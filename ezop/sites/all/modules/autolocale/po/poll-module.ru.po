@@ -1,0 +1,186 @@
+# $Id: poll-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: poll.module,v 1.222 2006/12/25 09:48:42 drumm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 19:07+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/poll/poll.module:16
+msgid "The poll module can be used to create simple polls for site users. A poll is a simple multiple choice questionnaire which displays the cumulative results of the answers to the poll. Having polls on the site is a good way to get instant feedback from community members."
+msgstr "Модуль опросов может использоваться для создания простых опросов для пользователей сайта. Опрос - это небольшой опросник с возможностью выбора из нескольких вариантов ответа, который показывает общий результат голосования. Размещение опроса на страницах сайта - хороший путь для того, чтобы дать возможность участникам сообщества сообщить о своем мнении."
+
+#: modules/poll/poll.module:17
+msgid "Users can create a poll. The title of the poll should be the question, then enter the answers and the \"base\" vote counts. You can also choose the time period over which the vote will run.The <a href=\"@poll\">poll</a> item in the navigation menu will take you to a page where you can see all the current polls, vote on them (if you haven't already) and view the results."
+msgstr "Пользователи могут создавать опросы. В заголовке опроса должна быть формулировка вопроса, на который нужно дать ответ, затем идут варианты ответов и \"базовое\" число голосов. Вы можете также выбрать продолжительность опроса. Пункт <a href=\"@poll\">опрос</a> в навигационном меню ссылается на страницу, где можно посмотреть все продолжающиеся опросы, проголовать в них (если вы готовы к этому) и посмотреть результаты."
+
+#: modules/poll/poll.module:18
+msgid "For more information please read the configuration and customization handbook <a href=\"@poll\">Poll page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@poll\">опросы</a>."
+
+#: modules/poll/poll.module:40
+msgid "Most recent poll"
+msgstr "Последний опрос"
+
+#: modules/poll/poll.module:105
+msgid "Negative values are not allowed."
+msgstr "Отрицательные значения недопустимы."
+
+#: modules/poll/poll.module:110
+msgid "You must fill in at least two choices."
+msgstr "Вы должны заполнить как минимум два варианта."
+
+#: modules/poll/poll.module:147
+msgid "Choices"
+msgstr "Варианты"
+
+#: modules/poll/poll.module:159
+msgid "Need more choices"
+msgstr "Нужно больше вариантов"
+
+#: modules/poll/poll.module:161
+msgid "If the amount of boxes above isn't enough, check this box and click the Preview button below to add some more."
+msgstr "Если пунктов выше недостаточно, отметьте этот пункт и затем нажмите кнопку просмотра для добавления еще нескольких."
+
+#: modules/poll/poll.module:168
+msgid "Choice @n"
+msgstr "Вариант @n"
+
+#: modules/poll/poll.module:175
+msgid "Votes for choice @n"
+msgstr "Голосов за вариант @n"
+
+#: modules/poll/poll.module:184
+msgid "Closed"
+msgstr "Закрыт"
+
+#: modules/poll/poll.module:191
+msgid "Poll status"
+msgstr "Статус опроса"
+
+#: modules/poll/poll.module:194
+msgid "When a poll is closed, visitors can no longer vote for it."
+msgstr "Когда опрос закрыт, посетители больше не могут участвовать в нем."
+
+#: modules/poll/poll.module:199
+msgid "Poll duration"
+msgstr "Длительность опроса"
+
+#: modules/poll/poll.module:202
+msgid "After this period, the poll will be closed automatically."
+msgstr "По окончании этого периода опрос закроется автоматически."
+
+#: modules/poll/poll.module:234
+msgid "Polls"
+msgstr "Опросы"
+
+#: modules/poll/poll.module:240;380;488;609
+msgid "Vote"
+msgstr "Голос"
+
+#: modules/poll/poll.module:260
+msgid "Votes"
+msgstr "Голоса"
+
+#: modules/poll/poll.module:268;602
+msgid "Results"
+msgstr "Результаты"
+
+#: modules/poll/poll.module:322
+msgid "A poll is a multiple-choice question which visitors can vote on."
+msgstr "Опрос с несколькими вариантами ответа, которые посетители могут выбрать."
+
+#: modules/poll/poll.module:323
+msgid "Question"
+msgstr "Вопрос"
+
+#: modules/poll/poll.module:336
+msgid "open"
+msgstr "открыт"
+
+#: modules/poll/poll.module:336
+msgid "closed"
+msgstr "закрыт"
+
+#: modules/poll/poll.module:428;435
+msgid "Total votes: %votes"
+msgstr "Всего голосов: %votes"
+
+#: modules/poll/poll.module:447
+msgid "Cancel your vote"
+msgstr "Аннулирование поданного вами голоса"
+
+#: modules/poll/poll.module:485
+msgid "This table lists all the recorded votes for this poll.  If anonymous users are allowed to vote, they will be identified by the IP address of the computer they used when they voted."
+msgstr "В этой таблице перечислены все голоса, поданные в данном опросе. Если анонимным пользователям разрешено голосовать, они идентифицируются по IP адресам тех компьютеров, с которых они голосовали."
+
+#: modules/poll/poll.module:534
+msgid "Your vote was recorded."
+msgstr "Ваш голос был учтен."
+
+#: modules/poll/poll.module:537
+msgid "You are not allowed to vote on this poll."
+msgstr "Вам не разрешено голосовать в этом опросе."
+
+#: modules/poll/poll.module:541
+msgid "You did not specify a valid poll choice."
+msgstr "Вы не сделали свой выбор."
+
+#: modules/poll/poll.module:571
+msgid "Your vote was canceled."
+msgstr "Ваш голос аннулирован."
+
+#: modules/poll/poll.module:574
+msgid "You are not allowed to cancel an invalid poll choice."
+msgstr "Вам не разрешено отменять неверно поданный голос."
+
+#: modules/poll/poll.module:600
+msgid "Older polls"
+msgstr "Старые опросы"
+
+#: modules/poll/poll.module:600
+msgid "View the list of polls on this site."
+msgstr "Посмотреть список голосований на этом сайте."
+
+#: modules/poll/poll.module:602
+msgid "View the current poll results."
+msgstr "Посмотреть результаты опроса."
+
+#: modules/poll/poll.module:336;414
+msgid "1 vote"
+msgid_plural "@count votes"
+msgstr[0] "@count голос"
+msgstr[1] "@count голоса"
+msgstr[2] "@count голосов"
+
+#: modules/poll/poll.module:347
+msgid "create polls"
+msgstr "создавать опросы"
+
+#: modules/poll/poll.module:347
+msgid "vote on polls"
+msgstr "участвовать в опросах"
+
+#: modules/poll/poll.module:347
+msgid "cancel own vote"
+msgstr "отменять свой голос"
+
+#: modules/poll/poll.module:347
+msgid "inspect all votes"
+msgstr "проверять все голоса"
+
+#: modules/poll/poll.module:0
+msgid "poll"
+msgstr "опрос"
+

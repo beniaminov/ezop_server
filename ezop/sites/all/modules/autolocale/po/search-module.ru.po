@@ -1,0 +1,188 @@
+# $Id: search-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: search.module,v 1.209 2007/01/13 11:02:30 unconed
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-24 01:07+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/search/search.module:99
+msgid "The search module adds the ability to search for content by keywords. Search is often the only practical way to find content on a large site. Search is useful for finding users and posts by searching on keywords."
+msgstr "Модуль поиска добавляет возможность искать содержимое по ключевым словам. Поиск иногда единственный реальный путь найти информацию на большом сайте. Можно использовать его для поиска пользователей или материалов по ключевым словам."
+
+#: modules/search/search.module:100
+msgid "The search engine works by maintaining an index of the words in your site's content. It indexes the posts and users. You can adjust the settings to tweak the indexing behaviour. Note that the search requires cron to be set up correctly. The index percentage sets the maximum amount of items that will be indexed in one cron run. Set this number lower if your cron is timing out or if PHP is running out of memory."
+msgstr "Поисковая машина работает, поддерживая индекс слов в материалах сайта. Она индексирует сообщения и пользователей. Вы можете регулировать настройки, чтобы управлять индексированием. Обратите внимание, что поиск требует правильной настройки планировщика заданий (cron). Уменьшите эти значения, если cron выходит за отведенное время или PHP превышает лимит памяти."
+
+#: modules/search/search.module:101
+msgid "For more information please read the configuration and customization handbook <a href=\"@search\">Search page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@search\">поиск</a>."
+
+#: modules/search/search.module:104
+msgid "The search engine works by maintaining an index of the words in your site's content. You can adjust the settings below to tweak the indexing behaviour. Note that the search requires cron to be set up correctly."
+msgstr "Поисковая машина работает, поддерживая индекс слов в материалах сайта. Вы можете изменить настройки ниже, чтобы повлиять на индексацию. Обратите внимание, что поиск требует правильной настройки планировщика заданий (cron)."
+
+#: modules/search/search.module:106
+msgid ""
+"<ul>\n"
+"<li>Check if your spelling is correct.</li>\n"
+"<li>Remove quotes around phrases to match each word individually: <em>\"blue smurf\"</em> will match less than <em>blue smurf</em>.</li>\n"
+"<li>Consider loosening your query with <em>OR</em>: <em>blue smurf</em> will match less than <em>blue OR smurf</em>.</li>\n"
+"</ul>"
+msgstr ""
+"<p><ul>\n"
+"<li>Удостоверьтесь, что нет орфографических ошибок.</li>\n"
+"<li>Уберите кавычки вокруг фраз, чтобы искать слова по отдельности: по запросу <em>\"черная зависть\"</em> найдется меньше совпадений, чем по запросу <em>черная зависть</em>.</li>\n"
+"<li>Попробуйте ослабить свой запрос, используя оператор <em>OR</em>: <em>черная зависть</em> даст меньше совпадений, чем <em>черная OR зависть</em>.</li>\n"
+"</ul></p>"
+
+#: modules/search/search.module:126
+msgid "Search form"
+msgstr "Форма поиска"
+
+#: modules/search/search.module:150
+msgid "Search settings"
+msgstr "Настройки поиска"
+
+#: modules/search/search.module:151
+msgid "Configure relevance settings for search and other indexing options"
+msgstr "Настройка установки релевантности для поиска и других опций индексирования"
+
+#: modules/search/search.module:157
+msgid "Clear index"
+msgstr "Очистить индекс"
+
+#: modules/search/search.module:162
+msgid "Top search phrases"
+msgstr "Популярные поисковые запросы"
+
+#: modules/search/search.module:163
+msgid "View most popular search phrases."
+msgstr "Просмотр наиболее популярных поисковых запросов."
+
+#: modules/search/search.module:192;222;246
+msgid "Re-index site"
+msgstr "Переиндексировать сайт."
+
+#: modules/search/search.module:198;255
+msgid "The index will be rebuilt."
+msgstr "Индекс был перестроен."
+
+#: modules/search/search.module:219
+msgid "%percentage of the site has been indexed."
+msgstr "%percentage сайта проиндексировано."
+
+#: modules/search/search.module:220
+msgid "Indexing status"
+msgstr "Статус индексации"
+
+#: modules/search/search.module:227
+msgid "Indexing throttle"
+msgstr "Регулятор индексации"
+
+#: modules/search/search.module:228
+msgid "Items to index per cron run"
+msgstr "Сколько элементов индексировать за один запуск планировщика заданий"
+
+#: modules/search/search.module:228
+msgid "The maximum amount of items that will be indexed in one cron run. Set this number lower if your cron is timing out or if PHP is running out of memory."
+msgstr "Максимальное количество элементов, которые будут проиндексированы за одно выполнение cron. Поставьте значение меньше, если ваш cron выполняется слишком долго и PHP выходит за пределы памяти."
+
+#: modules/search/search.module:230
+msgid "Indexing settings"
+msgstr "Настройки индексации"
+
+#: modules/search/search.module:231
+msgid "<p>Changing the settings below will cause the site index to be rebuilt. The search index is not cleared but systematically updated to reflect the new settings. Searching will continue to work but new content won't be indexed until all existing content has been re-indexed.</p><p>The default settings should be appropriate for the majority of sites.</p>"
+msgstr "<p>Изменение этих настроек повлечёт за собой перестройку всего индекса. Поисковый индекс будет не очищен, а обновлён в соответствии с новыми параметрами. Поиск будет продолжать работать, но новое содержимое не будет проиндексировано до тех пор, пока весь индекс не будет перестроен.</p><p>Настройки по умолчанию должны подходить большинству сайтов.</p>"
+
+#: modules/search/search.module:232
+msgid "Minimum word length to index"
+msgstr "Минимальная длина слова для индексации"
+
+#: modules/search/search.module:232
+msgid "The number of characters a word has to be to be indexed. A lower setting means better search result ranking, but also a larger database. Each search query must contain at least one keyword that is this size (or longer)."
+msgstr "Число букв в слове, чтобы оно было проиндексировано. Уменьшение числа приведет к лучшим результатам поиска, но увеличит размер базы данных. В каждом поисковом запросе должно быть хотя бы одно слово такого размера (или длиннее)."
+
+#: modules/search/search.module:233
+msgid "Simple CJK handling"
+msgstr "Простая работа с CJK (китайским, японским и корейским языками)"
+
+#: modules/search/search.module:233
+msgid "Whether to apply a simple Chinese/Japanese/Korean tokenizer based on overlapping sequences. Turn this off if you want to use an external preprocessor for this instead. Does not affect other languages."
+msgstr "Когда применять простую обработку CJK (китайского/японского/корейского языков) на основе перекрывающихся последовательностей. Отключите, если вы хотите использовать внешний препроцессор для этого. Не влияет на работу с другими языками."
+
+#: modules/search/search.module:245
+msgid "Are you sure you want to re-index the site?"
+msgstr "Вы действительно хотите переиндексировать сайт?"
+
+#: modules/search/search.module:246
+msgid " The search index is not cleared but systematically updated to reflect the new settings. Searching will continue to work but new content won't be indexed until all existing content has been re-indexed. This action cannot be undone."
+msgstr " Индекс поиска не очищается, а систематически обновляется, чтобы соответствовать новым настройкам. Поиск будет продолжать работать, но новые материалы не будут проиндексированы, пока весь существующие материалы не переиндексируются. Это действие не может быть отменено."
+
+#: modules/search/search.module:846
+msgid "You must include at least one positive keyword with @count characters or more."
+msgstr "Необходимо указать хотя бы одно не исключающее ключевое слово, содержащее не менее @count символов."
+
+#: modules/search/search.module:912
+msgid "%keys (@type)."
+msgstr "%keys (@type)."
+
+#: modules/search/search.module:912
+msgid "results"
+msgstr "результаты"
+
+#: modules/search/search.module:918
+msgid "Search results"
+msgstr "Результаты поиска"
+
+#: modules/search/search.module:921
+msgid "Your search yielded no results"
+msgstr "Ваш поиск не принес результатов"
+
+#: modules/search/search.module:983
+msgid "Enter your keywords"
+msgstr "Введите ключевые слова для поиска"
+
+#: modules/search/search.module:1024
+msgid "Please enter some keywords."
+msgstr "Пожалуйста, введите ключевые слова."
+
+#: modules/search/search.module:1041
+msgid "Enter the terms you wish to search for."
+msgstr "Введите слова, которые вы хотите искать."
+
+#: modules/search/search.module:912;0
+msgid "search"
+msgstr "поиск"
+
+#: modules/search/search.module:217
+msgid "There is 1 item left to index."
+msgid_plural "There are @count items left to index."
+msgstr[0] "Еще @count элемент для индексации."
+msgstr[1] "Еще @count элемента для индексации."
+msgstr[2] "Еще @count элементов для индексации."
+
+#: modules/search/search.module:118
+msgid "search content"
+msgstr "поиск материалов"
+
+#: modules/search/search.module:118
+msgid "use advanced search"
+msgstr "использовать расширенный поиск"
+
+#: modules/search/search.module:118
+msgid "administer search"
+msgstr "управлять поиском"
+

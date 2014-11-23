@@ -1,0 +1,34 @@
+<HTML>
+   <HEAD>
+      <TITLE>Открыть другую Базу понятий?</TITLE>
+      <STYLE TYPE="text/css">
+         BODY {margin-left:10pt;}
+	 P, #fldst {font-family: Book Antiqua; font-size:16;color:"336699"; font-weight: bolder;}
+         .button {font-family: Book Antiqua; font-size:13; font-weight: bolder;  color:#336699; width:100px;}
+      </STYLE>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+         function OpenKB(){
+		var retVal;
+	    	retVal = "new";
+		window.returnValue = retVal;
+            	window.close();
+         }
+</SCRIPT>
+   <BODY>
+      <FORM NAME="OpenNewKB">
+         <FIELDSET id="fldst">
+            <LEGEND>Открыть другую Базу понятий?</LEGEND>
+		<center>
+		<p><IMG src="pict\att.bmp">Внимание! </p>
+		<p>Все изменения, которые не были сохранены, будут утеряны! </p>
+		<p>Для открытия новой Базы понятий нажмите кнопку "ОК". </p>
+		<p>Для продолжения работы с текущей Базой понятий нажмите кнопку "Отмена"</p>
+		</center>
+         </FIELDSET>
+      </FORM>
+   <P STYLE="TEXT-ALIGN: center">
+      <INPUT TYPE=submit  ONCLICK="OpenKB();" VALUE="OK" CLASS="button">
+      <INPUT TYPE=reset ONCLICK="window.close();" VALUE="Отмена" CLASS="button">
+   </P>
+    </BODY>

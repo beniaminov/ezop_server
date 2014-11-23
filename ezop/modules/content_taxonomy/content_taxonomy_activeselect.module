@@ -1,0 +1,282 @@
+<?php
+
+// $Id: content_taxonomy_activeselect.module,v 1.1.4.2 2007/08/13 14:17:55 mh86 Exp $
+
+/**
+ * @file
+ * Defines a widget type for content_taxonomy with activeselects
+ **/
+
+/**
+ * Implementation of hook_help().
+ **/
+function content_taxonomy_activeselect_help($section) {
+  switch ($section) {
+    case 'admin/modules#description':
+      return t('Defines a widget type for content_taxonomy with activeselects. <em>Note: Requires content.module.</em>');
+  }
+}
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function content_taxonomy_activeselect_widget_info() {
+  return array(
+    'content_taxonomy_activeselect' => array(
+      'label' => 'ActiveSelect',
+      'field types' => array('content_taxonomy'),
+    ),
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_widget_settings
+ */
+function content_taxonomy_activeselect_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      $form = array();
+      
+      $options_term = array();
+      $options_term[0] = '---';
+      foreach (taxonomy_get_vocabularies() as $voc) {
+        foreach (taxonomy_get_tree($voc->vid) as $term) {
+          $options_term[$voc->name][$term->tid] = $term->name;
+        }
+      }    
+      $form['activeselect'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Activeselect'),
+        '#collapsible' => TRUE,
+        '#description' => t(''),
+      );
+          
+      $form['activeselect']['label_children'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Label for second bar'),
+        '#default_value' => isset($widget['label_children']) ? $widget['label_children'] : '',
+        '#size' => 60,
+      );
+      
+      $form['activeselect']['grandchildren'] = array(
+        '#title' => t('Third bar'),
+        '#type' => 'checkbox',
+        '#default_value' => isset($widget['grandchildren']) ? $widget['grandchildren'] : 0,
+      );
+           
+      $form['activeselect']['label_grandchildren'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Label for third bar'),
+        '#default_value' => isset($widget['label_grandchildren']) ? $widget['label_grandchildren'] : '',
+        '#size' => 60,
+      );
+      return $form;
+
+    case 'save':
+      return array('grandchildren', 'label_children', 'label_grandchildren');
+  }
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function content_taxonomy_activeselect_widget($op, &$node, $field, &$node_field) {
+  $vid = $field['vid'];
+  $tid = $field['tid'];
+  //dprint_r($op);
+  switch ($op) {
+    case 'prepare form values':
+      if (!isset($node_field['default_tid']) ) {
+        $node_field['default_tid'] = $_POST[$field['field_name']]['tid'];
+        $node_field['default_children'] = $_POST[$field['field_name']]['children'];
+        $node_field['default_grandchildren'] = $_POST[$field['field_name']]['grandchildren'];
+      }
+      break;
+    
+    case 'form':
+      $form = array();
+      $children = taxonomy_get_children($tid, $vid);
+      foreach ($children as $term) {
+        $options_terms[$term->tid] = $term->name;
+      }
+      if (is_array($node_field['default_children'])) {
+        $default_children = implode(',', $node_field['default_children']);
+      }
+      else {
+        $default_children = $node_field['default_children'];
+      }
+
+      $form[$field['field_name']] = array('#tree' => TRUE);         
+      $form[$field['field_name']]['tid'] = array(
+        '#title' => $field['widget']['label'],
+        '#type' => 'activeselect',
+        '#activeselect_path' => 'content_taxonomy/activeselect',
+        '#activeselect_targets' =>  str_replace('_', '-', $field['field_name']) .'-children',
+        '#activeselect_extra' => 'term,'. FALSE .','. $field['vid'] .','. str_replace('_', '-', $field['field_name']) .'-children@'. $default_children,
+        '#default_value' => isset($node_field['default_tid']) ? $node_field['default_tid'] : array(),
+        '#options' => $options_terms,
+        '#required' => $field['required'],
+        '#DANGEROUS_SKIP_CHECK' => TRUE,
+      );
+      
+      $form[$field['field_name']]['children'] = array(
+        '#title' => $field['widget']['label_children'],
+        '#options' => array(),
+        '#multiple' => FALSE,
+        '#required' => $field['required'],
+        '#default_value' => isset($node_field['default_children']) ? $node_field['default_children'] : "",
+        '#DANGEROUS_SKIP_CHECK' => TRUE,
+      );
+      
+      if (!$field['widget']['grandchildren']) {
+        $form[$field['field_name']]['children']['#type'] = 'select';
+      }
+      else {
+        if (is_array($node_field['default_grandchildren'])) {
+          $default_grandchildren = implode(',', $node_field['default_grandchildren']);
+        }
+        else {
+          $default_grandchildren = $node_field['default_grandchildren'];
+        }
+
+        $form[$field['field_name']]['children']['#type'] = 'activeselect';
+        $form[$field['field_name']]['children']['#activeselect_path'] = 'content_taxonomy/activeselect';
+        $form[$field['field_name']]['children']['#activeselect_targets'] = str_replace('_', '-', $field['field_name']) .'-grandchildren';
+        $form[$field['field_name']]['children']['#activeselect_extra'] = 'term,'. FALSE .','. $field['vid'] .','. str_replace('_', '-', $field['field_name']) . '-grandchildren@'. $default_grandchildren;
+            
+        $form[$field['field_name']]['grandchildren'] = array(
+          '#title' => $field['widget']['label_grandchildren'],
+          '#type' => 'select',
+          '#options' => array(),
+          '#required' => $field['required'],
+          '#default_value' => isset($node_field['default_grandchildren']) ? $node_field['default_grandchildren'] : "",
+          '#DANGEROUS_SKIP_CHECK' => TRUE,
+        );
+      }
+      return $form;
+      break;
+          
+    case 'process form values': 
+      $tids = array();  
+      foreach ($node_field as $type => $value) {
+        if (!($type == "tid" || $type == "children" || $type == "grandchildren")) {
+          continue;    
+        }
+        if (is_array($value)) {
+          foreach ($value as $tid) {
+            if ($tid != 0) {
+              $tids[] = $tid;
+            }
+          }
+        }
+        else {
+          if ($value != 0) {
+            $tids[] = $value;
+          }
+        }
+      }
+      $node_field = array();
+      $node_field['tids'] = $tids;
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_menu
+ */
+function content_taxonomy_activeselect_menu($may_cache) {
+  $access = user_access('access content');
+  $items = array();
+  if (!$may_cache) {
+    $items[] = array(
+      'path' => 'content_taxonomy/activeselect',
+      'callback' => 'content_taxonomy_activeselect',
+      'access' => $access,
+      'type' => MENU_CALLBACK);
+  }
+  return $items;
+}
+
+/**
+ * return depending values (--> ajax) see activeselect
+ */
+function content_taxonomy_activeselect($source, $targets, $string, $extra = NULL) {
+  if (empty($source) || empty($targets) || empty($string)) {
+    exit();
+  }
+  $targets = explode(',', $targets);
+  
+  $extras = explode(',',$extra); 
+  $type = $extras[0];
+  $multiple = $extras[1];
+  $default_vid = $extras[2];
+  for ($i=2; $i<count($extras); $i++) {
+    foreach ($targets as $target) {
+      if (strtok($extras[$i],'@') == $target) {
+        $default_tids[$target][] = drupal_substr($extras[$i],drupal_strlen($target)+1);
+      }
+    }
+  }
+  $output = array();
+  
+  $array = activeselect_explode_values($string);
+
+  
+  foreach ($targets as $target) {
+    $options = array();    
+    foreach ($array as $id => $value) {
+      if ($type == 'voc') {
+        $terms = taxonomy_get_tree($id);
+        $options[0]['value'] = '< whole vocabulary >';
+      }
+      else {
+        $terms = taxonomy_get_children($id);
+        $options[0]['value'] = '---';
+      }
+      foreach ($terms as $term) {
+        $options[$term->tid]['value'] = $term->name;
+        if (is_array($default_tids[$target]) && in_array($term->tid, $default_tids[$target])) {
+          $options[$term->tid]['selected'] = TRUE;
+        }
+      }
+    }
+    
+    $output[$target] = array('options' => $options, 'multiple' => $multiple);
+  }
+  
+  activeselect_set_header_nocache();
+  
+  print drupal_to_js($output);
+  exit();
+}
+
+/**
+ * adding of terms when node is loaded (called by content_taxonomy)
+ */
+function content_taxonomy_activeselect_field_load($op, &$node, $field, &$node_field, &$additions, $teaser, $page) {
+  $additions = array();
+  $default_terms = array();
+  $children_terms = array();
+  $grandchildren_terms = array();
+
+  $default_terms = content_taxonomy_terms_by_field($node, $field['vid'], $field['tid'], 1);
+  $additions[$field['field_name']]['default_tid'] = array_keys($default_terms);
+  $default_terms = array_values($default_terms);
+  
+  $children_terms = content_taxonomy_terms_by_field($node, $field['vid'], $default_terms[0]->tid, 1);
+  if (is_array($children_terms)) {
+    $additions[$field['field_name']]['default_children'] = array();
+    $additions[$field['field_name']]['default_children'] = array_keys($children_terms); 
+    $children_terms = array_values($children_terms);
+    
+    if ($field['widget']['grandchildren']) {
+      $grandchildren_terms = content_taxonomy_terms_by_field($node, $field['vid'], $children_terms[0]->tid, 1);
+      if (is_array($grandchildren_terms)) {
+       $additions[$field['field_name']]['default_grandchildren'] = array();
+        $additions[$field['field_name']]['default_grandchildren'] = array_keys($grandchildren_terms);
+      }
+    }
+  }
+}
+?>

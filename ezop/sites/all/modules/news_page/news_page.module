@@ -1,0 +1,450 @@
+<?php
+
+/* $Id: news_page.module,v 1.13.2.3 2009/04/29 21:29:58 MegaGrunt Exp $ */
+
+
+// Implementation of hook_help().
+function news_page_help($section) {
+  switch ($section) {
+    case 'node/add#news_page':
+    // This description shows up when users click "create content."
+    return t('Creates a page of keyword filtered news items from an <a href="!aggregator">aggregator</a> category.', array('!aggregator' => url('admin/content/aggregator')) );
+
+    case 'admin/content/news_page':
+    return t('A News Page provides a way to only include items from an <a href="!aggregator">aggregator</a> category which match your keywords. The majority of settings are entered when you create a new news page node.', array('!aggregator' => url('admin/content/aggregator')) );
+
+  }
+}
+
+// Implementation of hook_node_info().
+function news_page_node_info() {
+  return array('news_page' => array(
+    					 		'name' => t('News Page'), 
+    					 		'module' => 'news_page',
+    					 		'description' => 'Enables creation of pages displaying filtered syndicated news items from aggregator categories.',
+									)
+  );
+}
+
+
+// Implementation of hook_access().
+function news_page_access($op, $node) {
+  global $user;
+
+  switch($op) {
+    case 'create':
+      return user_access('create news page');
+      break;
+
+    case 'view':
+      return user_access('access news page');
+      break;
+
+    case 'update':
+    case 'delete':
+      if (user_access('edit own news page') && ($user->uid == $node->uid)) {
+        return TRUE;
+      }
+      break;
+
+
+  }
+}
+
+
+// Implementation of hook_perm().
+function news_page_perm() {
+  return array('access news page', 'access news page feed', 'create news page', 'edit own news page');
+}
+
+// Implementation of hook_menu().
+function news_page_menu($may_cache) {
+  $items = array();
+
+	if ($may_cache) {
+	  $items[] = array(
+	    'path' => 'admin/content/news_page',
+	    'title' => t('News Page'),
+	    'description' => t('News Page settings'),
+	    'callback' => 'drupal_get_form',
+	    'callback arguments' => 'news_page_admin_settings',
+	    'access' => user_access('administer site configuration'),
+	    'type' => MENU_NORMAL_ITEM, 
+	  );	
+  
+	}
+	else {
+
+	  if (is_numeric(arg(2))) {
+
+	    $account = NULL;
+
+	    // Check if an external source wants to read this feed. The url must containe authentication information.
+	    if (arg(3) && arg(4)) {
+
+	      // Authenticate user
+	      $account = user_load(array('name' => arg(3), 'pass' => arg(4), 'status' => 1));
+	       if ($account === FALSE) { 
+	            $account = NULL; 
+	        }
+	    }
+
+	    $items[] = array('path' => 'news_page/feed', 
+	                              'title' => t('News page feed'),
+	                              'callback' => '_news_page_feed', 
+	                              'callback arguments' => array('nid' => arg(2)),
+	                              'access' => user_access('access news page feed', $account),
+	                              'type' => MENU_CALLBACK);
+	  }	
+	}
+   
+  return $items;
+}
+
+
+// Implementation of hook_form().
+function news_page_form(&$node) {
+
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#default_value' => $node->title,
+    '#required' => TRUE,
+  );
+
+  $form['body_filter']['body'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Body'),
+    '#default_value' => $node->body,
+    '#required' => FALSE,
+    '#cols' => 60,
+    '#rows' => 20,
+  );
+  
+  $form['body_filter']['filter'] = filter_form($node->format);
+  
+  $results = db_query("SELECT cid, title FROM {aggregator_category}");
+  $row_count = db_num_rows($results);
+
+  if ($row_count == 0) form_set_error('cid', t('You must create at least 1 aggregator category before creating a news page.'));
+
+  $categories[0] = t('--none--');
+
+  for ($counter = 1; $counter <=  $row_count; $counter++) {
+    $category= db_fetch_object ($results);
+    $categories[$category->cid] = $category->title;
+  }
+
+  $form['cid'] = array(
+    '#type' => 'select',
+    '#title' => t('Aggregator Category'),
+    '#default_value' => $node->cid,
+    '#options' => $categories,
+    '#description' => t('Category to include on this page'),
+    '#extra' => '',
+    '#multiple' => '',
+    '#required' => TRUE,
+  );
+
+  $form['include'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Include Words'),
+    '#default_value' => $node->include,
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#description' => t('Keywords that must be included in a news item for it to be displayed - e.g. "iPhone, +battery, -problem"'),
+    '#attributes' => '',
+  );
+
+  $form['max_items'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum Items'),
+    '#default_value' => is_numeric($node->max_items) ? $node->max_items : 25,
+    '#size' => 5,
+    '#maxlength' => 5,
+    '#description' => t('Maximum number of news items to include on a page'),
+    '#attributes' => '',
+    '#required' => TRUE,
+  );
+
+  return $form;
+}
+
+
+// Implementation of hook_validate().
+function news_page_validate(&$node) {
+
+    if ($node->validate) {
+
+        if (is_numeric($node->cid) == FALSE OR $node->cid == 0) {
+          form_set_error('cid', t('Please select an aggregator category.'));
+        }
+
+        if (!$node->include) {
+          form_set_error('include', t('Please add at least one word to the list of include words.'));
+        }
+
+        if (is_numeric($node->max_items) == FALSE OR $node->max_items == 0) {
+          $node->max_items = 25;
+          form_set_error('max_items', t('Maximum items must have a value, field has been reset to the default (25).'));
+        }
+
+    }
+
+  return;
+}
+
+function news_page_admin_settings() {
+
+  $form['RSS'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('RSS Feed'),
+    '#description' => t('Users must have the "access news page feeds" <a href="!permission">permission</a> granted in order to use the News Page RSS feeds.', array('!permission' => url('admin/user/access')) ),
+  );
+
+  $form['RSS']['news_page_link_prepend'] = array(
+    '#type' => 'textfield',
+    '#title' => t('RSS Link prepend'),
+    '#default_value' => check_url( variable_get('news_page_link_prepend', '') ),
+    '#size' => 80,
+    '#maxlength' => 255,
+    '#description' => t('All item links generated will have this URL prepended to them. For example: "/jump.php?url=". If unsure, specify nothing. Note: the url is relative to the base url of this drupal site, the page cannot reside on a remote host.'),
+  );
+
+  $form['RSS']['news_page_channel_description'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Global channel description'),
+    '#default_value' => filter_xss_admin( variable_get('news_page_channel_description', '') ),
+    '#cols' => 60,
+    '#rows' => 4,
+    '#description' => t('This text will precede the News Page nodes body text for the feed description, for every News page feed. If no body text is set the global settings <a href="!mission">mission statement</a> is used; if this is empty - nothing will be displayed.', array('!mission' => url('admin/settings/site-information')) ),
+    '#attributes' => '',
+    '#required' => FALSE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+
+function _news_page_feed($nid) {
+  global $base_url, $locale;
+
+  // get node
+  $node = node_load($nid);
+
+  // Define RSS channel header
+  $channel = array(
+    'version'     => '0.92',
+    'title'       => check_plain($node->title) . ' | ' . check_plain( variable_get('site_name', 'drupal') ) .' - '. check_plain( variable_get('site_slogan', '') ),
+    'description' => $node->body ? variable_get('news_page_channel_description', '') . check_markup($node->body, $node->format, FALSE) : check_plain( variable_get('site_mission', '') ),
+    'link'        => $base_url,
+    'language'    => $locale
+  );
+
+  // --- Collect items associated with this node
+  $nodes = news_page_items($node);
+
+  $link_prepend = variable_get('news_page_link_prepend', '') ? $base_url . variable_get('news_page_link_prepend', '') : '';
+  
+  while ($item = db_fetch_object($nodes)) {
+
+    $link = url( $link_prepend . $item->link, NULL, NULL, FALSE);
+    $items .= format_rss_item($item->title, $link, $item->description, array('pubDate' => date('r', $item->timestamp)));
+
+ }
+
+  // Output RSS feed
+  theme('news_page_rss', $channel, $base_url, $items);
+
+  return;
+}
+
+
+// Implementation of hook_insert().
+function news_page_insert($node) {
+  $search = news_page_search_criteria($node->include, $node->cid);
+  db_query("INSERT INTO {news_page} (nid, include, search, cid, max_items) VALUES (%d, '%s', '%s', %d, %d)", $node->nid, $node->include, serialize($search), $node->cid, $node->max_items);
+}
+
+
+// Implementation of hook_update().
+function news_page_update($node) {
+  $search = news_page_search_criteria($node->include, $node->cid);
+  db_query("UPDATE {news_page} SET include = '%s', search = '%s', cid = %d, max_items = %d WHERE nid = %d", $node->include, serialize($search), $node->cid, $node->max_items, $node->nid);
+}
+
+// Implementation of hook_delete().
+
+function news_page_delete($node) {
+  db_query('DELETE FROM {news_page} WHERE nid = %d', $node->nid);
+}
+
+// Implementation of hook_load().
+function news_page_load($node) {
+  $additions = db_fetch_object(db_query('SELECT include, search, cid, max_items FROM {news_page} WHERE nid = %d', $node->nid));
+	$additions->search = unserialize($additions->search);
+  return $additions;
+}
+
+
+function news_page_items(&$node) {
+
+  if (isset($node->max_items) == FALSE OR $node->max_items == 0) $node->max_items = 25;
+  
+  if ($node->cid) {
+    $search = ($node->search) ? $node->search : news_page_search_criteria($node->include, $node->cid);
+    $result = db_query_range($search->sql, $search->arguments, 0, $node->max_items);
+  }
+  
+  return $result;
+}
+
+
+// Implementation of hook_view().
+function news_page_view(&$node, $teaser = FALSE, $page = FALSE) {
+  global $user;
+
+  $blog_support = module_exists('blog') && user_access('edit own blog');
+
+  $items = '';
+  $result = news_page_items($node);
+
+  while ($item = db_fetch_object($result)) {
+	  $items .= theme('news_page_item', $item, $blog_support);
+  }
+  // Add RSS feed link if user has correct permission
+  if (user_access('access news page feed')) {
+    // $authenticated =  '/' . $user->name . '/' . $user->pass;
+    //$feed_url = url('news_page/feed/' . $node->nid . $authenticated);
+    drupal_set_html_head("\n".'<link rel="alternate" type="application/rss+xml" title="' . check_plain($node->title) . '" href="' . $feed_url . '" />');
+  }
+
+  $node = node_prepare($node, $teaser);  
+  $node->content['news_page_feed'] = array(
+    '#value' => theme('news_page_feed', $items),
+    '#weight' => 0,
+  );
+  $node->content['feed_icon'] = array(
+    '#value' => theme('xml_icon', url('news_page/feed/' . $node->nid)),
+    '#weight' => 1, 
+  );
+  return $node;  
+}
+
+function news_page_search_criteria($keywords, $cid) {
+
+	$arguments = array($cid);
+
+	if (!empty($keywords)) {
+		$words = explode(",", $keywords);
+
+		foreach ($words as $word) {  
+
+		  $word = trim($word); 
+
+		  if (preg_match("/^-/", $word)) { 
+
+		  	$word = preg_replace('/^-/','', $word);
+		  	$not_title_filter[] = "lower(i.title) NOT LIKE '%%%s%%'";
+				$arguments[] = $word;
+		   	$not_content_filter[] = "lower(i.description) NOT LIKE '%%%s%%'";
+				$arguments[] = $word;
+		   	$not_filter_query = implode(" AND ", $not_title_filter) . ' AND ' . implode(" AND ", $not_content_filter); 
+
+		  } elseif (preg_match("/^\+/", $word)) { 
+
+		   	$word = preg_replace('/^\+/','', $word);
+		   	$and_title_filter[] = "lower(i.title) LIKE '%%%s%%'";
+				$arguments[] = $word; 
+		   	$and_content_filter[] = "lower(i.description) LIKE '%%%s%%'";
+				$arguments[] = $word; 
+		   	$and_filter_query = implode(" AND ", $and_title_filter) . ' OR ' . implode(" AND ", $and_content_filter);
+
+		  } else { 
+
+		   	$title_filter[] = "lower(i.title) LIKE '%%%s%%'";
+				$arguments[] = $word; 
+		   	$content_filter[] = "lower(i.description) LIKE '%%%s%%'";
+				$arguments[] = $word; 
+		   	$filter_query = implode(" OR ", $title_filter) . ' OR ' . implode(" OR ", $content_filter); 
+		  }
+		}
+
+		$news_queries = array($filter_query, $and_filter_query, $not_filter_query);
+		$i = 0;
+
+		foreach ($news_queries as $query) {
+		  if ($i > 0 && drupal_strlen($query) > 0) {
+		    $news_query .= "AND " ;
+		  }
+		
+		  if (drupal_strlen($query)) {
+		  	$news_query .= "(". $query .")"; 
+		  	$i++;
+		  }
+		}
+	}
+
+	$search->sql = 'SELECT i.*, f.link AS flink, f.title AS ftitle
+							    FROM {aggregator_item} i
+							    LEFT JOIN {aggregator_feed} f ON i.fid = f.fid
+							    LEFT JOIN {aggregator_category_feed} c ON c.fid = f.fid
+							    WHERE c.cid = %d'; 
+				 
+	if (!empty($news_query)) $search->sql .= " AND ($news_query)";
+
+	$search->sql .= ' ORDER BY timestamp DESC';
+	
+	$search->arguments = $arguments;
+
+	return $search; 
+}
+
+// A custom theme function.
+function theme_news_page_feed($items) {
+ 
+  $output = '<div id="news-page">' . $items . '</div>';
+  return $output;
+}
+
+function theme_news_page_item($item, $blogit) {
+
+	$output .= '<div class="feed-item">';
+
+	if ($item->title) {
+	  $output .= '<h3 class="feed-item-title">' . filter_xss($item->title, array()) . '</h3>';
+	}
+
+	$output .= '<p>';
+
+	if ($item->description) {
+	  $output .= '<span class="feed-item-body">' . aggregator_filter_xss($item->description) . '</span>';
+	}
+	/**
+	 * @todo convert these links to just use an l()
+	 */
+	if ($blogit) {
+	  $blog_icon = '<a href="' . url('node/add/blog', "iid=$item->iid") . '"><img src="'. '/misc/blog.png" alt="'. t('Blog this') . '" title="' . t('blog it') . '" class="blog-it"/></a>' ;
+	}
+
+	$output .= '<br /><span class="feed-item-link"><a href="' . check_url($item->link) . '">' .t('Read more') . '</a></span> <span class="feed-item-source">[<a href="' . check_url($item->flink) . '">' . check_plain($item->ftitle) . '</a>] ' . $blog_icon . '</span>';
+
+	$output .= '</p>';
+	$output .= '</div>';
+
+  return $output;
+}
+
+function theme_news_page_rss($channel, $base_url, $items) {
+
+    // Output RSS feed
+    $output = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+    $output .= "<rss version=\"". $channel["version"] . "\" xml:base=\"". $base_url ."\">\n";
+    $output .= format_rss_channel($channel['title'], $channel['link'], $channel['description'], $items, $channel['language']);
+    $output .= "</rss>\n";
+    
+    drupal_set_header('Content-Type: text/xml; charset=utf-8');
+    print $output;
+}
+?>

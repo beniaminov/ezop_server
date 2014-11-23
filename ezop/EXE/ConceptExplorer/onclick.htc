@@ -1,0 +1,19 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="OnClick()" />
+<SCRIPT src="explorer.js"></SCRIPT>
+<SCRIPT LANGUAGE="JScript">
+function OnClick(){
+window.parent.document.getElementById("menu_item").value = "toolbar";
+window.parent.document.getElementById("toolbar_button").value = id;
+window.parent.document.getElementById("main_form").target = "content";
+if(id == "fldr_left_create" || id == "fldr_right_create"){
+	var retval = showModalDialog("newfolder.html","Dialog Arguments Value","dialogHeight: 210px; dialogWidth: 250px;");
+	if (retval) window.parent.document.getElementById("new_folder_name").value = retval;
+	else {	return 0;}
+	}
+window.parent.document.getElementById("button").fireEvent("onclick");
+}
+
+
+</SCRIPT>
+</PUBLIC:COMPONENT>

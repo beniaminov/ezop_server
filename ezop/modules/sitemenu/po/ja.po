@@ -1,0 +1,150 @@
+# $Id: ja.po,v 1.1.2.1 2007/04/20 17:26:14 imagine Exp $
+# -----------------------------------------------------------------------------
+# Japanese translation of Drupal (sitemenu.module)
+#
+# Copyright (c) 2006-2007  Drupal Japan  ( http://drupal.jp/ )  /
+#                          Drupal Nippon ( http://drupon.org/ ) /
+#                          Takafumi      ( jp.drupal@imagine **reverse order**)
+#
+# Generated from file:
+#  sitemenu.module,v 1.23.2.12 2007/03/25 19:04:54 kbahey
+#  sitemenu.info,v 1.1.2.1 2007/04/19 16:55:20 kbahey
+#
+# -----------------------------------------------------------------------------
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2007-04-20 20:41+0900\n"
+"Last-Translator: Takafumi <jp.drupal@imagine **reverse order**>\n"
+"Language-Team: Drupal Japan / Drupal Nippon\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: sitemenu.module:25
+msgid "This module provides a site map based on the hierarchy of the site's taxonomy. The site map page shows all vocabularies, terms, and recent nodes within each term. It also provides a block that can be used in the side bar as a navigation menu."
+msgstr "このモジュールは、サイトのタクソノミーの階層構造に基づくサイトマップを提供します。 サイトマップページでは、各分類用語内のすべての分類用語グループ、分類用語、最近の投稿が表示されます。 また、サイドバーでナビゲーションメニューとして使用できるブロックも提供します。"
+
+#: sitemenu.module:38
+msgid "Site map"
+msgstr "サイトマップ"
+
+#: sitemenu.module:47
+msgid "Sitemenu"
+msgstr "サイトメニュー"
+
+#: sitemenu.module:48
+msgid "Settings for the sitemenu module."
+msgstr "サイトメニューモジュールの設定を行います。"
+
+#: sitemenu.module:67
+#msgid "none"
+#msgstr "無し"
+
+#: sitemenu.module:74
+#msgid "Description"
+#msgstr "説明"
+
+#: sitemenu.module:75
+msgid "This is the site map page."
+msgstr "サイトマップのページです。"
+
+# menu は map を指す
+#: sitemenu.module:78
+msgid "This text will be displayed at the top of the site menu page"
+msgstr "サイトマップページの最上部に表示したいテキストを記入してください。"
+
+#: sitemenu.module:83
+msgid "Omitted vocabularies"
+msgstr "除外する分類用語グループ"
+
+#: sitemenu.module:87
+msgid "Select vocabularies which should be <b>omitted</b> from listings."
+msgstr "一覧表示から<b>除外する</b>分類用語グループを選択してください。"
+
+#: sitemenu.module:92
+msgid "Navigation link text"
+msgstr "ナビゲーションリンクのテキスト"
+
+#: sitemenu.module:94;361
+msgid "site map"
+msgstr "サイトマップ"
+
+# menu は map を指す
+#: sitemenu.module:97
+msgid "The text in the navigation link which points to the site menu page."
+msgstr "サイトマップページを示す、ナビゲーションリンクでのテキストを入力してください。"
+
+#: sitemenu.module:102
+msgid "Block title text"
+msgstr "ブロックタイトルのテキスト"
+
+#: sitemenu.module:104;313
+#msgid "Menu"
+#msgstr "メニュー"
+
+#: sitemenu.module:107
+msgid "If configured as a block, this text shows as the block title."
+msgstr "ブロックとして設定した場合の、ブロックタイトルとして表示するテキストを入力してください。"
+
+#: sitemenu.module:112
+msgid "Show number of nodes for each term"
+msgstr "分類用語ごとのノード数を表示"
+
+#: sitemenu.module:118
+msgid "Cache the taxonomy tree for performance."
+msgstr "パフォーマンス向上のためにタクソノミーツリーをキャッシュする"
+
+#: sitemenu.module:120
+msgid "This reduces the load of generating the site menu block for every page, as well as the site map page. It may be suitable only for sites with one language. In some cases, using the i18n module is incompatible with this caching option. In this case, uncheck this box."
+msgstr "タクソノミーツリーをキャッシュするかどうかを指定してください。 ここにチェックを入れると有効になり、各ページのサイトメニューブロックと、サイトマップページを生成する際の負荷を軽減します。 ただし、このオプションは単一言語のサイトにのみ適しています。 i18nモジュールを使用している場合、このオプションは互換性がありませんので無効にしてください。"
+
+#: sitemenu.module:125
+msgid "Show Author and number of Comments (in mousover)"
+msgstr "マウスオーバーの際に投稿者とコメント数を表示"
+
+#: sitemenu.module:131
+msgid "Number of nodes to show"
+msgstr "表示するノード数"
+
+#: sitemenu.module:136
+msgid "Number of nodes to show per taxonomy term. Set to 0 if you do not want nodes to listed."
+msgstr "各分類用語に表示したいノード数を入力してください。 ノードを一覧表示したくない場合は <b>0</b> を入力してください。"
+
+#: sitemenu.module:141
+msgid "Closing description"
+msgstr "あとがき"
+
+# menu は map を指す
+#: sitemenu.module:145
+msgid "This text will be displayed at the bottom of the site menu page"
+msgstr "サイトマップページの最下部に表示されるテキストを記入してください。"
+
+#: sitemenu.module:213
+msgid "Author: "
+msgstr "投稿者： "
+
+#: sitemenu.module:215
+msgid ", comments: "
+msgstr "/ コメント： "
+
+#: sitemenu.module:59
+msgid "use sitemenu"
+msgstr "サイトメニューの使用"
+
+#: sitemenu.module:59
+msgid "administer sitemenu"
+msgstr "サイトメニューの管理"
+
+#: sitemenu.module:0 sitemenu.info:0
+msgid "sitemenu"
+msgstr "sitemenu"
+
+#: sitemenu.info:0
+msgid "Site menu"
+msgstr "サイトメニュー"
+
+#: sitemenu.info:0
+msgid "Provides a block and sitemap from categories"
+msgstr "カテゴリに基づいたブロックとサイトマップを提供します。"
+

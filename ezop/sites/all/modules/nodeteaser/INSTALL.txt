@@ -1,0 +1,15 @@
+INSTALL.txt file
+================
+
+1. Place the node_teaser folder in your drupal/modules folder
+   (or if multisite and this module is meant to be available
+   to just one site in drupal/sites/www.YOURSITE.com/modules)
+
+2. Enable the node_teaser module at administer > modules
+
+3. Ensure the correct admin users have permissions to administer the
+   node_teaser module at administer > access control
+
+4. Set-up the module at administer > settings > node_teaser
+
+

@@ -1,0 +1,74 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:PROPERTY NAME="Selected" />
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="SetSelection()" />
+     <PUBLIC:PROPERTY NAME="Name" />
+     <PUBLIC:PROPERTY NAME="ID" />
+
+<SCRIPT LANGUAGE="JScript">
+var normalColor, normalSpacing;
+
+
+function SelectedDir(){
+cur = this.parentElement;
+//alert(cur.id);
+while(cur.id<"oTD"){
+	cur=cur.parentElement;
+	//alert(cur.id);
+	}
+var selID;
+SelID = cur.id;
+SelID =SelID.substr(3);
+return SelID;
+}
+function SetSelection (){
+	if(SelectedID && SelectedID != id){		window.parent.frames("tree").document.getElementById(SelectedID).fireEvent("onclick");
+		Select();
+	}
+	else {
+
+		Select();}
+
+}
+
+function Select(){
+   if ((Selected == null) || (Selected == "false")) {
+	 Selected = "true";
+	 normalSpacing = style.letterSpacing;
+	 normalColor  = runtimeStyle.color;
+	 
+         runtimeStyle.color  = "#336699";
+         runtimeStyle.letterSpacing = 2;
+	 SelectedName = Name;
+	 SelectedID = id;
+	 SelectedDirID = SelectedDir();
+
+
+	
+	 window.parent.frames("tree").document.getElementById("SelectedNameTree").value = SelectedName;
+//TO QUERY THE SERVER, pressing the button "Показать"
+	 window.parent.frames("toolbar").document.getElementById("showDef_textarea").fireEvent("onclick");
+
+	}
+else {
+	
+	runtimeStyle.letterSpacing = normalSpacing;
+	 runtimeStyle.color  = normalColor;
+	Selected = "false";
+	SelectedName = "";
+	SelectedID = "";
+	SelectedDirID = null;
+
+	window.parent.frames("tree").document.getElementById("SelectedNameTree").value = "";
+	window.open("about:blank","textarea");
+	}
+}
+
+</SCRIPT>
+</PUBLIC:COMPONENT>
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<?php
+/* $Id: excerpt.install,v 1.2.2.5 2008/03/20 01:04:08 smk Exp $ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function excerpt_uninstall() {
+  // Delete all the excerpt variables and clear the variable cache.
+  db_query("DELETE FROM {variable} WHERE name LIKE 'excerpt_%'");
+  cache_clear_all('variables', 'cache');
+}
+
+/**
+ * @defgroup updates-4.7-to-5.0 Excerpt updates from 4.7 to 5.0
+ * @{
+ */
+
+/**
+ * Update variable names.
+ */
+function excerpt_update_5000() {
+  $ret = array();
+  foreach (node_get_types() as $type) {
+    $old_var = 'excerpt_option_'. $type->type;
+    $old_val = variable_get($old_var, NULL);
+    if (isset($old_val)) {
+      $new_var = 'excerpt_'. $type->type;
+      $new_val = variable_get($new_var, NULL);
+      // Don't overwrite existing variables.
+      if (!isset($new_val)) {
+        variable_set($new_var, $old_val);
+      }
+      // Delete old_val variable.
+      variable_del($old_var);
+    }
+  }
+  return $ret;
+}
+
+/**
+ * @} End of "defgroup updates-4.7-to-5.0"
+ */

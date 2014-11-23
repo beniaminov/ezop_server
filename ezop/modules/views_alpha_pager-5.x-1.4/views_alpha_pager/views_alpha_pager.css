@@ -1,0 +1,12 @@
+/* $Id: views_alpha_pager.css,v 1.1 2006/10/12 14:47:45 douggreen Exp $ */
+/*
+** HTML elements
+*/
+.apager {
+  clear: both;
+  text-align: center;
+  padding: 0.5em 0 0.5em 0;
+}
+.apager a, .apager strong.pager-current {
+  padding: 0.5em;
+}

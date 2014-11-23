@@ -1,0 +1,357 @@
+# $Id: aggregator-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.x.\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-03-04 01:46+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/aggregator/aggregator.module:15
+msgid "The news aggregator is a powerful on-site RSS syndicator/news reader that can gather fresh content from news sites and weblogs around the web."
+msgstr "Сбор новостей - это мощная программа для сбора и просмотра новых материалов в формате RSS, которые собираются с новостных сайтов или блогов в сети интернет."
+
+#: modules/aggregator/aggregator.module:16
+msgid "Users can view the latest news chronologically in the <a href=\"@aggregator\">main news aggregator display</a> or by <a href=\"@aggregator-sources\">source</a>. Administrators can add, edit and delete feeds and choose how often to check for newly updated news for each individual feed. Administrators can also tag individual feeds with categories, offering selective grouping of some feeds into separate displays. Listings of the latest news for individual sources or categorized sources can be enabled as blocks for display in the sidebar through the <a href=\"@admin-block\">block administration page</a>. The news aggregator requires cron to check for the latest news from the sites to which you have subscribed. Drupal also provides a <a href=\"@aggregator-opml\">machine-readable OPML file</a> of all of your subscribed feeds."
+msgstr "Пользователи могут просматривать новости в хронологическом порядке на странице <a href=\"@aggregator\">все новости</a> или <a href=\"@aggregator-sources\">по источникам</a>. Администраторы могут добавлять, изменять или удалять ленты и выбирать интервал обновления для каждой отдельной ленты. Администраторы также могут распределять новости по категориям, используя группировку некоторых лент в отдельные списки. Списки последних новостей по источникам или по категориям можно выводить в блоках на разных колонках сайта, настраивая это на странице <a href=\"@admin-block\">управления блоками</a>. Сбор новостей требует использования cron для проверки появления последних новостей, на которые вы подписаны. Drupal поддерживает также машинный формат файлов <a href=\"@aggregator-opml\">OPML</a> для всех лент на сайте."
+
+#: modules/aggregator/aggregator.module:17
+msgid "For more information please read the configuration and customization handbook <a href=\"@aggregator\">Aggregator page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@aggregator\">сбор новостей</a>."
+
+#: modules/aggregator/aggregator.module:20
+msgid "Thousands of sites (particularly news sites and weblogs) publish their latest headlines and/or stories in a machine-readable format so that other sites can easily link to them. This content is usually in the form of an <a href=\"http://blogs.law.harvard.edu/tech/rss\">RSS</a> feed (which is an XML-based syndication standard). To display the feed or category in a block you must decide how many items to show by editing the feed or block and turning on the <a href=\"@block\">feed's block</a>."
+msgstr "Тысячи сайтов (как правило, это новостные сайты и сетевые блоги) публикуют свои последние статьи или их заголовки в удобном для автоматического сбора формате, так что другие сайты могут легко ссылаться на них. Эти публикации выполняются как правило в формате <a href=\"http://blogs.law.harvard.edu/tech/rss\">RSS</a> ленты (это основанный на XML стандарт публикаций). Для отображения ленты или группы лент в блоке нужно указать количество выводимых пунктов в настройках ленты или блока и включить <a href=\"@block\">блок ленты</a>."
+
+#: modules/aggregator/aggregator.module:22
+msgid "Add a site that has an RSS/RDF/Atom feed. The URL is the full path to the feed file. For the feed to update automatically you must run \"cron.php\" on a regular basis. If you already have a feed with the URL you are planning to use, the system will not accept another feed with the same URL."
+msgstr "Добавить сайт, имеющий ленты RSS, RDF, или Atom. \"Адрес\" - полный адрес к файлу ленты. Для обновления потоков необходимо выполнения регулярных процедур (скрипт \"cron.php\"). Если лента с указанным вами адресом уже зарегистрирована на сайте, то вторая лента с тем же адресом не будет создана."
+
+#: modules/aggregator/aggregator.module:24
+msgid "Categories provide a way to group items from different news feeds together. Each news category has its own feed page and block. For example, you could tag various sport-related feeds as belonging to a category called <em>Sports</em>. News items can be added to a category automatically by setting a feed to automatically place its item into that category, or by using the categorize items link in any listing of news items."
+msgstr "Категории позволяют группировать новости из разных лент в одном месте. Каждая новостная категория имеет собственную страницу ленты и блок. Например, вы можете объединить различные спортивные ленты, как принадлежащие категории <em>Спорт</em>. Новости могут добавляться в категорию автоматически, для этого нужно настроить ленту на автоматическое размещение новостей в данную категорию. То же можно сделать, используя ссылку категоризации в любом списке новостей."
+
+#: modules/aggregator/aggregator.module:38
+#: ;77
+msgid "News aggregator"
+msgstr "Сбор новостей"
+
+#: modules/aggregator/aggregator.module:39
+msgid "Configure which content your site aggregates from other sites, how often it polls them, and how they're categorized."
+msgstr "Настройка сбора информации с других сайтов, частоты проверки обновления и способ ее систематизации."
+
+#: modules/aggregator/aggregator.module:43
+msgid "Add feed"
+msgstr "Добавить ленту"
+
+#: modules/aggregator/aggregator.module:55
+msgid "Remove items"
+msgstr "Удалить пункты"
+
+#: modules/aggregator/aggregator.module:60
+msgid "Update items"
+msgstr "Обновить пункты"
+
+#: modules/aggregator/aggregator.module:82
+msgid "Sources"
+msgstr "Источники"
+
+#: modules/aggregator/aggregator.module:96
+msgid "OPML feed"
+msgstr "материал OPML"
+
+#: modules/aggregator/aggregator.module:128
+#: ;150;1127
+msgid "Categorize"
+msgstr "Разбить по категориям"
+
+#: modules/aggregator/aggregator.module:170
+msgid "Edit feed"
+msgstr "Изменить ленту"
+
+#: modules/aggregator/aggregator.module:181
+msgid "Edit category"
+msgstr "Изменить категорию"
+
+#: modules/aggregator/aggregator.module:201
+msgid "The list of tags which are allowed in feeds, i.e., which will not be removed by Drupal."
+msgstr "Список тегов, которые останутся в сообщении, т.е. не будут удалены Drupal'ом."
+
+#: modules/aggregator/aggregator.module:205
+msgid "Items shown in sources and categories pages"
+msgstr "Новости, показанные на страницах источников и категорий"
+
+#: modules/aggregator/aggregator.module:207
+msgid "The number of items which will be shown with each feed or category in the feed and category summary pages."
+msgstr "Количество элементов, которое будет отображаться в каждой ленте или категории на сводных страницах категорий и лент."
+
+#: modules/aggregator/aggregator.module:211
+msgid "Discard news items older than"
+msgstr "Удалять элементы старше чем"
+
+#: modules/aggregator/aggregator.module:213
+msgid "Older news items will be automatically discarded. Requires crontab."
+msgstr "Старые сообщения будут автоматически удалены. Требуется выполнение регулярных процедур (crontab)."
+
+#: modules/aggregator/aggregator.module:217
+msgid "Category selection type"
+msgstr "Способ отбора категорий"
+
+#: modules/aggregator/aggregator.module:218
+msgid "checkboxes"
+msgstr "выбор опций"
+
+#: modules/aggregator/aggregator.module:218
+msgid "multiple selector"
+msgstr "множественный выбор"
+
+#: modules/aggregator/aggregator.module:219
+msgid "The type of category selection widget which is shown on categorization pages. Checkboxes are easier to use; a multiple selector is good for working with large numbers of categories."
+msgstr "Тип элемента управления для выбора категорий, который будет показываться на страницах категоризации. Выбор опций использовать проще всего, а окно множественного выбора удобно для работы с большим количеством категорий."
+
+#: modules/aggregator/aggregator.module:254
+msgid "!title category latest items"
+msgstr "Последние новости в категории \"!title\""
+
+#: modules/aggregator/aggregator.module:258
+msgid "!title feed latest items"
+msgstr "Последние новости ленты !title"
+
+#: modules/aggregator/aggregator.module:269
+msgid "Number of news items in block"
+msgstr "Число новостей в блоке"
+
+#: modules/aggregator/aggregator.module:288
+msgid "View this feed's recent news."
+msgstr "Просмотреть последние новости этой ленты."
+
+#: modules/aggregator/aggregator.module:296
+msgid "View this category's recent news."
+msgstr "Просмотреть последние новости в этой категории."
+
+#: modules/aggregator/aggregator.module:351
+msgid "A category named %category already exists. Please enter a unique title."
+msgstr "Категория %category уже существует. Пожалуйста, введите другое название."
+
+#: modules/aggregator/aggregator.module:370
+msgid "The category %category has been updated."
+msgstr "Категория %category обновлена."
+
+#: modules/aggregator/aggregator.module:379
+msgid "Category %category deleted."
+msgstr "Категория %category удалена."
+
+#: modules/aggregator/aggregator.module:380
+msgid "The category %category has been deleted."
+msgstr "Категория %category удалена."
+
+#: modules/aggregator/aggregator.module:390
+msgid "Category %category added."
+msgstr "Категория %category добавлена."
+
+#: modules/aggregator/aggregator.module:391
+msgid "The category %category has been added."
+msgstr "Категория %category добавлена."
+
+#: modules/aggregator/aggregator.module:426
+msgid "The name of the feed; typically the name of the web site you syndicate content from."
+msgstr "Название ленты. Обычно используется название сайта, с которого вы берете содержимое."
+
+#: modules/aggregator/aggregator.module:433
+msgid "The fully-qualified URL of the feed."
+msgstr "Полный адрес (URL) ленты."
+
+#: modules/aggregator/aggregator.module:437
+msgid "Update interval"
+msgstr "Интервал обновления"
+
+#: modules/aggregator/aggregator.module:440
+msgid "The refresh interval indicating how often you want to update this feed. Requires crontab."
+msgstr "Интервал обновления показывает, как часто вы хотите обновлять этот материал. Требуется crontab."
+
+#: modules/aggregator/aggregator.module:453
+msgid "Categorize news items"
+msgstr "Категоризовать новости"
+
+#: modules/aggregator/aggregator.module:456
+msgid "New items in this feed will be automatically filed in the checked categories as they are received."
+msgstr "Новые элементы этой ленты будут автоматически помещены в выбранные категории при получении."
+
+#: modules/aggregator/aggregator.module:483
+msgid "A feed named %feed already exists. Please enter a unique title."
+msgstr "Лента %feed уже существует. Пожалуйста, введите другое название."
+
+#: modules/aggregator/aggregator.module:486
+msgid "A feed with this URL %url already exists. Please enter a unique URL."
+msgstr "Поток с адреса %url уже существует. Укажите уникальные адрес."
+
+#: modules/aggregator/aggregator.module:506
+msgid "The feed %feed has been updated."
+msgstr "Лента %feed обновлена."
+
+#: modules/aggregator/aggregator.module:515
+msgid "Feed %feed deleted."
+msgstr "Лента %feed удалена."
+
+#: modules/aggregator/aggregator.module:516
+msgid "The feed %feed has been deleted."
+msgstr "Лента %feed удалена."
+
+#: modules/aggregator/aggregator.module:526
+msgid "Feed %feed added."
+msgstr "Лента %feed добавлена."
+
+#: modules/aggregator/aggregator.module:527
+msgid "The feed %feed has been added."
+msgstr "Лента %feed добавлена."
+
+#: modules/aggregator/aggregator.module:580
+msgid "The news items from %site have been removed."
+msgstr "Новости с %site были удалены."
+
+#: modules/aggregator/aggregator.module:710
+msgid "There is no new syndicated content from %site."
+msgstr "Нет нового RSS-материала с %site."
+
+#: modules/aggregator/aggregator.module:714
+msgid "Updated URL for feed %title to %url."
+msgstr "Обновленный адрес ленты %title - %url."
+
+#: modules/aggregator/aggregator.module:762
+#: ;763
+msgid "There is new syndicated content from %site."
+msgstr "Новый RSS-материал с %site."
+
+#: modules/aggregator/aggregator.module:767
+msgid "The feed from %site seems to be broken, due to \"%error\"."
+msgstr "Невозможно обработать RSS-ленту с сайта %site в результате \"%error\"."
+
+#: modules/aggregator/aggregator.module:768
+msgid "The feed from %site seems to be broken, because of error \"%error\"."
+msgstr "Невозможно обработать RSS-ленту с сайта %site из-за ошибки \"%error\"."
+
+#: modules/aggregator/aggregator.module:824
+msgid "The feed from %site seems to be broken, due to an error \"%error\" on line %line."
+msgstr "Невозможно обработать RSS-ленту с сайта %site в результате ошибки \"%error\" на строке %line."
+
+#: modules/aggregator/aggregator.module:825
+msgid "The feed from %site seems to be broken, because of error \"%error\" on line %line."
+msgstr "Невозможно обработать RSS-ленту с сайта %site из-за ошибки \"%error\" на строке %line."
+
+#: modules/aggregator/aggregator.module:981
+msgid "Feed overview"
+msgstr "Обзор ленты"
+
+#: modules/aggregator/aggregator.module:983
+#: ;994
+msgid "Items"
+msgstr "Элементы"
+
+#: modules/aggregator/aggregator.module:983
+msgid "Last update"
+msgstr "Последнее обновление"
+
+#: modules/aggregator/aggregator.module:983
+msgid "Next update"
+msgstr "Следующее обновление"
+
+#: modules/aggregator/aggregator.module:986
+msgid "%time left"
+msgstr "прошло %time"
+
+#: modules/aggregator/aggregator.module:986
+msgid "remove items"
+msgstr "удалить новости"
+
+#: modules/aggregator/aggregator.module:986
+msgid "update items"
+msgstr "обновить новости"
+
+#: modules/aggregator/aggregator.module:992
+msgid "Category overview"
+msgstr "Просмотр категории"
+
+#: modules/aggregator/aggregator.module:1031
+#: ;1220;379;390;515;526;714;762;767;824;0
+msgid "aggregator"
+msgstr "сбор новостей"
+
+#: modules/aggregator/aggregator.module:1052
+msgid "aggregator - @title"
+msgstr "сбор новостей - @title"
+
+#: modules/aggregator/aggregator.module:1087
+msgid "Save categories"
+msgstr "Сохранить категории"
+
+#: modules/aggregator/aggregator.module:1136
+msgid "You are not allowed to categorize this feed item."
+msgstr "У вас недостаточно прав для категоризации этой новости."
+
+#: modules/aggregator/aggregator.module:1149
+msgid "The categories have been saved."
+msgstr "Категории сохранены."
+
+#: modules/aggregator/aggregator.module:1172
+#: ;1276
+msgid "More"
+msgstr "Дальше"
+
+#: modules/aggregator/aggregator.module:1192
+msgid "in category"
+msgstr "в категории"
+
+#: modules/aggregator/aggregator.module:1220
+msgid "aggregated feeds"
+msgstr "Собранные ленты"
+
+#: modules/aggregator/aggregator.module:1298
+msgid "URL:"
+msgstr "Адрес:"
+
+#: modules/aggregator/aggregator.module:1311
+msgid "Updated:"
+msgstr "Обновлено:"
+
+#: modules/aggregator/aggregator.module:1326
+#: ;1326
+msgid "blog it"
+msgstr "в дневник"
+
+#: modules/aggregator/aggregator.module:1327
+msgid "Comment on this news item in your personal blog."
+msgstr "Написать комментарий к этой новости в вашем блоге (дневнике)."
+
+#: modules/aggregator/aggregator.module:1347
+msgid "%age old"
+msgstr "%age"
+
+#: modules/aggregator/aggregator.module:1367
+msgid "%ago ago"
+msgstr "%ago назад"
+
+#: modules/aggregator/aggregator.module:986
+#: ;997;1406
+msgid "1 item"
+msgid_plural "@count items"
+msgstr[0] "@count пункт"
+msgstr[1] "@count пункта"
+msgstr[2] "@count пунктов"
+
+#: modules/aggregator/aggregator.module:229
+msgid "administer news feeds"
+msgstr "управлять лентами новостей"
+
+#: modules/aggregator/aggregator.module:229
+msgid "access news feeds"
+msgstr "иметь доступ к лентам новостей"
+

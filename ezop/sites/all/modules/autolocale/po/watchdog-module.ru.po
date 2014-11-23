@@ -1,0 +1,99 @@
+# $Id: watchdog-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: watchdog.module,v 1.165 2006/12/29 17:22:20 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 14:41+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/watchdog/watchdog.module:21
+msgid "The watchdog module monitors your system, capturing system events in a log to be reviewed by an authorized individual at a later time. This is useful for site administrators who want a quick overview of activities on their site. The logs also record the sequence of events, so it can be useful for debugging site errors."
+msgstr "Модуль учета наблюдает за вашим сайтом, записывая системные события в журнал для последующего просмотра пользователем, имеющим такое право. Это полезно для администраторов сайта, которые хотят иметь быстрый обзор работы их сайта. Системные журналы также записывают последовательность событий, так что это может быть полезным для отладки ошибок на сайте."
+
+#: modules/watchdog/watchdog.module:22
+msgid "The watchdog log is simply a list of recorded events containing usage data, performance data, errors, warnings and operational information. Administrators should check the watchdog report on a regular basis to ensure their site is working properly."
+msgstr "Журнал регистратора представляет собой просто список событий, содержащий данные о функционировании сайта, о производительности, об ошибках, предупреждениях и прочую рабочую информацию. Администраторы должны регулярно следить за журналом, чтобы добиваться безошибочной работы сайта."
+
+#: modules/watchdog/watchdog.module:23
+msgid "For more information please read the configuration and customization handbook <a href=\"@watchdog\">Watchdog page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@watchdog\">регистратор</a>."
+
+#: modules/watchdog/watchdog.module:26
+msgid "The watchdog module monitors your web site, capturing system events in a log to be reviewed by an authorized individual at a later time. The watchdog log is simply a list of recorded events containing usage data, performance data, errors, warnings and operational information. It is vital to check the watchdog report on a regular basis as it is often the only way to tell what is going on."
+msgstr "Модуль регистратор наблюдает за вашим сайтом, записывая системные события в журнал для последующего просмотра пользователем, имеющим такое право. Журнал учета представляет собой просто список событий, содержащий данные о функционировании сайта, о производительности, об ошибках, предупреждениях и прочую рабочую информацию. Жизненно важно регулярно следить за журналом, поскольку это может оказаться единственным способом узнать, что происходит с сайтом."
+
+#: modules/watchdog/watchdog.module:37
+msgid "Recent log entries"
+msgstr "Недавние записи"
+
+#: modules/watchdog/watchdog.module:38
+msgid "View events that have recently been logged."
+msgstr "Просмотр событий, недавно записанных в системный журнал."
+
+#: modules/watchdog/watchdog.module:41
+msgid "Top 'page not found' errors"
+msgstr "\"Не найдено\""
+
+#: modules/watchdog/watchdog.module:42
+msgid "View 'page not found' errors (404s)."
+msgstr "Просмотр самых частых ошибок типа \"страница не найдена\" (404)."
+
+#: modules/watchdog/watchdog.module:45
+msgid "Top 'access denied' errors"
+msgstr "\"Отказ в доступе\""
+
+#: modules/watchdog/watchdog.module:46
+msgid "View 'access denied' errors (403s)."
+msgstr "Просмотр самых частых ошибок типа \"отказ в доступе\" (403)."
+
+#: modules/watchdog/watchdog.module:83
+msgid "all messages"
+msgstr "все сообщения"
+
+#: modules/watchdog/watchdog.module:85
+msgid "!type messages"
+msgstr "сообщения !type"
+
+#: modules/watchdog/watchdog.module:94
+msgid "Filter by message type"
+msgstr "Фильтровать по типу"
+
+#: modules/watchdog/watchdog.module:108;108;198
+msgid "warning"
+msgstr "предупреждение"
+
+#: modules/watchdog/watchdog.module:150;177
+msgid "No log messages available."
+msgstr "В системном журнале нет сообщений."
+
+#: modules/watchdog/watchdog.module:166
+msgid "Count"
+msgstr "Количество"
+
+#: modules/watchdog/watchdog.module:198
+msgid "notice"
+msgstr "замечание"
+
+#: modules/watchdog/watchdog.module:216
+msgid "Location"
+msgstr "Местоположение"
+
+#: modules/watchdog/watchdog.module:228
+msgid "Severity"
+msgstr "Важность"
+
+#: modules/watchdog/watchdog.module:0
+msgid "watchdog"
+msgstr "Системный журнал сайта"
+

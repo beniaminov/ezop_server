@@ -1,0 +1,91 @@
+<?php
+// $Id: activeselect.module,v 1.9 2007/01/05 15:57:53 jaza Exp $
+
+/**
+ * @file
+ * Defines the activeselect form element, which allows modules to have
+ * AJAX-enabled select boxes.
+ */
+
+/**
+ * Implementation of hook_help().
+ */
+function activeselect_help($section) {
+  switch ($section) {
+    case 'admin/help#activeselect':
+      return '<p>'. t('The activeselect module defines the activeselect form element. An activeselect element is the same as a regular select element, except that when the user selects a new option (or set of options), a different select element (the target element) gets its list updated. This is done using AJAX, and it is designed to degrade gracefully if the required JavaScript support is not present. The target element can be either a regular select box, or another activeselect box (which in turn can trigger another target box, which can trigger yet another, resulting in a hierarchical cascade of activeselect elements).') .'</p>';
+  }
+}
+
+/**
+ * Implementation of hook_elements().
+ */
+function activeselect_elements() {
+  $type['activeselect'] = array('#input' => TRUE);
+
+  return $type;
+}
+
+/**
+ * Converts the string of values passed to an activeselect callback function
+ * into an array.
+ *
+ * @param $string
+ *   The string of values passed to an activeselect callback.
+ *
+ * @return
+ *   An array of values, in the form $key => $value.
+ */
+function activeselect_explode_values($string) {
+  $array = explode('||', $string);
+  foreach ($array as $key => $value) {
+    $match = explode('|', $value);
+    $array[$match[0]] = html_entity_decode($match[1]);
+    unset($array[$key]);
+  }
+
+  return $array;
+}
+
+function activeselect_set_header_nocache() {
+  header("Expires: Sun, 19 Nov 1978 05:00:00 GMT");
+  header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+  header("Cache-Control: no-store, no-cache, must-revalidate");
+  header("Cache-Control: post-check=0, pre-check=0", false);
+  header("Pragma: no-cache");
+}
+
+/**
+ * Format a dropdown menu or scrolling selection box.
+ *
+ * @param $element
+ *   An associative array containing the properties of the element.
+ *   Properties used: title, value, options, description, extra, multiple, required
+ * @return
+ *   A themed HTML string representing the form element.
+ *
+ * It is possible to group options together; to do this, change the format of
+ * $options to an associative array in which the keys are group labels, and the
+ * values are associative arrays in the normal $options format.
+ */
+function theme_activeselect($element) {
+  $size = $element['#size'] ? ' size="' . $element['#size'] . '"' : '';
+  $class = array();
+  $extra = '';
+  if ($element['#activeselect_path'] && $element['#activeselect_targets']) {
+    $module_path = drupal_get_path('module', 'activeselect'). '/';
+    drupal_add_css($module_path. 'activeselect.css');
+    drupal_add_js($module_path. 'activeselect.js');
+    $class[] = ' form-activeselect';
+    $extra = '<input class="activeselect-path" type="hidden" id="'. $element['#id'] .'-activeselect-path" value="'. check_url(url($element['#activeselect_path'], NULL, NULL, TRUE)) .'" disabled="disabled" />'. "\n";
+    $targets = explode(',', $element['#activeselect_targets']);
+    foreach ($targets as $key => $target) {
+      $targets[$key] = 'edit-'. check_plain($target);
+    }
+	  $extra .= '<input class="activeselect-targets" type="hidden" id="'. $element['#id'] .'-activeselect-targets" value="'. implode(',', $targets) .'" disabled="disabled" />'. "\n";
+    $extra .= '<input class="activeselect-extra" type="hidden" id="'. $element['#id'] .'-activeselect-extra" value="'. check_plain($element['#activeselect_extra']) .'" disabled="disabled" />'. "\n";
+  }
+  _form_set_class($element, $class);
+
+  return theme('form_element', $element, '<select name="'. $element['#name'] .''. ($element['#multiple'] ? '[]' : '') .'"'. ($element['#multiple'] ? ' multiple="multiple" ' : '') . drupal_attributes($element['#attributes']) .' id="' . $element['#id'] .'" '. $size. '>'. form_select_options($element) .'</select>'). $extra;
+}

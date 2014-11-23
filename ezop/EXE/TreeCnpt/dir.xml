@@ -1,0 +1,138 @@
+<?xml version = "1.0" encoding = "WINDOWS-1251" ?>
+<?xml-stylesheet type='text/xsl' href='dir.xsl'?>
+<catalog>
+	<subdir name = "catalog" id ="0">
+<subdir name = "Алгебра" id = "1" pictureType = "folder" >
+<subdir name = "U-группа" id = "2" pictureType = "paper" >
+</subdir>
+<subdir name = "boolean" id = "3" pictureType = "paper" >
+</subdir>
+<subdir name = "if_then_else  и real" id = "4" pictureType = "paper" >
+</subdir>
+<subdir name = "Группа" id = "5" pictureType = "paper" >
+</subdir>
+<subdir name = "Множество" id = "6" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Базы данных" id = "7" pictureType = "folder" >
+<subdir name = "Поставки" id = "8" pictureType = "folder_paper" >
+<subdir name = "Спецификация деталей" id = "9" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Простой пример" id = "10" pictureType = "folder" >
+<subdir name = "Измененный цвет в среде цвет" id = "11" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета" id = "12" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета тел" id = "13" pictureType = "paper" >
+</subdir>
+<subdir name = "цвет" id = "14" pictureType = "envpaper" >
+<subdir name = "Измененный цвет в среде цвет" id = "15" pictureType = "paper" >
+</subdir>
+</subdir>
+</subdir>
+<subdir name = "Учебный процесс" id = "16" pictureType = "folder" >
+<subdir name = "Пример с таблицей свойств" id = "17" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация людей учебного процесса" id = "18" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация оборудования учебного процесса" id = "19" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация помещений учебного процесса" id = "20" pictureType = "paper" >
+</subdir>
+<subdir name = "некоторые факты о факультете автоматики ИАИ" id = "21" pictureType = "paper" >
+</subdir>
+<subdir name = "основные типы объектов" id = "22" pictureType = "paper" >
+</subdir>
+<subdir name = "пример размещения оборудования" id = "23" pictureType = "paper" >
+</subdir>
+<subdir name = "размещение оборудования учебного процесса" id = "24" pictureType = "paper" >
+</subdir>
+<subdir name = "типы объектов учебного процесса" id = "25" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "пример мира" id = "26" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Движение" id = "27" pictureType = "folder" >
+<subdir name = "Равномерное движение" id = "28" pictureType = "folder" >
+<subdir name = "Задачи" id = "29" pictureType = "folder" >
+<subdir name = "Задача1" id = "30" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача2" id = "31" pictureType = "paper" >
+</subdir>
+<subdir name = "задача на равномерное движение" id = "32" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "равномерное движение" id = "33" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "движение" id = "34" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Особые примеры" id = "35" pictureType = "folder" >
+<subdir name = "Введение шаблонов" id = "36" pictureType = "folder" >
+</subdir>
+<subdir name = "Объекты понятий" id = "37" pictureType = "folder" >
+</subdir>
+<subdir name = "Правила переписывания" id = "38" pictureType = "folder" >
+</subdir>
+</subdir>
+<subdir name = "Ядро системы" id = "39" pictureType = "envpaper" >
+<subdir name = "U-группа" id = "40" pictureType = "paper" >
+</subdir>
+<subdir name = "boolean" id = "41" pictureType = "paper" >
+</subdir>
+<subdir name = "if_then_else  и real" id = "42" pictureType = "paper" >
+</subdir>
+<subdir name = "Группа" id = "43" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача1" id = "44" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача2" id = "45" pictureType = "paper" >
+</subdir>
+<subdir name = "Множество" id = "46" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставки" id = "47" pictureType = "folder_paper" >
+<subdir name = "Спецификация деталей" id = "48" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример с таблицей свойств" id = "49" pictureType = "paper" >
+</subdir>
+<subdir name = "Спецификация деталей" id = "50" pictureType = "paper" >
+</subdir>
+<subdir name = "движение" id = "51" pictureType = "paper" >
+</subdir>
+<subdir name = "задача на равномерное движение" id = "52" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета" id = "53" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета тел" id = "54" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация людей учебного процесса" id = "55" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация оборудования учебного процесса" id = "56" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация помещений учебного процесса" id = "57" pictureType = "paper" >
+</subdir>
+<subdir name = "некоторые факты о факультете автоматики ИАИ" id = "58" pictureType = "paper" >
+</subdir>
+<subdir name = "основные типы объектов" id = "59" pictureType = "paper" >
+</subdir>
+<subdir name = "пример мира" id = "60" pictureType = "paper" >
+</subdir>
+<subdir name = "пример размещения оборудования" id = "61" pictureType = "paper" >
+</subdir>
+<subdir name = "равномерное движение" id = "62" pictureType = "paper" >
+</subdir>
+<subdir name = "размещение оборудования учебного процесса" id = "63" pictureType = "paper" >
+</subdir>
+<subdir name = "типы объектов учебного процесса" id = "64" pictureType = "paper" >
+</subdir>
+<subdir name = "цвет" id = "65" pictureType = "envpaper" >
+<subdir name = "Измененный цвет в среде цвет" id = "66" pictureType = "paper" >
+</subdir>
+</subdir>
+</subdir>
+	</subdir>
+</catalog>

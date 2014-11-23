@@ -1,0 +1,48 @@
+<?php
+// $Id: news_page.install,v 1.2.2.3 2009/04/29 21:29:58 MegaGrunt Exp $
+
+/**
+ * Implementation of hook_install()
+ */
+function news_page_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+          $query1 = db_query("CREATE TABLE {news_page} (
+                nid int(10) unsigned NOT NULL default '0',
+                include varchar(255) NOT NULL default '',
+                cid int(10) unsigned NOT NULL default '0',
+                max_items int(11) NOT NULL default '0',
+                search text,
+                PRIMARY KEY (nid)
+                ) TYPE=MyISAM /*!40100 DEFAULT CHARACTER SET utf8 */;");
+                
+          if (!empty($query1)) {
+            $created = TRUE;
+          } 
+          
+          break;
+  }
+  
+  if ($created) {
+    drupal_set_message(t('News Page module installed successfully.'));
+  }
+  else {
+    drupal_set_message(t('Table installation for the News Page module was unsuccessful. The tables may need to be installed by hand. See news_page.install file for a list of the installation queries.'), 'error');
+  } 
+  
+  return;
+}
+
+/**
+ * Updates existing tables from early 4.6 install and add "search" field.
+ */
+function news_page_update_1() {
+  
+  _system_update_utf8(array('news_page'));
+  
+  $items = array();
+  $items[] = update_sql('ALTER TABLE {news_page} ADD search text');
+
+  return $items;
+}

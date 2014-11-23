@@ -1,0 +1,468 @@
+# $Id: comment-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-21 14:55+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/comment/comment.module:129
+msgid "The comment module creates a discussion board for each post. Users can post comments to discuss a forum topic, weblog post, story, collaborative book page, etc. The ability to comment is an important part of involving members in a community dialogue."
+msgstr "Модуль комментариев дает возможность организовать обсуждение каждого материала. Пользователи могут добавлять свои комментарии к обсуждениям на форуме, к записям в блогах, к статьям, к страницам подшивок и т.д. Возможность создания комментариев - важная часть привлечения посетителей к диалогу."
+
+#: modules/comment/comment.module:130
+msgid "An administrator can give comment permissions to user groups, and users can (optionally) edit their last comment, assuming no others have been posted since. Attached to each comment board is a control panel for customizing the way that comments are displayed. Users can control the chronological ordering of posts (newest or oldest first) and the number of posts to display on each page. Comments behave like other user submissions. Filters, smileys and HTML that work in nodes will also work with comments. The comment module provides specific features to inform site members when new comments have been posted."
+msgstr "Администратор может предоставлять группе пользователей права на работу с комментариями и пользователи могут (при необходимости) изменять свои последние комментарии, если никто другой на них еще не ответил. Можно настраивать особенности показа комментариев. Пользователи могут управлять хронологией показа (сначала идут самые новые комментарии или наоборот) и количеством комментариев на каждой странице. Комментарии подобны другим пользовательским материалам. Фильтры, смайлики и HTML, которые применяются в материалах сайта, также можно применять в комментариях. Модуль комментария имеет дополнительные возможности сообщать зарегистрированным пользователям сайта о добавлении новых комментариев."
+
+#: modules/comment/comment.module:131
+msgid "For more information please read the configuration and customization handbook <a href=\"@comment\">Comment page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@comment\">комментариев</a>."
+
+#: modules/comment/comment.module:135
+msgid "Below is a list of the latest comments posted to your site. Click on a subject to see the comment, the author's name to edit the author's user information , 'edit' to modify the text, and 'delete' to remove their submission."
+msgstr "Ниже следует список последних комментариев на вашем сайте. Нажмите на заголовок темы, чтобы посмотреть комментарий, на имя автора, чтобы изменить информацию о нем, на \"изменить\", чтобы изменить текст и на \"удалить\", чтобы удалить сообщение."
+
+#: modules/comment/comment.module:137
+msgid "Below is a list of the comments posted to your site that need approval. To approve a comment, click on 'edit' and then change its 'moderation status' to Approved. Click on a subject to see the comment, the author's name to edit the author's user information, 'edit' to modify the text, and 'delete' to remove their submission."
+msgstr "Ниже следует список комментариев, нуждающихся в подтверждении для публикации на сайте. Для подтверждения публикации нажмите \"изменить\" и затем измените его \"статус модерации\" на \"разрешено\". Нажмите на заголовок темы, чтобы посмотреть комментарий, на имя автора, чтобы изменить информацию о нем, на \"Изменить\", чтобы изменить текст и на \"удалить\", чтобы удалить сообщение."
+
+#: modules/comment/comment.module:139
+msgid "Comments can be attached to any node, and their settings are below. The display comes in two types: a 'flat list' where everything is flush to the left side, and comments come in chronological order, and a 'threaded list' where replies to other comments are placed immediately below and slightly indented, forming an outline. They also come in two styles: 'expanded', where you see both the title and the contents, and 'collapsed' where you only see the title. Preview comment forces a user to look at their comment by clicking on a 'Preview' button before they can actually add the comment."
+msgstr "Комментарии могут быть добавлены к любому материалу, ниже приведены их настройки. Показ комментариев бывает двух типов: \"плоский список\" – где все прижато к левому краю, а комментарии идут в хронологическом порядке, и \"древовидный\", где ответы на комментарии помещаются сразу после оригиналов и отображаются с отступом. Также может быть два стиля показа комментариев: \"развёрнутый\" – показываются и заголовок и содержание, и \"свёрнутый\", где вы видите только заголовок. Просмотр комментария заставляет пользователя еще раз просмотреть свое сообщение, нажав на кнопку \"Просмотр\", перед тем, как окончательно отправить комментарий на сайт."
+
+#: modules/comment/comment.module:154
+msgid "List and edit site comments and the comment moderation queue."
+msgstr "Просмотр и изменение комментариев на сайте, очередь на их модерацию."
+
+#: modules/comment/comment.module:164
+msgid "Published comments"
+msgstr "Опубликованные материалы"
+
+#: modules/comment/comment.module:166
+msgid "Approval queue"
+msgstr "Очередь на подтверждение"
+
+#: modules/comment/comment.module:181
+msgid "Delete comment"
+msgstr "Удалить коментарий"
+
+#: modules/comment/comment.module:185
+msgid "Edit comment"
+msgstr "Изменить комментарий"
+
+#: modules/comment/comment.module:193
+msgid "Reply to comment"
+msgstr "Ответить на комментарий"
+
+#: modules/comment/comment.module:225
+#: ;229
+msgid "Recent comments"
+msgstr "Последние комментарии"
+
+#: modules/comment/comment.module:306
+msgid "Jump to the first comment of this posting."
+msgstr "Перейти к первому комментарию."
+
+#: modules/comment/comment.module:316
+msgid "Jump to the first new comment of this posting."
+msgstr "Перейти к первому новому комментарию."
+
+#: modules/comment/comment.module:325
+#: ;346
+msgid "Add new comment"
+msgstr "Комментировать"
+
+#: modules/comment/comment.module:327
+msgid "Add a new comment to this page."
+msgstr "Комментировать эту страницу."
+
+#: modules/comment/comment.module:348
+msgid "Share your thoughts and opinions related to this posting."
+msgstr "Поделитесь мыслями и мнениями об этом материале."
+
+#: modules/comment/comment.module:374
+msgid "Default comment setting"
+msgstr "Установки по умолчанию для комментариев"
+
+#: modules/comment/comment.module:376
+#: ;395
+msgid "Read only"
+msgstr "Только чтение"
+
+#: modules/comment/comment.module:376
+#: ;395
+msgid "Read/Write"
+msgstr "Чтение/Запись"
+
+#: modules/comment/comment.module:377
+msgid "Users with the <em>administer comments</em> permission will be able to override this setting."
+msgstr "Пользователи с правом <em>управления комментариями</em> смогут изменять эту настройку."
+
+#: modules/comment/comment.module:386
+#: ;458
+msgid "Comment settings"
+msgstr "Установки комментариев"
+
+#: modules/comment/comment.module:463
+msgid "Signature"
+msgstr "Подпись"
+
+#: modules/comment/comment.module:465
+msgid "Your signature will be publicly displayed at the end of your comments."
+msgstr "Подпись будет выводиться в конце текста ваших комментариев."
+
+#: modules/comment/comment.module:481
+msgid "Viewing options"
+msgstr "Настройки показа"
+
+#: modules/comment/comment.module:487
+msgid "Default display mode"
+msgstr "Режим показа по умолчанию"
+
+#: modules/comment/comment.module:490
+msgid "The default view for comments. Expanded views display the body of the comment. Threaded views keep replies together."
+msgstr "Вид комментариев по умолчанию. Развернутые виды показывают текст комментария. Свернутые виды делают список комментариев компактнее."
+
+#: modules/comment/comment.module:495
+msgid "Default display order"
+msgstr "Порядок сортировки по умолчанию"
+
+#: modules/comment/comment.module:498
+msgid "The default sorting for new users and anonymous users while viewing comments. These users may change their view using the comment control panel. For registered users, this change is remembered as a persistent user preference."
+msgstr "Сортировка по умолчанию, включенная для новых и анонимных пользователей. Эти пользователи могут изменять опции просмотра через панель управления комментариями, если она включена. Для зарегистрированных пользователей настройки запоминаются."
+
+#: modules/comment/comment.module:503
+msgid "Default comments per page"
+msgstr "Комментариев на странице по умолчанию"
+
+#: modules/comment/comment.module:506
+msgid "Default number of comments for each page: more comments are distributed in several pages."
+msgstr "Количество комментариев на одной странице по умолчанию: если их больше, они будут показаны на нескольких страницах."
+
+#: modules/comment/comment.module:511
+msgid "Comment controls"
+msgstr "Управление комментариями"
+
+#: modules/comment/comment.module:514
+msgid "Display above the comments"
+msgstr "Расположить над комментариями"
+
+#: modules/comment/comment.module:515
+msgid "Display below the comments"
+msgstr "Расположить под комментариями"
+
+#: modules/comment/comment.module:516
+msgid "Display above and below the comments"
+msgstr "Расположить над и под комментариями"
+
+#: modules/comment/comment.module:517
+msgid "Do not display"
+msgstr "Не показывать"
+
+#: modules/comment/comment.module:518
+msgid "Position of the comment controls box. The comment controls let the user change the default display mode and display order of comments."
+msgstr "Расположение блока управления показом комментариев. Этот блок позволяет пользователям изменять режим и порядок показа комментариев."
+
+#: modules/comment/comment.module:523
+msgid "Posting settings"
+msgstr "Настройки отправки"
+
+#: modules/comment/comment.module:529
+msgid "Anonymous commenting"
+msgstr "Анонимные комментарии"
+
+#: modules/comment/comment.module:532
+msgid "Anonymous posters may not enter their contact information"
+msgstr "Анонимные пользователи могут не оставлять контактную информацию"
+
+#: modules/comment/comment.module:533
+msgid "Anonymous posters may leave their contact information"
+msgstr "Анонимные пользователи могут оставлять контактную информацию"
+
+#: modules/comment/comment.module:534
+msgid "Anonymous posters must leave their contact information"
+msgstr "Анонимные пользователи должны указывать контактную информацию"
+
+#: modules/comment/comment.module:535
+msgid "This option is enabled when anonymous users have permission to post comments on the <a href=\"@url\">permissions page</a>."
+msgstr "Эта возможность доступна, если незарегистрированные пользователи имеют права отправлять комментарии (см. страницу <a href=\"@url\">Контроль доступа</a>).  "
+
+#: modules/comment/comment.module:543
+msgid "Comment subject field"
+msgstr "Поле темы комментария"
+
+#: modules/comment/comment.module:546
+msgid "Can users provide a unique subject for their comments?"
+msgstr "Могут ли пользователи задавать темы (заголовки) для своих комментариев?"
+
+#: modules/comment/comment.module:551
+#: ;633;1547;1553;1557;1581
+msgid "Preview comment"
+msgstr "Просмотр"
+
+#: modules/comment/comment.module:558
+msgid "Location of comment submission form"
+msgstr "Расположение формы отправки комментария"
+
+#: modules/comment/comment.module:560
+msgid "Display on separate page"
+msgstr "Показывать на отдельной странице"
+
+#: modules/comment/comment.module:560
+msgid "Display below post or comments"
+msgstr "Показывать ниже сообщения или комментариев"
+
+#: modules/comment/comment.module:638
+#: ;678
+msgid "You are not authorized to post comments."
+msgstr "Вы не авторизированы для отправки комментариев."
+
+#: modules/comment/comment.module:651
+#: ;660
+msgid "The comment you are replying to does not exist."
+msgstr "Комментарий, на который вы пытаетесь ответить, больше не существует."
+
+#: modules/comment/comment.module:671
+msgid "This discussion is closed: you can't post new comments."
+msgstr "Это обсуждение закрыто: вы не можете добавлять новые комментарии."
+
+#: modules/comment/comment.module:675
+msgid "Reply"
+msgstr "Ответить"
+
+#: modules/comment/comment.module:684
+msgid "You are not authorized to view comments."
+msgstr "Вы не авторизированы для просмотра комментариев."
+
+#: modules/comment/comment.module:715
+#: ;1222
+msgid "Comment: updated %subject."
+msgstr "Комментарии: обновлен \"%subject\"."
+
+#: modules/comment/comment.module:722
+msgid "Comment: duplicate %subject."
+msgstr "Комментарий: продублирован \"%subject\"."
+
+#: modules/comment/comment.module:795
+msgid "Comment: added %subject."
+msgstr "Комментарии: добавлен \"%subject\"."
+
+#: modules/comment/comment.module:804
+msgid "Your comment has been queued for moderation by site administrators and will be published after approval."
+msgstr "Ваш комментарий был отправлен администраторам сайта и будет опубликован после проверки."
+
+#: modules/comment/comment.module:813
+msgid "Comment: unauthorized comment submitted or comment submitted to a closed node %subject."
+msgstr "Комментарии: отправлен неавторизованный комментарий, либо это комментарий к закрытому материалу \"%subject\"."
+
+#: modules/comment/comment.module:828
+msgid "parent"
+msgstr "перейти выше"
+
+#: modules/comment/comment.module:845
+#: ;857
+msgid "reply"
+msgstr "ответить"
+
+#: modules/comment/comment.module:1060
+msgid "Post new comment"
+msgstr "Отправить комментарий"
+
+#: modules/comment/comment.module:1081
+msgid "The comment and all its replies have been deleted."
+msgstr "Комментарий и все ответы на него удалены."
+
+#: modules/comment/comment.module:1097
+msgid "The comment no longer exists."
+msgstr "Комментарий больше не существует."
+
+#: modules/comment/comment.module:1106
+msgid "Are you sure you want to delete the comment %title?"
+msgstr "Вы действительно хотите удалить комментарий \"%title\"?"
+
+#: modules/comment/comment.module:1108
+msgid "Any replies to this comment will be lost. This action cannot be undone."
+msgstr "Все ответы на этот комментарий будут потеряны. Это действие нельзя отменить."
+
+#: modules/comment/comment.module:1120
+#: ;1132
+msgid "Publish the selected comments"
+msgstr "Опубликовать отмеченные комментарии"
+
+#: modules/comment/comment.module:1121
+#: ;1127;1134
+msgid "Delete the selected comments"
+msgstr "Удалить отмеченные комментарии"
+
+#: modules/comment/comment.module:1126
+#: ;1133
+msgid "Unpublish the selected comments"
+msgstr "Снять отмеченные комментарии с публикации"
+
+#: modules/comment/comment.module:1199
+msgid "Please select one or more comments to perform the update on."
+msgstr "Отметьте один или несколько комментариев."
+
+#: modules/comment/comment.module:1245
+msgid "No comments available."
+msgstr "Комментарии отсутствуют."
+
+#: modules/comment/comment.module:1279
+msgid "There do not appear to be any comments to delete or your selected comment was deleted by another administrator."
+msgstr "Не удалось найти коментарии для удаления, либо отмеченные комментарии уже были удалены другим администратором."
+
+#: modules/comment/comment.module:1284
+msgid "Are you sure you want to delete these comments and all their children?"
+msgstr "Вы действительно хотите удалить эти комментарии и все ответы на них?"
+
+#: modules/comment/comment.module:1286
+msgid "Delete comments"
+msgstr "Удалить комментарии"
+
+#: modules/comment/comment.module:1301
+msgid "The comments have been deleted."
+msgstr "Комментарии удалены."
+
+#: modules/comment/comment.module:1378
+msgid "You have to specify a valid author."
+msgstr "Вы должны правильно указать автора."
+
+#: modules/comment/comment.module:1388
+msgid "The name you used belongs to a registered user."
+msgstr "Использованное вами имя принадлежит зарегистрированному пользователю."
+
+#: modules/comment/comment.module:1393
+msgid "You have to leave your name."
+msgstr "Вы должны указать свое имя."
+
+#: modules/comment/comment.module:1398
+msgid "The e-mail address you specified is not valid."
+msgstr "Указанный адрес электронной почты неверен."
+
+#: modules/comment/comment.module:1402
+msgid "You have to leave an e-mail address."
+msgstr "Необходимо оставить адрес электронной почты."
+
+#: modules/comment/comment.module:1407
+msgid "The URL of your homepage is not valid. Remember that it must be fully qualified, i.e. of the form <code>http://example.com/directory</code>."
+msgstr "Указан неверный адрес домашней страницы. Не забывайте, что необходимо указывать полный адрес, например, такого вида <code>http://example.com/directory</code>."
+
+#: modules/comment/comment.module:1454
+msgid "Administration"
+msgstr "Управление"
+
+#: modules/comment/comment.module:1497
+#: ;1522;1529
+msgid "Homepage"
+msgstr "Домашняя страница"
+
+#: modules/comment/comment.module:1506
+msgid "Not published"
+msgstr "Не опубликовано"
+
+#: modules/comment/comment.module:1553
+#: ;1554
+msgid "Post comment"
+msgstr "Отправить комментарий"
+
+#: modules/comment/comment.module:1656
+msgid "(No subject)"
+msgstr "(Тема не указана)"
+
+#: modules/comment/comment.module:1725
+msgid "!a comments per page"
+msgstr "!a комментариев на страницу"
+
+#: modules/comment/comment.module:1734
+msgid "Save settings"
+msgstr "Сохранить настройки"
+
+#: modules/comment/comment.module:1745
+msgid "Select your preferred way to display the comments and click \"Save settings\" to activate your changes."
+msgstr "Выберите нужный метод показа комментариев и нажмите \"Сохранить установки\"."
+
+#: modules/comment/comment.module:1746
+msgid "Comment viewing options"
+msgstr "Настройки просмотра комментариев"
+
+#: modules/comment/comment.module:1769
+msgid "by %a on %b"
+msgstr "Автор: %a, дата: %b"
+
+#: modules/comment/comment.module:1779
+msgid "by"
+msgstr "Автор:"
+
+#: modules/comment/comment.module:1806
+msgid "you can't post comments"
+msgstr "вы не можете размещать комментарии"
+
+#: modules/comment/comment.module:1818
+msgid "<a href=\"@login\">Login</a> or <a href=\"@register\">register</a> to post comments"
+msgstr "Для комментирования <a href=\"@login\">войдите</a> или <a href=\"@register\">зарегистрируйтесь</a>"
+
+#: modules/comment/comment.module:1821
+msgid "<a href=\"@login\">Login</a> to post comments"
+msgstr "<a href=\"@login\">Войдите на сайт</a> для отправки комментариев"
+
+#: modules/comment/comment.module:1835
+msgid "Can not delete non-existent comment."
+msgstr "Невозможно удалить несуществующий комментарий."
+
+#: modules/comment/comment.module:1841
+msgid "Comment: deleted %subject."
+msgstr "Комментарии: удален \"%subject\"."
+
+#: modules/comment/comment.module:1861
+msgid "Flat list - collapsed"
+msgstr "Плоский список - свёрнутый"
+
+#: modules/comment/comment.module:1862
+msgid "Flat list - expanded"
+msgstr "Плоский список - развёрнутый"
+
+#: modules/comment/comment.module:1863
+msgid "Threaded list - collapsed"
+msgstr "Древовидный - свёрнутый"
+
+#: modules/comment/comment.module:1864
+msgid "Threaded list - expanded"
+msgstr "Древовидный - развёрнутый"
+
+#: modules/comment/comment.module:314
+msgid "1 new comment"
+msgid_plural "@count new comments"
+msgstr[0] "@count новый комментарий"
+msgstr[1] "@count новых комментария"
+msgstr[2] "@count новых комментариев"
+
+#: modules/comment/comment.module:215
+msgid "access comments"
+msgstr "иметь доступ к комментариям"
+
+#: modules/comment/comment.module:215
+msgid "post comments"
+msgstr "размещать комментарии"
+
+#: modules/comment/comment.module:215
+msgid "administer comments"
+msgstr "управлять комментариями"
+
+#: modules/comment/comment.module:215
+msgid "post comments without approval"
+msgstr "размещать комментарии без проверки"
+
+#: modules/comment/comment.module:0
+msgid "comment"
+msgstr "комментарий"
+

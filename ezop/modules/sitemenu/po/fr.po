@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: French\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2006-08-28 10:27+0100\n"
+"Last-Translator: Jérôme <EMAIL@ADDRESS>\n"
+"Language-Team: FGM <support@osinet.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: E:\\Images\\OpenSource\\drupal\\contributions\\modules\\sitemenu\n"
+
+#: sitemenu.module:93
+msgid "Author: %username"
+msgstr "Auteur: %username"
+
+#: sitemenu.module:95
+msgid ", comments: "
+msgstr ", commentaires :"
+
+#: sitemenu.module:190
+#: ;269
+msgid "Menu"
+msgstr "Menu"
+
+#: sitemenu.module:220
+msgid "site map page and block menu, based on taxonomy"
+msgstr "page et bloc de menu de plan de site, basé sur la taxinomie."
+
+#: sitemenu.module:224
+msgid "This module provides a site map based on the hierarchy of the site's taxonomy. The site map page shows all vocabularies, terms, and recent nodes within each term. It also provides a block that can be used in the side bar as a navigation menu."
+msgstr "Ce module fournit un plan de site basé sur la hiérarchie de taxinomie du site. Le plan de site montre tous les vocabulaires, termes et noeuds récents associés à chaque terme. Le module fournit aussi un bloc utilisable dans les barres latérales comme menu de navigation pour le site."
+
+#: sitemenu.module:236
+msgid "none"
+msgstr "aucun"
+
+#: sitemenu.module:242
+msgid "Description"
+msgstr "Description"
+
+#: sitemenu.module:243
+msgid "This is the site map page."
+msgstr "Ceci est la page représentant le plan du site."
+
+#: sitemenu.module:246
+msgid "This text will be displayed at the top of the site menu page"
+msgstr "Ce texte sera affiché en haut de la page de plan du site"
+
+#: sitemenu.module:250
+msgid "Omitted vocabularies"
+msgstr "Vocabulaires omis"
+
+#: sitemenu.module:254
+msgid "Select vocabularies which should be <b>omitted</b> from listings."
+msgstr "Choisissez les vocabulaires qui seront <b>omis</b> lors de la construction du plan."
+
+#: sitemenu.module:258
+msgid "Navigation link text"
+msgstr "Texte du lien de navigation"
+
+#: sitemenu.module:260
+#: ;338;379
+msgid "site map"
+msgstr "plan du site"
+
+#: sitemenu.module:263
+msgid "The text in the navigation link which points to the site menu page."
+msgstr "Le texte affiché pour le lien de navigation pointant vers la page de plan du site."
+
+#: sitemenu.module:267
+msgid "Block title text"
+msgstr "Titre du bloc à l'affichage"
+
+#: sitemenu.module:272
+msgid "If configured as a block, this text shows as the block title."
+msgstr "Si le bloc sitemenu est activé, ce texte apparaît comme son titre."
+
+#: sitemenu.module:276
+msgid "Link to vocabulary page when listing vocabulary"
+msgstr "Lien vers la page de vocabulaire dans les listes de vocabulaire"
+
+#: sitemenu.module:281
+msgid "Show number of nodes for each term"
+msgstr "Affiche le nombre de noeuds associés à chaque terme"
+
+#: sitemenu.module:286
+msgid "Show Author and number of Comments (in mousover)"
+msgstr "Affiche l'auteur et le nombre de commentaires (lors du survol à la souris)"
+
+#: sitemenu.module:291
+msgid "Number of nodes to show"
+msgstr "Nombre de noeuds à afficher"
+
+#: sitemenu.module:293
+msgid "0"
+msgstr "0"
+
+#: sitemenu.module:296
+msgid "Number of nodes to show per taxonomy term. Set to 0 if you do not want nodes to listed."
+msgstr "Nombre de noeuds à afficher pour chaque terme de taxinomie. Définissez le à 0 si vous ne voulez pas que les noeuds soient listés."
+
+#: sitemenu.module:300
+msgid "Closing description"
+msgstr "Description de fin"
+
+#: sitemenu.module:304
+msgid "This text will be displayed at the bottom of the site menu page"
+msgstr "Ce texte sera affiché en bas de la page de menu du site"
+
+#: sitemenu.module:318
+#: ;0
+msgid "sitemenu"
+msgstr "sitemenu"
+
+#: sitemenu.module:328
+msgid "use sitemenu"
+msgstr "utiliser sitemenu"
+

@@ -1,0 +1,37 @@
+$Id: UPGRADE.txt,v 1.1.4.1 2007/11/13 01:28:24 dww Exp $
+
+======================================================================
+This file contains specific instructions for upgrading your site's
+version of project_issue.module to a new release.  You should always
+check this file when you download a new version to see if there are
+any specific things you need to know about a certain upgrade.
+======================================================================
+
+
+--------------------------------------------------
+Upgrading to 4.7.x-2.* (from the 4.7.x-1.* series)
+--------------------------------------------------
+
+  The 4.7.x-2.* versions of project and project_issue must be upgraded
+at the same time.  For example, you cannot run project_issue version
+4.7.x-2.* with project version 4.7.x-1.*.  Therefore, if you are
+considering upgrading a 4.7.x-1.* installation of project_issue to
+4.7.x-2.*, please consult modules/project/UPGRADE.txt.
+
+
+--------------------------------------------------
+Upgrading to 5.x-1.2 (from 5.x-1.1 or 4.7.x-*)
+--------------------------------------------------
+
+  In the past, the "From" address of all project issue e-mail
+notifications was the address entered by the project owner in the
+"Project e-mail" field on the project's settings page. This created a
+privacy problem, because unbeknownst to them, their e-mail address was
+being revealed to other users subscribed to their issue queue e-mails.
+
+  To correct this issue, all project issue e-mails now have a global
+"From" address.  This defaults to the global site e-mail, but can be
+customized using the "Reply-to address on e-mail notifications"
+setting on the Project issue settings page
+(admin/project/project-issue-settings).
+

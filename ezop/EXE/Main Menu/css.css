@@ -1,0 +1,12 @@
+
+.selectedMenuItem{font-family: Book Antiqua; font-size:15; font-weight: bolder; cursor:default;background-color="#336699"; color:white;behavior: URL(htc/selmenu.htc)}
+
+.notSelectedMenuItem {font-family: Book Antiqua; font-size:15; font-weight: bolder; cursor:hand; background-color: white; color:#336699;behavior: URL(htc/selmenu.htc)}
+
+.submenuItem {cursor:hand; background-color:#336699 ; color:white; align:"center";font-family: Book Antiqua; font-size:12;  behavior: URL(htc/submenu.htc)}
+
+.header, .fatal{font-family: Book Antiqua; font-size:14; font-weight: bolder; color:"336699"}
+.fatal {font-size:16}
+.message{font-family: Book Antiqua; font-size:16;}
+.error {font-family: Book Antiqua; font-size:14; font-weight: bolder; color:"darkred"}
+.button {font-family: Book Antiqua; font-size:13; font-weight: bolder;  color:#336699;}

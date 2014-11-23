@@ -1,0 +1,1428 @@
+<?php
+// $Id: project_issue.module,v 1.88.2.11 2009/01/07 20:48:32 dww Exp $
+
+// issue nodes      -> project_issues
+// issue comments   -> project_issue_comments
+
+/// How many issues should be displayed per page by default.
+define('PROJECT_ISSUES_PER_PAGE', 20);
+/// Default age in days of issues to auto close.
+define('PROJECT_ISSUE_AUTO_CLOSE_DAYS', 14);
+/// Project issue state = fixed.
+define('PROJECT_ISSUE_STATE_FIXED', 2);
+/// Project issue state = closed.
+define('PROJECT_ISSUE_STATE_CLOSED', 7);
+
+if (function_exists('drupal_get_path')) {
+  $path = drupal_get_path('module', 'project_issue');
+  if (file_exists("$path/issue.inc")) {
+    require_once "$path/issue.inc";
+    require_once "$path/comment.inc";
+    require_once "$path/mail.inc";
+  }
+}
+
+function project_issue_help($section) {
+  switch ($section) {
+    case 'admin/help#project_issue':
+      return '<h3>'. t('Mailhandler support') .'</h3>'.
+        '<p>'. t('Basic mail format:') .'</p>'.
+        '<pre>'. t("Type: project\nProject: chatbox\nCategory: bug report\nVersion: cvs\nPriority: normal\nStatus: active\nComponent: code\n\nWhatever I type here will be the body of the node.\n") .'</pre>'.
+        '<p>'. t('See the mailhandler help for more information on using the mailhandler module.') .'</p>';
+    case 'node/add#project_issue':
+      return t('Add a new issue (bug report, feature request, etc) to an existing project.');
+    case 'admin/project/project-issue-status':
+      return '<p>'. t('Use this page to add new status options for project issues or to change or delete existing options.') .'</p>'.
+        '<dl>'.
+        '<dt>'. t('Adding') .'</dt>'.
+        '<dd>'. t('To add a new status option, put its name in one of the blank places at the bottom of the form and assign it a weight.') .'</dd>'.
+        '<dt>'. t('Updating') .'</dt>'.
+        '<dd>'. t('When renaming existing issues, keep in mind that issues with the existing name will receive the new one.') .'</dd>'.
+        '<dt>'. t('Deleting') .'</dt>'.
+        '<dd>'. t('If you delete an existing issue status, you will be prompted for a new status to assign to existing issues with the deleted status.') .'</dd>'.
+        '<dt>'. t('Weight') .'</dt>'.
+        '<dd>'. t('The weight of an issue determines the order it appears in lists, like in the select box where users designate a status for their issue.') .'</dd>'.
+        '<dt>'. t('Author may set') .'</dt>'.
+        '<dd>'. t("Check this option to give the original poster of an issue the right to set a status option, even if she or he isn't part of a role with this permission. You may wish, for example, to allow issue authors to close their own issues.") .'</dd>'.
+        '<dt>'. t('In default queries') .'</dt>'.
+        '<dd>'. t('There are a number of pages that display a list of issues based on a certain query. For all of these views of the issue queues, if no status options are explicitly selected, a certain set of defaults will be used to construct the query.') .'</dd>'.
+        '<dt>'. t('Default status') .'</dt>'.
+        '<dd>'. t('The default status option will be used for new issues, and all users with the permission to create issues will automatically have permission to set this status. The default issue status cannot be deleted. If you wish to delete this status, first set a different status to default.') .'</dd>'.
+        '</dl>';
+  }
+}
+
+/**
+ * Implementation of hook_form_alter.
+ */
+function project_issue_form_alter($form_id, &$form) {
+  switch ($form_id) {
+    case 'comment_form':
+      $node = node_load($form['nid']['#value']);
+      if ($node->type == 'project_issue') {
+        // Comment is not required for project issue followups, we have our own
+        // validate handler.
+        // The 'your name' item just wastes screen estate.
+        unset($form['comment_filter']['comment']['#required'], $form['_author']);
+        // For existing comments, we want to preserve the comment subject,
+        // Even if the subject field is disabled.
+        if ($cid = $form['cid']['#value']) {
+          $subject = db_result(db_query('SELECT subject FROM {comments} WHERE cid = %d', $cid));
+        }
+        // For new comments, show the expected next number for previews.
+        // This is only for show, the number will be generated when the comment
+        // is posted.
+        else {
+          $next_id = db_result(db_query('SELECT last_comment_id FROM {project_issues} WHERE nid = %d', $form['nid']['#value'])) + 1;
+          $subject = "#$next_id";
+
+          // Clobber the comment signature for new followups if necessary.
+          // TODO: Revamp this for Drupal 6.
+          if (!variable_get('project_issue_show_comment_signatures', 0)) {
+            $form['comment_filter']['comment']['#default_value'] = '';
+          }
+        }
+        $form['subject'] = array(
+          '#type' => 'value',
+          '#value' => $subject,
+        );
+
+        // Any time we're on a reply page, show the full issue below the reply.
+        if (project_issue_is_comment_reply()) {
+          $form['#pre_render'][] = 'project_issue_comment_pre_render';
+        }
+
+        // Make sure the 'File attachments' fieldset is expanded and before the
+        // original issue fieldset.
+        if (isset($form['attachments'])) {
+          $form['attachments']['#collapsed'] = FALSE;
+          $form['attachments']['#weight'] = 2;
+        }
+
+      }
+      break;
+
+    // Issues must be updated if any project issue comments are edited/deleted.
+    case 'comment_admin_overview':
+      $form['#submit']['project_issue_comment_mass_update'] = array();
+      break;
+
+    case 'project_issue_node_form':
+      if (isset($form['attachments'])) {
+        if (isset($form['project_info'])) {
+          // We already know what project it is, so make sure the 'File
+          // attachments' fieldset is expanded.
+          $form['attachments']['#collapsed'] = FALSE;
+        }
+        else {
+          // On the first page of the multi-page form, don't have a project
+          // selected yet, so unset the file attachments fieldset entirely.
+          unset($form['attachments']);
+        }
+      }
+      break;
+
+    case 'comment_confirm_delete':
+      $comment = $form['comment']['#value'];
+      $type = db_result(db_query("SELECT type FROM {node} WHERE nid = %d", $comment->nid));
+      if (!empty($type) && $type == 'project_issue') {
+        $form['description']['#value'] = t('This action cannot be undone.');
+      }
+      break;
+
+    case 'update_script_selection_form':
+      $schema_num = db_result(db_query("SELECT schema_version FROM {system} WHERE name = 'project_issue'"));
+      if ($schema_num >= 5200 && $schema_num < 5204) {
+        // The only time the schema number will be inside this range is if
+        // 5200 was aborted due to missing module dependencies. Since core is
+        // evil and always increments the schema number, yet we want to force
+        // them to start over at 5200, we can just set the default we want.
+        $form['start']['project_issue']['#default_value'] = 5200;
+      }
+      break;
+
+  }
+}
+
+function project_issue_node_info() {
+  return array(
+    'project_issue' => array(
+      'name' => t('Issue'),
+      'module' => 'project_issue',
+      'description' => t('An issue that can be tracked, such as a bug report, feature request, or task.'),
+    ),
+  );
+}
+
+function project_issue_perm() {
+  $perms = array(
+    'create project issues',
+    'access project issues',
+    'edit own project issues',
+    'access own project issues',
+    'assign and be assigned project issues',
+  );
+  $states = project_issue_state();
+  foreach($states as $key => $value) {
+    $perms[] = "set issue status ". str_replace("'", "", $value);
+  }
+  return $perms;
+}
+
+/**
+ * Callback for the main settings page.
+ */
+function project_issue_settings_form() {
+
+  $form['project_issues_per_page'] = array(
+    '#title' => t('Issues per page'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('project_issues_per_page', PROJECT_ISSUES_PER_PAGE),
+    '#size' => 4,
+    '#maxlength' => 10,
+    '#description' => t('Number of issues to display on a single page when viewing the issue queues.'),
+    '#validate' => array('project_issue_validate_issues_per_page' => array()),
+  );
+
+  $form['project_directory_issues']  = array(
+    '#type' => 'textfield',
+    '#title' => t('Issue directory'),
+    '#default_value' => variable_get('project_directory_issues', 'issues'),
+    '#size' => 30,
+    '#maxlength' => 255,
+    '#description' => t("Subdirectory in the directory '%dir' where attachments to issues will be stored.", array('%dir' => variable_get('file_directory_path', 'files') . '/')),
+    '#after_build' => array('project_issue_check_directory'),
+  );
+
+  $form['project_issue_show_comment_signatures'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display user signatures on issue followups'),
+    '#default_value' => variable_get('project_issue_show_comment_signatures', 0),
+    '#description' => t('If selected, user signatures will be appended to the display of issue followups.'),
+  );
+
+  $form['project_issue_reply_to'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Reply-to address on e-mail notifications'),
+    '#default_value' => variable_get('project_issue_reply_to', variable_get('site_mail', ini_get('sendmail_from'))),
+    '#description' => t('All issue e-mails sent via subscriptions will appear from this e-mail address. You can use %project as a placeholder which will be replaced with the %short_project_name setting for the issue\'s current project.', array('%project' => '%project', '%short_project_name' => t('Short project name'))),
+  );
+
+  // Determine the auto followup username from the auto followup setting.
+  $followup_username = '';
+  $anon = variable_get('anonymous', t('Anonymous'));
+  if ($followup_user_object = _project_issue_followup_get_user()) {
+    $followup_username = $followup_user_object->name;
+  }
+
+  $form['project_issue_followup_user'] = array(
+    '#title' => t('Auto-followup user'),
+    '#type' => 'textfield',
+    '#default_value' => $followup_username,
+    '#maxlength' => 60,
+    '#description' => t('Enter the name of the user which will create automatic followups to issues -- leave empty to disable auto-followup or set to %anon to use the anonymous user.', array('%anon' => $anon)),
+    '#validate' => array('project_issue_validate_followup_user' => array()),
+    '#autocomplete_path' => 'user/autocomplete',
+  );
+
+  $form['project_issue_auto_close_days'] = array(
+    '#title' => t('Auto-close days'),
+    '#type' => 'textfield',
+    '#default_value' => (int) variable_get('project_issue_auto_close_days', PROJECT_ISSUE_AUTO_CLOSE_DAYS),
+    '#size' => 4,
+    '#maxlength' => 10,
+    '#description' => t('Issues being in "fixed" state for the specified number of days will be closed by the followup user specified above. For example, if this is 14, and an issue is set to fixed on January 1, then it will be closed on January 15.'),
+  );
+
+  if (module_exists('mailhandler')) {
+    // TODO: move this stuff to mailhandler.module ?
+    $items = array(t('<none>'));
+    $result = db_query('SELECT mail FROM {mailhandler} ORDER BY mail');
+    while ($mail = db_result($result, $i++)) {
+      $items[$mail] = $mail;
+    }
+
+    // Switch reply-to to a select box instead.
+    $form['project_issue_reply_to']['#type'] = 'select';
+    $form['project_issue_reply_to']['#options'] = $items;
+  }
+
+  $form['project_issue_site_help'] = array(
+    '#title' => t('Site-wide help text for new issues'),
+    '#type' => 'textarea',
+    '#default_value' => variable_get('project_issue_site_help', ''),
+    '#cols' => 20,
+    '#rows' => 5,
+    '#description' => t('Optionally enter site-wide help text that will be displayed whenever a user tries to create a new issue. Please note that there is no automatic formatting on this text, but you can use regular HTML tags as necessary (for example %p, %ul, and so on).', array('%p' => '<p>', '%ul' => '<ul>')),
+  );
+
+  return system_settings_form($form);
+}
+
+function project_issue_validate_issues_per_page($form) {
+  if (!is_numeric($form['#value'])) {
+    form_error($form, t('%setting must be a number.', array('%setting' => t('Issues per page'))));
+  }
+  if ($form['#value'] <= 0) {
+    form_error($form, t('%setting must be greater than 0.', array('%setting' => t('Issues per page'))));
+  }
+}
+
+/**
+ * Validates that the followup user exists, and has sufficient permissions
+ * to follow up on issues.
+ */
+function project_issue_validate_followup_user($form) {
+  $name = $form['#value'];
+  if ($name !== '') {
+    $anon = variable_get('anonymous', t('Anonymous'));
+    // Make this check case-insensitive to allow the admin some data entry leeway.
+    $is_anon = drupal_strtolower($name) == drupal_strtolower($anon);
+    // Load the user. (don't see a constant for uid 0... )
+    $account = $is_anon ? user_load(array('uid' => 0)) : user_load(array('name' => $name));
+    if ($account) {
+      if (user_access('access project issues', $account)) {
+        // Transform the username into the more stable user ID.
+        form_set_value($form, $account->uid);
+      }
+      else {
+        form_error($form, t('%name does not have sufficient permissions to follow up on issues.', array('%name' => $is_anon ? $anon : $name)));
+      }
+    }
+    else {
+      form_error($form, t('%name is not a valid user.', array('%name' => $name)));
+    }
+  }
+}
+
+/**
+ * Implementation of hook_cron().
+ *
+ * There is a variable (no admin UI, just via settings.php) that controls if
+ * the admin has setup a separate cron job on their system to invoke this code
+ * instead of relying on cron.php and hook_cron(). If this variable, called
+ * 'project_issue_hook_cron', is set to FALSE, then there's nothing to do
+ * in here. Otherwise, we include the cron.inc file and invoke that code
+ * ourselves.
+ */
+function project_issue_cron() {
+  if (variable_get('project_issue_hook_cron', TRUE)) {
+    require_once drupal_get_path('module', 'project_issue') .'/includes/cron.inc';
+    _project_issue_cron();
+  }
+}
+
+/**
+ * Comment left when cron auto-closes an issue.
+ */
+function theme_project_issue_auto_close_message() {
+  return t('Automatically closed -- issue fixed for two weeks with no activity.');
+}
+
+/**
+ * Add a followup to a project issue.
+ *
+ * @param $changes
+ *   An associative array specifying what should change in the issue. Every key
+ *   corresponds to a database field and the value is what it should be changed
+ *   to. nid is a required key and it specifies the issue being changed.
+ *   'comment' is also a required key and it contains the text of the followup
+ *   changing the issue.
+ *   You can specify the following fields of the comment table: uid, subject,
+ *   hostname, timestamp, score, status, format, thread, users, name, mail,
+ *   homepage. You can also specify the following fields from project_issues
+ *   table: category, priority, assigned, sid, title. There is a special,
+ *   optional key called 'project_info', its value is another associative
+ *   array with the following fields from project_issues: pid, rid, component.
+ *   Example: To change the issue status and set the comment text for the
+ *   issue with nid = 100, this array might look like:
+ *     array(
+ *      'nid' => 100,
+ *      'sid' => 4,
+ *      'comment' => t('This issue was automatically closed after 2 weeks of no activity.'),
+ *     );
+ */
+function project_issue_add_followup($changes) {
+  global $user;
+
+  if ($auto_user = _project_issue_followup_get_user()) {
+    // If a user exists for followups, load them into
+    // the global user object temporarily. We use session_save_session()
+    // to provide safe user impersonation.
+    $original_user = $user;
+    session_save_session(FALSE);
+    $user = $auto_user;
+
+    $result = db_query('SELECT pi.nid, pi.rid, pi.component, pi.category, pi.priority, pi.assigned, pi.sid, pi.pid, n.title FROM {project_issues} pi INNER JOIN {node} n ON n.nid = pi.nid WHERE n.nid = %d', $changes['nid']);
+
+    if ($issue = db_fetch_object($result)) {
+      // Code from comment_save.
+      $roles = variable_get('comment_roles', array());
+      $score = 0;
+      foreach (array_intersect(array_keys($roles), array_keys($user->roles)) as $rid) {
+        $score = max($roles[$rid], $score);
+      }
+      $users = serialize(array(0 => $score));
+      // Build vancode
+      $max = db_result(db_query('SELECT MAX(thread) FROM {comments} WHERE nid = %d', $changes['nid']));
+      // Strip the "/" from the end of the thread.
+      $max = rtrim($max, '/');
+      // Finally, build the thread field for this new comment.
+      $thread = int2vancode(vancode2int($max) + 1) .'/';
+
+      // These two are not allowed to be set in changes.
+      unset($changes['cid'], $changes['pid']);
+      $comment = $changes + array(
+        'cid' => db_next_id('{comments}_cid'),
+        'pid' => 0,
+        'uid' => $user->uid,
+        // The correct subject (#number) is supplied during the save cycle.
+        'subject' => '--project followup subject--',
+        'hostname' => $_SERVER['REMOTE_ADDR'],
+        'timestamp' => time(),
+        'score' => $score,
+        'status' => COMMENT_PUBLISHED,
+        'format' => FILTER_FORMAT_DEFAULT,
+        'thread' => $thread,
+        'users' => $users,
+        'name' => $user->name,
+        'mail' => '',
+        'homepage' => '',
+        'category' => $issue->category,
+        'priority' => $issue->priority,
+        'assigned' => $issue->assigned,
+        'sid' => $issue->sid,
+        'title' => $issue->title,
+      );
+
+      if (!isset($comment['project_info'])) {
+        $comment['project_info'] = array();
+      }
+      $comment['project_info'] += array(
+        'pid' => $issue->pid,
+        'rid' => $issue->rid,
+        'component' => $issue->component,
+      );
+
+      db_query("INSERT INTO {comments} (cid, pid, nid, uid, subject, comment, hostname, timestamp, score, status, format, thread, users, name, mail, homepage) VALUES (%d, %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, '%s', '%s', '%s', '%s', '%s')", $comment['cid'], $comment['pid'], $comment['nid'], $comment['uid'], $comment['subject'], $comment['comment'], $comment['hostname'], $comment['timestamp'], $comment['score'], $comment['status'], $comment['format'], $comment['thread'], $comment['users'], $comment['name'], $comment['mail'], $comment['homepage']);
+
+      _comment_update_node_statistics($comment['nid']);
+
+      // Tell the other modules a new comment has been submitted.
+      comment_invoke_comment($comment, 'insert');
+      cache_clear_all();
+    }
+
+    // Load the original user back in.
+    $user = $original_user;
+    session_save_session(TRUE);
+  }
+}
+
+/**
+ * Load and verify the followup user.
+ *
+ * @return $account
+ *   The account of the followup user (or FALSE if not found).
+ */
+function _project_issue_followup_get_user() {
+  $uid = variable_get('project_issue_followup_user', '');
+  if ($uid === '') {
+    return FALSE;
+  }
+  $account = user_load(array('uid' => $uid));
+  // Safety check -- we have to have a valid user here.
+  if (!$account) {
+    watchdog('project_issue', t('Auto-change user failed to load.'), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  $anon = variable_get('anonymous', t('Anonymous'));
+  $account->name = $uid ? $account->name : $anon;
+  // Safety check -- selected user must still have the correct permissions to follow up on issues.
+  if (!user_access('access project issues', $account)) {
+    watchdog('project_issue', t('%name does not have sufficient permissions to follow up on issues.', array('%name' => $account->name)), WATCHDOG_ERROR);
+    return FALSE;
+  }
+  return $account;
+}
+
+function project_issue_menu($may_cache) {
+  $items = array();
+  global $user;
+
+  $access_create = node_access('create', 'project_issue');
+
+  if ($may_cache) {
+
+    $access_all = user_access('access project issues');
+    $access_own = user_access('access own project issues');
+    $access_admin = user_access('administer projects');
+    $access = $access_all || $access_own || $access_admin;
+
+    // Issues
+    $items[] = array(
+      'path' => 'project/issues',
+      'title' => t('Issues'),
+      'callback' => 'project_issue_page',
+      'access' => $access,
+      'type' => MENU_NORMAL_ITEM,
+      'weight' => -50,
+    );
+    $items[] = array(
+      'path' => 'project/issues/add',
+      'title' => t('Create'),
+      'callback' => 'project_issue_page',
+      'access' => $access_create,
+      'type' => MENU_NORMAL_ITEM,
+    );
+    $items[] = array(
+      'path' => 'project/issues/update_project',
+      'callback' => 'project_issue_update_project',
+      'access' => $access,
+      'type' => MENU_CALLBACK,
+    );
+    $items[] = array(
+      'path' => 'project/issues/statistics',
+      'title' => t('Statistics'),
+      'callback' => 'project_issue_page',
+      'access' => $access,
+      'type' => MENU_NORMAL_ITEM,
+    );
+    $items[] = array(
+      'path' => 'project/issues/search',
+      'title' => t('Search'),
+      'callback' => 'project_issue_search_page',
+      'access' => $access,
+      'type' => MENU_NORMAL_ITEM,
+    );
+    if (module_exists('search')) {
+      $items[] = array(
+        'path' => 'search/issues',
+        'title' => t('Issues'),
+        'callback' => 'project_issue_search_page',
+        'access' => $access,
+        'type' => MENU_LOCAL_TASK,
+        'weight' => 4,
+      );
+    }
+    $items[] = array(
+      'path' => 'project/issues/subscribe-mail',
+      'title' => t('Subscribe'),
+      'callback' => 'project_issue_page',
+      'access' => $user->uid && $access,
+      'type' => MENU_NORMAL_ITEM,
+    );
+
+    // "My projects" page (which shows all issues for all your projects)
+    $items[] = array(
+      'path' => 'project/user',
+      'title' => t('My projects'),
+      'callback' => 'project_issue_user_page',
+      'access' => $user->uid && $access,
+      'type' => MENU_NORMAL_ITEM,
+      'weight' => -49,
+    );
+
+    $items[] = array(
+      'path' => 'project/issues/user',
+      'title' => t('My issues'),
+      'callback' => 'project_issue_page',
+      'access' => $user->uid && $access,
+      'type' => MENU_NORMAL_ITEM,
+    );
+
+    // Administrative pages
+    $items[] = array(
+      'path' => 'admin/project/project-issue-settings',
+      'title' => t('Project issue settings'),
+      'description' => t('Specify where attachments to issues should be stored on your site, and what filename extensions should be allowed.'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('project_issue_settings_form'),
+      'type' => MENU_NORMAL_ITEM,
+      'weight' => 1,
+      'access' => $access_admin,
+    );
+
+    // Administer issue status settings
+    $items[] = array(
+      'path' => 'admin/project/project-issue-status',
+      'title' => t('Project issue status options'),
+      'description' => t('Configure what issue status values should be used on your site.'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('project_issue_admin_states_form'),
+      'weight' => 1,
+      'access' => $access_admin,
+      'type' => MENU_NORMAL_ITEM,
+    );
+    $items[] = array(
+      'path' => 'admin/project/project-issue-status/delete',
+      'title' => t('Delete'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('project_issue_delete_state_confirm'),
+      'access' => $access_admin,
+      'type' => MENU_CALLBACK,
+    );
+
+    // Special menu item for the "first page" of submitting a new issue.
+    // Instead of the treachery of a true multipage form, we just have
+    // a simple form at node/add/project-issue that provides a project
+    // selector which redirects to node/add/project-issue/[project-name].
+    $types = node_get_types();
+    $items[] = array(
+      'path' => 'node/add/project-issue',
+      'title' => $types['project_issue']->name,
+      'callback' => 'project_issue_pick_project_page',
+      'access' => $access_create,
+      'type' => MENU_NORMAL_ITEM,
+    );
+
+  }
+  else {
+    // Dynamic menu items
+    // Issues subtab on project node edit tab.
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+      if ($node->type == 'project_project' && node_access('update', $node)) {
+        $items[] = array(
+          'path' => 'node/'. arg(1) .'/edit/issues',
+          'title' => t('Issues'),
+          'callback' => 'project_issue_project_edit_issues',
+          'type' => MENU_LOCAL_TASK,
+        );
+      }
+    }
+    // Reply to issues
+    if (arg(0) == 'project' && arg(1) == 'comments' && arg(2) == 'add' && is_numeric(arg(3))) {
+      $node = node_load(arg(3));
+      if ($node->nid) {
+        $items[] = array(
+         'path' => 'project/comments',
+         'title' => t('Comments'),
+         'callback' => 'project_comment_page',
+         'access' => node_access('view', $node) && $access_create,
+         'type' => MENU_CALLBACK,
+        );
+      }
+    }
+
+    if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'project-issue' && arg(3)) {
+      $items[] = array(
+        'path' => 'node/add/project-issue/'. arg(3),
+        'callback' => 'node_add',
+        'callback arguments' => array('project-issue'),
+        'access' => $access_create,
+        'type' => MENU_CALLBACK,
+      );
+    }
+
+    $project_issue_path = drupal_get_path('module', 'project_issue');
+    if (module_exists('views')) {
+      require_once './'. $project_issue_path .'/project_issue.views.inc';
+    }
+    drupal_add_css($project_issue_path .'/project_issue.css');
+  }
+  return $items;
+}
+
+/**
+ * Adds the issues subtab to the edit tab on project nodes.
+ */
+function project_issue_project_edit_issues() {
+  $node = node_load(arg(1));
+  project_project_set_breadcrumb($node);
+  drupal_set_title(check_plain($node->title));
+
+  if (isset($node->components) && is_array($node->components)) {
+    $node->components = implode("\n", $node->components);
+  }
+  return drupal_get_form('project_issue_project_edit_form', $node);
+}
+
+/**
+ * Form builder for the issues subtab on the edit tab for project nodes.
+ */
+function project_issue_project_edit_form($node) {
+  /* Issue properties */
+  $form['issue'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Issue information'),
+    '#collapsible' => TRUE,
+  );
+  $form['issue']['issue'] = array(
+    '#type' => 'item',
+    '#title' => t('Issue tracker'),
+  );
+  $form['issue']['issues'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable issue tracker'),
+    '#return_value' => 1,
+    '#default_value' => isset($node->issues) ? $node->issues : 1,
+    '#description' => t('Let users submit bug requests, patches, feature requests, support requests, etc.'),
+  );
+  $form['issue']['components'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Components'),
+    '#default_value' => isset($node->components) ? $node->components : NULL,
+    '#cols' => 20,
+    '#rows' => 5,
+  );
+  $form['issue']['help'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Submission guidelines'),
+    '#default_value' => isset($node->help) ? $node->help : NULL,
+    '#cols' => 20,
+    '#rows' => 5,
+  );
+
+  /* E-mail options */
+  $form['email'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Issue e-mail options'),
+    '#collapsible' => TRUE,
+  );
+  $form['email']['mail_digest'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Weekly critical issues report'),
+    '#default_value' => isset($node->mail_digest) ? $node->mail_digest : NULL,
+    '#size' => 20,
+    '#maxlength' => 255,
+    '#description' => t('To get a weekly digest of critical issues specify an e-mail address.'),
+  );
+  $form['email']['mail_copy'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Issues e-mail address'),
+    '#default_value' => isset($node->mail_copy) ? $node->mail_copy : NULL,
+    '#size' => 20,
+    '#maxlength' => 255,
+    '#description' => t('If you wish to receive a copy of all the issues to a central location specify an address here. <em>Note: the copy will contain links to file attachments.</em>'),
+  );
+  $options = project_issue_category();
+  $form['email']['categories'] = array(
+    '#type' => 'item',
+    '#title' => t('Categories'),
+    '#description' => t('Which issue categories to e-mail. If none is checked all categories will be posted.'),
+  );
+  $form['email']['mail_copy_filter']['#tree'] = TRUE;
+
+  foreach ($options as $key => $choice) {
+    $form['email']['mail_copy_filter'][$key] = array(
+      '#type' => 'checkbox',
+      '#title' => $choice,
+      '#return_value' => $key,
+      '#default_value' => isset($node->mail_copy_filter[$key]) ? $node->mail_copy_filter[$key] : NULL,
+    );
+  }
+  $options = project_issue_state();
+  $form['email']['states'] = array(
+    '#type' => 'item',
+    '#title' => t('States'),
+    '#description' => t('Which issue states to e-mail. If none is checked all states will be posted.'),
+  );
+  $form['email']['mail_copy_filter_state']['#tree'] = TRUE;
+  foreach ($options as $key => $choice) {
+    $form['email']['mail_copy_filter_state'][$key] = array(
+      '#type' => 'checkbox',
+      '#title' => check_plain($choice),
+      '#return_value' => $key,
+      '#default_value' => isset($node->mail_copy_filter_state[$key]) ? $node->mail_copy_filter_state[$key] : NULL,
+    );
+  }
+
+  if (user_access('administer projects')) {
+    $form['email']['reminder'] = array(
+      '#type' => 'item',
+      '#title' => t('Monthly reminder'),
+    );
+    $form['email']['mail_reminder'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Send monthly reminders to users'),
+      '#return_value' => 1,
+      '#default_value' => isset($node->mail_reminder) ? $node->mail_reminder : NULL,
+      '#description' => t('Enabling this will send a monthly reminder to users that have open issues registered.'),
+    );
+  }
+
+  $form['nid'] = array('#type' => 'value', '#value' => $node->nid);
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#weight' => 45,
+  );
+
+  return $form;
+}
+
+/**
+ * Validation handler when project admins use the issues subtab.
+ * @see project_issue_project_edit_issues
+ */
+function project_issue_project_edit_form_validate($form_id, $form_values) {
+  if (!empty($form_values['mail_digest']) && ($data = user_validate_mail($form_values['mail_digest']))) {
+    form_set_error('mail_digest', $data);
+  }
+  if (!empty($form_values['mail_copy']) && ($data = user_validate_mail($form_values['mail_copy']))) {
+    form_set_error('mail_copy', $data);
+  }
+}
+
+/**
+ * Submit handler when project admins use the issues subtab.
+ * @see project_issue_project_edit_issues
+ */
+function project_issue_project_edit_form_submit($form_id, $form_values) {
+  $components = serialize(explode("\n", str_replace("\r", '', $form_values['components'])));
+  $mail_copy_filter = serialize($form_values['mail_copy_filter']);
+  $mail_copy_filter_state = serialize($form_values['mail_copy_filter_state']);
+
+  db_query("UPDATE {project_issue_projects} SET issues = %d, components = '%s', mail_digest = '%s', mail_reminder = %d, mail_copy = '%s', mail_copy_filter = '%s', mail_copy_filter_state = '%s', help = '%s' WHERE nid = %d", $form_values['issues'], $components, $form_values['mail_digest'], $form_values['mail_reminder'], $form_values['mail_copy'], $mail_copy_filter, $mail_copy_filter_state, $form_values['help'], $form_values['nid']);
+  db_query("UPDATE {node} SET changed = %d WHERE nid = %d", time(), $form_values['nid']);
+  drupal_set_message(t('Issue settings have been saved.'));
+}
+
+/**
+ * hook_nodeapi() implementation. This just decides what type of node
+ * is being passed, and calls the appropriate type-specific hook.
+ *
+ * @see project_issue_issue_nodeapi().
+ * @see project_issue_project_nodeapi().
+ */
+function project_issue_nodeapi(&$node, $op, $arg) {
+  switch ($node->type) {
+    case 'project_project':
+      project_issue_project_nodeapi($node, $op, $arg);
+      break;
+    case 'project_issue':
+      project_issue_issue_nodeapi($node, $op, $arg);
+      break;
+  }
+}
+
+/**
+ * hook_nodeapi implementation specific to "project_issue" nodes.
+ * @see project_issue_nodeapi().
+ */
+function project_issue_issue_nodeapi(&$node, $op, $arg) {
+  global $user;
+  switch ($op) {
+    case 'view':
+      $_GET['mode'] = COMMENT_MODE_FLAT_EXPANDED;
+      $_GET['sort'] = COMMENT_ORDER_OLDEST_FIRST;
+      project_issue_comment_view($node);
+      break;
+    case 'submit':
+      if (isset($node->files)) {
+        $issue_dir = variable_get('project_directory_issues', 'issues');
+        foreach ($node->files as $key => $file) {
+          // Only rewrite the name when an issues directory exists, and when
+          // adding the file, not when updating it.
+          if ($issue_dir && 0 === strpos($key, 'upload_')) {
+            // Change where the file will be saved to the specified directory.
+            $node->files[$key]['filename'] = $issue_dir .'/'. $node->files[$key]['filename'];
+          }
+        }
+      }
+      break;
+    case 'insert':
+      // Mark the node for email notification during hook_exit(), so all issue
+      // and file data is in a consistent state before we generate the email.
+      project_issue_set_mail_notify($node->nid);
+      break;
+  }
+}
+
+/**
+ * Store issue nodes that need mail notifications sent.
+ *
+ * It's possible that mass inserts/updates could occur, and also possible that
+ * a given node/comment could be programatically updated more than once in a
+ * page load -- an associative array is used in order to support these cases.
+ *
+ * @param $nid
+ *   The node ID of the issue node to store, or NULL to fetch the stored nids.
+ * @return
+ *   If $nid is not passed, an associative array of nids that are marked for
+ *   notification emails, with the following structure: key = nid, value = nid.
+ */
+function project_issue_set_mail_notify($nid = NULL) {
+  static $nids = array();
+
+  if (!isset($nid)) {
+    $return = $nids;
+    $nids = array();  // Reset just in case this function gets called again.
+    return $return;
+  }
+  else {
+    $nids[$nid] = $nid;
+  }
+}
+
+/**
+ * Implementation of hook_exit().
+ */
+function project_issue_exit() {
+  // Check for issue nodes that need mail notifications sent. This is done in
+  // hook_exit() so that all issue and file data is in a consistent state
+  // before we generate the email.
+  $nids = project_issue_set_mail_notify();
+  // For cached pages, this hook is called, but there aren't any mail functions
+  // loaded. Since the cached pages won't have any new mail notifications,
+  // we can safely test for this case.
+  if (!empty($nids)) {
+    foreach ($nids as $nid) {
+      project_mail_notify($nid);
+    }
+  }
+}
+
+function project_issue_user_page($arg = 0) {
+  $current_user = FALSE;
+  if ($arg) {
+    $where = '';
+    if (is_numeric($arg)) {
+      $where = 'uid = %d';
+    }
+    else {
+      $where = "name = '%s'";
+    }
+    $user = db_fetch_object(db_query("SELECT uid, name FROM {users} WHERE $where", $arg));
+    if ($user) {
+      drupal_set_title(t('Projects by @user', array('@user' => $user->name)));
+    }
+  }
+
+  if (empty($user)) {
+    global $user;
+    $current_user = TRUE;
+  }
+
+  if (!$user->uid) {
+    return t('You need to log in to see your projects.');
+  }
+
+  $header = array(
+    array('data' => t('Project'), 'field' => 'n.title', 'sort' => 'asc'),
+    array(
+      'data' => t('Last issue update'),
+      'field' => 'max_issue_changed',
+      'class' => 'project-issue-updated',
+    ),
+    array(
+      'data' => t('Open issues'),
+      'field' => 'count',
+      'class' => 'project-issues',
+    ),
+    array('data' => t('Issue links'), 'class' => 'project-issue-links'),
+  );
+  $default_states = implode(',', project_issue_default_states());
+  $result = db_query(db_rewrite_sql("SELECT n.nid, n.title, COUNT(ni.nid) AS count, MAX(ni.changed) AS max_issue_changed FROM {node} n LEFT JOIN {project_issues} pi ON n.nid = pi.pid AND pi.sid IN ($default_states) LEFT JOIN {node} ni ON ni.nid = pi.nid AND ni.status = 1 WHERE n.type = 'project_project' AND n.status = 1 AND n.uid = %d GROUP BY n.nid, n.title") . tablesort_sql($header), $user->uid);
+
+  if (!db_num_rows($result)) {
+    return ($current_user ? t('You have no projects.') : t('This user has no projects.'));
+  }
+
+  $any_admin = FALSE;
+  $projects = array();
+  while ($node = db_fetch_object($result)) {
+    $node_obj = node_load($node->nid);
+    $node->is_admin = node_access('update', $node_obj);
+    $node->issues = $node_obj->issues;
+    $node->releases = isset($node_obj->releases) ? $node_obj->releases : 0;
+    if ($node->is_admin) {
+      $any_admin = TRUE;
+    }
+    $projects[] = $node;
+  }
+  foreach ($projects as $node) {
+    $issue_links = array(
+      array(
+        'title' => t('View'),
+        'href' => "project/issues/$node->nid"
+      ),
+      array(
+        'title' => t('Search'),
+        'href' => "project/issues/search/$node->nid",
+      ),
+      array(
+        'title' => t('Create'),
+        'href' => "node/add/project-issue/$node->nid",
+      ),
+    );
+    if ($node->is_admin) {
+      $project_links = array(
+        array(
+          'title' => t('Edit'),
+          'href' => "node/$node->nid/edit",
+        ),
+      );
+      if (module_exists('project_release') && $node->releases) {
+        $project_links[] = array(
+          'title' => t('Add release'),
+          'href' => "node/add/project-release/$node->nid",
+        );
+      }
+    }
+    if ($node->issues) {
+      $row = array(
+        array(
+          'data' => l($node->title, "node/$node->nid"),
+          'class' => 'project-name',
+        ),
+        array(
+          'data' => $node->max_issue_changed ? format_interval(time() - $node->max_issue_changed, 2) : t('n/a'),
+          'class' => 'project-issue-updated',
+        ),
+        array(
+          'data' => $node->count,
+          'class' => 'project-issues',
+        ),
+        array(
+          'data' => theme('links', $issue_links),
+          'class' => 'project-issue-links',
+        ),
+      );
+    }
+    else {
+      $row = array(
+        array(
+          'data' => l($node->title, "node/$node->nid"),
+          'class' => 'project-name',
+        ),
+        array(
+          'data' => t('Issue tracking is disabled.'),
+          'colspan' => $node->is_admin ? 2 : 3,
+        ),
+      );
+      if ($node->is_admin) {
+        $row[] = array(
+          'data' => l(t('Enable'), "node/$node->nid/edit/issues", array(), drupal_get_destination()),
+          'class' => 'project-issue-links',
+        );
+      }
+    }
+    if ($node->is_admin) {
+      $row[] = array(
+        'data' => theme('links', $project_links),
+        'class' => 'project-project-links',
+      );
+    }
+    elseif ($any_admin) {
+      $row[] = array();
+    }
+
+    $rows[] = $row;
+    $query->projects[] = $node->nid;
+  }
+
+  if ($any_admin) {
+    $header[] = array('data' => t('Project links'), 'class' => 'project-project-links');
+  }
+  $output = theme('table', $header, $rows, array('class' => 'projects'));
+  $output .= l('#', "project/user/$user->name");
+
+  $output .= theme('box', t('Issues'), project_issue_query_result($query, 'html', false, false));
+
+  return $output;
+}
+
+/**
+ * hook_nodeapi implementation specific to "project_project" nodes
+ * (from the project.module)
+ * @see project_issue_nodeapi().
+ */
+function project_issue_project_nodeapi(&$node, $op, $arg) {
+  switch ($op) {
+    case 'load':
+      project_issue_project_load($node, $arg);
+      break;
+
+    case 'insert':
+      project_issue_project_insert($node);
+      break;
+
+    case 'delete':
+      project_issue_project_delete($node);
+      break;
+  }
+}
+
+function project_issue_project_load(&$node, $arg) {
+  $project = db_fetch_object(db_query('SELECT * FROM {project_issue_projects} WHERE nid = %d', $node->nid));
+  // If nothing loaded, bail immediately
+  if (!$project) {
+    return $node;
+  }
+  //assert($project);
+  $node->components = unserialize($project->components);
+  $node->mail_copy_filter = unserialize($project->mail_copy_filter);
+  $node->mail_copy_filter_state = unserialize($project->mail_copy_filter_state);
+  foreach (array('issues', 'help', 'mail_digest', 'mail_copy', 'mail_reminder') as $field) {
+    $node->$field = $project->$field;
+  }
+  return $node;
+}
+
+function project_issue_project_insert($node) {
+  // Setup reasonable defaults: enable issue tracker and standard
+  // components. If maintainers want to change these, (or any of the
+  // other issue-related project settings, like the email notifications)
+  // they'd use the "issues" subtab of the project edit tab (since none
+  // of these fields are present on the initial project add form).
+  $node->issues = 1;
+  $node->components = serialize(array(t('Code'), t('Documentation'), t('Miscellaneous'), t('User interface')));
+  db_query("INSERT INTO {project_issue_projects} (nid, issues, components) VALUES (%d, %d, '%s')", $node->nid, $node->issues, $node->components);
+}
+
+function project_issue_project_delete($node) {
+  // Delete all associated issues.
+  $issues = db_query('SELECT nid FROM {project_issues} WHERE pid = %d', $node->nid);
+  while ($issue = db_fetch_object($issues)) {
+    node_delete($issue->nid);
+  }
+  db_query('DELETE FROM {project_issue_projects} WHERE nid = %d', $node->nid);
+  db_query('DELETE FROM {project_subscriptions} WHERE nid = %d', $node->nid);
+}
+
+/**
+ * Check whether the intended issues directory exists and ensure it is writable.
+ */
+function project_issue_check_directory($form_element) {
+  $directory = file_create_path($form_element['#value']);
+  file_check_directory($directory, FILE_CREATE_DIRECTORY, $form_element['#parents'][0]);
+  return $form_element;
+}
+
+/**
+ * Submit handler to adjust project issue metadata when comments are mass edited.
+ */
+function project_issue_comment_mass_update($form_id, $form_values) {
+  // This filters non-numeric values, then empty values.
+  $cids = array_filter(array_filter($form_values['comments'], 'is_numeric'));
+  $issue_comments = db_query("SELECT n.nid, c.cid FROM {node} n INNER JOIN {comments} c ON n.nid = c.nid WHERE c.cid IN (". implode(', ', $cids) .") AND n.type = 'project_issue'");
+  while ($issue_comment = db_fetch_object($issue_comments)) {
+    project_issue_update_by_comment($issue_comment, 'update');
+  }
+}
+
+/**
+ * Set the breadcrumb trail for project issues and issue followups.
+ *
+ * Since the comment form and a full node view of an issue can appear
+ * on both full issue pages and comment reply pages, this function checks
+ * to see which page is being loaded, and sets the breadcrumb appropriately.
+ *
+ * @param $node
+ *   The issue node object.
+ * @param $project
+ *   The project node object.
+ */
+function project_issue_set_breadcrumb($node, $project) {
+  $extra = array();
+  $extra[] = l($project->title, 'node/'. $project->nid);
+  $extra[] = l(t('Issues'), 'project/issues/'. $project->uri);
+  // Add the issue title if we're on a comment reply page.
+  if (project_issue_is_comment_reply()) {
+    $extra[] = l($node->title, 'node/'. $node->nid);
+  }
+  project_project_set_breadcrumb($project, $extra);
+}
+
+/**
+ * Implementation of hook_link_alter().
+ */
+function project_issue_link_alter(&$node, &$links) {
+  // Only remove link for full page views.
+  if ($node->type == 'project_issue' && arg(0) == 'node' && is_numeric(arg(1))) {
+    unset($links['comment_add']);
+  }
+}
+
+/**
+ * @defgroup project_issue_views Views-integration hooks
+ */
+
+/**
+ * Implementation of hook_views_tables.
+ * @ingroup project_issue_views
+ * @see _project_issue_views_tables
+ */
+function project_issue_views_tables() {
+  require_once(drupal_get_path('module', 'project_issue') .'/project_issue.views.inc');
+  return _project_issue_views_tables();
+}
+
+/**
+ * Implementation of hook_views_default_views.
+ * @ingroup project_issue_views
+ * @see _project_issue_views_default_views
+ */
+function project_issue_views_default_views() {
+  require_once(drupal_get_path('module', 'project_issue') .'/project_issue.views.inc');
+  return _project_issue_views_default_views();
+}
+
+/**
+ * Implementation of hook_views_arguments.
+ * @ingroup project_issue_views
+ * @see _project_issue_views_arguments()
+ */
+function project_issue_views_arguments() {
+  require_once(drupal_get_path('module', 'project_issue') .'/project_issue.views.inc');
+  return _project_issue_views_arguments();
+}
+
+/**
+ * @defgroup project_issue_filter Project Issue number to link filter.
+ */
+
+/**
+ * Theme automatic Project Issue links.
+ * @ingroup project_issue_filter themeable
+ *
+ * @param $node
+ *   The issue node object to be linked.
+ * @param $comment_id
+ *   The comment id to be appended to the link, optional.
+ * @param $comment_number
+ *   The comment's number, as visible to users, optional.
+ */
+function theme_project_issue_issue_link($node, $comment_id = NULL, $comment_number = NULL) {
+  $path = "node/$node->nid";
+  $attributes = array('title' => project_issue_state($node->sid));
+  if ($comment_id) {
+    $title = "#$node->nid-$comment_number: $node->title";
+    $link = l($title, $path, $attributes, NULL, "comment-$comment_id");
+  }
+  else {
+    $title = "#$node->nid: $node->title";
+    $link = l($title, $path, $attributes);
+  }
+  $output = "<span class=\"project-issue-status-$node->sid\">$link</span>";
+  return $output;
+}
+
+/**
+ * Implementation of hook_form_filter_tips().
+ * @ingroup project_issue_filter
+ */
+function project_issue_filter_tips($delta, $format, $long = FALSE) {
+  if ($long) {
+    return t('References to project issues in the form of [#1234] (or [#1234-2] for comments) turn into links automatically, with the title of the issue appended. The status of the issue is shown on hover.');
+  }
+  else {
+    return t('Project issue numbers (ex. [#12345]) turn into links automatically.');
+  }
+}
+
+/**
+ * Implementation of hook_form_filter().
+ * @ingroup project_issue_filter
+ */
+function project_issue_filter($op, $delta = 0, $format = -1, $text = '') {
+  switch ($op) {
+    case 'list':
+      return array(0 => t('Project Issue to link filter'));
+    case 'description':
+      return t('Converts references to project issues (in the form of [#12345]) into links. Caching should be disabled if node access control modules are used.');
+    case 'no cache':
+      return FALSE;
+    case 'prepare':
+      return $text;
+    case 'process':
+      $regex = '(?<!\w)(\[#(\d+)(-(\d+))?\])(?![^<]*<\/a>|([^<]++|(<(?!code)))*<\/code>|([^<]++|(<(?!pre)))*<\/pre>|\w)';
+      $offset = 0;
+      while(preg_match("/$regex/", $text, $preg_matches, PREG_OFFSET_CAPTURE, $offset)) {
+        $offset++;
+        $match = $preg_matches[1];
+        $nid = $preg_matches[2][0];
+        $comment_number = $preg_matches[4][0];
+        $node = node_load($nid);
+        if (is_object($node) && node_access('view', $node) && $node->type == 'project_issue') {
+          // Pull comment id based on the comment number if we have one.
+          if (!is_null($comment_number) && ($comment_id = db_result(db_query("SELECT pic.cid FROM {project_issue_comments} pic INNER JOIN {comments} c ON pic.cid = c.cid WHERE pic.nid = %d AND pic.comment_number = %d AND c.status = %d", $nid, $comment_number, COMMENT_PUBLISHED)))) {
+            $link = theme('project_issue_issue_link', $node, $comment_id, $comment_number);
+          }
+          else {
+            $link = theme('project_issue_issue_link', $node);
+          }
+          $text = substr_replace($text, $link, $match[1], strlen($match[0]));
+          $offset = max($offset, $match[1] + strlen($link));
+        }
+        else {
+          $offset = max($offset, $match[1] + strlen($match[0]));
+        }
+      }
+      return $text;
+  }
+}
+
+/**
+ * Implementation of hook_requirements().
+ * @ingroup project_issue_filter
+ *
+ * Check for conflicts with:
+ *   installed node access control modules,
+ *   'access project issues' restrictions,
+ *   filters escaping code with higher weight.
+ */
+function project_issue_requirements($phase) {
+  $requirements = array();
+  $input_formats = array();
+  if ($phase == 'runtime') {
+
+    $grants = module_implements('node_grants');
+    if (!empty($grants)) {
+      $conflict_grants = TRUE;
+    }
+    $allowed_roles = user_roles(FALSE, 'access project issues');
+    if (!isset($allowed_roles[DRUPAL_ANONYMOUS_RID])) {
+      $conflict_anonymous = TRUE;
+    }
+
+    foreach (filter_formats() as $format => $input_format) {
+      $filters = filter_list_format($format);
+      if (isset($filters['project_issue/0'])) {
+        if ($conflict_grants && filter_format_allowcache($format)) {
+          $requirements[] = array(
+            'title' => t('Project Issue to link filter'),
+            'value' => t('Some module conflicts were detected.'),
+            'description' => t('%issuefilter should not be enabled when a node access control is also in use. Users may be able to see cached titles of project issues they would otherwise not have access to. You should disable this filter in !inputformat input format.', array('%issuefilter' => t('Project Issue to link filter'), '!inputformat' => l($input_format->name, "admin/settings/filters/$format"))),
+            'severity' => REQUIREMENT_ERROR,
+          );
+        }
+
+        if ($conflict_anonymous && filter_format_allowcache($format)) {
+          $requirements[] = array(
+            'title' => t('Project Issue to link filter'),
+            'value' => t('Some security conflicts were detected.'),
+            'description' => t('%issuefilter conflicts with project issue access settings. Users who do not have access to all project issues may be able to see titles of project issues. You should disable this filter in !inputformat input format.', array('%issuefilter' => t('Project Issue to link filter'), '!inputformat' => l($input_format->name, "admin/settings/filters/$format"))),
+            'severity' => REQUIREMENT_ERROR,
+          );
+        }
+
+        // Put up an error when some code escaping filter's weight is higher.
+        $low_filters = array('filter/0', 'filter/1', 'bbcode/0', 'codefilter/0', 'geshifilter/0');
+        foreach ($low_filters as $lfilter) {
+          if (isset($filters[$lfilter]) && $filters['project_issue/0']->weight <= $filters[$lfilter]->weight) {
+            $description_names['%issuefilter'] = $filters['project_issue/0']->name;
+            $description_names['%lowfilter']  = $filters[$lfilter]->name;
+            $requirements[] = array(
+              'title' => t('Project Issue to link filter'),
+              'value' => t('Some filter conflicts were detected.'),
+              'description' => t('%issuefilter should come after %lowfilter to prevent loss of layout and highlighting.', $description_names) .' '. l(t('Please rearrange the filters.'), "admin/settings/filters/$format/order"),
+              'severity' => REQUIREMENT_ERROR,
+            );
+          }
+        }
+
+      }
+    }
+
+  }
+  return $requirements;
+}
+
+/**
+ * Calculate the differences in project_issue comment metadata
+ * between the original issue and a comment or between two
+ * comments.
+ *
+ * @param $view
+ *   A string representing the metadata view being generated.  For the comment
+ *   metadata table, this will be 'diff'.
+ * @param $node
+ *   The issue node.
+ * @param $old_data
+ *   Object containing old metadata.
+ * @param $new_data
+ *   Object containing new metadata.
+ * @param $field_labels
+ *   An associative array of field_name=>display_name pairs.
+ *   In most cases, this will be the array returned by project_issue_change_summary().
+ *
+ * @return
+ *  An associative array containing information about changes between
+ *  the two objects.
+ *  For example:
+ *  array(
+ *    'component' => array(
+ *      'label' => t('Component'),
+ *      'old' => 'Code',
+ *      'new' => 'User interface',
+ *    ),
+ *    'sid' => array(
+ *      'label' => t('Status'),
+ *      'old' => 8,
+ *      'new' => 13,
+ *    ),
+ *  )
+ */
+function project_issue_metadata_changes($node, $old_data, $new_data, $field_labels = array()) {
+  $changes = array();
+  foreach ($field_labels as $property => $name) {
+    if ($property == 'rid' && empty($old_data->rid) && empty($new_data->rid)) {
+      // Special case for version -- if both are empty, leave it out entirely,
+      // since maybe this project doesn't have (and/or disabled) releases.
+      continue;
+    }
+    if (isset($old_data->$property) || isset($new_data->$property)) {
+      $changes[$property] = array('label' => $name);
+    }
+    if (isset($old_data->$property) && isset($new_data->$property)) {
+      if ($old_data->$property != $new_data->$property) {
+        $changes[$property]['old'] = $old_data->$property;
+        $changes[$property]['new'] = $new_data->$property;
+      }
+    }
+    elseif (isset($old_data->$property)) {
+      $changes[$property]['old'] = $old_data->$property;
+    }
+    else {
+      $changes[$property]['new'] = $new_data->$property;
+    }
+  }
+
+  // Allow other modules to implement hook_project_issue_metadata() so that they
+  // can find changes in additional metadata.  In most cases other modules will
+  // be responsible for storing this metadata in their own tables.  Developers
+  // of modules that implement this hook should keep in mind the following:
+  // 1.  Implementations of hook_project_issue_metadata() must take the
+  //     $changes array by reference.
+  // 2.  Differences in properties will only be processed later on for
+  //     elements of the array which have the 'label', 'old', and 'new' properties
+  //     defined.
+  // In other words, for each line in the differences table (or field in the email)
+  // that is displayed, your hook should add something like the following as a
+  // new element of the $changes array:
+  //    'taxonomy_vid_10' => array(
+  //       'label' => 'Vocabulary 10',
+  //       'old' => 'MySQL, pgSQL, javascript',
+  //       'new' => 'pgSQL, newbie',
+  //     ),
+  //
+  // There are two methods you can use to indicate multiple changes of a field.
+  // The first is that for 'old' and 'new' you pass strings separated by some
+  // character, customarily a comma.  This method is used in
+  // the example above.  When using this method, the default display of the changes
+  // will be to show all old values followed by all new values.  In the example
+  // above, this would be displayed like:
+  // Vocabulary 10:  MySQL, pgSQL, javascript >> pgSQL, newbie
+  //
+  // The other method you can use when constructing 'old' and 'new' is to make
+  // both of these arrays, with each element of the array one change.  If you
+  // use this method, all elements in the 'old' array are typically interpreted
+  // as being removed, and all elements in the 'new' array are typically interpreted
+  // as being added.  An example of this type of structure is as follows:
+  //    'taxonomy_vid_10' => array(
+  //       'label' => 'Vocabulary 10',
+  //       'old' => array('MySQL', 'javascript'),
+  //       'new' => array('newbie'),
+  //     ),
+  // In this situation, the default display of these changes in a project issue
+  // metadata table would be as follows:
+  // Vocabulary 10:  -MySQL, -javascript    +newbie
+  foreach (module_implements('project_issue_metadata') as $module) {
+    $function = $module .'_project_issue_metadata';
+    $function('diff', $node, $changes, $old_data, $new_data);
+  }
+  return $changes;
+}

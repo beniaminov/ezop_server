@@ -1,0 +1,107 @@
+# $Id$
+# Russian translation of Drupal
+# Copyright (c) 2007 vadbars <vadbars@mail.ru>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.x\n"
+"POT-Creation-Date: 2007-03-04 01:49+0500\n"
+"PO-Revision-Date: 2007-03-14 11:31+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: autolocale.module:12
+msgid "Automatic import scans all enabled modules and themes for interface translation files under their directories and imports all files found for the selected language. This operation could be resource intensive, and is irreversible."
+msgstr "Автоматический импорт просматривает все включенные модули и темы оформления для поиска файлов перевода интерфейса, которые находятся в этих каталогах (импортируются файлы каталог_модуля/po/ru.po и каталог_модуля/po/любое_имя.ru.po). Все найденные файлы затем импортируются. Эта операция может быть ресурсоемкой и отменить ее результаты нельзя."
+
+#: autolocale.module:31
+msgid "Automatic import"
+msgstr "Автоимпортировать"
+
+#: autolocale.module:54
+msgid "No foreign language enabled on your site. You need to <a href=\"@urladd\">add</a> and <a href=\"@urlenable\">enable</a> at least one foreign language to import strings for."
+msgstr "Иностранные языки не включены на вашем сайте. Для того, чтобы импортировать строки, вам нужно <a href=\"@urladd\">добавить</a> и <a href=\"@urlenable\">включить</a> хотя бы один иностранный язык."
+
+#: autolocale.module:62
+msgid "Language"
+msgstr "Язык"
+
+#: autolocale.module:65
+msgid "Select the language to autoimport translation files into."
+msgstr "Выберите язык для автоматического импорта файлов с переводами."
+
+#: autolocale.module:70
+msgid "Remove existing translations first"
+msgstr "Сначала удалить существующие переводы"
+
+#: autolocale.module:72
+msgid "It is advised to remove the existing translations in the given language for performance reasons, if you have no custom strings added, which are not available in the PO files to import. This removes strings left from upgrades or previously tried and removed modules."
+msgstr "Если вы не добавляли каких-либо дополнительных строк (которых нет в тех файлах .po, что вы собираетесь импортировать сейчас), то для повышения производительности рекомендуется предварительно удалить существующие переводы для данного языка. В этом случае такие строки будут утрачены для переводов обновлений или для ранее использовавшихся, но затем удаленных модулей."
+
+#: autolocale.module:77
+msgid "Perform automatic import"
+msgstr "Выполнить автоматический импорт"
+
+#: autolocale.module:89
+msgid "Invalid language code (@langcode) choosen for automatic import."
+msgstr "Для автоматического импорта выбран неверный код языка (@langcode)."
+
+#: autolocale.module:102
+msgid "Existing translations removed from @language."
+msgstr "Существующие переводы удалены из языка @language."
+
+#: autolocale.module:109
+msgid "New @language strings imported."
+msgstr "Новые строки для языка @language импортированы."
+
+#: autolocale.module:0
+msgid "autolocale"
+msgstr "autolocale"
+
+#: autolocale.install:65
+msgid "Imported translation file @filename"
+msgstr "Импортирован перевод @filename"
+
+#: autolocale.install:10
+msgid "Now you can <a href=\"@url\">import interface translations</a> automatically"
+msgstr "Теперь можно автоматически <a href=\"@url\">импортировать перевод интерфейса</a>"
+
+#: autolocale.info:0
+msgid "Autolocale"
+msgstr "Autolocale"
+
+#: autolocale.info:0
+msgid "Automatically imports interface translations."
+msgstr "Автоматически импортирует переводы интерфейса."
+
+#: localized.profile:49
+msgid "Body"
+msgstr "Текст"
+
+#: localized.profile:51
+msgid "Title"
+msgstr "Заголовок"
+
+#: localized.profile:57
+msgid "Page"
+msgstr "Страница"
+
+#: localized.profile:58
+msgid "If you want to add a static page, like a contact page or an about page, use a page."
+msgstr "Используйте, если вы хотите добавить статическую страницу, наподобие контактной информации или страницы \"О компании\"."
+
+#: localized.profile:65
+msgid "Story"
+msgstr "Заметка"
+
+#: localized.profile:66
+msgid "Stories are articles in their simplest form: they have a title, a teaser and a body, but can be extended by other modules. The teaser is part of the body too. Stories may be used as a personal blog or for news articles."
+msgstr "Заметки - это материалы в их простейшей форме: они имеют заглавие, сопроводительную надпись и текст, но могут быть расширены другими модулями. Анонс является частью текста заметки. Заметки могут использоваться для записей блога или для новостных сообщений."
+

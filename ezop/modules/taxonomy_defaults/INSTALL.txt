@@ -1,0 +1,12 @@
+Taxonomy Defaults allows you to assign default terms from any vocabulary to any
+node-type. 
+
+INSTALLATION
+------------
+
+Copy all files to modules/taxonomy_defaults/, visit Admin >> Site building >>
+Modules (admin/build/modules) and enable Taxonomy Defaults. The provided
+install file should correctly set the weight of the module. If not execute the
+following query manually:
+
+UPDATE system SET weight = -1 WHERE name = 'taxonomy_defaults';

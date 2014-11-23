@@ -1,0 +1,149 @@
+# $Id: nodeteaser.pot,v 1.1 2008/06/17 18:36:25 shannonlucas Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  nodeteaser.module: n/a
+#  nodeteaser.info,v 1.1 2007/02/14 00:22:36 ideaoforder
+#  nodeteaser.install: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-03-18 13:11-0500\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: nodeteaser.module:18 nodeteaser.info:0
+msgid "Node Teaser"
+msgstr ""
+
+#: nodeteaser.module:19
+msgid "Set a variety of options for node teaser input and display."
+msgstr ""
+
+#: nodeteaser.module:71
+msgid "Teaser or Summary"
+msgstr ""
+
+#: nodeteaser.module:106
+msgid "Enter a teaser, summary, or description for this node."
+msgstr ""
+
+#: nodeteaser.module:110
+msgid "Based on current settings, the site's default teaser behavior will be used if you do not enter anything here."
+msgstr ""
+
+#: nodeteaser.module:113
+msgid "Based on current settings, no teaser will be displayed if you do not enter anything here."
+msgstr ""
+
+#: nodeteaser.module:116
+msgid "Based on current settings, the node's title will be displayed if you do not enter anything here."
+msgstr ""
+
+#: nodeteaser.module:119
+msgid "Based on current settings, the node's entire body will be displayed if you do not enter anything here and there is no %break is present in the node body. If a %break is present in the node's body, the site's default teaser behavior will be used."
+msgstr ""
+
+#: nodeteaser.module:123
+msgid "Based on current settings, the node's entire body will be displayed if you do not enter a teaser here."
+msgstr ""
+
+#: nodeteaser.module:267
+msgid "Drupal Default"
+msgstr ""
+
+#: nodeteaser.module:268
+msgid "Nothing"
+msgstr ""
+
+#: nodeteaser.module:269
+msgid "Node Title"
+msgstr ""
+
+#: nodeteaser.module:270
+msgid "Full Post"
+msgstr ""
+
+#: nodeteaser.module:271
+msgid "Full Post if no %break in node body"
+msgstr ""
+
+#: nodeteaser.module:276
+msgid "If node teaser is empty, display"
+msgstr ""
+
+#: nodeteaser.module:278
+msgid "Default display for empty node teasers"
+msgstr ""
+
+#: nodeteaser.module:285
+msgid "Collapse node teaser"
+msgstr ""
+
+#: nodeteaser.module:287
+msgid "Collapse node teaser by default"
+msgstr ""
+
+#: nodeteaser.module:293
+msgid "Show on every page except the listed pages."
+msgstr ""
+
+#: nodeteaser.module:294
+msgid "Show on only the listed pages."
+msgstr ""
+
+#: nodeteaser.module:303
+msgid "Enter one page per line as Drupal paths. The '*' character is a wildcard. Example paths are '%blog' for the blog page and %blog-wildcard for every personal blog. %front is the front page."
+msgstr ""
+
+#: nodeteaser.module:308
+msgid "Show if the following PHP code returns %true (PHP-mode, experts only)."
+msgstr ""
+
+#: nodeteaser.module:309
+msgid "TRUE"
+msgstr ""
+
+#: nodeteaser.module:310
+msgid " If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code can break your Drupal site."
+msgstr ""
+
+#: nodeteaser.module:315
+msgid "Show Teaser on specific pages"
+msgstr ""
+
+#: nodeteaser.module:322
+msgid "Pages"
+msgstr ""
+
+#: nodeteaser.install:46
+msgid "Node Teaser Settings"
+msgstr ""
+
+#: nodeteaser.install:47
+msgid "Node Teaser was successfully installed with the default options. To customize Node Teaser, please view the !settings page."
+msgstr ""
+
+#: nodeteaser.install:50
+msgid "Node Teaser could not be installed."
+msgstr ""
+
+#: nodeteaser.install:96
+msgid "Node Teaser was uninstalled successfully."
+msgstr ""
+
+#: nodeteaser.install:99
+msgid "Node Teaser could not be uninstalled."
+msgstr ""
+
+#: nodeteaser.info:0
+msgid "This module provides a separate teaser field."
+msgstr ""

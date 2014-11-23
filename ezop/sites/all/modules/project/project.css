@@ -1,0 +1,53 @@
+/* $Id: project.css,v 1.35.2.2 2008/12/05 19:17:52 dww Exp $ */
+/* $Name: DRUPAL-5--1-3 $ */
+
+.project table {
+  width: auto;
+}
+.project tbody, .project tr {
+  border: 0;
+}
+.project td {
+  vertical-align: top;
+  padding: 0.4em 0.1em;
+}
+.project .links {
+  font-size: 0.8em;
+}
+.project .author {
+  color: #999;
+  font-size: 0.8em;
+}
+
+.project .downloads td {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1em;
+}
+.project .downloads ul {
+  margin: 0px;
+}
+.project .downloads li {
+  list-style-type: none;
+  margin: 0px;
+}
+
+.project-links-section div {
+  float: left;
+  padding-right: 1.2em;
+  width: 30%;
+}
+
+#edit-project-goto {
+  width: 150px;
+}
+
+.project .node-form fieldset {
+  display: block;
+}
+.project .node-form .project-taxonomy-element {
+  float: left;
+  padding-right: 2em;
+}
+ul.project-terms {
+  padding-left: 1.5em;
+}

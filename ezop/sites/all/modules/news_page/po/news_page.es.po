@@ -1,0 +1,154 @@
+# $Id: news_page.es.po,v 1.1.2.1 2009/04/29 21:29:58 MegaGrunt Exp $
+#
+# Spanish translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  news_page.module,v 1.13.2.2 2007/07/24 00:41:25 MegaGrunt
+#  news_page.info,v 1.1.2.1 2007/07/24 00:41:25 MegaGrunt
+#  news_page.install,v 1.2.2.2 2007/07/24 00:41:25 MegaGrunt
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-01-27 19:35+0100\n"
+"PO-Revision-Date: 2008-01-27 19:35+0100\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: news_page.module:11
+msgid "Creates a page of keyword filtered news items from an <a href=\"!aggregator\">aggregator</a> category."
+msgstr "Crear una página de noticias filtradas por palabras desde una categoría de <a href=\"!aggregator\">aggregator</a>"
+
+#: news_page.module:14
+msgid "A News Page provides a way to only include items from an <a href=\"!aggregator\">aggregator</a> category which match your keywords. The majority of settings are entered when you create a new news page node."
+msgstr "Una nueva Página de Noticias ofrece una manera de solamente incluir recursos de una categoría a href=\"!aggregator\">aggregator</a> que coincidan con las palabras introducidas. La mayoría de los ajustes son introducidos cuando crea un nuevo nodo de página de noticias"
+
+#: news_page.module:22
+msgid "News page"
+msgstr "Página de Noticias"
+
+#: news_page.module:67
+msgid "edit this news page node"
+msgstr "Editar este nodo de páginas de noticias"
+
+#: news_page.module:83
+msgid "news page"
+msgstr "Páginas de noticias"
+
+#: news_page.module:102
+msgid "News page feed"
+msgstr "Feed de páginas de noticias"
+
+#: news_page.module:111 news_page.info:0
+msgid "News Page"
+msgstr "Página de Noticias"
+
+#: news_page.module:112
+msgid "News Page settings"
+msgstr "Ajustes de Pagina de Noticias"
+
+#: news_page.module:128
+msgid "Title"
+msgstr "Título"
+
+#: news_page.module:143
+msgid "Body"
+msgstr "Cuerpo"
+
+#: news_page.module:155
+msgid "You must create at least 1 aggregator category before creating a news page."
+msgstr "Debe crear como mínimo 1 una categoría en <a href=\"!aggregator\">aggregator</a> antes de crear una página de noticias."
+
+#: news_page.module:157
+msgid "--none--"
+msgstr "--ninguno--"
+
+#: news_page.module:166
+msgid "Aggregator Category"
+msgstr "Categorías de Aggregator"
+
+#: news_page.module:169
+msgid "Category to include on this page"
+msgstr "Categoría a incluir en esta página"
+
+#: news_page.module:177
+msgid "Include Words"
+msgstr "Palabras incluidas"
+
+#: news_page.module:181
+msgid "Keywords that must be included in a news item for it to be displayed - e.g. \"iPhone, +battery, -problem\""
+msgstr "Las palabras que deben estar incluidas en las noticias para ser mostradas, por ejemplo \"iPhone, +pilas, -problema\""
+
+#: news_page.module:188
+msgid "Maximum Items"
+msgstr "Número máximo de noticias"
+
+#: news_page.module:192
+msgid "Maximum number of news items to include on a page"
+msgstr "Máximo número de noticias mostradas en una página"
+
+#: news_page.module:207
+msgid "Please select an aggregator category."
+msgstr "Por favor seleccione una categoría"
+
+#: news_page.module:211
+msgid "Please add at least one word to the list of include words."
+msgstr "Por favor añada como mínimo una palabra para la lista de palabrtas incluidas."
+
+#: news_page.module:216
+msgid "Maximum items must have a value, field has been reset to the default (25)."
+msgstr "Máximo de noticias debe tener un valor, el campo ha sido configurado por defecto (25)."
+
+#: news_page.module:228
+msgid "RSS Feed"
+msgstr "Feed RSS"
+
+#: news_page.module:229
+msgid "Users must have the \"access news page feeds\" <a href=\"!permission\">permission</a> granted in order to use the News Page RSS feeds."
+msgstr "Los usuarios deben tener <a href=\"!permission\">permiso</a> otorgado a los\"Feeds\" para usar los feeds RSS en Páginas de Noticias."
+
+#: news_page.module:234
+msgid "RSS Link prepend"
+msgstr "Enlace RSS añadido"
+
+#: news_page.module:238
+msgid "All item links generated will have this URL prepended to them. For example: \"/jump.php?url=\". If unsure, specify nothing. Note: the url is relative to the base url of this drupal site, the page cannot reside on a remote host."
+msgstr "Todos los enlaces a noticias generados tendrán esta URL añadida. Por ejemplo: \"/jump.php?url=\".  Si es muy inseguro, no especificar nada. Nota: La URL tiene relación con la url de este sitio basado en Drupal, la página no puede residir en un host remoto."
+
+#: news_page.module:243
+msgid "Global channel description"
+msgstr ""
+
+#: news_page.module:247
+msgid "This text will precede the News Page nodes body text for the feed description, for every News page feed. If no body text is set the global settings <a href=\"!mission\">mission statement</a> is used; if this is empty - nothing will be displayed."
+msgstr "Para cada feed de Página de Noticias, este texto precederá a el cuerpo de las Páginas de Noticias para la descripción del feed. Si no hay cuerpo del texto el ajuste global <a href=\"!mission\">misión de la web</a> es usado; si este está vació no se mostrará nada."
+
+#: news_page.module:431
+msgid "Blog this"
+msgstr "a la bitácora"
+
+#: news_page.module:431
+msgid "blog it"
+msgstr "a la bitácora"
+
+#: news_page.module:434
+msgid "Read more"
+msgstr "Leer más"
+
+#: news_page.install:28
+msgid "News Page module installed successfully."
+msgstr "El módulo Página de Noticias se instaló correctamente."
+
+#: news_page.install:31
+msgid "Table installation for the News Page module was unsuccessful. The tables may need to be installed by hand. See news_page.install file for a list of the installation queries."
+msgstr "La creación de la tabla en la base de datos para el módulo Página de Noticias no fue satisfactoria. Las tablas necesitan ser instaladas a mano. Mirar el archivo news_page.install para más información."
+
+#: news_page.info:0
+msgid "Creates a page of keyword filtered news items from an aggregator category"
+msgstr "Crea una página de noticias filtradas por palabras desde una categoría de aggregator"
+

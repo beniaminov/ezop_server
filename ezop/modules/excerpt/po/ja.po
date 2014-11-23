@@ -1,0 +1,67 @@
+# $Id: ja.po,v 1.1.2.2 2008/03/19 01:35:59 smk Exp $
+# -----------------------------------------------------------------------------
+# Japanese translation of Drupal (excerpt.module)
+#
+# Copyright (c) 2006-2007  Drupal Japan  ( http://drupal.jp/ )  /
+#                          Drupal Nippon ( http://drupon.org/ ) /
+#                          Takafumi      ( jp.drupal@imagine **reverse order**)
+#
+# Generated from file:
+#  excerpt.module,v 1.6 2005/12/30 17:31:10 unconed
+#  excerpt.info,v 1.2.4.2 2007/04/20 21:52:09 hayesr
+#
+# -----------------------------------------------------------------------------
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2007-04-21 14:50+0900\n"
+"Last-Translator: Takafumi <jp.drupal@imagine **reverse order**>\n"
+"Language-Team: Drupal Japan / Drupal Nippon\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: excerpt.module:7
+msgid "Allows users to enter a separate excerpt for nodes."
+msgstr "ノードに独立した抜粋を記入できるようにします。"
+
+#: excerpt.module:9
+msgid "<p>If you want users to be able to enter separate excerpts for nodes, check the <em>excerpt</em> box in the appropriate column.</p>"
+msgstr "<p>ユーザがノードに独立した抜粋を記入できるようにしたい場合、適切な「抜粋」ボックスにチェックを入れてください。</p>"
+
+#: excerpt.module:31 excerpt.info:0
+msgid "Excerpt"
+msgstr "エクサープト（抜粋）"
+
+#: excerpt.module:34
+msgid "Teasers"
+msgstr "ティーザー"
+
+#: excerpt.module:36
+msgid "Auto-generated"
+msgstr "自動生成"
+
+#: excerpt.module:36
+msgid "Manual excerpt"
+msgstr "手動抜粋"
+
+#: excerpt.module:37
+msgid "Choose whether teasers are generated automatically or can be entered manually by the author."
+msgstr "ティーザーを自動生成するか、投稿者が手作業で記入できるようにするかを選んでください。"
+
+#: excerpt.module:44
+msgid "Teaser"
+msgstr "ティーザー"
+
+#: excerpt.module:49
+msgid "Enter an excerpt for this item. It will be shown on listing pages along with a <em>read more</em> link which leads to the full view. Leave empty to auto-generate one from the body."
+msgstr "このアイテムの抜粋を記入してください。 これは、フロントページなどで一覧表示される際、全文表示への「続きを読む」リンクと一緒に表示されます。 本文から自動生成したい場合は空欄にしてください。"
+
+#: excerpt.module:0 excerpt.info:0
+msgid "excerpt"
+msgstr "excerpt"
+
+#: excerpt.info:0
+msgid "Allows users to manually control the teaser for a node."
+msgstr "ティーザーを手作業でコントロールできるようにします。"
+

@@ -1,0 +1,10 @@
+; $Id: project_issue_generate.info,v 1.1.2.1 2007/12/09 03:46:02 dww Exp $
+name = Project issue generator
+description = Generate random issues.
+dependencies = project_issue devel
+package = Development
+; Information added by drupal.org packaging script on 2008-01-31
+version = "5.x-1.3"
+project = "project_issue"
+datestamp = "1201740311"
+

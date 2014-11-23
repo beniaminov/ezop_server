@@ -1,0 +1,376 @@
+# Czech translation of Drupal (modules/update_status/update_status.po)
+# Jakub Suchy <redakce@drupal.cz>, 2007.
+# $Id: cs.po,v 1.1 2007/08/08 18:02:48 dww Exp $
+# Copyright 2007 Jakub Suchy <redakce@drupal.cz>
+# Generated from files:
+#  update_status.module,v 1.83.2.17 2007/08/07 15:57:31 dww
+#  update_status.info,v 1.3 2007/06/13 19:32:05 dww
+msgid ""
+msgstr ""
+"Project-Id-Version: update_status\n"
+"POT-Creation-Date: 2007-08-08 09:08-0700\n"
+"PO-Revision-Date: 2007-08-08 19:38+0200\n"
+"Last-Translator: Jakub Suchy <redakce@drupal.cz>\n"
+"Language-Team: Czech <redakce@drupal.cz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: update_status.module:24
+msgid ""
+"Here you can find information about available updates for your installed "
+"modules. Note that each module is part of a \"project\", which may have the "
+"same name as the module or may have a different name."
+msgstr ""
+"Zde můžete nalézt informace o dostupných aktualizacích nainstalovaných "
+"modulů. Berte prosím na vědomí, že každý modul je součástí \"projektu\", "
+"který může, ale nemusí mít stejné jméno jako modul."
+
+#: update_status.module:27
+msgid ""
+"Here you can configure what kinds of available updates for your installed "
+"modules should be marked as an error on the <a href=\"@status_report"
+"\">Status report</a> and the <a href=\"@modules_page\">Modules</a> page, and "
+"other related settings."
+msgstr ""
+"Zde můžete nastavit jaké dostupné aktualizace se označí jako chyby na "
+"stránce <a href=\"@status_report\">hlášení stavu</a> a na stránce <a href="
+"\"@modules_page\">modulů</a>."
+
+#: update_status.module:43
+msgid ""
+"See the <a href=\"@available_updates\">available updates</a> page for "
+"information on installed modules with new versions released."
+msgstr ""
+"Zobrazit stránku <a href=\"@available_updates\">dostupných aktualizací</a> "
+"pro informaci o nových verzí modulů."
+
+#: update_status.module:78
+msgid "Available updates"
+msgstr "Dostupné aktualizace"
+
+#: update_status.module:79
+msgid "Get a status report on installed modules and available updates."
+msgstr "Zobrazit hlášení stavu o nainstalovaných modulech a jejich aktualizacích."
+
+#: update_status.module:86
+msgid "List"
+msgstr "Seznam"
+
+#: update_status.module:93
+msgid "Settings"
+msgstr "Nastavení"
+
+#: update_status.module:101
+msgid "Manual update check"
+msgstr "Ruční kontrola aktualizací"
+
+#: update_status.module:140
+msgid "E-mail addresses to notify when updates are available"
+msgstr "E-mailové adresy, na které se zašle upozornění o nových aktualizacích"
+
+#: update_status.module:143
+msgid ""
+"Whenever your site checks for available updates and finds new releases, it "
+"can notify a list of users via e-email. Put each address on a separate line. "
+"If blank, no e-mails will be sent."
+msgstr ""
+"Kdykoliv Váš web zkontroluje dostupné aktualizace a najde nové verze modulů, "
+"může automaticky zaslat e-mail nastavenému seznamu uživatelů. Jednotlivé e-maily oddělte novou řádkou. Pokud je toto pole prázdné, e-maily nebudou rozesílány."
+
+#: update_status.module:148
+msgid "Check for updates"
+msgstr "Zkontrolovat aktualizace"
+
+#: update_status.module:151
+msgid "Daily"
+msgstr "Denně"
+
+#: update_status.module:152
+msgid "Weekly"
+msgstr "Týdně"
+
+#: update_status.module:154
+msgid ""
+"Select how frequently you want to automatically check for new releases of "
+"your currently installed modules."
+msgstr ""
+"Vyberte jak často chcete, aby systém automaticky kontroloval nové "
+"aktualizace nainstalovaných modulů."
+
+#: update_status.module:159
+msgid "Notification threshold"
+msgstr "Práh upozornění"
+
+#: update_status.module:162
+msgid "All newer versions"
+msgstr "Všechny nové verze"
+
+#: update_status.module:163
+msgid "Only security updates"
+msgstr "Pouze bezpečnostní aktualizace"
+
+#: update_status.module:165
+msgid ""
+"If there are updates available of Drupal core or any of your installed "
+"modules, your site will print an error message on the <a href="
+"\"@status_report\">status report</a> and the <a href=\"@modules_page"
+"\">modules page</a>. You can choose to only see these error messages if a "
+"security update is available, or to be notified about any newer versions."
+msgstr ""
+"Pokud jsou dostupné aktualizace, systém vypíše zprávu na stránku <a href="
+"\"@status_report\">hlášení stavu</a> a stránku <a href=\"@modules_page"
+"\">modulů</a>. Můžete si vybrat, zda chcete zobrazovat pouze bezpečnostní "
+"aktualizace či i zprávy o nových verzích modulů."
+
+#: update_status.module:169
+msgid ""
+"These settings allow you to control if a certain project, or even a specific "
+"release of that project, should be ignored by the available updates report. "
+"For each project, you can select if it should always warn you about a newer "
+"release, never warn you (ignore the project completely), or ignore a "
+"specific available release you do not want to upgrade to. You can also "
+"specify a note explaining why you are ignoring a specific project or "
+"version, and that will be displayed on the available updates report."
+msgstr ""
+"Tyto nastavení Vám umožňují nastavit ignorování specifické verze určitého "
+"projektu při kontrole aktualizací. Pro každý projekt můžete nastavit, zda "
+"budete vždy upozorněni na nové aktualizace, nikdy a nebo budou ignorovány "
+"upozorněni pouze na specifické verze. V poznámce můžete specifikovat důvod, "
+"proč jste toto nastavení zvolili."
+
+#: update_status.module:182
+msgid "Always"
+msgstr "Vždy"
+
+#: update_status.module:184
+msgid "Ignore @version"
+msgstr "Ignorovat @version"
+
+#: update_status.module:186;944
+msgid "Never"
+msgstr "Nikdy"
+
+#: update_status.module:202
+msgid "Submit changes"
+msgstr "Potvrdit změny"
+
+#: update_status.module:226
+msgid "Project"
+msgstr "Projekt"
+
+#: update_status.module:227
+msgid "Warn if out of date"
+msgstr "Upozornit pokud je zastaralý"
+
+#: update_status.module:228
+msgid "Notes"
+msgstr "Poznámky"
+
+#: update_status.module:280
+msgid "%email is not a valid e-mail address."
+msgstr "Adresa %email není platná."
+
+#: update_status.module:283
+msgid "%emails are not valid e-mail addresses."
+msgstr "Následující e-mailové adresy nejsou platné: %emails."
+
+#: update_status.module:306
+msgid "Your changes have been saved."
+msgstr "Změny byly uloženy."
+
+#: update_status.module:328
+msgid "Drupal core update status"
+msgstr "Stav aktualizací jádra Drupalu"
+
+#: update_status.module:334
+msgid "Out of date (version @version available)"
+msgstr "Zastaralý (dostupná verze @version)"
+
+#: update_status.module:341
+msgid "Not secure! (version @version available)"
+msgstr "Bezpečnostní problém! (dostupná verze @version)"
+
+#: update_status.module:348;357;985
+msgid "Up to date"
+msgstr "V pořádku"
+
+#: update_status.module:355
+msgid "Module update status"
+msgstr "Stav aktualizací modulu"
+
+#: update_status.module:361
+msgid "Not secure!"
+msgstr "Bezpečnostní problém!"
+
+#: update_status.module:374
+msgid "Out of date"
+msgstr "Zastaralý"
+
+#: update_status.module:381
+msgid "No update data available"
+msgstr "Údaje nejsou k dispozici"
+
+#: update_status.module:425
+msgid "See the available updates page for more information:"
+msgstr "Pro více informací se podívejte na stránku seznamu aktualizací:"
+
+#: update_status.module:426
+msgid "New release(s) available for !site_name"
+msgstr "Nové aktualizace dostupné pro !site_name"
+
+#: update_status.module:480
+msgid ""
+"There are updates available for your version of Drupal. To ensure the proper "
+"functioning of your site, you should update as soon as possible."
+msgstr ""
+"Pro Vaši verzi Drupalu jsou dostupné nové aktualizace. Pro zajištění správné "
+"funkčnosti byste měli co nejdříve aktualizovat."
+
+#: update_status.module:483
+msgid ""
+"There are updates available for one or more of your modules. To ensure the "
+"proper functioning of your site, you should update as soon as possible."
+msgstr ""
+"Pro jeden či více Vašich nainstalovaných modulů jsou dostupné aktualizace. "
+"Pro zajištění správné funkčnosti byste měli co nejdříve aktualizovat."
+
+#: update_status.module:489
+msgid ""
+"There is a security update available for your version of Drupal. To ensure "
+"the security of your server, you should update immediately!"
+msgstr ""
+"Pro Váš web jsou dostupné bezpečnostní aktualizace. Pro zajištění dostatečné "
+"bezpečnosti webu byste měli co nejdříve aktualizovat."
+
+#: update_status.module:492
+msgid ""
+"There are security updates available for one or more of your modules. To "
+"ensure the security of your server, you should update immediately!"
+msgstr ""
+"Pro Váš web jsou dostupné bezpečnostní aktualizace. Pro zajištění dostatečné "
+"bezpečnosti webu byste měli co nejdříve aktualizovat."
+
+#: update_status.module:498
+msgid ""
+"See the <a href=\"@available_updates\">available updates</a> page for more "
+"information."
+msgstr ""
+"Pro více informací se podívejte na stránku <a href=\"@available_updates"
+"\">dostupných aktualizací</a>."
+
+#: update_status.module:509
+msgid "Fetched information about all available new releases and updates."
+msgstr "Stažené informace o všech dostupných vydáních modulů a aktualizacích."
+
+#: update_status.module:512
+msgid "Unable to fetch any information on available new releases and updates."
+msgstr "Nebylo možné stáhnout informace o nových aktualizacích."
+
+#: update_status.module:522
+msgid ""
+"No information is available about potential new releases for currently "
+"installed modules. To check for updates, you may need to <a href=\"@run_cron"
+"\">run cron</a> or you can <a href=\"@check_manually\">check manually</a>. "
+"Please note that checking for available updates can take a long time, so "
+"please be patient."
+msgstr ""
+"Žádné informace o nových aktualizacích nejsou dostupné. Je možné, že musíte "
+"spustit <a href=\"@run_cron\">cron</a> nebo ručně spustit <a href="
+"\"@check_manually\">kontrolu aktualizací</a>. Berte prosím na vědomí, že "
+"kontrola aktualizací může trvat dlouhou dobu."
+
+#: update_status.module:674
+msgid "Unknown"
+msgstr "Neznámý"
+
+#: update_status.module:875;933
+msgid "No available releases found"
+msgstr "Nebyly nalezeny žádné dostupné vydání"
+
+#: update_status.module:885
+msgid "Ignored by settings"
+msgstr "Ignorováno na základě nastavení"
+
+#: update_status.module:916
+msgid "No filedate available"
+msgstr "Pole filedate není dostupné"
+
+#: update_status.module:928
+msgid "Invalid info"
+msgstr "Neplatné informace"
+
+#: update_status.module:944
+msgid "Last checked: "
+msgstr "Poslední kontrola: "
+
+#: update_status.module:944
+msgid "ago"
+msgstr "zpět"
+
+#: update_status.module:945
+msgid "Check manually"
+msgstr "Spustit ručně"
+
+#: update_status.module:989
+msgid "Security update required!"
+msgstr "Je třeba provést bezpečnostní aktualizace!"
+
+#: update_status.module:993
+msgid "Update available"
+msgstr "Dostupná aktualizace"
+
+#: update_status.module:1047
+msgid "Recommended version:"
+msgstr "Doporučená verze:"
+
+#: update_status.module:1053
+msgid "Security update:"
+msgstr "Bezpečnostní aktualizace:"
+
+#: update_status.module:1059
+msgid "Latest version:"
+msgstr "Poslední verze:"
+
+#: update_status.module:1064
+msgid "Development version:"
+msgstr "Vývojová verze:"
+
+#: update_status.module:1070
+msgid "Also available:"
+msgstr "Také dostupné:"
+
+#: update_status.module:1079
+msgid "Administrator note: %notes"
+msgstr "Poznámka administrátora: %notes"
+
+#: update_status.module:1084
+msgid "Includes: %modules"
+msgstr "Zahrnuje: %modules"
+
+#: update_status.module:1110
+msgid "Download"
+msgstr "Stáhnout"
+
+#: update_status.module:1110
+msgid "Release notes"
+msgstr "Poznámky k vydání"
+
+#: update_status.module:1143
+msgid "Fetched information on all available new releases and updates."
+msgstr "Staženy informace o všech dostupných aktualizacích."
+
+#: update_status.module:1143;1146;0
+msgid "update_status"
+msgstr "update_status"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "Stav aktualizací"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "Kontroluje, zda Vaše instalace Drupalu potřebuje nějaké aktualizace."
+

@@ -1,0 +1,11 @@
+digraph G{
+node [shape=plaintext, fontcolor=white, width=.01, height=.3];
+nodesep=.05;
+rankdir=LR;
+subgraph cluster1 {
+label = "Условные обозначения:";
+C->D [label="subclass_of", fontsize="12"];
+D->B [color="grey", label="has_type", fontsize="12"];
+B->F [style="dashed", label="instance_of", fontsize="12"];
+}
+}

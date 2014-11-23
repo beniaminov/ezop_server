@@ -1,0 +1,298 @@
+# translation of el.po to Greek
+# $Id: el.po,v 1.1.2.1 2007/08/08 22:46:44 goofyx Exp $
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  update_status.module,v 1.83.2.17 2007/08/07 15:57:31 dww
+#  update_status.info,v 1.3 2007/06/13 19:32:05 dww
+#
+# Vasileios Lourdas <lourdas_v@yahoo.gr>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: el\n"
+"POT-Creation-Date: 2007-08-08 13:47-0700\n"
+"PO-Revision-Date: 2007-08-09 01:41+0300\n"
+"Last-Translator: Vasileios Lourdas <lourdas_v@yahoo.gr>\n"
+"Language-Team: Greek <el@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: update_status.module:24
+msgid "Here you can find information about available updates for your installed modules. Note that each module is part of a \"project\", which may have the same name as the module or may have a different name."
+msgstr "Εδώ μπορείτε να βρείτε πληροφορίες σχετικά με διαθέσιμες ενημερώσεις για τις εγκατεστημένες μονάδες σας. Πρέπει να σημειωθεί ότι κάθε μονάδα είναι τμήμα ενός \"σχεδίου\", που μπορεί να έχει το ίδιο όνομα με τη μονάδα ή διαφορετικό."
+
+#: update_status.module:27
+msgid "Here you can configure what kinds of available updates for your installed modules should be marked as an error on the <a href=\"@status_report\">Status report</a> and the <a href=\"@modules_page\">Modules</a> page, and other related settings."
+msgstr "Εδώ μπορείτε να ρυθμίσετε τα είδη διαθέσιμων ενημερώσεων για τις εγκατεστημένες μονάδες σας που θα σημειώνονται ως σφάλμα στη σελίδα <a href=\"@status_report\">Αναφορά κατάστασης</a> και στη σελίδα των <a href=\"@modules_page\">Μονάδων</a>, καθώς και άλλες σχετικές πληροφορίες."
+
+#: update_status.module:43
+msgid "See the <a href=\"@available_updates\">available updates</a> page for information on installed modules with new versions released."
+msgstr "Δείτε τη σελίδα των <a href=\"@available_updates\">διαθέσιμων ενημερώσεων</a> για πληροφορίες σχετικά με μονάδες για τις οποίες υπάρχουν νέες εκδόσεις."
+
+#: update_status.module:78
+msgid "Available updates"
+msgstr "Διαθέσιμες ενημερώσεις"
+
+#: update_status.module:79
+msgid "Get a status report on installed modules and available updates."
+msgstr "Λήψη αναφοράς κατάστασης για τις εγκατεστημένες μονάδες και τις διαθέσιμες ενημερώσεις."
+
+#: update_status.module:86
+msgid "List"
+msgstr "Λίστα"
+
+#: update_status.module:93
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: update_status.module:101
+msgid "Manual update check"
+msgstr "Χειροκίνητος έλεγχος για ενημερώσεις"
+
+#: update_status.module:140
+msgid "E-mail addresses to notify when updates are available"
+msgstr "Διευθύνσεις e-mail που θα ενημερώνονται όταν υπάρχουν διαθέσιμες ενημερώσεις"
+
+#: update_status.module:143
+msgid "Whenever your site checks for available updates and finds new releases, it can notify a list of users via e-email. Put each address on a separate line. If blank, no e-mails will be sent."
+msgstr "Όταν ο ιστοτόπος σας ελέγχει για διαθέσιμες ενημερώσεις και βρίσκει νέες εκδόσεις, μπορεί να ειδοποιεί μια λίστα χρηστών μέσω e-mail. Εισάγετε κάθε διεύθυνση σε ξεχωριστή γραμμή. Αν το πεδίο μείνει κενό, δε θα αποστέλλονται e-mail."
+
+#: update_status.module:148
+msgid "Check for updates"
+msgstr "Έλεγχος για ενημερώσεις"
+
+#: update_status.module:151
+msgid "Daily"
+msgstr "Καθημερινά"
+
+#: update_status.module:152
+msgid "Weekly"
+msgstr "Εβδομαδιαία"
+
+#: update_status.module:154
+msgid "Select how frequently you want to automatically check for new releases of your currently installed modules."
+msgstr "Επιλέξτε πόσο συχνά θέλετε να γίνεται αυτόματος έλεγχος για νέες εκδόσεις των εγκατεστημένων μονάδων που έχετε αυτή τη στιγμή."
+
+#: update_status.module:159
+msgid "Notification threshold"
+msgstr "Κατώφλι ενημέρωσης"
+
+#: update_status.module:162
+msgid "All newer versions"
+msgstr "Όλες οι νεώτερες εκδόσεις"
+
+#: update_status.module:163
+msgid "Only security updates"
+msgstr "Μόνο ενημερώσεις ασφαλείας"
+
+#: update_status.module:165
+msgid "If there are updates available of Drupal core or any of your installed modules, your site will print an error message on the <a href=\"@status_report\">status report</a> and the <a href=\"@modules_page\">modules page</a>. You can choose to only see these error messages if a security update is available, or to be notified about any newer versions."
+msgstr "Αν υπάρχουν διαθέσιμες ενημερώσεις για τον πυρήνα του Drupal ή για οποιαδήποτε από τις εγκατεστημένες μονάδες σας, ο ιστοτόπος σας θα εμφανίζει ένα μήνυμα σφάλματος στην <a href=\"@status_report\">αναφορά κατάστασης</a> και στη <a href=\"@modules_page\">σελίδα των μονάδων</a>. Μπορείτε να επιλέξετε αν θέλετε να βλέπετε αυτά τα σφάλματα αν υπάρχει διαθέσιμη μια ενημέρωση ασφαλείας, ή να ειδοποιήστε σχετικά με νεώτερες εκδόσεις."
+
+#: update_status.module:169
+msgid "These settings allow you to control if a certain project, or even a specific release of that project, should be ignored by the available updates report. For each project, you can select if it should always warn you about a newer release, never warn you (ignore the project completely), or ignore a specific available release you do not want to upgrade to. You can also specify a note explaining why you are ignoring a specific project or version, and that will be displayed on the available updates report."
+msgstr "Οι ρυθμίσεις αυτές σας επιτρέπουν να ελέγχετε αν ένα συγκεκριμένο σχέδιο, ή ακόμη και μια συγκεκριμένη έκδοση ενός σχεδίου, θα πρέπει να αγνοείται από την αναφορά των διαθέσιμων ενημερώσεων. Για κάθε σχέδιο, μπορείτε να επιλέξετε αν θα πρέπει να προειδοποιήστε σχετικά με μια νεώτερη έκδοση, να μην δέχεστε προειδοποίηση (να αγνοείτε τελείως το σχέδιο), ή να αγνοείτε μια συγκεκριμένη έκδοση στην οποία δεν θέλετε να γίνει αναβάθμιση. Μπορείτε επίσης να γράψετε μια σημείωση σχετικά με το γιατί θέλετε να αγνοείτε ένα συγκεκριμένο σχέδιο ή έκδοση και αυτή θα εμφανίζεται στην αναφορά των διαθέσιμων ενημερώσεων."
+
+#: update_status.module:182
+msgid "Always"
+msgstr "Πάντα"
+
+#: update_status.module:184
+msgid "Ignore @version"
+msgstr "Αγνόηση της @version"
+
+#: update_status.module:186;944
+msgid "Never"
+msgstr "Ποτέ"
+
+#: update_status.module:202
+msgid "Submit changes"
+msgstr "Υποβολή αλλαγών"
+
+#: update_status.module:226
+msgid "Project"
+msgstr "Σχέδιο"
+
+#: update_status.module:227
+msgid "Warn if out of date"
+msgstr "Προειδοποίηση αν είναι παλιό"
+
+#: update_status.module:228
+msgid "Notes"
+msgstr "Σημειώσεις"
+
+#: update_status.module:280
+msgid "%email is not a valid e-mail address."
+msgstr "Το %email δεν είναι έγκυρη διεύθυνση e-mail."
+
+#: update_status.module:283
+msgid "%emails are not valid e-mail addresses."
+msgstr "Τα %emails δεν είναι έγκυρες διευθύνσεις e-mail."
+
+#: update_status.module:306
+msgid "Your changes have been saved."
+msgstr "Οι αλλαγές σας αποθηκεύτηκαν."
+
+#: update_status.module:328
+msgid "Drupal core update status"
+msgstr "Αναφορά κατάστασης του πυρήνα του Drupal"
+
+#: update_status.module:334
+msgid "Out of date (version @version available)"
+msgstr "Ξεπερασμένο (η έκδοση @version είναι διαθέσιμη)"
+
+#: update_status.module:341
+msgid "Not secure! (version @version available)"
+msgstr "Μη ασφαλές! (η έκδοση @version είναι διαθέσιμη)"
+
+#: update_status.module:348;357;985
+msgid "Up to date"
+msgstr "Ενημερωμένο"
+
+#: update_status.module:355
+msgid "Module update status"
+msgstr "Κατάστασης ενημέρωσης μονάδας"
+
+#: update_status.module:361
+msgid "Not secure!"
+msgstr "Μη ασφαλές!"
+
+#: update_status.module:374
+msgid "Out of date"
+msgstr "Ξεπερασμένο"
+
+#: update_status.module:381
+msgid "No update data available"
+msgstr "Δεν υπάρχουν στοιχεία ενημέρωσης"
+
+#: update_status.module:425
+msgid "See the available updates page for more information:"
+msgstr "Δείτε τη σελίδα των διαθέσιμων ενημερώσεων για περισσότερες πληροφορίες:"
+
+#: update_status.module:426
+msgid "New release(s) available for !site_name"
+msgstr "Υπάρχει νέα(ες) έκδοση(εις) διαθέσιμη(ες) για το !site_name"
+
+#: update_status.module:480
+msgid "There are updates available for your version of Drupal. To ensure the proper functioning of your site, you should update as soon as possible."
+msgstr "Υπάρχουν διαθέσιμες ενημερώσεις για την έκδοση του Drupal σας. Για τη σωστή λειτουργία του ιστοτόπου σας, θα πρέπει να προβείτε σε ενημέρωση το συντομότερο."
+
+#: update_status.module:483
+msgid "There are updates available for one or more of your modules. To ensure the proper functioning of your site, you should update as soon as possible."
+msgstr "Υπάρχουν διαθέσιμες ενημερώσεις για μία ή περισσότερες μονάδες σας. Για τη σωστή λειτουργία του ιστοτόπου σας, θα πρέπει να προβείτε σε ενημέρωση το συντομότερο."
+
+#: update_status.module:489
+msgid "There is a security update available for your version of Drupal. To ensure the security of your server, you should update immediately!"
+msgstr "Υπάρχει διαθέσιμη ενημέρωση ασφαλείας για την έκδοση του Drupal σας. Για την ασφάλεια του διακομιστή σας, θα πρέπει να προβείτε σε ενημέρωση άμεσα!"
+
+#: update_status.module:492
+msgid "There are security updates available for one or more of your modules. To ensure the security of your server, you should update immediately!"
+msgstr "Υπάρχει διαθέσιμη ενημέρωση ασφαλείας για μία ή περισσότερες μονάδες σας. Για την ασφάλεια του διακομιστή σας, θα πρέπει να προβείτε σε ενημέρωση άμεσα!"
+
+#: update_status.module:498
+msgid "See the <a href=\"@available_updates\">available updates</a> page for more information."
+msgstr "Δείτε τη σελίδα των <a href=\"@available_updates\">διαθέσιμων ενημερώσεων</a> για περισσότερες πληροφορίες."
+
+#: update_status.module:509;1143
+msgid "Fetched information about all available new releases and updates."
+msgstr "Λήφθησαν πληροφορίες σχετικά με όλες τις διαθέσιμες νέες εκδόσεις και ενημερώσεις."
+
+#: update_status.module:512
+msgid "Unable to fetch any information on available new releases and updates."
+msgstr "Δεν ήταν δυνατή η λήψη πληροφοριών σχετικά με διαθέσιμες νέες εκδόσεις και ενημερώσεις."
+
+#: update_status.module:522
+msgid "No information is available about potential new releases for currently installed modules. To check for updates, you may need to <a href=\"@run_cron\">run cron</a> or you can <a href=\"@check_manually\">check manually</a>. Please note that checking for available updates can take a long time, so please be patient."
+msgstr "Δεν υπάρχουν πληροφορίες σχετικά με πιθανές νέες εκδόσεις για τις τρέχουσες εγκατεστημένες μονάδες. Για να γίνει έλεγχος για ενημερώσεις, πιθανόν να χρειαστεί ή <a href=\"@run_cron\">εκτέλεση του cron</a> ή να γίνει <a href=\"@check_manually\">χειροκίνητος έλεγχος</a>. Πρέπει να σημειωθεί ότι ο έλεγχος για διαθέσιμες ενημερώσεις μπορεί να πάρει αρκετό χρόνο, γι' αυτό χρειάζεται υπομονή."
+
+#: update_status.module:674
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: update_status.module:875;933
+msgid "No available releases found"
+msgstr "Δε βρέθηκαν διαθέσιμες εκδόσεις"
+
+#: update_status.module:885
+msgid "Ignored by settings"
+msgstr "Αγνόηση ως ρύθμιση"
+
+#: update_status.module:916
+msgid "No filedate available"
+msgstr "Δεν υπάρχει αρχείο με πληροφορίες ημερομηνίας"
+
+#: update_status.module:928
+msgid "Invalid info"
+msgstr "Μη έγκυρες πληροφορίες"
+
+#: update_status.module:944
+msgid "Last checked: "
+msgstr "Τελευταίος έλεγχος: "
+
+#: update_status.module:944
+msgid "ago"
+msgstr "πριν"
+
+#: update_status.module:945
+msgid "Check manually"
+msgstr "Χειροκίνητος έλεγχος"
+
+#: update_status.module:989
+msgid "Security update required!"
+msgstr "Απαραίτητη η ενημέρωση ασφαλείας!"
+
+#: update_status.module:993
+msgid "Update available"
+msgstr "Διαθέσιμη ενημέρωση"
+
+#: update_status.module:1047
+msgid "Recommended version:"
+msgstr "Προτεινόμενη έκδοση:"
+
+#: update_status.module:1053
+msgid "Security update:"
+msgstr "Ενημέρωση ασφαλείας:"
+
+#: update_status.module:1059
+msgid "Latest version:"
+msgstr "Τελευταία έκδοση:"
+
+#: update_status.module:1064
+msgid "Development version:"
+msgstr "Έκδοση υπό ανάπτυξη:"
+
+#: update_status.module:1070
+msgid "Also available:"
+msgstr "Επίσης διαθέσιμα:"
+
+#: update_status.module:1079
+msgid "Administrator note: %notes"
+msgstr "Σημείωση διαχειριστή: %notes"
+
+#: update_status.module:1084
+msgid "Includes: %modules"
+msgstr "Περιέχει: %modules"
+
+#: update_status.module:1110
+msgid "Download"
+msgstr "Λήψη"
+
+#: update_status.module:1110
+msgid "Release notes"
+msgstr "Σημειώσεις έκδοσης"
+
+#: update_status.module:1143;1146;0
+msgid "update_status"
+msgstr "update_status"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "κατάσταση ενημέρωσης"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "Ελέγχει αν η έκδοση του Drupal σας καθώς και οι μονάδες της είναι ενημερωμένες."
+

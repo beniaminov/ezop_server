@@ -1,0 +1,38 @@
+.header {    font-family:Book Antiqua;     font-size:12px;    font-weight: bolder;  color:#336699 }
+.header2 {font-family: Geneva, Arial, Helvetica, sans-serif;  font-style: oblique; color:#3399CC; font-size: 12px; font-weight: bolder;}
+
+.fatal {    font-family:Book Antiqua;    font-size:16;    font-weight:bolder;    color:"#336699"; }
+.message{font-family: Book Antiqua; font-size:16;}
+.error {font-family: Book Antiqua; font-size:14; font-weight: bolder; color:"darkred";}
+.button {font-family: Book Antiqua; font-size:13; font-weight: bolder;  color:#336699;}
+.cnptok{font-family: Book Antiqua; font-size:14; font-weight: bolder; color:"black";}
+.cnpterr{font-family: Book Antiqua; font-size:14; font-weight: bolder; color:"darkred";}
+
+#field_for_messages{
+width:100%;
+height: 100px;
+border: 2px solid #6699CC;
+margin-left: 0px;
+padding: 0px;
+padding-bottom: 0px;
+float:left;
+}
+* html #field_for_messages{ /*IE only style*/
+height: 100px;
+}
+
+#field_for_answers{
+width:39%;
+height: 100px;
+border: 2px solid #6699CC;
+margin-left: -10px;
+margin-top: 0px;
+padding: 0px;
+padding-left:10px;
+padding-bottom: 0px;
+float:right;
+}
+* html #field_for_answers{ /*IE only style*/
+height: 100px;
+}
+

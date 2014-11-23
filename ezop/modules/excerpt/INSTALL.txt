@@ -1,0 +1,9 @@
+To install:
+1) Copy excerpt.module into your Drupal /modules directory.
+2) On your Drupal site, go to administer > modules and enable excerpt
+   module.
+3) (optional) If you only want separate excerpts on some node types,
+   go to 'administer > content > configure > default workflow' and
+   uncheck the 'excerpt' column.
+
+Steven Wittens <unconed@drupal.org>

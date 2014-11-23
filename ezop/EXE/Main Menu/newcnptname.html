@@ -1,0 +1,31 @@
+<HTML>
+   <HEAD>
+      <TITLE>Введите имя понятия</TITLE>
+      <STYLE TYPE="text/css">
+         BODY {margin-left:10pt; background:menu}
+      </STYLE>
+ </HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+         function saveValues() {
+            // Build an array of return values.
+            var retVal;
+	    retVal = document.all.cnpt.value;
+	    if(!retVal) {alert("Ошибка: введите имя новой онтологии.");}
+            else {	window.returnValue = retVal;
+            		event.returnValue = false;
+            		window.close();}
+         }
+      </SCRIPT>
+   <BODY>
+      <FORM NAME="CreateNewFolder">
+         <FIELDSET>
+            <LEGEND>Новое имя</LEGEND>
+            <P>Введите имя онтологии: <INPUT NAME="cnpt" >            
+            </p>
+         </FIELDSET>
+      </FORM>
+   <P STYLE="TEXT-ALIGN: center">
+      <INPUT TYPE=submit STYLE="WIDTH: 5em"
+         ONCLICK="saveValues();" VALUE="OK">
+      <INPUT TYPE=reset ONCLICK="window.close();" VALUE="Отмена"></P>
+    </BODY>

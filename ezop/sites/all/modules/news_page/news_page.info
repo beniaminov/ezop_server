@@ -1,0 +1,11 @@
+; $Id: news_page.info,v 1.1.2.2 2009/04/29 21:29:58 MegaGrunt Exp $
+name = News Page
+description = Creates a page of keyword filtered news items from an aggregator category
+dependencies = aggregator
+version = "$Names$"
+
+; Information added by drupal.org packaging script on 2009-04-29
+version = "5.x-1.2"
+project = "news_page"
+datestamp = "1241041276"
+

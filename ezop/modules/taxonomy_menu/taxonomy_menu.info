@@ -1,0 +1,11 @@
+; $Id: taxonomy_menu.info,v 1.1.2.3 2008/01/15 22:14:35 brmassa Exp $
+core          = "5.x"
+name          = "Taxonomy Menu"
+dependencies  = taxonomy
+description   = "Adds links to taxonomy terms to the global navigation menu."
+
+; Information added by drupal.org packaging script on 2008-01-31
+version = "5.x-1.03"
+project = "taxonomy_menu"
+datestamp = "1201797607"
+

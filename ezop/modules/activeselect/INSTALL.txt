@@ -1,0 +1,15 @@
+// $Id: INSTALL.txt,v 1.1 2006/02/18 03:17:26 jaza Exp $
+
+Requirements
+------------
+
+This module requires the latest development version of Drupal (CVS HEAD).
+
+
+Installation
+------------
+
+1. Copy the activeselect folder and its contents to the Drupal modules/ directory. 
+   Drupal should automatically detect it.
+
+2. Go to 'administer -> modules' and enable activeselect.

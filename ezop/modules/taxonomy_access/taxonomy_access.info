@@ -1,0 +1,9 @@
+; $Id: taxonomy_access.info,v 1.4 2006/10/26 23:03:28 keve Exp $
+name = Taxonomy Access Control
+description = Access control for user roles based on taxonomy categories.
+dependencies = taxonomy
+; Information added by drupal.org packaging script on 2007-06-14
+version = "5.x-1.1"
+project = "taxonomy_access"
+datestamp = "1181848249"
+

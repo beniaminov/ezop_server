@@ -1,0 +1,12 @@
+name = Content Taxonomy
+description = Defines a field type for taxonomy terms
+dependencies = content taxonomy
+package = CCK
+
+
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "5.x-1.x-dev"
+project = "content_taxonomy"
+datestamp = "1380567066"
+

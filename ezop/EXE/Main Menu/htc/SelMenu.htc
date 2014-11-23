@@ -1,0 +1,78 @@
+     <PUBLIC:COMPONENT>
+     <PUBLIC:PROPERTY NAME="ID"/>
+     <PUBLIC:PROPERTY NAME="Selected" />
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="SetSelection()" />
+     <PUBLIC:ATTACH EVENT="onmouseover"  ONEVENT="SelectMouse()" />
+
+// WHAT COLOR SUITS BEST: "BEIGE" OR "336699". IF THE LATTER, WHAT NAME IT HAS 
+"CC9966" "6699CC" "darkgoldenrod" "CCCC99"
+<SCRIPT LANGUAGE="JScript">
+var normalColor, normalbgColor;
+
+function SetSelection (){
+//ChangeBG_white_byID_all ();
+//window.tmr = setInterval("alert('ss');clearInterval(window.tmr);", 999);
+//clearInterval(window.tmr); 
+//alert(id);
+//alert(LastSelection);
+
+if(SelectedID && SelectedID != id){
+
+		window.document.getElementById(SelectedID).fireEvent("onclick");
+		SelectClick();
+	}
+	else {	
+
+		SelectClick();
+
+		}
+
+}
+function ChangeBG () {
+	runtimeStyle.backgroundColor = "CCCC99";}
+
+
+function SelectClick(){
+	if ((Selected == null) || (Selected == "false")) {
+	Selected = "true";	 
+	SelectedID = id;
+	ChangeBG();//runtimeStyle.backgroundColor = "6699CC";
+	 //TO SHOW SUBMENU
+	DisplaySubMenu(id);
+
+	}
+else {
+	
+	Selected = "false";
+	SelectedID = "";
+	runtimeStyle.backgroundColor = "white";
+
+	// TO HIDE SUBMENU
+	clearSubMTable();
+	}
+	
+}
+
+
+function SelectMouse(){
+ChangeBG_white_byID_all ();
+
+if(SelectedID != id){
+		
+ 	if(SelectedID) ChangeBG_white_byID(SelectedID);
+	ChangeBG();//runtimeStyle.backgroundColor = "6699CC";
+	}
+else {
+	ChangeBG();}
+
+if(LastSelection && LastSelection!=id) 		
+		ChangeBG_white_byID(LastSelection);
+
+LastSelection=id;//in case !LastSelection
+DisplaySubMenu(id);
+
+
+}
+
+</SCRIPT>
+</PUBLIC:COMPONENT>

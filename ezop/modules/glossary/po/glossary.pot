@@ -1,0 +1,558 @@
+# $Id: glossary.pot,v 1.2.2.13 2008/03/28 14:22:33 nancyw Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  glossary.module,v 1.121.2.13 2008/03/12 16:38:24 nancyw
+#  glossary.install,v 1.4.2.3 2008/03/18 17:26:38 nancyw
+#  glossary.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-03-28 10:19-0400\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: glossary.module:14
+msgid "<p>Glossary helps newbies understand the jargon which always crops up when specialists talk about a topic. Doctors discuss CBC and EKG and CCs. Web developers keep talking about CSS, P2P, XSLT, etc. This is all intimidating for newbies.</p>\r\n      <p>The Glossary module scans posts for glossary terms (and their synonyms) in the body. If found, the glossary indicator is inserted after the term, or the term is turned into an indicator link depending on the settings. By hovering over the indicator, users may learn the definition of that term. Clicking leads the user to that term presented within the whole glossary.</p>\r\n      <p>Glossary terms are managed as vocabularies within the taxonomy.module. To get started with glossary, create a new vocabulary on the !taxonomy_admin page. The vocabulary need not be associated with any modules, although you can add detailed description to terms by attaching (story or other type of) nodes to them. Add a few terms to the vocabulary. The term title should be the glossary entry and the description should be its definition. You can make use of the hierarchy, synonym, and related terms features. These features impact the display of the glossary when viewed in an overview.</p>\r\n      <p>Next, you have to setup the input formats you want to use the glossary with. At the !input_formats page select an input format to configure. Select the Glossary filter checkbox and press Save configuration. Now select the configure filters tab and select the vocabulary and apply other settings.</p>\r\n      <p>You can see how a vocabulary would function as a glossary by going to the !glossaries page and selecting the vocabulary to view.</p>\r\n      <p>Administration of glossary requires <em>%permissions</em> permissions.</p>"
+msgstr ""
+
+#: glossary.module:21
+msgid "administer taxonomy"
+msgstr ""
+
+#: glossary.module:21
+msgid "access administration pages"
+msgstr ""
+
+#: glossary.module:21
+msgid "administer filters"
+msgstr ""
+
+#: glossary.module:22;23
+msgid "administer"
+msgstr ""
+
+#: glossary.module:22
+msgid "content"
+msgstr ""
+
+#: glossary.module:22
+msgid "categories"
+msgstr ""
+
+#: glossary.module:23
+msgid "site configuration"
+msgstr ""
+
+#: glossary.module:23;76;84;156 glossary.install:132 glossary.info:0
+msgid "Glossary"
+msgstr ""
+
+#: glossary.module:24
+msgid "glossaries"
+msgstr ""
+
+#: glossary.module:28
+msgid "This page and its tabs allow you to control how the Glossary module functions."
+msgstr ""
+
+#: glossary.module:32
+msgid "Maintain one or more glossaries on your site."
+msgstr ""
+
+#: glossary.module:36
+msgid "The Glossary module will automatically mark terms that have been defined in the glossary vocabulary with links to their descriptions. These marks depend on the settings and may be a superscript character or an icon, or the term may be turned into an acronym or abbr."
+msgstr ""
+
+#: glossary.module:39
+msgid "Glossary terms will be automatically marked with links to their descriptions."
+msgstr ""
+
+#: glossary.module:49
+msgid "Search for glossary terms"
+msgstr ""
+
+#: glossary.module:54
+msgid "Search Glossary"
+msgstr ""
+
+#: glossary.module:68
+msgid "Glossary Search"
+msgstr ""
+
+#: glossary.module:92
+msgid "Glossary Settings"
+msgstr ""
+
+#: glossary.module:94
+msgid "Select how you want the Glossary module to behave."
+msgstr ""
+
+#: glossary.module:101
+msgid "General"
+msgstr ""
+
+#: glossary.module:102;918
+msgid "General settings"
+msgstr ""
+
+#: glossary.module:112
+msgid "Alphabet"
+msgstr ""
+
+#: glossary.module:116
+msgid "Alphabet settings."
+msgstr ""
+
+#: glossary.module:123;852
+msgid "Clear cache"
+msgstr ""
+
+#: glossary.module:127
+msgid "Clear the filter cache."
+msgstr ""
+
+#: glossary.module:146
+msgid "Settings for the !name input format."
+msgstr ""
+
+#: glossary.module:179
+msgid "Search"
+msgstr ""
+
+#: glossary.module:229
+msgid "Glossary filter"
+msgstr ""
+
+#: glossary.module:259
+msgid "Glossary Indicators"
+msgstr ""
+
+#: glossary.module:263
+msgid "Disable Glossary indicators"
+msgstr ""
+
+#: glossary.module:266
+msgid "Check this box to disable the display of Glossary indicators."
+msgstr ""
+
+#: glossary.module:510;517
+msgid "Home"
+msgstr ""
+
+#: glossary.module:511;519
+msgid "Glossaries"
+msgstr ""
+
+#: glossary.module:637
+msgid "edit term"
+msgstr ""
+
+#: glossary.module:639
+msgid "edit this term and definition"
+msgstr ""
+
+#: glossary.module:645
+msgid "search for term"
+msgstr ""
+
+#: glossary.module:647
+msgid "search for content using this term"
+msgstr ""
+
+#: glossary.module:674;685
+msgid "Detailed definition of @term"
+msgstr ""
+
+#: glossary.module:692
+msgid "See also"
+msgstr ""
+
+#: glossary.module:714
+msgid "Add term"
+msgstr ""
+
+#: glossary.module:718;756
+msgid "Edit @name"
+msgstr ""
+
+#: glossary.module:725
+msgid "Glossary settings"
+msgstr ""
+
+#: glossary.module:750
+msgid "Glossary name"
+msgstr ""
+
+#: glossary.module:750
+msgid "Operations"
+msgstr ""
+
+#: glossary.module:762
+msgid "List"
+msgstr ""
+
+#: glossary.module:862
+msgid "Cache_filter cleared."
+msgstr ""
+
+#: glossary.module:878
+msgid "The filter cache has been cleared. There may be a temporary performance degradation while it is rebuilt."
+msgstr ""
+
+#: glossary.module:906;907
+msgid "enabled"
+msgstr ""
+
+#: glossary.module:906;907
+msgid "disabled"
+msgstr ""
+
+#: glossary.module:908
+msgid "Multibyte string support is !status; multibyte function overload is !overload."
+msgstr ""
+
+#: glossary.module:926
+msgid "Allow the user to disable glossary links."
+msgstr ""
+
+#: glossary.module:928
+msgid "Determines whether or not the individual user may disable the Glossary indicators."
+msgstr ""
+
+#: glossary.module:933
+msgid "Hide unused input format tabs."
+msgstr ""
+
+#: glossary.module:935
+msgid "Determines whether or not to hide settings tabs for input formats that are not glossary-enabled."
+msgstr ""
+
+#: glossary.module:939
+msgid "Show only the single term."
+msgstr ""
+
+#: glossary.module:940
+msgid "Advance the whole glossary to the term."
+msgstr ""
+
+#: glossary.module:944
+msgid "Clicking on a term link will"
+msgstr ""
+
+#: glossary.module:947
+msgid "Changing this setting may require you to clear the cache_filter."
+msgstr ""
+
+#: glossary.module:954
+msgid "Glossary Page"
+msgstr ""
+
+#: glossary.module:963
+msgid "Show glossary across many smaller pages."
+msgstr ""
+
+#: glossary.module:965
+msgid "Do you want to show all terms on one glossary page or break up the glossary into a page for each first letter (i.e. many pages)."
+msgstr ""
+
+#: glossary.module:970
+msgid "Separate letters."
+msgstr ""
+
+#: glossary.module:972
+msgid "Separate the terms by the first letters. This will create a large letter at the beginning of each section."
+msgstr ""
+
+#: glossary.module:977
+msgid "Show glossary terms even if there is no description."
+msgstr ""
+
+#: glossary.module:979
+msgid "By default, Glossary omits terms from the list if there is no term description. This setting overrides that. This is useful on free-tagging vocabularies that rarely get descriptions."
+msgstr ""
+
+#: glossary.module:984
+msgid "Show glossary term descriptions on the Glossary page."
+msgstr ""
+
+#: glossary.module:986
+msgid "Glossary term descriptions may be large and/or include pictures, therefore the Glossary page can take a long time to load if you include the full descriptions."
+msgstr ""
+
+#: glossary.module:991
+msgid "Show detailed descriptions on the Glossary page."
+msgstr ""
+
+#: glossary.module:993
+msgid "Glossary terms may have nodes associated with them. This option allows you to include the teasers of those nodes under the term."
+msgstr ""
+
+#: glossary.module:1010
+msgid "The current locale is set to \"@loc\". The term_data collation is \"!collate\"."
+msgstr ""
+
+#: glossary.module:1015
+msgid "Enter all the letters of your alphabet, in the correct order and in lower case."
+msgstr ""
+
+#: glossary.module:1017
+msgid "Separate the letters by a blank."
+msgstr ""
+
+#: glossary.module:1023
+msgid "Enter all the digits of your alphabet, in the correct order."
+msgstr ""
+
+#: glossary.module:1025
+msgid "Separate the digits by a blank. If you don't want terms to start with digits, leave this blank."
+msgstr ""
+
+#: glossary.module:1031
+msgid "Suppress unused letters?"
+msgstr ""
+
+#: glossary.module:1033
+msgid "This will cause unused letters to be omitted from the alphabar."
+msgstr ""
+
+#: glossary.module:1047
+msgid "Alphabar separator"
+msgstr ""
+
+#: glossary.module:1049
+msgid "This is the character that will separate the letters in the alphabar."
+msgstr ""
+
+#: glossary.module:1056;1284
+msgid "Save configuration"
+msgstr ""
+
+#: glossary.module:1074
+msgid "Configuration saved"
+msgstr ""
+
+#: glossary.module:1089
+msgid "No vocabularies were found. Until you set up, and select, at least one vocabulary for Glossary, no substitutions can be done."
+msgstr ""
+
+#: glossary.module:1103
+msgid "The Glossary module is not enabled for this input format. <a href=\"!url\">Change the settings</a>."
+msgstr ""
+
+#: glossary.module:1107
+msgid "This filter may be cached."
+msgstr ""
+
+#: glossary.module:1117
+msgid "There is currently cached data for this input format."
+msgstr ""
+
+#: glossary.module:1121
+msgid "You are using a minimum cache lifetime of !life."
+msgstr ""
+
+#: glossary.module:1124
+msgid "You do not have a minimum cache lifetime."
+msgstr ""
+
+#: glossary.module:1128
+msgid "This filter may not be cached."
+msgstr ""
+
+#: glossary.module:1138
+msgid "Input format settings"
+msgstr ""
+
+#: glossary.module:1142
+msgid "Submitting this form will clear the \"cache_filter\" table, which will have a short-term performance impact."
+msgstr ""
+
+#: glossary.module:1152
+msgid "Select Vocabulary"
+msgstr ""
+
+#: glossary.module:1155
+msgid "Select one or more vocabularies which hold all terms for your glossary. When enabled, posts will be scanned for glossary terms from the selected vocabulary(ies) and an icon or link will be inserted for each term. Choosing no vocabularies will result in no terms being flagged."
+msgstr ""
+
+#: glossary.module:1164
+msgid "Term matching"
+msgstr ""
+
+#: glossary.module:1172
+msgid "Match type"
+msgstr ""
+
+#: glossary.module:1175
+msgid "Word"
+msgstr ""
+
+#: glossary.module:1176
+msgid "Right or left substring"
+msgstr ""
+
+#: glossary.module:1177
+msgid "Left substring"
+msgstr ""
+
+#: glossary.module:1178
+msgid "Right substring"
+msgstr ""
+
+#: glossary.module:1179
+msgid "Any substring"
+msgstr ""
+
+#: glossary.module:1181
+msgid "Choose the match type of glossary links. \"Word\" means a word break must occur on both sides of the term. \"Right or left\" requires a word break on either side. \"Left\" requires a word break on the left side of the term. \"Right\" requires a word break on the right. \"Any\" means any substring will match."
+msgstr ""
+
+#: glossary.module:1189
+msgid "Case sensitivity"
+msgstr ""
+
+#: glossary.module:1192
+msgid "Case insensitive"
+msgstr ""
+
+#: glossary.module:1193
+msgid "Case sensitive"
+msgstr ""
+
+#: glossary.module:1195
+msgid "Match either case sensitive or not. Case sensitive matches are not very resource intensive."
+msgstr ""
+
+#: glossary.module:1203
+msgid "Replace matches"
+msgstr ""
+
+#: glossary.module:1206
+msgid "Only the first match"
+msgstr ""
+
+#: glossary.module:1207
+msgid "All matches"
+msgstr ""
+
+#: glossary.module:1209
+msgid "Whether only the first match should be replaced or all matches."
+msgstr ""
+
+#: glossary.module:1216
+msgid "Blocked elements"
+msgstr ""
+
+#: glossary.module:1221
+msgid "Which HTML elements (tags) should not include Glossary links; that is, text within these elements will not be scanned for glossary terms. Enter the list separated by a space and do not include < and > characters (e.g. h1 h2)."
+msgstr ""
+
+#: glossary.module:1226
+msgid "Link style"
+msgstr ""
+
+#: glossary.module:1232;1262
+msgid "Superscript"
+msgstr ""
+
+#: glossary.module:1233
+msgid "Icon"
+msgstr ""
+
+#: glossary.module:1234
+msgid "Acronym link"
+msgstr ""
+
+#: glossary.module:1235
+msgid "Abbr element"
+msgstr ""
+
+#: glossary.module:1238
+msgid "Hovertip"
+msgstr ""
+
+#: glossary.module:1243
+msgid "Make Glossary links absolute"
+msgstr ""
+
+#: glossary.module:1245
+msgid "RSS feeds need absolute links to ensure they point back to this site. If you are not providing RSS feeds, it is better to leave this turned off."
+msgstr ""
+
+#: glossary.module:1251
+msgid "Term Indicator"
+msgstr ""
+
+#: glossary.module:1254
+msgid "This determines how the link to the glossary term will be indicated."
+msgstr ""
+
+#: glossary.module:1266
+msgid "If you chose !superscript above, enter the superscript text."
+msgstr ""
+
+#: glossary.module:1267
+msgid "superscript"
+msgstr ""
+
+#: glossary.module:1274
+msgid "Glossary Icon URL"
+msgstr ""
+
+#: glossary.module:1278
+msgid "If you chose !icon above, enter the URL of the glossary icon relative to the root of your Drupal site."
+msgstr ""
+
+#: glossary.module:1279
+msgid "icon"
+msgstr ""
+
+#: glossary.module:1318
+msgid "Configuration has been updated."
+msgstr ""
+
+#: glossary.module:0
+msgid "glossary"
+msgstr ""
+
+#: glossary.install:94
+msgid "The Glossary module has been enabled with default settings. To change the settings, <a href=\"!settings_uri\">click here</a>."
+msgstr ""
+
+#: glossary.install:132
+msgid "Glossary module uninstalled by uid !user."
+msgstr ""
+
+#: glossary.install:133
+msgid "The Glossary module has been uninstalled. You will still need to decide what to do with vocabularies that were used."
+msgstr ""
+
+#: (duplicate) glossary.install:44 
+msgid "Character type functions (ctype)"
+msgstr ""
+
+#: (duplicate) glossary.install:47 
+msgid "Enabled"
+msgstr ""
+
+#: (duplicate) glossary.install:51 
+msgid "Disabled"
+msgstr ""
+
+#: (duplicate) glossary.install:52 
+msgid "The Glossary module requires that you configure PHP with --enable-ctype."
+msgstr ""
+
+#: glossary.info:0
+msgid "Maintain a glossary on your site."
+msgstr ""
+

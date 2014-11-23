@@ -1,0 +1,53 @@
+# $Id: excerpt.pot,v 1.1.2.3 2008/03/19 23:23:15 smk Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  excerpt.module,v 1.6.4.2 2008/03/19 01:47:07 smk
+#  excerpt.info,v 1.2.4.2 2007/04/20 21:52:09 hayesr
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-03-20 00:22+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: excerpt.module:38 excerpt.info:0
+msgid "Excerpt"
+msgstr ""
+
+#: excerpt.module:43;57
+msgid "Teaser"
+msgstr ""
+
+#: excerpt.module:45
+msgid "Auto-generated"
+msgstr ""
+
+#: excerpt.module:45
+msgid "Manual excerpt"
+msgstr ""
+
+#: excerpt.module:46
+msgid "Choose whether the node teaser must be generated automatically or manually entered by the author."
+msgstr ""
+
+#: excerpt.module:50
+msgid "Weight of Teaser field"
+msgstr ""
+
+#: excerpt.module:62
+msgid "Enter an excerpt for this item. It will be shown on listing pages along with a <em>read more</em> link which leads to the full view. Leave empty to auto-generate one from the body."
+msgstr ""
+
+#: excerpt.info:0
+msgid "Allows users to manually control the teaser for a node."
+msgstr ""
+

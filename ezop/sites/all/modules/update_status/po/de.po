@@ -1,0 +1,385 @@
+# $Id: de.po,v 1.12.2.7 2008/02/05 18:38:03 hass Exp $
+#
+# LANGUAGE translation of Drupal (update_status.module)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from file: update_status.info,v 1.2 2007/02/25 21:12:34 merlinofchaos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: update_stats\n"
+"POT-Creation-Date: 2007-03-24 21:44+0100\n"
+"PO-Revision-Date: 2008-02-05 19:37+0100\n"
+"Last-Translator: Alexander Hass\n"
+"Language-Team: Alexander Hass\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: update_status.module:54
+msgid "Here you can find information about available updates for your installed modules. Note that each module is part of a \"project\", which may have the same name as the module or may have a different name."
+msgstr "Hier befinden sich Informationen über verfügbare Aktualisierungen der installierten Module. Zu beachten ist, dass jedes Modul Teil eines „Projektes“ ist, welches den gleichen oder einen anderen Namen wie das Modul hat."
+
+#: update_status.module:57
+msgid "Here you can configure what kinds of available updates for your installed modules should be marked as an error on the <a href=\"@status_report\">Status report</a> and the <a href=\"@modules_page\">Modules</a> page, and other related settings."
+msgstr "Hier kann konfiguriert werden, welche Art der verfügbaren Aktualisierungen installierter Module, im <a href=\"@status_report\">Statusbericht</a>, der <a href=\"@modules_page\">Module-Seite</a> und anderen entsprechenden Einstellungen als Fehler markiert werden sollen."
+
+#: update_status.module:73
+msgid "See the <a href=\"@available_updates\">available updates</a> page for information on installed modules with new versions released."
+msgstr "Nähere Informationen bezüglich neuer Versionen installierter Modulen gibt es auf der Seite <a href=\"@available_updates\">verfügbare Aktualisierungen</a>."
+
+#: update_status.module:108
+msgid "Available updates"
+msgstr "Verfügbare Aktualisierungen"
+
+#: update_status.module:109
+msgid "Get a status report on installed modules and available updates."
+msgstr "Einen Statusbericht über die installierten Module und verfügbaren Aktualisierungen abrufen."
+
+#: update_status.module:116
+msgid "List"
+msgstr "Alle anzeigen"
+
+#: update_status.module:123
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: update_status.module:131
+msgid "Manual update check"
+msgstr "Aktualisierung per Hand überprüfen"
+
+#: update_status.module:170
+msgid "E-mail addresses to notify when updates are available"
+msgstr "Bei verfügbaren Aktualisierungen folgende E-Mail Adressen benachrichtigen"
+
+#: update_status.module:173
+msgid "Whenever your site checks for available updates and finds new releases, it can notify a list of users via e-mail. Put each address on a separate line. If blank, no e-mails will be sent."
+msgstr "Immer wenn die Website auf verfügbaren Aktualisierungen prüft und neue Veröffentlichungen findet, kann eine Liste von Benutzern per E-Mail benachrichtigt werden. Geben Sie eine E-Mail Adresse pro Zeile an. Es wird keine E-Mail verschickt, wenn das Feld leer gelassen wird."
+
+#: update_status.module:178
+msgid "Check for updates"
+msgstr "Auf Aktualisierungen prüfen"
+
+#: update_status.module:181
+msgid "Daily"
+msgstr "Täglich"
+
+#: update_status.module:182
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#: update_status.module:184
+msgid "Select how frequently you want to automatically check for new releases of your currently installed modules."
+msgstr "Wie häufig soll automatisch nach neuen Veröffentlichungen installierter Module gesucht werden."
+
+#: update_status.module:189
+msgid "Notification threshold"
+msgstr "Benachrichtigungsschwelle"
+
+#: update_status.module:192
+msgid "All newer versions"
+msgstr "Alle neueren Versionen"
+
+#: update_status.module:193
+msgid "Only security updates"
+msgstr "Nur Sicherheitsupdates"
+
+#: update_status.module:195
+msgid "If there are updates available of Drupal core or any of your installed modules, your site will print an error message on the <a href=\"@status_report\">status report</a> and the <a href=\"@modules_page\">modules page</a>. You can choose to only see these error messages if a security update is available, or to be notified about any newer versions."
+msgstr "Sollten Aktualisierungen des Drupal Kern oder eines der installierten Module verfügbar sein, wird die Website eine Fehlermeldung auf der <a href=\"@status_report\">Statusbericht</a> und <a href=\"@modules_page\">Modul</a>-Seite ausgeben. Es kann ausgewählt werden, ob diese Fehlermeldungen nur bei verfügbaren Sicherheitsaktualisierungen oder bei allen neueren Versionen ausgegeben werden soll."
+
+#: update_status.module:199
+msgid "These settings allow you to control if a certain project, or even a specific release of that project, should be ignored by the available updates report. For each project, you can select if it should always warn you about a newer release, never warn you (ignore the project completely), or ignore a specific available release you do not want to upgrade to. You can also specify a note explaining why you are ignoring a specific project or version, and that will be displayed on the available updates report."
+msgstr "Diese Einstellungen ermöglicht die Kontrolle, ob ein bestimmtes Projekt oder spezielle Veröffentlichung von diesem Projekt, im Bericht über verfügbare Aktualisierungen ignoriert werden soll. Für jedes Projekt kann eingestellt werden, ob bei neuen Veröffentlichungen immer gewarnt wird, nie gewarnt wird (Projekt vollständig ignorieren) oder die Aktualisierung auf eine bestimmte Veröffentlichung ignoriert werden soll. Warum ein bestimmtes Projekt oder Version ignoriert wird, kann als Bemerkung angegeben werden, die im Bericht zu verfügbaren Aktualisierungen angezeigt wird."
+
+#: update_status.module:212
+msgid "Always"
+msgstr "Immer"
+
+#: update_status.module:214
+msgid "Ignore @version"
+msgstr "@version ignorieren"
+
+#: update_status.module:216;1198
+msgid "Never"
+msgstr "Nie"
+
+#: update_status.module:232
+msgid "Submit changes"
+msgstr "Änderungen speichern"
+
+#: update_status.module:256
+msgid "Project"
+msgstr "Projekt"
+
+#: update_status.module:257
+msgid "Warn if out of date"
+msgstr "Warnen, sobald veraltet"
+
+#: update_status.module:258
+msgid "Notes"
+msgstr "Bemerkungen"
+
+#: update_status.module:310
+msgid "%email is not a valid e-mail address."
+msgstr "%email ist keine zulässige E-Mail Adresse."
+
+#: update_status.module:313
+msgid "%emails are not valid e-mail addresses."
+msgstr "%emails sind keine zulässigen E-Mail Adressen."
+
+#: update_status.module:336
+msgid "Your changes have been saved."
+msgstr "Die Änderungen wurden gespeichert."
+
+#: update_status.module:375;407
+msgid "Drupal core update status"
+msgstr "Aktualisierungsstatus des Drupal Kern"
+
+#: update_status.module:376
+msgid "No update data available"
+msgstr "Keine Aktualisierungsdaten verfügbar"
+
+#: update_status.module:410
+msgid "Module update status"
+msgstr "Aktualisierungsstatus der Module"
+
+#: update_status.module:420
+msgid "Not secure!"
+msgstr "Unsicher!"
+
+#: update_status.module:423;1244
+msgid "Revoked!"
+msgstr "Zurückgezogen!"
+
+#: update_status.module:426
+msgid "Unsupported release"
+msgstr "Veröffentlichung ist nicht unterstützt"
+
+#: update_status.module:429
+msgid "Out of date"
+msgstr "Veraltet"
+
+#: update_status.module:434
+msgid "Can not determine status"
+msgstr "Der Status konnte nicht ermittelt werden"
+
+#: update_status.module:438;1253
+msgid "Up to date"
+msgstr "Aktuell"
+
+#: update_status.module:441
+msgid "(version @version available)"
+msgstr "(Version @version ist verfügbar)"
+
+#: update_status.module:482
+msgid "See the available updates page for more information:"
+msgstr "Weitere Information zu verfügbaren Aktualisierungen:"
+
+#: update_status.module:483
+msgid "New release(s) available for !site_name"
+msgstr "Neue Veröffentlichung(en) für !site_name verfügbar"
+
+#: update_status.module:537
+msgid "There is a security update available for your version of Drupal. To ensure the security of your server, you should update immediately!"
+msgstr "Für diese Drupal Version ist ein Sicherheitsupdate verfügbar. Um die Sicherheit des Servers sicherzustellen, sollte umgehend aktualisiert werden!"
+
+#: update_status.module:540
+msgid "There are security updates available for one or more of your modules. To ensure the security of your server, you should update immediately!"
+msgstr "Es stehen Sicherheitsupdates für ein oder mehrere Module zu Verfügung. Um die Sicherheit des Servers zu gewährleisten, sollte umgehend aktualisiert werden!"
+
+#: update_status.module:546
+msgid "Your version of Drupal has been revoked and is no longer available for download. Upgrading is strongly recommended!"
+msgstr "Diese Version von Drupal wurde zurückgezogen und kann nicht mehr heruntergeladen werden. Die Aktualisierung wird dringend empfohlen!"
+
+#: update_status.module:549
+msgid "The installed version of at least one of your modules or themes has been revoked and is no longer available for download. Upgrading or disabling is strongly recommended!"
+msgstr "Die installierte Version von mindestens einem Modul oder Theme wurde zurückgezogen und kann nicht mehr heruntergeladen werden. Die Aktualisierung oder Deaktivierung wird dringend empfohlen!"
+
+#: update_status.module:555
+msgid "Your version of Drupal is no longer supported. Upgrading is strongly recommended!"
+msgstr "Diese Version von Drupal wird nicht länger unterstützt. Die Aktualisierung wird dringend empfohlen!"
+
+#: update_status.module:558
+msgid "The installed version of at least one of your modules or themes is no longer supported. Upgrading or disabling is strongly recommended! Please see the project homepage for more details."
+msgstr "Die installierte Version von mindestens einem Modul oder Theme wird nicht länger unterstützt und kann nicht mehr heruntergeladen werden. Die Aktualisierung oder Deaktivierung wird dringend empfohlen! Weitere Details befindet sich auf der Projekt-Homepage."
+
+#: update_status.module:564
+msgid "There are updates available for your version of Drupal. To ensure the proper functioning of your site, you should update as soon as possible."
+msgstr "Für diese Drupal Version sind Aktualisierungen verfügbar. Um die einwandfreie Funktion der Website zu gewährleisten, sollte umgehend aktualisiert werden."
+
+#: update_status.module:567
+msgid "There are updates available for one or more of your modules. To ensure the proper functioning of your site, you should update as soon as possible."
+msgstr "Es stehen Aktualisierungen für ein oder mehrere Module zu Verfügung. Um die einwandfreie Funktion der Website zu gewährleisten, sollte umgehend aktualisiert werden."
+
+#: update_status.module:574
+msgid "There was a problem determining the status of available updates for your version of Drupal."
+msgstr "Bei der Statusermittlung von verfügbaren Aktualisierungen für diese Drupal-Version trat ein Problem auf."
+
+#: update_status.module:577
+msgid "There was a problem determining the status of available updates for one or more of your modules or themes."
+msgstr "Bei der Statusermittlung von verfügbaren Aktualisierungen für ein oder mehr Module oder Themes trat ein Problem auf."
+
+#: update_status.module:583
+msgid "See the <a href=\"@available_updates\">available updates</a> page for more information."
+msgstr "Weitere Information befindet sich auf der Seite der <a href=\"@available_updates\">verfügbaren Aktualisierungen</a>."
+
+#: update_status.module:594;1412
+msgid "Fetched information about all available new releases and updates."
+msgstr "Verfügbarkeitsinformationen über neue Veröffentlichungen und Aktualisierungen wurden abgerufen."
+
+#: update_status.module:597
+msgid "Unable to fetch any information on available new releases and updates."
+msgstr "Verfügbarkeitsinformationen über neue Veröffentlichungen und Aktualisierungen konnten nicht abgerufen werden."
+
+#: update_status.module:607
+msgid "No information is available about potential new releases for currently installed modules. To check for updates, you may need to <a href=\"@run_cron\">run cron</a> or you can <a href=\"@check_manually\">check manually</a>. Please note that checking for available updates can take a long time, so please be patient."
+msgstr "Derzeit sind keine Informationen über neue Veröffentlichungen der aktuell installierten Module verfügbar. Die Überprüfung auf Aktualisierungen kann <a href=\"@run_cron\">per Cron</a> oder <a href=\"@check_manually\">per Hand</a> ausgeführt werden. Die Überprüfung auf verfügbare Aktualisierungen kann etwas Zeit erfordern."
+
+#: update_status.module:769
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: update_status.module:875
+msgid "Project not secure"
+msgstr "Das Projekt ist unsicher!"
+
+#: update_status.module:876
+msgid "This project has been labeled insecure by the Drupal security team, and is no longer available for download. Immediately disabling everything included by this project is strongly recommended!"
+msgstr "Dieses Projekt wurde von Drupal-Sicherheitsteam als unsicher eingestuft und kann nicht mehr heruntergeladen werden. Es wird dringend empfohlen alles was dieses Projekt beinhaltet zu deaktivieren!"
+
+#: update_status.module:887
+msgid "Project revoked"
+msgstr "Das Projekt wurde zurückgezogen"
+
+#: update_status.module:888
+msgid "This project has been revoked, and is no longer available for download. Disabling everything included by this project is strongly recommended!"
+msgstr "Dieses Projekt wurde zurückgezogen und kann nicht mehr heruntergeladen werden. Es wird dringend empfohlen alles was dieses Projekt beinhaltet zu deaktivieren!"
+
+#: update_status.module:898
+msgid "Project not supported"
+msgstr "Das Projekt ist nicht unterstützt"
+
+#: update_status.module:899
+msgid "This project is no longer supported, and is no longer available for download. Disabling everything included by this project is strongly recommended!"
+msgstr "Dieses Projekt wird nicht länger unterstützt und kann nicht mehr heruntergeladen werden. Es wird dringend empfohlen alles was dieses Projekt beinhaltet zu deaktivieren!"
+
+#: update_status.module:965;1126;1186
+msgid "No available releases found"
+msgstr "Keine verfügbaren Veröffentlichungen gefunden"
+
+#: update_status.module:982
+msgid "Release revoked"
+msgstr "Die Veröffentlichung wurde zurückgezogen"
+
+#: update_status.module:983
+msgid "Your currently installed release has been revoked, and is no longer available for download. Disabling everything included in this release or upgrading is strongly recommended!"
+msgstr "Die aktuell installierte Veröffentlichung wurde zurückgezogen und kann nicht mehr heruntergeladen werden. Alle Bestandteile dieser Veröffentlichung sollten umgehend deaktiviert oder aktualisiert werden!"
+
+#: update_status.module:994
+msgid "Release not supported"
+msgstr "Die Veröffentlichung ist nicht unterstützt"
+
+#: update_status.module:995
+msgid "Your currently installed release is now unsupported, and is no longer available for download. Disabling everything included in this release or upgrading is strongly recommended!"
+msgstr "Die aktuell installierte Veröffentlichung wird nicht mehr unterstützt und kann nicht mehr heruntergeladen werden. Alle Bestandteile dieser Veröffentlichung sollten umgehend deaktiviert oder aktualisiert werden!"
+
+#: update_status.module:1136
+msgid "Ignored by settings"
+msgstr "Durch Einstellungen ignoriert"
+
+#: update_status.module:1169
+msgid "No filedate available"
+msgstr "Dateidatum nicht verfügbar"
+
+#: update_status.module:1181
+msgid "Invalid info"
+msgstr "Falsche Information"
+
+#: update_status.module:1198
+msgid "Last checked: "
+msgstr "Zuletzt überprüft: "
+
+#: update_status.module:1198
+msgid "ago"
+msgstr "her"
+
+#: update_status.module:1199
+msgid "Check manually"
+msgstr "per Hand überprüfen"
+
+#: update_status.module:1219;1219
+msgid "ok"
+msgstr "Ok"
+
+#: update_status.module:1228;1228
+msgid "error"
+msgstr "Fehler"
+
+#: update_status.module:1234;1234
+msgid "warning"
+msgstr "Warnung"
+
+#: update_status.module:1241
+msgid "Security update required!"
+msgstr "Sicherheitsupdate erforderlich!"
+
+#: update_status.module:1247
+msgid "Not supported!"
+msgstr "Nicht unterstützt!"
+
+#: update_status.module:1250
+msgid "Update available"
+msgstr "Aktualisierung verfügbar"
+
+#: update_status.module:1309
+msgid "Recommended version:"
+msgstr "Empfohlene Version:"
+
+#: update_status.module:1315
+msgid "Security update:"
+msgstr "Sicherheitsupdate:"
+
+#: update_status.module:1321
+msgid "Latest version:"
+msgstr "Neuste Version:"
+
+#: update_status.module:1327
+msgid "Development version:"
+msgstr "Entwicklungsversion:"
+
+#: update_status.module:1333
+msgid "Also available:"
+msgstr "Außerdem verfügbar:"
+
+#: update_status.module:1342
+msgid "Administrator note: %notes"
+msgstr "Bemerkung des Administrators: %notes"
+
+#: update_status.module:1347
+msgid "Includes: %modules"
+msgstr "Enthält: %modules"
+
+#: update_status.module:1373
+msgid "Download"
+msgstr "Herunterladen"
+
+#: update_status.module:1373
+msgid "Release notes"
+msgstr "Anmerkungen zur Veröffentlichung"
+
+#: update_status.module:1412;1415;0
+msgid "update_status"
+msgstr "Aktualisierungsstatus"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "Aktualisierungsstatus"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "Überprüft ob diese Drupal Installation und die Module auf dem aktuellen Stand sind."
+

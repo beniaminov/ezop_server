@@ -1,0 +1,121 @@
+# LANGUAGE translation of Drupal (sitemenu.module)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from file: sitemenu.module,v 1.16.2.5 2006/08/18 23:29:03 kbahey
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2006-12-31 01:23+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: sitemenu.module:93
+msgid "Author: %username"
+msgstr ""
+
+#: sitemenu.module:95
+msgid ", comments: "
+msgstr ""
+
+#: sitemenu.module:190;269
+msgid "Menu"
+msgstr ""
+
+#: sitemenu.module:220
+msgid "site map page and block menu, based on taxonomy"
+msgstr ""
+
+#: sitemenu.module:224
+msgid "This module provides a site map based on the hierarchy of the site's taxonomy. The site map page shows all vocabularies, terms, and recent nodes within each term. It also provides a block that can be used in the side bar as a navigation menu."
+msgstr ""
+
+#: sitemenu.module:236
+msgid "none"
+msgstr ""
+
+#: sitemenu.module:242
+msgid "Description"
+msgstr ""
+
+#: sitemenu.module:243
+msgid "This is the site map page."
+msgstr ""
+
+#: sitemenu.module:246
+msgid "This text will be displayed at the top of the site menu page"
+msgstr ""
+
+#: sitemenu.module:250
+msgid "Omitted vocabularies"
+msgstr ""
+
+#: sitemenu.module:254
+msgid "Select vocabularies which should be <b>omitted</b> from listings."
+msgstr ""
+
+#: sitemenu.module:258
+msgid "Navigation link text"
+msgstr ""
+
+#: sitemenu.module:260;338;379
+msgid "site map"
+msgstr ""
+
+#: sitemenu.module:263
+msgid "The text in the navigation link which points to the site menu page."
+msgstr ""
+
+#: sitemenu.module:267
+msgid "Block title text"
+msgstr ""
+
+#: sitemenu.module:272
+msgid "If configured as a block, this text shows as the block title."
+msgstr ""
+
+#: sitemenu.module:276
+msgid "Link to vocabulary page when listing vocabulary"
+msgstr ""
+
+#: sitemenu.module:281
+msgid "Show number of nodes for each term"
+msgstr ""
+
+#: sitemenu.module:286
+msgid "Show Author and number of Comments (in mousover)"
+msgstr ""
+
+#: sitemenu.module:291
+msgid "Number of nodes to show"
+msgstr ""
+
+#: sitemenu.module:293
+msgid "0"
+msgstr ""
+
+#: sitemenu.module:296
+msgid "Number of nodes to show per taxonomy term. Set to 0 if you do not want nodes to listed."
+msgstr ""
+
+#: sitemenu.module:300
+msgid "Closing description"
+msgstr ""
+
+#: sitemenu.module:304
+msgid "This text will be displayed at the bottom of the site menu page"
+msgstr ""
+
+#: sitemenu.module:318;0
+msgid "sitemenu"
+msgstr ""
+
+#: sitemenu.module:328
+msgid "use sitemenu"
+msgstr ""
+

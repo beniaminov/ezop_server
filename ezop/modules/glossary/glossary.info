@@ -1,0 +1,10 @@
+;Id$ 
+name = Glossary
+description = Maintain a glossary on your site.
+dependencies = taxonomy
+
+; Information added by drupal.org packaging script on 2008-03-28
+version = "5.x-2.2"
+project = "glossary"
+datestamp = "1206714617"
+

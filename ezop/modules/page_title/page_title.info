@@ -1,0 +1,9 @@
+; $Id: page_title.info,v 1.1.2.1 2007/06/20 13:32:02 robertDouglass Exp $
+name = Page Title
+description = "Enhanced control over the page title (in the &lt;head> tag)."
+
+; Information added by drupal.org packaging script on 2007-08-06
+version = "5.x-1.1"
+project = "page_title"
+datestamp = "1186434912"
+

@@ -1,0 +1,9 @@
+name = Autolocale
+description = "Automatically imports interface translations."
+dependencies = locale
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "5.x-1.x-dev"
+project = "autolocale"
+datestamp = "1380554859"
+

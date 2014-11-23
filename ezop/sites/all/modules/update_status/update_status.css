@@ -1,0 +1,122 @@
+/* $Id: update_status.css,v 1.20.2.5 2009/09/29 18:18:22 dww Exp $ */
+.update-status .project {
+  font-weight: bold;
+  font-size: 110%;
+  padding-left: .25em;
+  height: 22px;
+}
+
+.update-status .version-status {
+  float: right;
+  padding-right: 10px;
+  font-size: 110%;
+  height: 20px;
+}
+
+.update-status .version-status .icon {
+  padding-left: .5em;
+}
+
+.update-status .version-date {
+  white-space: nowrap;
+}
+
+.update-status .info {
+  margin: 0;
+  padding: 1em 1em .25em 1em;
+}
+
+.update-status tr td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.update-status tr.error {
+  background: #fcc;
+}
+
+.update-status tr.error .version-recommended {
+  background: #fdd;
+}
+
+.update-status tr.ok {
+  background: #dfd;
+}
+
+.update-status tr.warning {
+  background: #ffd;
+}
+
+.update-status tr.warning .version-recommended {
+  background: #ffe;
+}
+
+.update-status tr.unknown {
+  background: #ddd;
+}
+
+.current-version, .new-version {
+  direction: ltr;
+}
+
+table.update-status,
+.update-status table.version {
+  width: 100%;
+  margin-top: .5em;
+}
+
+.update-status table.version tbody {
+  border: none;
+}
+
+.update-status table.version tr,
+.update-status table.version td {
+  line-height: .9em;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.update-status table.version .version-title {
+/*  font-weight: bold; */
+  padding-left: 1em;
+  width: 14em;
+}
+
+.update-status table.version .version-details {
+  padding-right: .5em;
+}
+
+.update-status table.version .version-links {
+  text-align: right;
+  padding-right: 1em;
+}
+
+.update-status table.version-security .version-title {
+  color: #970F00;
+}
+
+.update-status table.version-recommended-strong .version-title {
+  font-weight: bold;
+}
+
+.update-status .security-error {
+  font-weight: bold;
+  color: #970F00;
+}
+
+.update-status-settings .form-select {
+  width: 12em;
+}
+
+.update-status-settings tr.update-status-settings-label td.update-status-settings-label {
+  font-size: 75%;
+  font-weight: bold;
+  background: #ddd;
+  color: #666;
+  padding: 0 0 0 2em; /* LTR */
+}
+
+.update-status .check-manually {
+  padding-left: 1em;
+}

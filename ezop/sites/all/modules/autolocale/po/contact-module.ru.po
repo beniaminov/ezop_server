@@ -1,0 +1,274 @@
+# $Id: contact-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-21 16:43+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/contact/contact.module:15
+msgid "The contact module enables the use of both personal and site-wide contact forms, thereby facilitating easy communication within the community. While personal contact forms allow users to contact each other by e-mail, site-wide forms allow community members to contact the site administration from a central location. Users can specify a subject and message in the contact form, and also request that a copy of the e-mail be sent to their own address."
+msgstr "Модуль контактов позволяет использовать как персональную форму обратной связи, так и форму для всего сайта, чтобы облегчить взаимодействие с сообществом. Персональная форма позволяет пользователям связываться друг с другом по электронной почте, а форма для всего сайта дает возможность участникам сообщества контактировать с администрацией сайта. Пользователи могут написать в форме контактов тему сообщения и его текст, а также указать, что нужно отправить копию этого сообщения на свой собственный адрес электронной почты."
+
+#: modules/contact/contact.module:16
+msgid "Users can activate/deactivate their personal contact forms in their account settings. Upon activation, a contact tab will appear in their user profiles. Privileged users such as site administrators are able to contact users even if they have chosen not to enable this feature."
+msgstr "Пользователи могут включать и отключать показ своих персональных форм контактов. При включении на страницах с информацией о пользователях появляется закладка контактов. Пользователи со специальными правами, например, администраторы сайта могут связываться с другими пользователями, даже если те отключили такую возможность."
+
+#: modules/contact/contact.module:17
+msgid "Note that the contact tab will not appear when a user views his or her own profile; only when viewing another user's profile, if that user's contact form is enabled."
+msgstr "Обратите внимание, что вкладка формы контактов появляется только, если пользователь смотрит информацию о другом, а не о себе самом."
+
+#: modules/contact/contact.module:18
+msgid "If the menu module is enabled, a menu item linking to the site-wide contact page is added to the navigation block. It is disabled by default, but can be enabled via the <a href=\"@menu-module\">menu management</a> page. Links to the contact page may also be added to the primary and secondary links using the same page."
+msgstr "Если включен модуль меню, то пункты меню, связанные со страницей формы контактов для всего сайта, добавляются в блок навигации. По умолчанию это выключено, но можно включить на странице <a href=\"@menu-module\">управление меню</a>. На этой же странице можно добавить ссылки на форму контактов также в меню основных и дополнительных ссылок."
+
+#: modules/contact/contact.module:19
+msgid "For more information, please read the configuration and customization handbook page for the <a href=\"@contact\">contact module</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@contact\">контактов</a>."
+
+#: modules/contact/contact.module:22
+msgid "This page lets you setup <a href=\"@form\">your site-wide contact form</a>. To do so, add one or more categories. You can associate different recipients with each category to route e-mails to different people. For example, you can route website feedback to the webmaster and direct product information requests to the sales department. On the <a href=\"@settings\">settings page</a>, you can customize the information shown above the contact form. This can be useful to provide additional contact information such as your postal address and telephone number."
+msgstr "Эта страница позволяет вам настроить вашу <a href=\"@form\">форму контактов</a>. Чтобы сделать это, добавьте одну или более категорий. Вы можете связать различных получателей сообщений с разными категориями, чтобы распределить электронную почту между несколькими людьми. Например, вы можете направлять сообщения о работе сайта вебмастеру, а запросы о товарах и услугах - в отдел продаж. На странице <a href=\"@settings\">настроек</a> вы можете изменить текст, появляющийся над формой контактов. Его можно использовать для дополнительной информации вроде вашего почтового адреса и телефонного номера."
+
+#: modules/contact/contact.module:24
+msgid "The menu item can be customized and configured only once the menu module has been <a href=\"@modules-page\">enabled</a>."
+msgstr "Пункт меню можно изменять и настраивать, как только модуль меню <a href=\"@modules-page\">включен</a>."
+
+#: modules/contact/contact.module:29
+msgid "The contact module also adds a <a href=\"@menu-settings\">menu item</a> (disabled by default) to the navigation block."
+msgstr "Модуль контактов добавляет <a href=\"@menu-settings\">пункт меню</a> (выключен по умолчанию) в блок навигации."
+
+#: modules/contact/contact.module:47
+msgid "Contact form"
+msgstr "Контакты"
+
+#: modules/contact/contact.module:48
+msgid "Create a system contact form and set up categories for the form to use."
+msgstr "Создание формы контактов для всего сайта и категорий для нее."
+
+#: modules/contact/contact.module:67
+msgid "Edit contact category"
+msgstr "изменить категорию контакта"
+
+#: modules/contact/contact.module:74
+msgid "Delete contact"
+msgstr "удалить контактную информацию"
+
+#: modules/contact/contact.module:122
+msgid "Contact settings"
+msgstr "Настройки контактов"
+
+#: modules/contact/contact.module:127
+msgid "Personal contact form"
+msgstr "Персональная форма контактов"
+
+#: modules/contact/contact.module:129
+msgid "Allow other users to contact you by e-mail via <a href=\"@url\">your personal contact form</a>. Note that while your e-mail address is not made public to other members of the community, privileged users such as site administrators are able to contact you even if you choose not to enable this feature."
+msgstr "Позволяет другим пользователям связываться с вами по электронной почте через вашу персональную <a href=\"@url\">форму контактов</a>. Обратите внимание, что ваш почтовый адрес не показывается другим участникам сообщества, а также на то, что администрация сайта может связаться с вами, даже если вы не включали эту возможность."
+
+#: modules/contact/contact.module:150;170
+msgid "Recipients"
+msgstr "Получатели"
+
+#: modules/contact/contact.module:166
+msgid "Example: 'website feedback' or 'product information'."
+msgstr "Примеры: 'Замечания по работе сайта' или 'Информация о товаре'."
+
+#: modules/contact/contact.module:172
+msgid "Example: 'webmaster@example.com' or 'sales@example.com,support@example.com'. To specify multiple recipients, separate each e-mail address with a comma."
+msgstr "Пример: 'webmaster@yoursite.com' или 'info@yoursite.com'. Адреса нескольких получателей разделяются запятыми."
+
+#: modules/contact/contact.module:176
+msgid "Auto-reply"
+msgstr "Автоматический ответ"
+
+#: modules/contact/contact.module:178
+msgid "Optional auto-reply. Leave empty if you do not want to send the user an auto-reply message."
+msgstr "Опция автоматического ответа. Оставьте поле пустым, если вы не хотите посылать пользователям автоматические ответы."
+
+#: modules/contact/contact.module:183
+msgid "When listing categories, those with lighter (smaller) weights get listed before categories with heavier (larger) weights. Categories with equal weights are sorted alphabetically."
+msgstr "При отображении категорий те, что имеют меньший вес, будут отображаться выше имеющих больший вес. Категории с одинаковым весом сортируются в алфавитном порядке."
+
+#: modules/contact/contact.module:189
+msgid "Set this to <em>Yes</em> if you would like this category to be selected by default."
+msgstr "Установите в значение <em>Да</em>, если вы желаете, чтобы эта категория выбиралась по умолчанию."
+
+#: modules/contact/contact.module:209
+msgid "You must enter one or more recipients."
+msgstr "Вы должны указать хотя бы одного получателя."
+
+#: modules/contact/contact.module:215
+msgid "%recipient is an invalid e-mail address."
+msgstr "%recipient является ошибочным адресом электронной почты."
+
+#: modules/contact/contact.module:237
+msgid "Category %category has been added."
+msgstr "Категория %category добавлена."
+
+#: modules/contact/contact.module:238
+msgid "Contact form: category %category added."
+msgstr "Форма контактов: Категория %category добавлена."
+
+#: modules/contact/contact.module:243
+msgid "Category %category has been updated."
+msgstr "Категория %category обновлена."
+
+#: modules/contact/contact.module:244
+msgid "Contact form: category %category updated."
+msgstr "Форма контактов: Категория %category обновлена."
+
+#: modules/contact/contact.module:259
+msgid "Are you sure you want to delete %category?"
+msgstr "Вы действительно желаете удалить %category?"
+
+#: modules/contact/contact.module:262
+msgid "Category not found."
+msgstr "Категория не найдена."
+
+#: modules/contact/contact.module:272
+msgid "Category %category has been deleted."
+msgstr "Категория %category удалена."
+
+#: modules/contact/contact.module:273
+msgid "Contact form: category %category deleted."
+msgstr "Категория %category обновлена."
+
+#: modules/contact/contact.module:280
+msgid "Additional information"
+msgstr "Дополнительная информация"
+
+#: modules/contact/contact.module:281
+msgid "You can leave a message using the contact form below."
+msgstr "Вы можете оставить сообщение, используя расположенную ниже форму контактов."
+
+#: modules/contact/contact.module:282
+msgid "Information to show on the <a href=\"@form\">contact page</a>. Can be anything from submission guidelines to your postal address or telephone number."
+msgstr "Информация, отображаемая на <a href=\"@form\">странице контактов</a>. Может содержать всё что угодно, от инструкций по подписке до вашего почтового адреса или телефонного номера."
+
+#: modules/contact/contact.module:285
+msgid "Hourly threshold"
+msgstr "Ограничение по времени"
+
+#: modules/contact/contact.module:288
+msgid "The maximum number of contact form submissions a user can perform per hour."
+msgstr "Максимальное число отправлений через форму контактов, которое пользователь может сделать в час."
+
+#: modules/contact/contact.module:292
+msgid "Enable personal contact form by default"
+msgstr "Включать персональную форму контактов по умолчанию"
+
+#: modules/contact/contact.module:294
+msgid "Default status of the personal contact form for new users."
+msgstr "Состояние персональной формы контактов для новых пользователей."
+
+#: modules/contact/contact.module:307
+msgid "You need to provide a valid e-mail address to contact other users. Please update your <a href=\"@url\">user information</a> and try again."
+msgstr "Вы должны указать верный адрес электронной почты, чтобы связываться с другими пользователями. Пожалуйста, исправьте <a href=\"@url\">информацию о вас</a> и попробуйте снова."
+
+#: modules/contact/contact.module:310
+msgid "You cannot contact more than %number users per hour. Please try again later."
+msgstr "Вы можете связаться не более чем с %number пользователей в час. Пожалуйста, попробуйте позже."
+
+#: modules/contact/contact.module:328
+msgid "From"
+msgstr "От"
+
+#: modules/contact/contact.module:332
+msgid "To"
+msgstr "Кому"
+
+#: modules/contact/contact.module:346;477
+msgid "Send yourself a copy."
+msgstr "Прислать мне копию."
+
+#: modules/contact/contact.module:349;481
+msgid "Send e-mail"
+msgstr "Отправить почту"
+
+#: modules/contact/contact.module:363
+msgid "!name (!name-url) has sent you a message via your contact form (!form-url) at !site."
+msgstr "Пользователь !name (!name-url) отправил вам сообщение через форму контактов (!form-url) на сайте !site."
+
+#: modules/contact/contact.module:364
+msgid "If you don't want to receive such e-mails, you can change your settings at !url."
+msgstr "Если вы не хотите получать такие почтовые сообщения, вы можете изменить свои настройки по адресу !url."
+
+#: modules/contact/contact.module:365
+msgid "Message:"
+msgstr "Сообщение:"
+
+#: modules/contact/contact.module:393
+msgid "%name-from sent %name-to an e-mail."
+msgstr "%name-from отправил почту %name-to"
+
+#: modules/contact/contact.module:396
+msgid "The message has been sent."
+msgstr "Сообщение отправлено."
+
+#: modules/contact/contact.module:409
+msgid "You cannot send more than %number messages per hour. Please try again later."
+msgstr "Максимально возможное количество сообщений в час: %number. Пожалуйста, попробуйте позже."
+
+#: modules/contact/contact.module:431
+msgid "You can leave us a message using the contact form below."
+msgstr "Вы можете оставить нам сообщение, используя расположенную ниже форму контактов."
+
+#: modules/contact/contact.module:439
+msgid "Your e-mail address"
+msgstr "Ваш адрес электронной почты"
+
+#: modules/contact/contact.module:453
+msgid "--"
+msgstr "--"
+
+#: modules/contact/contact.module:485
+msgid "The contact form has not been configured."
+msgstr "Форма контактов ещё не настроена."
+
+#: modules/contact/contact.module:495
+msgid "You must select a valid category."
+msgstr "Вы должны выбрать правильную категорию."
+
+#: modules/contact/contact.module:498
+msgid "You must enter a valid e-mail address."
+msgstr "Вы должны ввести правильный адрес электронной почты.l"
+
+#: modules/contact/contact.module:512
+msgid "!name sent a message using the contact form at !form."
+msgstr "Пользователь !name отправил сообщение, используя форму контактов !form."
+
+#: modules/contact/contact.module:524
+msgid "[!category] !subject"
+msgstr "[!category] !subject"
+
+#: modules/contact/contact.module:544
+msgid "%name-from sent an e-mail regarding %category."
+msgstr "Пользователь %name-from отправил по электронной почте сообщение из категории %category."
+
+#: modules/contact/contact.module:547
+msgid "Your message has been sent."
+msgstr "Ваше сообщение отправлено."
+
+#: modules/contact/contact.module:238;244;273;393;544
+msgid "mail"
+msgstr "почта"
+
+#: modules/contact/contact.module:38
+msgid "access site-wide contact form"
+msgstr "иметь доступ к контактной форме сайта"
+
+#: modules/contact/contact.module:0
+msgid "contact"
+msgstr "для связи"
+

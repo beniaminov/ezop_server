@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1251" ?> 
+<root>
+<menu_item_id id ="KB">
+	<sub_menu_item class="submenuItem" id="KB_folders" value="Показать папки онтологий"/> 
+	<sub_menu_item class="submenuItem" id="KB_cnpt_tree" value="Дерево онтологий"/>
+	<sub_menu_item class="submenuItem" id="KB_open_another" value="Открыть другую БП"/>
+</menu_item_id>
+<menu_item_id id ="CC">
+	<sub_menu_item class="submenuItem" id="CC_disp" value="Показать" /> 
+	<sub_menu_item class="submenuItem" id="CC_edit" value="Редактировать"/> 
+	<sub_menu_item class="submenuItem" id="CC_build_all" value="Построить все"/> 
+	<sub_menu_item class="submenuItem" id="CC_build_complete" value="Достроить"/> 
+	<sub_menu_item class="submenuItem" id="CC_save" value="Сохранить"/> 
+	<sub_menu_item class="submenuItem" id="CC_save_as" value="Сохранить как"/> 
+	<sub_menu_item class="submenuItem" id="CC_new_c_env" value="Новая в текущей среде"/> 
+	<sub_menu_item class="submenuItem" id="CC_new_c_krnl" value="Новая в среде ядра"/> 
+</menu_item_id>
+<menu_item_id id ="CMD">
+	<sub_menu_item class="submenuItem" id="CMD_run" value="Выполнить"/> 
+</menu_item_id>
+<menu_item_id id ="DIC">
+	<sub_menu_item class="submenuItem" id="DIC_all_ext_templ" value="Все внешние шаблоны"/> 
+	<sub_menu_item class="submenuItem" id="DIC_all_cur_c" value="Все шаблоны текущей онтологии"/> 
+	<sub_menu_item class="submenuItem" id="DIC_all_cur_env" value="Все шаблоны текущей онтологии и среды"/> 
+	<sub_menu_item class="submenuItem" id="DIC_rules" value="Продукции"/> 
+</menu_item_id>
+<menu_item_id id ="MSG">
+	<sub_menu_item class="submenuItem" id="MSG_show" value="Показать"/> 
+	<sub_menu_item class="submenuItem" id="MSG_set" value="Установить"/> 
+</menu_item_id>
+<menu_item_id id ="HLP">
+	<sub_menu_item class="submenuItem" id="HLP_purp" value="Назначение системы ЭЗОП"/> 
+	<sub_menu_item class="submenuItem" id="HLP_lang" value="Язык системы ЭЗОП"/> 
+	<sub_menu_item class="submenuItem" id="HLP_hist" value="История создания системы"/> 
+	<sub_menu_item class="submenuItem" id="HLP_techn" value="Технология работы с системой"/> 
+</menu_item_id>
+</root>

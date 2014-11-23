@@ -1,0 +1,9 @@
+; $Id: taxonomy_defaults.info,v 1.1 2006/11/14 09:29:31 heine Exp $
+name = Taxonomy Defaults
+description = Assign default taxonomy terms per node-type.
+dependencies = taxonomy
+; Information added by drupal.org packaging script on 2008-02-24
+version = "5.x-1.0"
+project = "taxonomy_defaults"
+datestamp = "1203846909"
+

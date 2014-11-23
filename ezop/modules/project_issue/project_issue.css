@@ -1,0 +1,134 @@
+/* $Id: project_issue.css,v 1.12 2007/08/16 00:10:02 dww Exp $ */
+/* $Name: DRUPAL-5--1-3 $ */
+
+/* Viewing issue nodes */
+.project-issue .header {
+  font-weight: bold;
+  padding-top: 0.5em;
+}
+.project-issue .summary table {
+  border-collapse: collapse;
+  width: auto;
+}
+.project-issue .summary table td {
+  color: #333;
+  background-color: transparent;
+  font-size: 90%;
+  padding: 0em 0.2em;
+  border: 0;
+}
+.project-issue tbody {
+  border: 0;
+}
+.project-issue .summary table tr {
+  border: 0;
+}
+
+/* Issue node and comment followup form UI */
+.project-issue .node-form .inline-options fieldset .form-item {
+  float: left;
+  padding-right: 0.8em;
+  margin: 0.05em 0.1em;
+}
+.project-issue .node-form fieldset:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.project-issue .node-form #edit-pid {
+  width: 200px;
+}
+
+/* "My Projects" table UI */
+table.projects {
+  width: 100%;
+}
+table.projects .project-name {
+  width: 22%;
+}
+table.projects .project-issue-updated {
+  width: 12%;
+}
+table.projects .project-issues {
+  width: 9%;
+  text-align: right;
+}
+table.projects .project-issue-links {
+  width: 24%;
+  padding-left: 0.8em;
+}
+table.projects .project-project-updated {
+  width: 15%;
+}
+table.projects .project-project-links {
+  width: 18%;
+}
+
+/* Issue query bar UI */
+.project-issue .quick-search #edit-projects,
+.project-issue .quick-search #edit-states {
+  width: 150px;
+}
+.project-issue .quick-search tr td .form-item,
+.project-issue .quick-search tr td input {
+  margin: 0;
+  padding: 0;
+}
+.project-issue .quick-search tr td {
+  vertical-align: bottom;
+}
+
+/* Issue query results (row coloring based on issue status) */
+.project-issue tr.state-1 {
+  background-color: #fff;
+}
+.project-issue tr.state-1 td.active {
+  background-color: #e1e7eb;
+}
+.project-issue tr.state-2 {
+  background-color: #c0ffc0;
+}
+.project-issue tr.state-2 td.active {
+  background-color: #cec;
+}
+.project-issue tr.state-3, .project-issue tr.state-4, .project-issue tr.state-5, .project-issue tr.state-6 {
+  background-color: #ddf;
+}
+.project-issue tr.state-3 td.active, .project-issue tr.state-4 td.active, .project-issue tr.state-5 td.active, .project-issue tr.state-6 td.active {
+  background-color: #cce;
+}
+.project-issue tr.state-7 {
+  background-color: #ffc9c9;
+}
+.project-issue tr.state-7 td.active {
+  background-color: #eeb9b9;
+}
+.project-issue tr.state-8 {
+  background-color: #ffd;
+}
+.project-issue tr.state-8 td.active {
+  background-color: #eed;
+}
+.project-issue tr.state-13 {
+  background-color: #ffe7dd;
+}
+.project-issue tr.state-13 td.active {
+  background-color: #eed7cc;
+}
+.project-issue tr.state-14 {
+  background-color: #e7ffdd;
+}
+.project-issue tr.state-14 td.active {
+  background-color: #d7eecc;
+}
+
+/* Issue statistics page */
+.project-issue-numeric {
+  text-align: right;
+}
+.project-issue-numeric-light {
+  text-align: right;
+  color: #999;
+}

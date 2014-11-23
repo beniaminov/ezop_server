@@ -1,0 +1,268 @@
+# $Id: taxonomy-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: taxonomy.module,v 1.330 2007/01/11 03:29:15 unconed
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-22 02:12+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: modules/taxonomy/taxonomy.module:78
+msgid "Create vocabularies and terms to categorize your content."
+msgstr "Создание словарей и терминов для разбивки материалов по категориям."
+
+#: modules/taxonomy/taxonomy.module:88
+msgid "Add vocabulary"
+msgstr "Добавить словарь"
+
+#: modules/taxonomy/taxonomy.module:95
+msgid "Edit vocabulary"
+msgstr "Изменить словарь"
+
+#: modules/taxonomy/taxonomy.module:101
+msgid "Edit term"
+msgstr "Изменить термин"
+
+#: modules/taxonomy/taxonomy.module:107
+msgid "Taxonomy term"
+msgstr "Термин таксономии"
+
+#: modules/taxonomy/taxonomy.module:113
+msgid "Autocomplete taxonomy"
+msgstr "Автозаполнение таксономии"
+
+#: modules/taxonomy/taxonomy.module:122
+msgid "List terms"
+msgstr "Список терминов"
+
+#: modules/taxonomy/taxonomy.module:134
+msgid "Add term"
+msgstr "Добавить термин"
+
+#: modules/taxonomy/taxonomy.module:159
+msgid "edit vocabulary"
+msgstr "изменить словарь"
+
+#: modules/taxonomy/taxonomy.module:160
+msgid "list terms"
+msgstr "список терминов"
+
+#: modules/taxonomy/taxonomy.module:161
+msgid "add terms"
+msgstr "добавить термины"
+
+#: modules/taxonomy/taxonomy.module:165
+msgid "No categories available."
+msgstr "Нет категорий."
+
+#: modules/taxonomy/taxonomy.module:202
+msgid "No terms available."
+msgstr "Нет терминов."
+
+#: modules/taxonomy/taxonomy.module:220
+msgid "Vocabulary name"
+msgstr "Название словаря"
+
+#: modules/taxonomy/taxonomy.module:223
+msgid "The name for this vocabulary. Example: \"Topic\"."
+msgstr "Название этого словаря. Например \"Тема\"."
+
+#: modules/taxonomy/taxonomy.module:229
+msgid "Description of the vocabulary; can be used by modules."
+msgstr "Описание словаря. Может использоваться модулями."
+
+#: modules/taxonomy/taxonomy.module:232
+msgid "Help text"
+msgstr "Справочный текст"
+
+#: modules/taxonomy/taxonomy.module:234
+msgid "Instructions to present to the user when choosing a term."
+msgstr "Инструкции для отображения пользователям при выборе этого термина."
+
+#: modules/taxonomy/taxonomy.module:237
+msgid "Types"
+msgstr "Типы"
+
+#: modules/taxonomy/taxonomy.module:240
+msgid "A list of node types you want to associate with this vocabulary."
+msgstr "Список типов материалов, которые вы хотите связать с этом словарем."
+
+#: modules/taxonomy/taxonomy.module:244
+msgid "Hierarchy"
+msgstr "Иерархия"
+
+#: modules/taxonomy/taxonomy.module:246
+msgid "Single"
+msgstr "Одиночная"
+
+#: modules/taxonomy/taxonomy.module:246
+msgid "Multiple"
+msgstr "Множественная"
+
+#: modules/taxonomy/taxonomy.module:247
+msgid "Allows <a href=\"@help-url\">a tree-like hierarchy</a> between terms of this vocabulary."
+msgstr "Разрешает использование <a href=\"@help-url\">древообразной иерархии</a> терминов в этом словаре."
+
+#: modules/taxonomy/taxonomy.module:250;413
+msgid "Related terms"
+msgstr "Связанные термины"
+
+#: modules/taxonomy/taxonomy.module:252
+msgid "Allows <a href=\"@help-url\">related terms</a> in this vocabulary."
+msgstr "Разрешает использование <a href=\"@help-url\">связанных терминов</a> в текущем словаре."
+
+#: modules/taxonomy/taxonomy.module:255
+msgid "Free tagging"
+msgstr "Свободный выбор тегов"
+
+#: modules/taxonomy/taxonomy.module:257
+msgid "Content is categorized by typing terms instead of choosing from a list."
+msgstr "Материалы категоризируются путем ввода терминов вместо выбора из списка."
+
+#: modules/taxonomy/taxonomy.module:260
+msgid "Multiple select"
+msgstr "Множественный выбор"
+
+#: modules/taxonomy/taxonomy.module:262
+msgid "Allows nodes to have more than one term from this vocabulary (always true for free tagging)."
+msgstr "Позволяет материалам иметь более одного термина из этого словаря (всегда верно при свободном выборе терминов)."
+
+#: modules/taxonomy/taxonomy.module:267
+msgid "If enabled, every node <strong>must</strong> have at least one term in this vocabulary."
+msgstr "Если включено, то каждый материал <strong>обязан</strong> иметь как минимум один термин в этом словаре."
+
+#: modules/taxonomy/taxonomy.module:272
+msgid "In listings, the heavier vocabularies will sink and the lighter vocabularies will be positioned nearer the top."
+msgstr "В списках наиболее тяжёлые словари будут опускаться ниже, а лёгкие подниматься наверх."
+
+#: modules/taxonomy/taxonomy.module:292
+msgid "Created new vocabulary %name."
+msgstr "Создан новый словарь %name."
+
+#: modules/taxonomy/taxonomy.module:295
+msgid "Updated vocabulary %name."
+msgstr "Обновлен словарь %name."
+
+#: modules/taxonomy/taxonomy.module:363
+msgid "Are you sure you want to delete the vocabulary %title?"
+msgstr "Вы действительно желаете удалить словарь %title?"
+
+#: modules/taxonomy/taxonomy.module:366
+msgid "Deleting a vocabulary will delete all the terms in it. This action cannot be undone."
+msgstr "Удаление словаря повлечет за собой удаление всех терминов в нем. Это действие не может быть отменено."
+
+#: modules/taxonomy/taxonomy.module:373
+msgid "Deleted vocabulary %name."
+msgstr "Удалён словарь %name."
+
+#: modules/taxonomy/taxonomy.module:382
+msgid "Term name"
+msgstr "Название термина"
+
+#: modules/taxonomy/taxonomy.module:385
+msgid "The name of this term."
+msgstr "Название данного термина."
+
+#: modules/taxonomy/taxonomy.module:392
+msgid "A description of the term."
+msgstr "Описание термина."
+
+#: modules/taxonomy/taxonomy.module:405
+msgid "Parent term"
+msgstr "Родительский термин"
+
+#: modules/taxonomy/taxonomy.module:408
+msgid "Parents"
+msgstr "Родители"
+
+#: modules/taxonomy/taxonomy.module:408
+msgid "Parent terms"
+msgstr "Родительские термины"
+
+#: modules/taxonomy/taxonomy.module:418
+msgid "Synonyms"
+msgstr "Синонимы"
+
+#: modules/taxonomy/taxonomy.module:420
+msgid "<a href=\"@help-url\">Synonyms</a> of this term, one synonym per line."
+msgstr "<a href=\"@help-url\">Синонимы</a> для данного термина, по одному на строку."
+
+#: modules/taxonomy/taxonomy.module:425
+msgid "In listings, the heavier terms will sink and the lighter terms will be positioned nearer the top."
+msgstr "В списках наиболее тяжёлые термины будут опускаться ниже, а лёгкие подниматься наверх."
+
+#: modules/taxonomy/taxonomy.module:454
+msgid "Created new term %term."
+msgstr "Создан новый термин %term."
+
+#: modules/taxonomy/taxonomy.module:457
+msgid "The term %term has been updated."
+msgstr "Термин %term был обновлен."
+
+#: modules/taxonomy/taxonomy.module:583
+msgid "Are you sure you want to delete the term %title?"
+msgstr "Вы действительно желаете удалить термин %title?"
+
+#: modules/taxonomy/taxonomy.module:586
+msgid "Deleting a term will delete all its children if there are any. This action cannot be undone."
+msgstr "Удаление термина повлечет за собой удаление всех дочерних терминов, если они есть. Это действие не может быть отменено."
+
+#: modules/taxonomy/taxonomy.module:593
+msgid "Deleted term %name."
+msgstr "Удалён термин %name."
+
+#: modules/taxonomy/taxonomy.module:701
+msgid "A comma-separated list of terms describing this content. Example: funny, bungee jumping, \"Company, Inc.\"."
+msgstr "Список разделенных запятыми ярлыков, характеризующих содержание. Пример: забавное, прыжки в высоту, \"ЗАО Компания\"."
+
+#: modules/taxonomy/taxonomy.module:781
+msgid "The %name vocabulary can not be modified in this way."
+msgstr "Словарь %name нельзя обновить подобным образом."
+
+#: modules/taxonomy/taxonomy.module:1268
+msgid "There are currently no posts in this category."
+msgstr "В этой категории нет материалов."
+
+#: modules/taxonomy/taxonomy.module:1442
+msgid "The taxonomy module is one of the most popular features because users often want to create categories to organize content by type. A simple example would be organizing a list of music reviews by musical genre."
+msgstr "Модуль таксономии - это одна из наиболее популярных возможностей, поскольку позволяет пользователям распределять содержание сайта по категориям. Простой пример такой классификации - деление музыкальных произведений по жанрам."
+
+#: modules/taxonomy/taxonomy.module:1443
+msgid "Taxonomy is the study of classification. The taxonomy module allows you to define vocabularies (sets of categories) which are used to classify content. The module supports hierarchical classification and association between terms, allowing for truly flexible information retrieval and classification. The taxonomy module allows multiple lists of categories for classification (controlled vocabularies) and offers the possibility of creating thesauri (controlled vocabularies that indicate the relationship of terms) and taxonomies (controlled vocabularies where relationships are indicated hierarchically). To view and manage the terms of each vocabulary, click on the associated <em>list terms</em> link. To delete a vocabulary and all its terms, choose <em>edit vocabulary.</em>"
+msgstr "Таксономия является изучением классификации. Модуль таксономии позволяет вам определять словари (наборы категорий), которые используются для классификации содержимого. Модуль поддерживает иерархическую классификацию и связи между терминами, необходимые для действительно гибкого поиска информации и ее классификации. Модуль таксономии допускает многочисленные списки категорий для классификации (управляемые словари) и предлагает возможность создавать тезаурусы (управляемые словари, которые указывают связи между терминами) и таксономии (управляемые словари, где связь указывается иерархически). Для того, чтобы рассматривать и управлять терминами каждого словаря, щелкните на соответствующей ссылке <em>список терминов</em>. Для того, чтобы удалить словари и все их термины, выберите <em>редактировать словарь.</em>"
+
+#: modules/taxonomy/taxonomy.module:1444
+msgid "A controlled vocabulary is a set of terms to use for describing content (known as descriptors in indexing lingo). Drupal allows you to describe each piece of content (blog, story, etc.) using one or many of these terms. For simple implementations, you might create a set of categories without subcategories, similar to Slashdot's sections. For more complex implementations, you might create a hierarchical list of categories."
+msgstr "Управляемый словарь - это набор терминов для описания публикаций сайта. Друпал позволяет описать каждый материал (запись блога, заметку и т.д.), используя один или несколько из этих терминов. Для простых задач бывает достаточно создать словарь без структуры (например, как разделы на SlashDot.org). Более сложные задачи могут потребовать структурированных словарей."
+
+#: modules/taxonomy/taxonomy.module:1445
+msgid "For more information please read the configuration and customization handbook <a href=\"@taxonomy\">Taxonomy page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@taxonomy\">таксономии</a>."
+
+#: modules/taxonomy/taxonomy.module:1448
+msgid "The taxonomy module allows you to classify content into categories and subcategories; it allows multiple lists of categories for classification (controlled vocabularies) and offers the possibility of creating thesauri (controlled vocabularies that indicate the relationship of terms), taxonomies (controlled vocabularies where relationships are indicated hierarchically), and free vocabularies where terms, or tags, are defined during content creation. To view and manage the terms of each vocabulary, click on the associated <em>list terms</em> link. To delete a vocabulary and all its terms, choose \"edit vocabulary\"."
+msgstr "Модуль таксономии позволяет классифицировать материалы по категориям и подкатегориям, создавать более одного списка категорий для классификации (управляемые словари) и дает возможность создания словаря синонимов и антонимов (управляемые словари, показывающие связанность выражений), а также таксономий (управляемые словари, связки в которых показываются иерархически). Для удаления термина выберите \"Изменить термин\". Для удаления словаря со всеми терминами, выберите \"Изменить словарь\"."
+
+#: modules/taxonomy/taxonomy.module:1450
+msgid "When you create a controlled vocabulary you are creating a set of terms to use for describing content (known as descriptors in indexing lingo). Drupal allows you to describe each piece of content (blog, story, etc.) using one or many of these terms. For simple implementations, you might create a set of categories without subcategories. For more complex implementations, you might create a hierarchical list of categories."
+msgstr "Когда вы создаете управляемый словарь, вы создаете набор терминов, используемых для описания содержимого (на научном жаргоне называются дескрипторами). Drupal позволяет вам описывать каждый фрагмент содержимого (блог, заметка и т.п.) используя один или несколько таких терминов. Для простых задач можно создать набор категорий без подкатегорий. Для более сложных задач вы можете создавать иерархический список категорий."
+
+#: modules/taxonomy/taxonomy.module:13
+msgid "administer taxonomy"
+msgstr "управлять таксономией"
+
+#: modules/taxonomy/taxonomy.module:0
+msgid "taxonomy"
+msgstr "таксономия"
+

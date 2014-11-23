@@ -1,0 +1,53 @@
+.og-picture-wrapper {
+  border-bottom:1px dotted;
+  padding:5px 0px;
+  text-align:center;
+}
+
+.og-picture-wrapper .picture {
+  float: none;
+}
+
+#block-og-5 div.item-list ul { padding: 0; margin: 0;  }
+#block-og-5 div.item-list ul ul li {margin:0}
+
+/*tighter search button on group details block*/
+#block-og-0 .form-item {
+  margin-bottom: .4em;
+}
+
+/*no link on group title in group details block*/
+#block-og-0 h2 a {
+  text-decoration:none;
+}
+
+/*used in node.tpl.php*/
+.groups .links  {
+  display: inline;
+}
+
+table.og-picture-grid {
+  width: 100%;
+}
+
+table.og-picture-grid td {
+  text-align: center;
+  width: 20%;
+  padding: 7px 0 7px 0;
+  border-top: #CCCCCC 1px dotted;
+}
+
+table.og-picture-grid td.first {
+  border-top: none;
+}
+
+td.og-picture-grid-item {
+  text-align: center;
+  vertical-align: bottom;
+}
+
+td.og-picture-grid-item .group-role {
+  font-style: italic;
+}
+
+

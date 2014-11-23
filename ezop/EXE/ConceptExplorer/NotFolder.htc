@@ -1,0 +1,9 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="DisplayBottom()" />
+<SCRIPT LANGUAGE="JScript" SRC="explorer.js"></SCRIPT>
+<SCRIPT LANGUAGE="JScript" >
+function DisplayBottom(){
+alert("ddd");
+}
+</SCRIPT>
+</PUBLIC:COMPONENT>

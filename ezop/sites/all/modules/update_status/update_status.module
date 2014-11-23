@@ -1,0 +1,1908 @@
+<?php
+// $Id: update_status.module,v 1.83.2.52 2010/01/17 20:40:41 dww Exp $
+
+// Version of core that this module is currently at (and therefore,
+// that sites running it must be at and will want to query for).
+define('UPDATE_STATUS_CORE_VERSION', '5.x');
+
+// URL to check updates at, if a given project doesn't define its own.
+define('UPDATE_STATUS_DEFAULT_URL', 'http://updates.drupal.org/release-history');
+
+// These are internally used constants for this code, do not modify.
+/**
+ * Project is missing security update(s).
+ */
+define('UPDATE_STATUS_NOT_SECURE', 1);
+
+/**
+ * Current release has been unpublished and is no longer available.
+ */
+define('UPDATE_STATUS_REVOKED', 2);
+
+/**
+ * Current release is no longer supported by the project maintainer.
+ */
+define('UPDATE_STATUS_NOT_SUPPORTED', 3);
+
+/**
+ * Project has a new release available, but it is not a security release.
+ */
+define('UPDATE_STATUS_NOT_CURRENT', 4);
+
+/**
+ * Project is up to date.
+ */
+define('UPDATE_STATUS_CURRENT', 5);
+
+/**
+ * Project's status cannot be checked.
+ */
+define('UPDATE_STATUS_NOT_CHECKED', -1);
+
+/**
+ * No available update data was found for project.
+ */
+define('UPDATE_STATUS_UNKNOWN', -2);
+
+/**
+ * There was a failure fetching available update data for this project.
+ */
+define('UPDATE_STATUS_NOT_FETCHED', -3);
+
+/**
+ * Maximum number of attempts to fetch available update data from a given host.
+ */
+define('UPDATE_STATUS_MAX_FETCH_ATTEMPTS', 2);
+
+
+/**
+ * Implementation of hook_help().
+ */
+function update_status_help($section) {
+  switch ($section) {
+    case 'admin/logs/updates':
+      return '<p>'. t('Here you can find information about available updates for your installed modules. Note that each module is part of a "project", which may have the same name as the module or may have a different name.') .'</p>';
+
+    case 'admin/logs/updates/settings':
+      return '<p>'. t('Here you can configure what kinds of available updates for your installed modules should be marked as an error on the <a href="@status_report">Status report</a> and the <a href="@modules_page">Modules</a> page, and other related settings.', array('@status_report' => url('admin/logs/status'), '@modules_page' => url('admin/build/modules'))) .'</p>';
+
+    case 'admin/build/modules':
+      include_once './includes/install.inc';
+      $status = update_status_requirements('runtime');
+      $types = array('update_status_core', 'update_status_contrib');
+      foreach ($types as $type) {
+        if (isset($status[$type]['severity'])) {
+          if ($status[$type]['severity'] == REQUIREMENT_ERROR) {
+            drupal_set_message($status[$type]['description'], 'error');
+          }
+          elseif ($status[$type]['severity'] == REQUIREMENT_WARNING) {
+            drupal_set_message($status[$type]['description']);
+          }
+        }
+      }
+      return '<p>'. t('See the <a href="@available_updates">available updates</a> page for information on installed modules with new versions released.', array('@available_updates' => url('admin/logs/updates'))) .'</p>';
+
+    case 'admin/logs/updates/settings':
+    case 'admin/logs/status':
+      // These two pages don't need additional nagging.
+      break;
+
+    default:
+      // Otherwise, if we're on *any* admin page and there's a security
+      // update missing, print an error message about it.
+      if (arg(0) == 'admin' && strpos($section, '#') === FALSE
+          && user_access('administer site configuration')) {
+        include_once './includes/install.inc';
+        $status = update_status_requirements('runtime');
+        $notify_all = (variable_get('update_status_notification_threshold', 'all') == 'all');
+        foreach (array('core', 'contrib') as $report_type) {
+          $type = 'update_status_'. $report_type;
+          if (isset($status[$type])
+              && isset($status[$type]['reason'])
+              && ($status[$type]['reason'] === UPDATE_STATUS_NOT_SECURE || ($notify_all && $status[$type]['reason'] == UPDATE_STATUS_NOT_CURRENT))) {
+            drupal_set_message($status[$type]['description'], 'error');
+          }
+        }
+      }
+  }
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function update_status_menu($may_cache) {
+  $items = array();
+  if ($may_cache) {
+    $admin_access = user_access('administer site configuration');
+    $items[] = array(
+      'path' => 'admin/logs/updates',
+      'title' => t('Available updates'),
+      'description' => t('Get a status report on installed modules and available updates.'),
+      'callback' => 'update_status_status',
+      'weight' => 10,
+      'access' => $admin_access,
+    );
+    $items[] = array(
+      'path' => 'admin/logs/updates/list',
+      'title' => t('List'),
+      'callback' => 'update_status_status',
+      'access' => $admin_access,
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+    );
+    $items[] = array(
+      'path' => 'admin/logs/updates/settings',
+      'title' => t('Settings'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('update_status_settings'),
+      'access' => $admin_access,
+      'type' => MENU_LOCAL_TASK,
+    );
+    $items[] = array(
+      'path' => 'admin/logs/updates/check',
+      'title' => t('Manual update check'),
+      'callback' => 'update_status_manual_status',
+      'access' => $admin_access,
+      'type' => MENU_CALLBACK,
+    );
+  }
+  return $items;
+}
+
+/**
+ * Menu callback. Generate a page about the update status of projects.
+ */
+function update_status_status() {
+  if ($available = update_status_get_available(TRUE)) {
+    $data = update_status_calculate_project_data($available);
+    return theme('update_status_report', $data);
+  }
+  else {
+    return theme('update_status_report', _update_status_no_data());
+  }
+}
+
+/**
+ * Menu callback. Show the settings for the update status module.
+ */
+function update_status_settings() {
+  $form = array();
+
+  $form['update_status_check_disabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check for updates of disabled modules'),
+    '#default_value' => variable_get('update_status_check_disabled', FALSE),
+  );
+
+  if ($available = update_status_get_available(TRUE)) {
+    $values = variable_get('update_status_settings', array());
+    $form['projects'] = array('#tree' => TRUE);
+
+    $data = update_status_calculate_project_data($available);
+    $form['data'] = array('#type' => 'value', '#value' => $data);
+    $form['avail'] = array('#type' => 'value', '#value' => $available);
+
+    $notify_emails = variable_get('update_status_notify_emails', array());
+    $form['notify_emails'] = array(
+      '#type' => 'textarea',
+      '#title' => t('E-mail addresses to notify when updates are available'),
+      '#rows' => 4,
+      '#default_value' => implode("\n", $notify_emails),
+      '#description' => t('Whenever your site checks for available updates and finds new releases, it can notify a list of users via e-mail. Put each address on a separate line. If blank, no e-mails will be sent.'),
+    );
+
+    $form['check_frequency'] = array(
+      '#type' => 'radios',
+      '#title' => t('Check for updates'),
+      '#default_value' => variable_get('update_status_check_frequency', 'daily'),
+      '#options' => array(
+        'daily' => t('Daily'),
+        'weekly' => t('Weekly'),
+      ),
+      '#description' => t('Select how frequently you want to automatically check for new releases of your currently installed modules.'),
+    );
+
+    $form['notification_threshold'] = array(
+      '#type' => 'radios',
+      '#title' => t('E-mail notification threshold'),
+      '#default_value' => variable_get('update_status_notification_threshold', 'all'),
+      '#options' => array(
+        'all' => t('All newer versions'),
+        'security' => t('Only security updates'),
+      ),
+      '#description' => t('You can choose to send e-mail only if a security update is available, or to be notified about all newer versions. If there are updates available of Drupal core or any of your installed modules and themes, your site will always print a message on the <a href="@status_report">status report</a> page, and will also display an error message on administration pages if there is a security update.', array('@status_report' => url('admin/logs/status'))),
+    );
+
+    $form['project_help'] = array(
+      '#value' => t('These settings allow you to control if a certain project, or even a specific release of that project, should be ignored by the available updates report. For each project, you can select if it should always warn you about a newer release, never warn you (ignore the project completely), or ignore a specific available release you do not want to upgrade to. You can also specify a note explaining why you are ignoring a specific project or version, and that will be displayed on the available updates report.'),
+    );
+
+    foreach ($data as $key => $project) {
+      if (isset($available[$key])) {
+        if (!isset($values[$key])) {
+          $values[$key] = array(
+            'check' => 'always',
+            'notes' => '',
+          );
+        }
+
+        $options = array();
+        $options['always'] = t('Always');
+        if (isset($project['recommended'])) {
+          $options[$project['recommended']] = t('Ignore @version', array('@version' => $project['recommended']));
+        }
+        $options['never'] = t('Never');
+
+        $form['projects'][$key]['check'] = array(
+          '#type' => 'select',
+          '#options' => $options,
+          '#default_value' => $values[$key]['check'],
+        );
+        $form['projects'][$key]['notes'] = array(
+          '#type' => 'textfield',
+          '#size' => 50,
+          '#default_value' => $values[$key]['notes'],
+        );
+      }
+    }
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit changes'),
+    );
+  }
+  else {
+    $form['error'] = array(
+      '#value' => theme('update_status_report', _update_status_no_data())
+    );
+  }
+
+  drupal_add_css(drupal_get_path('module', 'update_status') .'/update_status.css');
+  return $form;
+}
+
+function theme_update_status_settings($form) {
+  if (isset($form['error'])) {
+    return drupal_render($form);
+  }
+
+  $output = '';
+  $output .= drupal_render($form['notify_emails']);
+  $output .= drupal_render($form['check_frequency']);
+  $output .= drupal_render($form['notification_threshold']);
+  $output .= drupal_render($form['update_status_check_disabled']);
+
+  $header = array(
+    array('data' => t('Project'), 'class' => 'update-status-project'),
+    array('data' => t('Warn if out of date'), 'class' => 'update-status-status'),
+    array('data' => t('Notes'), 'class' => 'update-status-notes'),
+  );
+
+  $data = $form['data']['#value'];
+  $available = $form['avail']['#value'];
+
+  $rows = array();
+  foreach ($data as $key => $project) {
+    if (isset($available[$key])) {
+      $row = array();
+      $row[] = array(
+        'class' => 'update-status-project',
+        'data' => check_plain($available[$key]['title']),
+      );
+      $row[] = array(
+        'class' => 'update-status-status',
+        'data' => drupal_render($form['projects'][$key]['check']),
+      );
+      $row[] = array(
+        'class' => 'update-status-notes',
+        'data' => drupal_render($form['projects'][$key]['notes']),
+      );
+      if (!isset($rows[$project['project_type']])) {
+        $rows[$project['project_type']] = array();
+      }
+      $row_key = drupal_strtolower($available[$key]['title']);
+      $rows[$project['project_type']][$row_key] = $row;
+    }
+  }
+  $split_rows = array();
+  $project_types = array(
+    'core' => t('Drupal core'),
+    'module' => t('Modules'),
+    'disabled-module' => t('Disabled modules'),
+  );
+  foreach ($project_types as $type_name => $type_label) {
+    if (!empty($rows[$type_name])) {
+      $split_rows[] = array(
+        'class' => 'update-status-settings-label',
+        'data' => array(
+           array(
+             'class' => 'update-status-settings-label',
+             'data' => $type_label,
+             'colspan' => 3,
+          ),
+        ),
+      );
+      ksort($rows[$type_name]);
+      $split_rows = array_merge($split_rows, $rows[$type_name]);
+    }
+  }
+  $output .= theme('table', $header, $split_rows, array('class' => 'update-status-settings'));
+  $output .= '<div class="form-item"><div class="description">';
+  $output .= drupal_render($form['project_help']);
+  $output .= '</div></div>';
+  $output .= drupal_render($form);
+  return $output;
+}
+
+/**
+ * Validates the update_status settings form.
+ *
+ * Ensures that the email addresses are valid and properly formatted.
+ */
+function update_status_settings_validate($form_id, $form_values) {
+  if (!empty($form_values['notify_emails'])) {
+    $invalid = array();
+    foreach (explode("\n", trim($form_values['notify_emails'])) as $email) {
+      $email = trim($email);
+      if (!empty($email)) {
+        if (!valid_email_address($email)) {
+          $invalid[] = $email;
+        }
+      }
+    }
+    if (!empty($invalid)) {
+      if (count($invalid) == 1) {
+        form_set_error('notify_emails', t('%email is not a valid e-mail address.', array('%email' => reset($invalid))));
+      }
+      else {
+        form_set_error('notify_emails', t('%emails are not valid e-mail addresses.', array('%emails' => implode(', ', $invalid))));
+      }
+    }
+  }
+}
+
+/**
+ * Submit callback handler for the update status settings tab.
+ *
+ * Saves all the settings to the database.
+ *
+ * Also invalidates the cache of available updates if the "Check for updates
+ * of disabled modules" setting is being changed. Both the advanced settings
+ * table and the available updates report need to refetch available update
+ * data after this setting changes or they're going to show misleading things
+ * (for example, listing all of the disabled projects on the site with the "No
+ * available releases found" warning).
+ *
+ * @see update_status_settings()
+ */
+function update_status_settings_submit($form_id, $form_values) {
+  variable_set('update_status_check_frequency', $form_values['check_frequency']);
+  variable_set('update_status_notification_threshold', $form_values['notification_threshold']);
+  if (empty($form_values['notify_emails'])) {
+    variable_del('update_status_notify_emails');
+  }
+  else {
+    $emails = array();
+    foreach (explode("\n", trim($form_values['notify_emails'])) as $email) {
+      $email = trim($email);
+      if (!empty($email)) {
+        $emails[] = $email;
+      }
+    }
+    variable_set('update_status_notify_emails', $emails);
+  }
+  variable_set('update_status_settings', $form_values['projects']);
+
+  // See if the update_status_check_disabled setting is being enabled, and
+  // if so, invalidate all cached update status data.
+  $check_disabled = variable_get('update_status_check_disabled', FALSE);
+  if ($form_values['update_status_check_disabled'] != $check_disabled) {
+    update_status_invalidate_cache();
+  }
+  variable_set('update_status_check_disabled', $form_values['update_status_check_disabled']);
+
+  drupal_set_message(t('Your changes have been saved.'));
+}
+
+/**
+ * Implementation of hook_requirements.
+ *
+ * @return
+ *   An array describing the status of the site regarding available updates.
+ *   If there is no update data, only one record will be returned, indicating
+ *   that the status of core can't be determined. If data is available, there
+ *   will be two records: one for core, and another for all of contrib In
+ *   addition to the fields expected by hook_requirements ('value',
+ *   'severity', and optionally 'description'), this array will contain a
+ *   'reason' attribute, which is an integer constant to indicate why the
+ *   given status is being returned (UPDATE_STATUS_NOT_SECURE,
+ *   UPDATE_STATUS_NOT_CURRENT, or UPDATE_STATUS_UNKNOWN). This is used for
+ *   generating the appropriate e-mail notification messages during
+ *   update_status_cron(), and might be useful for other modules that invoke
+ *   update_status_requirements() to find out if the site is up to date.
+ */
+function update_status_requirements($phase) {
+  if ($phase == 'runtime') {
+    if ($available = update_status_get_available(FALSE)) {
+      $data = update_status_calculate_project_data($available);
+      // First, populate the requirements for core:
+      $requirements['update_status_core'] = _update_status_requirement_check($data['drupal'], 'core');
+      // We don't want to check drupal a second time.
+      unset($data['drupal']);
+      if (!empty($data)) {
+        // Now, sort our $data array based on each project's status. The
+        // status constants are numbered in the right order of precedence, so
+        // we just need to make sure the projects are sorted in ascending
+        // order of status, and we can look at the first project we find.
+        uasort($data, '_update_status_project_status_sort');
+        $first_project = reset($data);
+        $requirements['update_status_contrib'] = _update_status_requirement_check($first_project, 'contrib');
+      }
+    }
+    else {
+      $requirements['update_status_core']['title'] = t('Drupal core update status');
+      $requirements['update_status_core']['value'] = t('No update data available');
+      $requirements['update_status_core']['severity'] = REQUIREMENT_WARNING;
+      $requirements['update_status_core']['reason'] = UPDATE_STATUS_UNKNOWN;
+      $requirements['update_status_core']['description'] = _update_status_no_data();
+    }
+    return $requirements;
+  }
+}
+
+/**
+ * Private helper method to fill in the requirements array.
+ *
+ * This is shared for both core and contrib to generate the right elements in
+ * the array for hook_requirements().
+ *
+ * @param $project
+ *  Array of information about the project we're testing as returned by
+ *  update_status_calculate_project_data().
+ * @param $type
+ *  What kind of project is this ('core' or 'contrib').
+ *
+ * @return
+ *  An array to be included in the nested $requirements array.
+ *
+ * @see hook_requirements()
+ * @see update_status_requirements()
+ * @see update_status_calculate_project_data()
+ */
+function _update_status_requirement_check($project, $type) {
+  $requirement = array();
+  if ($type == 'core') {
+    $requirement['title'] = t('Drupal core update status');
+  }
+  else {
+    $requirement['title'] = t('Module update status');
+  }
+  $status = $project['status'];
+  if ($status != UPDATE_STATUS_CURRENT) {
+    $requirement['reason'] = $status;
+    $requirement['description'] = _update_status_message_text($type, $status, TRUE);
+    $requirement['severity'] = REQUIREMENT_ERROR;
+  }
+  switch ($status) {
+    case UPDATE_STATUS_NOT_SECURE:
+      $requirement_label = t('Not secure!');
+      break;
+    case UPDATE_STATUS_REVOKED:
+      $requirement_label = t('Revoked!');
+      break;
+    case UPDATE_STATUS_NOT_SUPPORTED:
+      $requirement_label = t('Unsupported release');
+      break;
+    case UPDATE_STATUS_NOT_CURRENT:
+      $requirement_label = t('Out of date');
+      $requirement['severity'] = REQUIREMENT_WARNING;
+      break;
+    case UPDATE_STATUS_UNKNOWN:
+    case UPDATE_STATUS_NOT_CHECKED:
+    case UPDATE_STATUS_NOT_FETCHED:
+      $requirement_label = isset($project['reason']) ? $project['reason'] : t('Can not determine status');
+      $requirement['severity'] = REQUIREMENT_WARNING;
+      break;
+    default:
+      $requirement_label = t('Up to date');
+  }
+  if ($status != UPDATE_STATUS_CURRENT && $type == 'core' && isset($project['recommended'])) {
+    $requirement_label .= ' '. t('(version @version available)', array('@version' => $project['recommended']));
+  }
+  $requirement['value'] = l($requirement_label, 'admin/logs/updates');
+  return $requirement;
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function update_status_cron() {
+  $frequency = variable_get('update_status_check_frequency', 'daily');
+  $interval = 60 * 60 * 24 * ($frequency == 'weekly' ? 7 : 1);
+  // Cron should check for updates if there is no update data cached
+  // or if the configured update interval has elapsed.
+  if (!_update_status_cache_get('update_status_available_releases') || ((time() - variable_get('update_status_last', 0)) > $interval)) {
+    update_status_refresh();
+    _update_status_cron_notify();
+  }
+}
+
+/**
+ * Perform any notifications that should be done once cron fetches new data.
+ *
+ * This method checks the status of the site using the new data and depending
+ * on the configuration of the site, notifies administrators via email if there
+ * are new releases or missing security updates.
+ *
+ * @see update_status_requirements()
+ */
+function _update_status_cron_notify() {
+  $status = update_status_requirements('runtime');
+  $notify_all = (variable_get('update_status_notification_threshold', 'all') == 'all');
+  $body = array();
+  foreach (array('core', 'contrib') as $report_type) {
+    $type = 'update_status_'. $report_type;
+    if (isset($status[$type]['severity'])
+        && ($status[$type]['severity'] == REQUIREMENT_ERROR || ($notify_all && $status[$type]['reason'] == UPDATE_STATUS_NOT_CURRENT))) {
+      $body[] = wordwrap(_update_status_message_text($report_type, $status[$type]['reason'], FALSE));
+    }
+  }
+  if (!empty($body)) {
+    $notify_list = variable_get('update_status_notify_emails', '');
+    if (!empty($notify_list)) {
+      $body[] = t('See the available updates page for more information:') ."\n". url('admin/logs/updates', NULL, NULL, TRUE) ."\n\n";
+      $subject = t('New release(s) available for !site_name', array('!site_name' => variable_get('site_name', 'Drupal')));
+      $body_text = implode("\n\n", $body);
+      foreach ($notify_list as $target) {
+        drupal_mail('update-status', $target, $subject, $body_text);
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ *
+ * Adds a submit handler to the system modules and themes forms, so that if a
+ * site admin saves either form, we invalidate the cache of available updates.
+ *
+ * @see update_status_invalidate_cache()
+ */
+function update_status_form_alter($form_id, &$form) {
+  if ($form_id == 'system_modules') {
+    $form['#submit']['update_status_system_submit'] = array();
+  }
+}
+
+/**
+ * Submit handler for system modules pages.
+ */
+function update_status_system_submit($form_id, $form_values) {
+  update_status_invalidate_cache();
+}
+
+/**
+ * Helper function to return the appropriate message text when the site is out
+ * of date or missing a security update.
+ *
+ * These error messages are shared by both update_status_requirements() for the
+ * site-wide status report at admin/logs/status and in the body of the
+ * notification emails generated by update_status_cron().
+ *
+ * @param $msg_type
+ *   String to indicate what kind of message to generate. Can be either
+ *   'core' or 'contrib'.
+ * @param $msg_reason
+ *   Integer constant specifying why message is generated. Can be any of the
+ *   UPDATE_STATUS_* constants from the top of this file.
+ * @param $report_link
+ *   Boolean that controls if a link to the updates report should be added.
+ * @return
+ *   The properly translated error message for the given key.
+ */
+function _update_status_message_text($msg_type, $msg_reason, $report_link = FALSE) {
+  $text = '';
+  switch ($msg_reason) {
+    case UPDATE_STATUS_NOT_SECURE:
+      if ($msg_type == 'core') {
+        $text = t('There is a security update available for your version of Drupal. To ensure the security of your server, you should update immediately!');
+      }
+      else {
+        $text = t('There are security updates available for one or more of your modules. To ensure the security of your server, you should update immediately!');
+      }
+      break;
+
+    case UPDATE_STATUS_REVOKED:
+      if ($msg_type == 'core') {
+        $text = t('Your version of Drupal has been revoked and is no longer available for download. Upgrading is strongly recommended!');
+      }
+      else {
+        $text = t('The installed version of at least one of your modules or themes has been revoked and is no longer available for download. Upgrading or disabling is strongly recommended!');
+      }
+      break;
+
+    case UPDATE_STATUS_NOT_SUPPORTED:
+      if ($msg_type == 'core') {
+        $text = t('Your version of Drupal is no longer supported. Upgrading is strongly recommended!');
+      }
+      else {
+        $text = t('The installed version of at least one of your modules or themes is no longer supported. Upgrading or disabling is strongly recommended! Please see the project homepage for more details.');
+      }
+      break;
+
+    case UPDATE_STATUS_NOT_CURRENT:
+      if ($msg_type == 'core') {
+        $text = t('There are updates available for your version of Drupal. To ensure the proper functioning of your site, you should update as soon as possible.');
+      }
+      else {
+        $text = t('There are updates available for one or more of your modules. To ensure the proper functioning of your site, you should update as soon as possible.');
+      }
+      break;
+
+    case UPDATE_STATUS_UNKNOWN:
+    case UPDATE_STATUS_NOT_CHECKED:
+    case UPDATE_STATUS_NOT_FETCHED:
+      if ($msg_type == 'core') {
+        $text = t('There was a problem determining the status of available updates for your version of Drupal.');
+      }
+      else {
+        $text = t('There was a problem determining the status of available updates for one or more of your modules or themes.');
+      }
+      break;
+  }
+
+  if ($report_link) {
+    $text .= ' '. t('See the <a href="@available_updates">available updates</a> page for more information.', array('@available_updates' => url('admin/logs/updates')));
+  }
+
+  return $text;
+}
+
+/**
+ * Callback to manually check the update status without cron.
+ */
+function update_status_manual_status() {
+  if (update_status_refresh()) {
+    drupal_set_message(t('Attempted to fetch information about all available new releases and updates.'));
+  }
+  else {
+    drupal_set_message(t('Unable to fetch any information on available new releases and updates.'), 'error');
+  }
+  drupal_goto('admin/logs/updates');
+}
+
+/**
+ * Prints a warning message when there is no data about available updates.
+ */
+function _update_status_no_data() {
+  $destination = drupal_get_destination();
+  return t('No information is available about potential new releases for currently installed modules. To check for updates, you may need to <a href="@run_cron">run cron</a> or you can <a href="@check_manually">check manually</a>. Please note that checking for available updates can take a long time, so please be patient.', array(
+    '@run_cron' => url('admin/logs/status/run-cron', $destination),
+    '@check_manually' => url('admin/logs/updates/check', $destination),
+  ));
+}
+
+/**
+ * Fetch an array of installed and enabled projects.
+ *
+ * This is only responsible for generating an array of projects (taking into
+ * account projects that include more than one module). Other information
+ * like the specific version and install type (official release, dev snapshot,
+ * etc) is handled later in update_status_process_project_info() since that
+ * logic is only required when preparing the status report, not for fetching
+ * the available release data.
+ *
+ * This array is fairly expensive to construct, since it involves a lot of disk
+ * I/O, so we cache the results into the {cache_update_status} table using the
+ * 'update_status_project_projects' cache ID. However, since this is not the
+ * data about available updates fetched from the network, it is ok to
+ * invalidate it somewhat quickly. If we keep this data for very long, site
+ * administrators are more likely to see incorrect results if they upgrade to
+ * a newer version of a module or theme but do not visit certain pages that
+ * automatically clear this cache.
+ *
+ * @see update_status_process_project_info()
+ * @see update_status_calculate_project_data()
+ * @see update_status_project_cache()
+ *
+ * @todo
+ *   Extend this to include themes and theme engines when they get .info files.
+ */
+function update_status_get_projects() {
+  static $projects = array();
+  if (!empty($projects)) {
+    return $projects;
+  }
+  // Retrieve the projects from cache, if present.
+  $projects = update_status_project_cache('update_status_project_projects');
+  if (!empty($projects)) {
+    return $projects;
+  }
+
+  // Still empty, will have to compute this and save it to the DB cache.
+
+  // Get current list of modules.
+  $files = drupal_system_listing('\.module$', 'modules', 'name', 0);
+
+  // Extract current files from database.
+  system_get_files_database($files, 'module');
+  _update_status_process_info_list($projects, $files, 'module');
+  if (variable_get('update_status_check_disabled', FALSE)) {
+    _update_status_process_info_list($projects, $files, 'disabled-module');
+  }
+
+  // Allow other modules to alter projects before fetching and comparing.
+  foreach (module_implements('update_status_projects_alter') as $module) {
+    $function = $module .'_update_status_projects_alter';
+    $function($projects);
+  }
+
+  _update_status_cache_set('update_status_project_projects', serialize($projects), time() + (60 * 60));
+  return $projects;
+}
+
+function _update_status_process_info_list(&$projects, $list, $project_type) {
+  $module_target_status = $project_type == 'module' ? 1 : 0;
+  foreach ($list as $file) {
+    if ($file->status != $module_target_status) {
+      continue;
+    }
+
+    $info_filename = dirname($file->filename) .'/'. $file->name .'.info';
+    $file->info = _module_parse_info_file($info_filename);
+
+    // Skip if this is broken.
+    if (empty($file->info)) {
+      continue;
+    }
+
+    // Record the change time on the .info file itself. Note: we need to use
+    // the ctime, not the mtime (modification time) since many (all?) tar
+    // implementations will go out of their way to set the mtime on the files
+    // it creates to the timestamps recorded in the tarball. We want to see
+    // the last time the file was changed on disk, which is left alone by tar
+    // and correctly set to the time the .info file was unpacked.
+    $file->info['_info_file_ctime'] = filectime($info_filename);
+
+    $info = $file->info;
+    $info['check'] = TRUE;
+
+    if (!isset($info['project'])) {
+      $info['project'] = update_status_get_project($file);
+    }
+
+    // Give other modules a chance to fill-in and clean the version,
+    // datestamp, or any other data from the .info file they need to alter.
+    // We can't use module_invoke_all() since we pass a reference to the hook
+    // so it can modify the info array.
+    $project = array();
+    $project['name'] = $file->name;
+    $project['project'] = $info['project'];
+    $project['filename'] = $file->filename;
+    foreach (module_implements('system_info_alter') as $module) {
+      $function = $module .'_system_info_alter';
+      $function($info, $project);
+    }
+
+    // If we still don't know the 'project', give up.
+    if (empty($info['project'])) {
+      continue;
+    }
+
+    if (!isset($info['datestamp'])) {
+      $info['datestamp'] = 0;
+    }
+
+    $project_name = $info['project'];
+    if (!isset($projects[$project_name])) {
+      // Only process this if we haven't done this project, since a single
+      // project can have multiple modules.
+      $projects[$project_name] = array(
+        'name' => $project_name,
+        'info' => $info,
+        'datestamp' => $info['datestamp'],
+        'modules' => array($file->name => $info['name']),
+        'project_type' => $project_name == 'drupal' ? 'core' : $project_type,
+      );
+    }
+    elseif ($projects[$project_name]['project_type'] == $project_type) {
+      $projects[$project_name]['modules'][$file->name] = $info['name'];
+      $projects[$project_name]['datestamp'] = max($projects[$project_name]['datestamp'], $info['datestamp']);
+    }
+  }
+
+  return $projects;
+}
+
+/**
+ * Given a $module object (as returned by system_get_files_database()), figure
+ * out what project that module belongs to.
+ *
+ * @see system_get_files_database()
+ */
+function update_status_get_project($module) {
+  $project = '';
+  if (isset($module->info['project'])) {
+    $project = $module->info['project'];
+  }
+  elseif (isset($module->info['package'])
+          && (strpos($module->info['package'], 'Core -') !== FALSE)) {
+    $project = 'drupal';
+  }
+  return $project;
+}
+
+/**
+ * Process the list of projects on the system to figure out the currently
+ * installed versions, and other information that is required before we can
+ * compare against the available releases to produce the status report.
+ *
+ * @param $projects
+ *   Array of project information from update_status_get_projects().
+ */
+function update_status_process_project_info(&$projects) {
+  foreach ($projects as $key => $project) {
+    // Assume an official release until we see otherwise.
+    $type = 'official';
+
+    $info = $project['info'];
+
+    if (isset($info['version'])) {
+      // Check for development snapshots
+      if (preg_match('@(dev|HEAD)@', $info['version'])) {
+        $type = 'dev';
+      }
+
+      // Figure out what the currently installed major version is. We need
+      // to handle both contribution (e.g. "5.x-1.3", major = 1) and core
+      // (e.g. "5.1", major = 5) version strings.
+      $matches = array();
+      if (preg_match('/^(\d+\.x-)?(\d+)\..*$/', $info['version'], $matches)) {
+        $info['major'] = $matches[2];
+      }
+      elseif (!isset($info['major'])) {
+        // This would only happen for version strings that don't follow the
+        // drupal.org convention. We let contribs define "major" in their
+        // .info in this case, and only if that's missing would we hit this.
+        $info['major'] = -1;
+      }
+    }
+    else {
+      // No version info available at all.
+      $type = 'unknown';
+      $info['version'] = t('Unknown');
+      $info['major'] = -1;
+    }
+
+    // Finally, save the results we care about into the $projects array.
+    $projects[$key]['existing_version'] = $info['version'];
+    $projects[$key]['existing_major'] = $info['major'];
+    $projects[$key]['type'] = $type;
+    unset($projects[$key]['info']);
+  }
+}
+
+/**
+ * Given the installed projects and the available release data retrieved from
+ * remote servers, calculate the current status.
+ *
+ * This function is the heart of the update status feature. It iterates over
+ * every currently installed project. For each one, it first checks if the
+ * project has been flagged with a special status like "unsupported" or
+ * "insecure", or if the project node itself has been unpublished. In any of
+ * those cases, the project is marked with an error and the next project is
+ * considered.
+ *
+ * If the project itself is valid, the function decides what major release
+ * series to consider. The project defines what the currently supported major
+ * versions are for each version of core, so the first step is to make sure
+ * the current version is still supported. If so, that's the target version.
+ * If the current version is unsupported, the project maintainer's recommended
+ * major version is used. There's also a check to make sure that this function
+ * never recommends an earlier release than the currently installed major
+ * version.
+ *
+ * Given a target major version, it scans the available releases looking for
+ * the specific release to recommend (avoiding beta releases and development
+ * snapshots if possible). This is complicated to describe, but an example
+ * will help clarify. For the target major version, find the highest patch
+ * level. If there is a release at that patch level with no extra ("beta",
+ * etc), then we recommend the release at that patch level with the most
+ * recent release date. If every release at that patch level has extra (only
+ * betas), then recommend the latest release from the previous patch
+ * level. For example:
+ *
+ * 1.6-bugfix <-- recommended version because 1.6 already exists.
+ * 1.6
+ *
+ * or
+ *
+ * 1.6-beta
+ * 1.5 <-- recommended version because no 1.6 exists.
+ * 1.4
+ *
+ * It also looks for the latest release from the same major version, even a
+ * beta release, to display to the user as the "Latest version" option.
+ * Additionally, it finds the latest official release from any higher major
+ * versions that have been released to provide a set of "Also available"
+ * options.
+ *
+ * Finally, and most importantly, it keeps scanning the release history until
+ * it gets to the currently installed release, searching for anything marked
+ * as a security update. If any security updates have been found between the
+ * recommended release and the installed version, all of the releases that
+ * included a security fix are recorded so that the site administrator can be
+ * warned their site is insecure, and links pointing to the release notes for
+ * each security update can be included (which, in turn, will link to the
+ * official security announcements for each vulnerability).
+ *
+ * This function relies on the fact that the .xml release history data comes
+ * sorted based on major version and patch level, then finally by release date
+ * if there are multiple releases such as betas from the same major.patch
+ * version (e.g. 5.x-1.5-beta1, 5.x-1.5-beta2, and 5.x-1.5). Development
+ * snapshots for a given major version are always listed last.
+ *
+ * The results of this function are expensive to compute, especially on sites
+ * with lots of modules, since it involves a lot of comparisons and other
+ * operations. Therefore, we cache the results into the {cache_update_status}
+ * table using the 'update_status_project_data' cache ID. However, since this
+ * is not the data about available updates fetched from the network, it is ok
+ * to invalidate it somewhat quickly. If we keep this data for very long, site
+ * administrators are more likely to see incorrect results if they upgrade to
+ * a newer version of a module or theme but do not visit certain pages that
+ * automatically clear this cache.
+ *
+ * @param $available
+ *  Array of data about available project releases.
+ *
+ * @see update_status_get_available()
+ * @see update_status_get_projects()
+ * @see update_status_process_project_info()
+ * @see update_status_project_cache()
+ */
+function update_status_calculate_project_data($available) {
+
+  // Retrieve the projects from cache, if present.
+  $projects = update_status_project_cache('update_status_project_data');
+  // If $projects is empty, then the cache must be rebuilt.
+  // Otherwise, return the cached data and skip the rest of the function.
+  if (!empty($projects)) {
+    return $projects;
+  }
+
+  $projects = update_status_get_projects();
+  update_status_process_project_info($projects);
+  $settings = variable_get('update_status_settings', array());
+  foreach ($projects as $project => $project_info) {
+    if (isset($available[$project])) {
+
+      // If the project status is marked as something bad, there's nothing
+      // else to consider.
+      if (isset($available[$project]['project_status'])) {
+        switch ($available[$project]['project_status']) {
+          case 'insecure':
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_SECURE;
+            if (empty($projects[$project]['extra'])) {
+              $projects[$project]['extra'] = array();
+            }
+            $projects[$project]['extra'][] = array(
+              'class' => 'project-not-secure',
+              'label' => t('Project not secure'),
+              'data' => t('This project has been labeled insecure by the Drupal security team, and is no longer available for download. Immediately disabling everything included by this project is strongly recommended!'),
+            );
+            break;
+          case 'unpublished':
+          case 'revoked':
+            $projects[$project]['status'] = UPDATE_STATUS_REVOKED;
+            if (empty($projects[$project]['extra'])) {
+              $projects[$project]['extra'] = array();
+            }
+            $projects[$project]['extra'][] = array(
+              'class' => 'project-revoked',
+              'label' => t('Project revoked'),
+              'data' => t('This project has been revoked, and is no longer available for download. Disabling everything included by this project is strongly recommended!'),
+            );
+            break;
+          case 'unsupported':
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_SUPPORTED;
+            if (empty($projects[$project]['extra'])) {
+              $projects[$project]['extra'] = array();
+            }
+            $projects[$project]['extra'][] = array(
+              'class' => 'project-not-supported',
+              'label' => t('Project not supported'),
+              'data' => t('This project is no longer supported, and is no longer available for download. Disabling everything included by this project is strongly recommended!'),
+            );
+            break;
+          case 'not-fetched':
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_FETCHED;
+            $projects[$project]['reason'] = t('Failed to fetch available update data');
+            break;
+
+          default:
+            // Assume anything else (e.g. 'published') is valid and we should
+            // perform the rest of the logic in this function.
+            break;
+        }
+      }
+
+      if (!empty($projects[$project]['status'])) {
+        // We already know the status for this project, so there's nothing
+        // else to compute. Just record everything else we fetched from the
+        // XML file into our projects array and move to the next project.
+        $projects[$project] += $available[$project];
+        continue;
+      }
+
+      // Figure out the target major version.
+      $existing_major = $project_info['existing_major'];
+      $supported_majors = array();
+      if (isset($available[$project]['supported_majors'])) {
+        $supported_majors = explode(',', $available[$project]['supported_majors']);
+      }
+      elseif (isset($available[$project]['default_major'])) {
+        // Older release history XML file without supported or recommended.
+        $supported_majors[] = $available[$project]['default_major'];
+      }
+
+      if (in_array($existing_major, $supported_majors)) {
+        // Still supported, stay at the current major version.
+        $target_major = $existing_major;
+      }
+      elseif (isset($available[$project]['recommended_major'])) {
+        // Since 'recommended_major' is defined, we know this is the new XML
+        // format. Therefore, we know the current release is unsupported since
+        // its major version was not in the 'supported_majors' list. We should
+        // find the best release from the recommended major version.
+        $target_major = $available[$project]['recommended_major'];
+        $projects[$project]['status'] = UPDATE_STATUS_NOT_SUPPORTED;
+      }
+      elseif (isset($available[$project]['default_major'])) {
+        // Older release history XML file without recommended, so recommend
+        // the currently defined "default_major" version.
+        $target_major = $available[$project]['default_major'];
+      }
+      else {
+        // Malformed XML file? Stick with the current version.
+        $target_major = $existing_major;
+      }
+
+      // Make sure we never tell the admin to downgrade. If we recommended an
+      // earlier version than the one they're running, they'd face an
+      // impossible data migration problem, since Drupal never supports a DB
+      // downgrade path. In the unfortunate case that what they're running is
+      // unsupported, and there's nothing newer for them to upgrade to, we
+      // can't print out a "Recommended version", but just have to tell them
+      // what they have is unsupported and let them figure it out.
+      $target_major = max($existing_major, $target_major);
+
+      $version_patch_changed = '';
+      $patch = '';
+
+      // Defend ourselves from XML history files that contain no releases.
+      if (empty($available[$project]['releases'])) {
+        $projects[$project]['status'] = UPDATE_STATUS_UNKNOWN;
+        $projects[$project]['reason'] = t('No available releases found');
+        continue;
+      }
+      foreach ($available[$project]['releases'] as $version => $release) {
+        // First, if this is the existing release, check a few conditions.
+        if ($projects[$project]['existing_version'] === $version) {
+          if (isset($release['terms']['Release type']) &&
+              in_array('Insecure', $release['terms']['Release type'])) {
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_SECURE;
+          }
+          elseif ($release['status'] == 'unpublished') {
+            $projects[$project]['status'] = UPDATE_STATUS_REVOKED;
+            if (empty($projects[$project]['extra'])) {
+              $projects[$project]['extra'] = array();
+            }
+            $projects[$project]['extra'][] = array(
+              'class' => 'release-revoked',
+              'label' => t('Release revoked'),
+              'data' => t('Your currently installed release has been revoked, and is no longer available for download. Disabling everything included in this release or upgrading is strongly recommended!'),
+            );
+          }
+          elseif (isset($release['terms']['Release type']) &&
+                  in_array('Unsupported', $release['terms']['Release type'])) {
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_SUPPORTED;
+            if (empty($projects[$project]['extra'])) {
+              $projects[$project]['extra'] = array();
+            }
+            $projects[$project]['extra'][] = array(
+              'class' => 'release-not-supported',
+              'label' => t('Release not supported'),
+              'data' => t('Your currently installed release is now unsupported, and is no longer available for download. Disabling everything included in this release or upgrading is strongly recommended!'),
+            );
+          }
+        }
+
+        // Otherwise, ignore unpublished, insecure, or unsupported releases.
+        if ($release['status'] == 'unpublished' ||
+            (isset($release['terms']['Release type']) &&
+             (in_array('Insecure', $release['terms']['Release type']) ||
+              in_array('Unsupported', $release['terms']['Release type'])))) {
+          continue;
+        }
+
+        // See if this is a higher major version than our target and yet still
+        // supported. If so, record it as an "Also available" release.
+        if ($release['version_major'] > $target_major) {
+          if (in_array($release['version_major'], $supported_majors)) {
+            if (!isset($available[$project]['also'])) {
+              $available[$project]['also'] = array();
+            }
+            if (!isset($available[$project]['also'][$release['version_major']])) {
+              $available[$project]['also'][$release['version_major']] = $version;
+            }
+          }
+          // Otherwise, this release can't matter to us, since it's neither
+          // from the release series we're currently using nor the recommended
+          // release. We don't even care about security updates for this
+          // branch, since if a project maintainer puts out a security release
+          // at a higher major version and not at the lower major version,
+          // they must change the default major release at the same time, in
+          // which case we won't hit this code.
+          continue;
+        }
+
+        // Look for the 'latest version' if we haven't found it yet. Latest is
+        // defined as the most recent version for the target major version.
+        if (!isset($available[$project]['latest_version'])
+            && $release['version_major'] == $target_major) {
+          $available[$project]['latest_version'] = $version;
+        }
+
+        // Look for the development snapshot release for this branch.
+        if (!isset($available[$project]['dev_version'])
+            && isset($release['version_extra'])
+            && $release['version_extra'] == 'dev') {
+          $available[$project]['dev_version'] = $version;
+        }
+
+        // Look for the 'recommended' version if we haven't found it yet (see
+        // phpdoc at the top of this function for the definition).
+        if (!isset($available[$project]['recommended'])
+            && $release['version_major'] == $target_major
+            && isset($release['version_patch'])) {
+          if ($patch != $release['version_patch']) {
+            $patch = $release['version_patch'];
+            $version_patch_changed = $release['version'];
+          }
+          if (empty($release['version_extra']) && $patch == $release['version_patch']) {
+            $available[$project]['recommended'] = $version_patch_changed;
+          }
+        }
+
+        // Stop searching once we hit the currently installed version.
+        if ($projects[$project]['existing_version'] === $version) {
+          break;
+        }
+
+        // If we're running a dev snapshot and have a timestamp, stop
+        // searching for security updates once we hit an official release
+        // older than what we've got. Allow 100 seconds of leeway to handle
+        // differences between the datestamp in the .info file and the
+        // timestamp of the tarball itself (which are usually off by 1 or 2
+        // seconds) so that we don't flag that as a new release.
+        if ($projects[$project]['type'] == 'dev') {
+          if (empty($projects[$project]['datestamp'])) {
+            // We don't have current timestamp info, so we can't know.
+            continue;
+          }
+          elseif (isset($release['date']) && ($projects[$project]['datestamp'] + 100 > $release['date'])) {
+            // We're newer than this, so we can skip it.
+            continue;
+          }
+        }
+
+        // See if this release is a security update.
+        if (isset($release['terms']['Release type'])
+            && in_array('Security update', $release['terms']['Release type'])) {
+          $projects[$project]['security updates'][] = $release;
+        }
+      }
+
+      // If we were unable to find a recommended version, then make the latest
+      // version the recommended version if possible.
+      if (!isset($available[$project]['recommended']) && isset($available[$project]['latest_version'])) {
+        $available[$project]['recommended'] = $available[$project]['latest_version'];
+      }
+
+      // If we're running a dev snapshot, compare the date of the dev snapshot
+      // with the latest official version, and record the absolute latest in
+      // 'latest_dev' so we can correctly decide if there's a newer release
+      // than our current snapshot.
+      if ($projects[$project]['type'] == 'dev') {
+        if (isset($available[$project]['dev_version']) && $available[$project]['releases'][$available[$project]['dev_version']]['date'] > $available[$project]['releases'][$available[$project]['latest_version']]['date']) {
+          $projects[$project]['latest_dev'] = $available[$project]['dev_version'];
+        }
+        else {
+          $projects[$project]['latest_dev'] = $available[$project]['latest_version'];
+        }
+      }
+
+      // Stash the info about available releases into our $projects array.
+      $projects[$project] += $available[$project];
+
+      //
+      // Check to see if we need an update or not.
+      //
+      if (!empty($projects[$project]['security updates'])) {
+        // If we found security updates, that always trumps any other status.
+        $projects[$project]['status'] = UPDATE_STATUS_NOT_SECURE;
+      }
+
+      if (isset($projects[$project]['status'])) {
+        // If we already know the status, we're done.
+        continue;
+      }
+
+      // If we don't know what to recommend, there's nothing we can report.
+      // Bail out early.
+      if (!isset($projects[$project]['recommended'])) {
+        $projects[$project]['status'] = UPDATE_STATUS_UNKNOWN;
+        $projects[$project]['reason'] = t('No available releases found');
+        continue;
+      }
+
+      // If we're running a dev snapshot, compare the date of the dev snapshot
+      // with the latest official version, and record the absolute latest in
+      // 'latest_dev' so we can correctly decide if there's a newer release
+      // than our current snapshot.
+      if ($projects[$project]['type'] == 'dev') {
+        if (isset($available[$project]['dev_version']) && $available[$project]['releases'][$available[$project]['dev_version']]['date'] > $available[$project]['releases'][$available[$project]['latest_version']]['date']) {
+          $projects[$project]['latest_dev'] = $available[$project]['dev_version'];
+        }
+        else {
+          $projects[$project]['latest_dev'] = $available[$project]['latest_version'];
+        }
+      }
+
+      // Figure out the status, based on what we've seen and the install type.
+      switch ($projects[$project]['type']) {
+        case 'official':
+          if ($projects[$project]['existing_version'] === $projects[$project]['recommended'] || $projects[$project]['existing_version'] === $projects[$project]['latest_version']) {
+            $projects[$project]['status'] = UPDATE_STATUS_CURRENT;
+          }
+          else {
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_CURRENT;
+          }
+          break;
+
+        case 'dev':
+          $latest = $available[$project]['releases'][$projects[$project]['latest_dev']];
+          if (empty($projects[$project]['datestamp'])) {
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_CHECKED;
+            $projects[$project]['reason'] = t('No filedate available');
+          }
+          elseif (($projects[$project]['datestamp'] + 100 > $latest['date'])) {
+            $projects[$project]['status'] = UPDATE_STATUS_CURRENT;
+          }
+          else {
+            $projects[$project]['status'] = UPDATE_STATUS_NOT_CURRENT;
+          }
+          break;
+
+        default:
+          $projects[$project]['status'] = UPDATE_STATUS_UNKNOWN;
+          $projects[$project]['reason'] = t('Invalid info');
+      }
+    }
+    else {
+      $projects[$project]['status'] = UPDATE_STATUS_UNKNOWN;
+      $projects[$project]['reason'] = t('No available releases found');
+    }
+  }
+
+  // After everything else is done, check our settings to see if we're
+  // configured to ignore certain projects or releases.
+  foreach ($projects as $project => $project_info) {
+    if (isset($settings[$project]) && isset($settings[$project]['check']) &&
+        ($settings[$project]['check'] == 'never' ||
+         $settings[$project]['check'] === $available[$project]['recommended'])) {
+      $projects[$project]['check'] = FALSE;
+      $projects[$project]['status'] = UPDATE_STATUS_NOT_CHECKED;
+      $projects[$project]['reason'] = t('Ignored by settings');
+      $projects[$project]['notes'] = $settings[$project]['notes'];
+      continue;
+    }
+  }
+
+  _update_status_cache_set('update_status_project_data', serialize($projects), time() + (60 * 60));
+  return $projects;
+}
+
+/**
+ * Theme project status report.
+ */
+function theme_update_status_report($data) {
+  $last = variable_get('update_status_last', 0);
+  $output = '<div class="update-status checked">'. t('Last checked: ') . ($last ? format_interval(time() - $last) .' '. t('ago') : t('Never'));
+  $output .= ' <span class="check-manually">('. l(t('Check manually'), 'admin/logs/updates/check') .')</span>';
+  $output .= "</div>\n";
+
+  if (!is_array($data)) {
+    $output .= '<p>'. $data .'</p>';
+    return $output;
+  }
+
+  $header = array();
+  $rows = array();
+
+  $notification_level = variable_get('update_status_notification_threshold', 'all');
+
+  foreach ($data as $project) {
+    switch ($project['status']) {
+      case UPDATE_STATUS_CURRENT:
+        $class = 'ok';
+        $icon = theme('image', 'misc/watchdog-ok.png', t('ok'), t('ok'));
+        break;
+
+      case UPDATE_STATUS_UNKNOWN:
+      case UPDATE_STATUS_NOT_FETCHED:
+        $class = 'unknown';
+        $icon = theme('image', 'misc/watchdog-warning.png', t('unknown'), t('unknown'));
+        break;
+
+      case UPDATE_STATUS_NOT_SECURE:
+      case UPDATE_STATUS_REVOKED:
+      case UPDATE_STATUS_NOT_SUPPORTED:
+        $class = 'error';
+        $icon = theme('image', 'misc/watchdog-error.png', t('error'), t('error'));
+        break;
+
+      case UPDATE_STATUS_NOT_CHECKED:
+      case UPDATE_STATUS_NOT_CURRENT:
+      default:
+        $class = 'warning';
+        $icon = theme('image', 'misc/watchdog-warning.png', t('warning'), t('warning'));
+        break;
+    }
+
+    $row = '<div class="version-status">';
+    switch ($project['status']) {
+      case UPDATE_STATUS_NOT_SECURE:
+        $row .= '<span class="security-error">'. t('Security update required!') .'</span>';
+        break;
+      case UPDATE_STATUS_REVOKED:
+        $row .= '<span class="revoked">'. t('Revoked!') .'</span>';
+        break;
+      case UPDATE_STATUS_NOT_SUPPORTED:
+        $row .= '<span class="not-supported">'. t('Not supported!') .'</span>';
+        break;
+      case UPDATE_STATUS_NOT_CURRENT:
+        $row .= '<span class="not-current">'. t('Update available') .'</span>';
+        break;
+      case UPDATE_STATUS_CURRENT:
+        $row .= '<span class="current">'. t('Up to date') .'</span>';
+        break;
+      default:
+        $row .= check_plain($project['reason']);
+        break;
+    }
+
+    $row .= '<span class="icon">'. $icon .'</span>';
+    $row .= "</div>\n";
+
+    $row .= '<div class="project">';
+    if (isset($project['title'])) {
+      if (isset($project['link'])) {
+        $row .= l($project['title'], $project['link']);
+      }
+      else {
+        $row .= check_plain($project['title']);
+      }
+    }
+    else {
+      $row .= check_plain($project['name']);
+    }
+    $row .= ' '. check_plain($project['existing_version']);
+    if ($project['type'] == 'dev' && !empty($project['datestamp'])) {
+      $row .= ' <span class="version-date">('. format_date($project['datestamp'], 'custom', 'Y-M-d') .')</span>';
+    }
+    $row .= "</div>\n";
+
+    $row .= "<div class=\"versions\">\n";
+
+    if (isset($project['recommended'])) {
+      if ($project['status'] != UPDATE_STATUS_CURRENT || $project['existing_version'] !== $project['recommended']) {
+
+        // First, figure out what to recommend.
+        // If there's only 1 security update and it has the same version we're
+        // recommending, give it the same CSS class as if it was recommended,
+        // but don't print out a separate "Recommended" line for this project.
+        if (!empty($project['security updates']) && count($project['security updates']) == 1 && $project['security updates'][0]['version'] === $project['recommended']) {
+          $security_class = ' version-recommended version-recommended-strong';
+        }
+        else {
+          $security_class = '';
+          $version_class = 'version-recommended';
+          // Apply an extra class if we're displaying both a recommended
+          // version and anything else for an extra visual hint.
+          if ($project['recommended'] !== $project['latest_version']
+              || !empty($project['also'])
+              || ($project['type'] == 'dev'
+                 && isset($project['dev_version'])
+                 && $project['latest_version'] !== $project['dev_version']
+                 && $project['recommended'] !== $project['dev_version'])
+              || (isset($project['security updates'][0])
+                 && $project['recommended'] !== $project['security updates'][0])
+              ) {
+            $version_class .= ' version-recommended-strong';
+          }
+          $row .= theme('update_status_version', $project['releases'][$project['recommended']], t('Recommended version:'), $version_class);
+        }
+
+        // Now, print any security updates.
+        if (!empty($project['security updates'])) {
+          foreach ($project['security updates'] as $security_update) {
+            $row .= theme('update_status_version', $security_update, t('Security update:'), 'version-security'. $security_class);
+          }
+        }
+      }
+
+      if ($project['recommended'] !== $project['latest_version']) {
+        $row .= theme('update_status_version', $project['releases'][$project['latest_version']], t('Latest version:'), 'version-latest');
+      }
+      if ($project['type'] == 'dev'
+          && $project['status'] != UPDATE_STATUS_CURRENT
+          && isset($project['dev_version'])
+          && $project['recommended'] !== $project['dev_version']) {
+        $row .= theme('update_status_version', $project['releases'][$project['dev_version']], t('Development version:'), 'version-latest');
+      }
+    }
+
+    if (isset($project['also'])) {
+      foreach ($project['also'] as $also) {
+        $row .= theme('update_status_version', $project['releases'][$also], t('Also available:'), 'version-also-available');
+      }
+    }
+
+    $row .= "</div>\n"; // versions div.
+
+    $row .= "<div class=\"info\">\n";
+    if (!empty($project['notes'])) {
+      $row .= '<div class="notes">';
+      $row .= t('Administrator note: %notes', array('%notes' => $project['notes']));
+      $row .= "</div>\n";
+    }
+
+    $row .= '<div class="modules">';
+    $row .= t('Includes: %modules', array('%modules' => implode(', ', $project['modules'])));
+    $row .= "</div>\n";
+
+    $row .= "</div>\n"; // info div.
+
+    if (!isset($rows[$project['project_type']])) {
+      $rows[$project['project_type']] = array();
+    }
+    $row_key = isset($project['title']) ? drupal_strtolower($project['title']) : drupal_strtolower($project['name']);
+    $rows[$project['project_type']][$row_key] = array(
+      'class' => $class,
+      'data' => array($row),
+    );
+  }
+
+  $project_types = array(
+    'core' => t('Drupal core'),
+    'module' => t('Modules'),
+    'disabled-module' => t('Disabled modules'),
+  );
+  foreach ($project_types as $type_name => $type_label) {
+    if (!empty($rows[$type_name])) {
+      ksort($rows[$type_name]);
+      $output .= "\n<h3>". $type_label ."</h3>\n";
+      $output .= theme('table', $header, $rows[$type_name], array('class' => 'update-status'));
+    }
+  }
+  drupal_add_css(drupal_get_path('module', 'update_status') .'/update_status.css');
+  return $output;
+}
+
+function theme_update_status_version($version, $tag, $class) {
+  $output = '';
+  $output .= '<table class="version '. $class .'">';
+  $output .= '<tr>';
+  $output .= '<td class="version-title">'. $tag ."</td>\n";
+  $output .= '<td class="version-details">';
+  $output .= l($version['version'], $version['release_link']);
+  $output .= ' <span class="version-date">('. format_date($version['date'], 'custom', 'Y-M-d') .')</span>';
+  $output .= "</td>\n";
+  $output .= '<td class="version-links">';
+  $output .= l(t('Download'), $version['download_link']) .' · '. l(t('Release notes'), $version['release_link']);
+  $output .= '</td>';
+  $output .= '</tr>';
+  $output .= "</table>\n";
+  return $output;
+}
+
+/**
+ * Fetch project info via XML from a central server.
+ */
+function update_status_refresh() {
+  global $base_url;
+  static $fail = array();
+
+  // Since we're fetching new available update data, we want to clear
+  // our cache of both the projects we care about, and the current update
+  // status of the site. We do *not* want to clear the cache of available
+  // releases just yet, since that data (even if it's stale) can be useful
+  // during update_status_get_projects(); for example, to modules that
+  // implement hook_system_info_alter() such as cvs_deploy.
+  _update_status_cache_clear('update_status_project_projects');
+  _update_status_cache_clear('update_status_project_data');
+
+  // If not in 'safe mode', increase the maximum execution time:
+  if (!ini_get('safe_mode')) {
+    set_time_limit(300);
+  }
+
+  $available = array();
+  $data = array();
+  $site_key = md5($base_url . drupal_get_private_key());
+  $projects = update_status_get_projects();
+
+  // Now that we have the list of projects, we should also clear our cache of
+  // available release data, since even if we fail to fetch new data, we need
+  // to clear out the stale data at this point.
+  _update_status_cache_clear('update_status_available_releases');
+
+  $max_fetch_attempts = variable_get('update_status_max_fetch_attempts', UPDATE_STATUS_MAX_FETCH_ATTEMPTS);
+
+  foreach ($projects as $key => $project) {
+    $url = _update_status_build_fetch_url($project, $site_key);
+    $fetch_url_base = _update_status_get_fetch_url_base($project);
+    if (empty($fail[$fetch_url_base]) || count($fail[$fetch_url_base]) < $max_fetch_attempts) {
+      $xml = drupal_http_request($url);
+      if (isset($xml->data)) {
+        $data[] = $xml->data;
+      }
+      else {
+        // Connection likely broken; prepare to give up.
+        $fail[$fetch_url_base][$key] = 1;
+      }
+    }
+    else {
+      // Didn't bother trying to fetch.
+      $fail[$fetch_url_base][$key] = 1;
+    }
+  }
+
+  if ($data) {
+    $parser = new update_status_xml_parser;
+    $available = $parser->parse($data);
+    // Record the projects where we failed to fetch data.
+    foreach ($fail as $fetch_url_base => $failures) {
+      foreach ($failures as $key => $value) {
+        $available[$key]['project_status'] = 'not-fetched';
+      }
+    }
+    _update_status_cache_set('update_status_available_releases', serialize($available), time() + (60 * 60 * 24));
+    watchdog('update_status', t('Attempted to fetch information about all available new releases and updates.'), WATCHDOG_NOTICE, l(t('view'), 'admin/logs/updates'));
+  }
+  else {
+    watchdog('update_status', 'Unable to fetch any information on available new releases and updates.', WATCHDOG_ERROR, l(t('view'), 'admin/logs/updates'));
+  }
+  // Whether this worked or not, we did just (try to) check for updates.
+  variable_set('update_status_last', time());
+  return $available;
+}
+
+/**
+ * Generates the URL to fetch information about project updates.
+ *
+ * This figures out the right URL to use, based on the project's .info file
+ * and the global defaults. Appends optional query arguments when the site is
+ * configured to report usage stats.
+ *
+ * @param $project
+ *   The array of project information from update_status_get_projects().
+ * @param $site_key
+ *   The anonymous site key hash (optional).
+ *
+ * @see update_status_refresh()
+ * @see update_status_get_projects()
+ */
+function _update_status_build_fetch_url($project, $site_key = '') {
+  $name = $project['name'];
+  $url = _update_status_get_fetch_url_base($project);
+  $url .= '/'. $name .'/'. UPDATE_STATUS_CORE_VERSION;
+  if (!empty($site_key) && (empty($project['project_type']) || strpos($project['project_type'], 'disabled') === FALSE)) {
+    $url .= (strpos($url, '?') === TRUE) ? '&' : '?';
+    $url .= 'site_key=';
+    $url .= drupal_urlencode($site_key);
+    if (!empty($project['info']['version'])) {
+      $url .= '&version=';
+      $url .= drupal_urlencode($project['info']['version']);
+    }
+  }
+  return $url;
+}
+
+/**
+ * Return the base of the URL to fetch available update data for a project.
+ *
+ * @param $project
+ *   The array of project information from update_status_get_projects().
+ * @return
+ *   The base of the URL used for fetching available update data. This does
+ *   not include the path elements to specify a particular project, version,
+ *   site_key, etc.
+ *
+ * @see _update_status_build_fetch_url()
+ */
+function _update_status_get_fetch_url_base($project) {
+  return isset($project['info']['project status url']) ? $project['info']['project status url'] : variable_get('update_status_fetch_url', UPDATE_STATUS_DEFAULT_URL);
+}
+
+/**
+ * Internal helper to try to get the update information from the cache
+ * if possible, and to refresh the cache when necessary.
+ *
+ * @param $refresh
+ *   Boolean to indicate if this method should refresh the cache automatically
+ *   if there's no data.
+ */
+function update_status_get_available($refresh = FALSE) {
+  $available = array();
+
+  // First, make sure that none of the .info files have a change time newer
+  // than the last time we checked for available updates. If something was
+  // changed, it almost certainly means a new version was installed. Without
+  // fresh data, the logic in update_status_calculate_project_data() will be
+  // wrong and produce confusing, bogus results.
+  $needs_refresh = FALSE;
+  $last_check = variable_get('update_status_last', 0);
+  $projects = update_status_get_projects();
+  foreach ($projects as $key => $project) {
+    if ($project['info']['_info_file_ctime'] > $last_check) {
+      $needs_refresh = TRUE;
+      break;
+    }
+  }
+
+  if (!$needs_refresh && ($cache = _update_status_cache_get('update_status_available_releases'))
+      && $cache->expire > time()) {
+    $available = unserialize($cache->data);
+  }
+  elseif ($needs_refresh || $refresh) {
+    $available = update_status_refresh();
+  }
+  return $available;
+}
+
+/**
+ * XML Parser object to read Drupal's project info files
+ * This uses PHP4's lame XML parsing, but it works. Mostly.
+ */
+class update_status_xml_parser {
+  var $projects = array();
+  var $current_project;
+  var $current_release;
+  var $current_term;
+  var $current_tag;
+  var $current_object;
+
+  /**
+   * Parse an array of XML data files.
+   */
+  function parse($data) {
+    foreach ($data as $datum) {
+      $parser = xml_parser_create();
+      xml_set_object($parser, $this);
+      xml_set_element_handler($parser, 'start', 'end');
+      xml_set_character_data_handler($parser, "data");
+      xml_parse($parser, $datum);
+      xml_parser_free($parser);
+    }
+    return $this->projects;
+  }
+
+  function start($parser, $name, $attr) {
+    $this->current_tag = $name;
+    switch ($name) {
+      case 'PROJECT':
+        unset($this->current_object);
+        $this->current_project = array();
+        $this->current_object = &$this->current_project;
+        break;
+      case 'RELEASE':
+        unset($this->current_object);
+        $this->current_release = array();
+        $this->current_object = &$this->current_release;
+        break;
+      case 'TERM':
+        unset($this->current_object);
+        $this->current_term = array();
+        $this->current_object = &$this->current_term;
+        break;
+    }
+  }
+
+  function end($parser, $name) {
+    switch ($name) {
+      case 'PROJECT':
+        unset($this->current_object);
+        $this->projects[$this->current_project['short_name']] = $this->current_project;
+        $this->current_project = array();
+        break;
+      case 'RELEASE':
+        unset($this->current_object);
+        $this->current_project['releases'][$this->current_release['version']] = $this->current_release;
+        break;
+      case 'RELEASES':
+        $this->current_object = &$this->current_project;
+        break;
+      case 'TERM':
+        unset($this->current_object);
+        $term_name = $this->current_term['name'];
+        if (!isset($this->current_release['terms'])) {
+          $this->current_release['terms'] = array();
+        }
+        if (!isset($this->current_release['terms'][$term_name])) {
+          $this->current_release['terms'][$term_name] = array();
+        }
+        $this->current_release['terms'][$term_name][] = $this->current_term['value'];
+        break;
+      case 'TERMS':
+        $this->current_object = &$this->current_release;
+        break;
+      default:
+        $this->current_object[strtolower($this->current_tag)] = trim($this->current_object[strtolower($this->current_tag)]);
+        $this->current_tag = '';
+    }
+  }
+
+  function data($parser, $data) {
+    if ($this->current_tag && !in_array($this->current_tag, array('PROJECT', 'RELEASE', 'RELEASES', 'TERM', 'TERMS'))) {
+      $tag = strtolower($this->current_tag);
+      if (isset($this->current_object[$tag])) {
+        $this->current_object[$tag] .= $data;
+      }
+      else {
+        $this->current_object[$tag] = $data;
+      }
+    }
+  }
+}
+
+/**
+ * Private sort function to order projects based on their status.
+ *
+ * @see update_status_requirements()
+ * @see uasort()
+ */
+function _update_status_project_status_sort($a, $b) {
+  // The status constants are numerically in the right order, so we can
+  // usually subtract the two to compare in the order we want. However,
+  // negative status values should be treated as if they are huge, since we
+  // always want them at the bottom of the list.
+  $a_status = $a['status'] > 0 ? $a['status'] : (-10 * $a['status']);
+  $b_status = $b['status'] > 0 ? $b['status'] : (-10 * $b['status']);
+  return $a_status - $b_status;
+}
+
+/**
+ * Retrieve data from {cache_update_status} or empty the cache when necessary.
+ *
+ * Two very expensive arrays computed by this module are the list of all
+ * installed modules (and .info data, project associations, etc), and the
+ * current status of the site relative to the currently available releases.
+ * These two arrays are cached in the {cache_update_status} table and used
+ * whenever possible. The cache is cleared whenever the administrator visits
+ * the status report, available updates report, or the module administration
+ * pages, since we should always recompute the most current values on any of
+ * those pages.
+ *
+ * @param $cid
+ *   The cache id of data to return from the cache. Valid options are
+ *   'update_status_project_data' and 'update_status_project_projects'.
+ *
+ * @return
+ *   The cached value of the $projects array generated by
+ *   update_status_calculate_project_data() or update_status_get_projects(),
+ *   or an empty array when the cache is cleared.
+ */
+function update_status_project_cache($cid) {
+  $projects = array();
+
+  // On certain paths, we should clear the cache and recompute the projects or
+  // update status of the site to avoid presenting stale information.
+  $q = $_GET['q'];
+  $paths = array('admin/build/modules', 'admin/logs', 'admin/logs/updates', 'admin/logs/status', 'admin/logs/updates/check');
+  if (in_array($q, $paths)) {
+    _update_status_cache_clear($cid);
+  }
+  else {
+    $cache = _update_status_cache_get($cid);
+    if (!empty($cache->data) && $cache->expire > time()) {
+      $projects = unserialize($cache->data);
+    }
+  }
+  return $projects;
+}
+
+/**
+ * @defgroup update_status_cache Private update status cache system
+ * @{
+ *
+ * We specifically do NOT use the core cache API for saving the fetched data
+ * about available updates. It is vitally important that this cache is only
+ * cleared when we're populating it after successfully fetching new available
+ * update data. Usage of the core cache API results in all sorts of potential
+ * problems that would result in attempting to fetch available update data all
+ * the time, including if a site has a "minimum cache lifetime" (which is both
+ * a minimum and a maximum) defined, or if a site uses memcache or another
+ * plug-able cache system that assumes volatile caches.
+ *
+ * Update status uses the {cache_update_status} table, but instead of using
+ * cache_set(), cache_get(), and cache_clear_all(), there are private helper
+ * functions that implement these same basic tasks but ensure that the cache
+ * is not prematurely cleared, and that the data is always stored in the
+ * database, even if memcache or another cache backend is in use.
+ */
+
+/**
+ * Store data in the private update status cache table.
+ *
+ * @param $cid
+ *   The cache ID to save the data with.
+ * @param $data
+ *   The data to store.
+ * @param $expire
+ *   One of the following values:
+ *   - CACHE_PERMANENT: Indicates that the item should never be removed except
+ *     by explicitly using _update_status_cache_clear() or
+ *     update_status_invalidate_cache().
+ *   - A Unix timestamp: Indicates that the item should be kept at least until
+ *     the given time, after which it will be invalidated.
+ */
+function _update_status_cache_set($cid, $data, $expire) {
+  $created = time();
+  db_query("UPDATE {cache_update_status} SET data = %b, created = %d, expire = %d WHERE cid = '%s'", $data, $created, $expire, $cid);
+  if (!db_affected_rows()) {
+    @db_query("INSERT INTO {cache_update_status} (cid, data, created, expire) VALUES ('%s', %b, %d, %d)", $cid, $data, $created, $expire);
+  }
+}
+
+/**
+ * Retrieve data from the private update status cache table.
+ *
+ * @param $cid
+ *   The cache ID to retrieve.
+ * @return
+ *   The data for the given cache ID, or NULL if the ID was not found.
+ */
+function _update_status_cache_get($cid) {
+  $cache = db_fetch_object(db_query("SELECT data, created, expire FROM {cache_update_status} WHERE cid = '%s'", $cid));
+  if (isset($cache->data)) {
+    $cache->data = db_decode_blob($cache->data);
+  }
+  return $cache;
+}
+
+/**
+ * Invalidates specific cached data relating to update status.
+ *
+ * @param $cid
+ *   Optional cache ID of the record to clear from the private update status
+ *   cache. If empty, all records will be cleared from the table.
+ */
+function _update_status_cache_clear($cid = NULL) {
+  if (empty($cid)) {
+    db_query("DELETE FROM {cache_update_status}");
+  }
+  else {
+    db_query("DELETE FROM {cache_update_status} WHERE cid = '%s'", $cid);
+  }
+}
+
+/**
+ * Invalidates all cached data relating to update status.
+ */
+function update_status_invalidate_cache() {
+  _update_status_cache_clear();
+}
+
+/**
+ * @} End of "defgroup update_status_cache".
+ */

@@ -1,0 +1,243 @@
+$Id: CHANGELOG.txt,v 1.11.2.34 2010/01/18 18:30:15 dww Exp $
+
+Update Status 5.x-2.5  (2010-01-18)
+Bug fixes:
+  o #687368 by dww: Fixed a call-time pass-by-reference bug that was
+    introduced in version 5.x-2.4 via issue #162788.
+
+
+Update Status 5.x-2.4  (2010-01-16)
+Bug fixes:
+  o #155450 by JoshuaRogers, dww: Moved cached data into a separate
+    table in the database using a private (non-volatile) cache API.
+    This prevents critical bugs where sites would repeatedly attempt
+    to fetch available update data in various cache configurations.
+  o #267724 by dww: Fixed bug where update_status was not checking for
+    new data when the cache was cleared, until the set time was elapsed.
+    Now update_status checks on cron after the cache was cleared.
+  o #386636 by dww: Fixed bug where the settings to ignore certain
+    projects would not take effect in some cases when modules were
+    marked unsupported by the maintainer.
+  o #499828 by Dave Reid: Fixed release date on multi-module projects to
+    always use the most recent datestamp, not the first datestamp we find.
+  o #319033 by Dave Reid, Ralf, dww: Fixed the order of the "Available
+    updates" report so that it is sorted by project name, not by the
+    names of modules included in each project.
+
+Other changes:
+  o #162788 by dww, Dave Reid, JohnAlbin: Added a setting to check update
+    status on disabled modules.
+  o #243253 by dww: Put in a check while fetching available updates to
+    see if the server was reachable and to bail out before trying to
+    fetch data for all projects if a server is down.
+  o #431148 by pwolanin, JoshuaRogers, dww: Made it easier to visually
+    distinguish between security updates and regular updates.
+  o #445748 by dww: Added a hook_update_status_projects_alter() for
+    modules that wish to modify data in update status module.
+  o #314009 by igor.stamatovski: Added a Macedonian (mk) translation.
+
+
+Update Status 5.x-2.3  (2008-08-14)
+  o #217977 by dww: Fixed bug in Spanish (es) translation where the list
+    of included modules was not printed due to a missing '%modules'.
+  o #238564 by scor: Made the link text in a watchdog message translatable.
+  o #275051 by dalin: Fixed bug where the notification threshold setting
+    wasn't working due to a typo in the name of the variable. This bug
+    was introduced in version 5.x-2.1 via #197186.
+  o #295152 by dww: Fixed version comparison bug that resulted in '5.1'
+    being confused with '5.10'.  Arguably this is a PHP bug, but we need
+    to work-around it for now, anyway.
+  o #232041 by dww: Increased the PHP time limit while fetching updates.
+
+
+Update Status 5.x-2.2  (2008-02-04)
+  o #216750 by dww: Fixed an important bug where releases from higher
+    branches than the currently installed version were not ignored in
+    all cases. This resulted in bogus security warnings, and faulty
+    information printed about development snapshot releases (#216309).
+  o #216366 by dww: Restored ability to ignore projects that are
+    missing security updates or have been unpublished/revoked. This
+    bug was introduced in version 5.x-2.1 via #197186.
+  o #216632 by webernet, dww: Improved accessibility of the available
+    updates report by adding alt tags and title attributes to the icons.
+  o #216008 by Greggus: Added a Polish (po) translation.
+  o #217771 by dww: Added some CSS to prevent wrapping of release dates
+    when viewing the available updates report with a narrow window.
+
+
+Update Status 5.x-2.1  (2008-01-30)
+  o #178892 by webchick: Use an API function to get the private key.
+  o #184900 by webernet: Fixed bug where email wasn't getting sent in
+    some cases when it should have been.
+  o #196775 by dww: Fixed a bug that caused truncated error messages to
+    be displayed when the site is running an insecure version of core.
+  o #197186 by dww: Backport of major update.module patch from D6 core:
+    - Fixed bug where update_status would not warn sites when a
+      currently installed release or an entire project being used has
+      been unpublished.
+    - Added support for project maintainers that want to support
+      multiple major versions (branches) for one version of core.
+    - Added support for flagging both individual releases and projects
+      as "unsupported" or "insecure", to pave the way for new
+      workflows (instead of just unpublishing things) for the Drupal
+      security team and project maintainers.
+    - Reorganized and simplified some code to avoid duplication and
+      needless complications.
+  o #208687 by dww: Fixed major bug that printed bogus results and
+    recommended that users downgrade to an older version when a site
+    upgraded a module or Drupal core but did not manually refresh the
+    available update data. Now, before using the cached available
+    update data, the code ensures that none of the .info files have
+    been changed since the last time it fetched data.
+  o #158526 by dww: Changed the hook_version_alter() API exposed by
+    update_status to be hook_system_info_alter() so that all
+    attributes in the .info files can be altered. This API change is
+    required to fix some bugs in the http://drupal.org/cvs_deploy
+    module, which is the only known user of this API.
+  o #200028 by agentrickard, dww: Significantly enhanced performance
+    of the admin/* pages by adding DB caching for the list of
+    installed modules and their current status. The cache is cleared
+    every time new available release data is fetched, every time the
+    admin visits the modules page, status report, or available updates
+    report, or every hour if nothing else clears it before that.
+
+
+Update Status 5.x-2.0  (2007-08-14)
+  o #165695: Added another database update to completely rebuild the menu
+    since the "Check manually" path moved to "admin/logs/updates/check".
+  o #165638: Improved usability for the "Check manually" link on the
+    update report by wrapping it in () and adding some padding.
+  o #155483: Simplified the description of the email notification setting.
+  o #155878: Re-use the same t() string for both the watchdog() and
+    drupal_set_message() when fetching information about available updates.
+  o Added or updated translations:
+    - Czech (cs)
+    - German (de)
+    - Greek (el)
+    - Hungarian (hu)
+    - Italian (it)
+    - Norwegian (nb)
+
+
+Update Status 5.x-2.0-rc2  (2007-08-07)
+  o #155483: Backported numerous improvements from update.module in 6.x core:
+  == General ==
+    - The module now nags site administrators on admin/* if the site is
+      missing a security update.
+    - Added a drupal_set_message() when fetching data manually (success
+      or failure) and cleaned up wording of watchdog().
+    - Added watchdog() error message when you can't fetch any data.
+    - The menu callback for manually checking is now at
+      'admin/logs/updates/check'.
+    - Lots of internal improvements to the code to improve clarity.
+  == Available updates report ==
+    - Used format_interval() for the "Last checked:" date and time.
+    - Removed the "Ignored" part whenever a row on the update report is
+      yellow, except for when something is ignored because of the settings.
+    - Changed the wording when the "Notification threshold" is set to
+      "Only security updates", and you have a non-security update
+       available. Now, it just says "Update available".
+    - Added support for a variable to override the default fetch URL.
+  == Settings page ==
+    - Moved the email notification setting to the top of the page.
+    - Renamed "Error threshold" to "Notification threshold" and improved
+      the description.
+    - Fixed t() bug in form_set_error() during email validation.
+    - Removed the setting to opt out of the usage reporting.  No one
+      who's willing to run this module in the first place could
+      possibly complain about the random string appended as a query arg
+      on the fetch URL, and the extra setting needlessly complicates
+      the settings page.
+  o Fixed a notice on the status report page when the available update
+    cache is empty: we were generating a 1/2 constructed line for core
+    and a full line for contrib.  Now, if the cache is empty, we just
+    generate the warning line for core and nothing for contrib.
+  o Fixed minor bug: the status report text was missing a space.
+  o Fixed bug caused by variable name typo: $base_util vs. $base_url.
+  o Made the status report table all 100% wide for a more consistent UI.
+  o #155281: Use flexible path for serving/fetching release history.
+  o #155428: Removed the human-readable menu path from the notification
+    email since it was considered a burden to translate.
+  o Added an implementation of hook_uninstall() to purge variables.
+    It's important that when sites running this want to upgrade to 6.x
+    core that they first uninstall this module, or they'll be left with
+    stale variables.
+  o Updated README.txt to reflect recent changes and to mention
+    uninstalling the module before upgrading to 6.x core.
+
+
+Update Status 5.x-2.0-rc  (2007-06-27)
+  o #124715: Added setting for email notifications when updates are available.
+  o #154868: Fixed bugs and inconsistencies with security update warnings.
+  o #153757: Renamed the "Warning threshold" setting to "Error threshold".
+  o #149079: A few CSS tweaks and fixes for recommended version:
+    - Renamed the CSS class to "version-recommended-strong" to indicate
+      it's the strongly recommended version among many (the old name,
+      "version-recommended-not-latest" isn't good since "Latest" isn't
+      the only possible thing we're distinguishing against).
+    - Fixed classes so that if we're recommending a security release,
+      it gets the subtle "zebra" stripe, too.
+  o #154689: Restored the CSS classes on the per-project settings table,
+    (and made them consistent across all rows), but made them more
+    specific to avoid name conflicts.
+  o Fixed minor glitch in the logic for when to display the
+    'Development version'.
+  o Fixed bug in hook_version_alter() invocation for CVS deploy
+    integration (http://drupal.org/project/cvs_deploy).
+  o Updated screenshot to show off recent UI and functionality improvements.
+
+Update Status 5.x-2.0-beta2  (2007-06-26)
+  == Bug fixes ==
+  o #153756: Fixed math bug when comparing the timestamps of dev snapshots.
+  o #153798: Fixed warning logic for development snapshots and flag
+    security updates.
+  o #153502: Made update_status E_ALL compliant.
+  o #154540: Minor wording fixes for the UI and help texts.
+  o #153569: Fixed obscure CSS problem for Firefox 2.0.0.4 on Windows XP.
+  o #154689: Fixed settings page bug in marvin theme due to CSS class conflict.
+  o Don't clear the update_status cache when an admin saves the system
+    themes page, since in 5.x, there is no information about theme updates.
+  == New features and enhancements ==
+  o #153741: Added support for optionally reporting anonymous usage statistics.
+  o #153757: Added a setting to only warn when there are security updates.
+  o #154049: Added a setting to control how frequently to check for updates.
+  o #146564: Major performance gain for fetching available update data:
+    directly fetch the .xml files instead of going through the Drupal menu
+    callback inside project_release.module.
+  o #153783: Don't hard-code dark black (#000) in update_status.css, use
+    theme's default foreground color.
+  o #149079: Further visual clarity about the recommended version: use a
+    subtle "zebra stripe" with a slightly lighter shade of the status
+    color for the entire recommended version line.
+  o Completely re-wrote the README to match 5.x-2.* reality.
+
+Update Status 5.x-2.0-beta  (2007-06-20)
+  o Major re-write to use a whole new system for finding available updates.
+  o Lots of improvements to the user interface and internals of the code.
+  o #125742: The status report indicates updates involving security issues.
+  o #149918: Add support for "Also available" entries in the status report.
+  o #150316: All CVS-specific code has been moved into the CVS Deploy module:
+      http://drupal.org/project/cvs_deploy
+  o #144694: Available update data now stored in the {cache} table instead
+      of the {variables} table for better performance and functionality.
+  o #149921: Clear update_status cache when you enable/disable modules.
+  o #145095: Core modules were not always considered part of Drupal core.
+  o #141507: Fixed bug in the links to manually run cron to find updates.
+  o #151734: Display the administrator's note when a project is
+      ignored due to the settings.
+  o #149079: Highlight the 'Recommended' version if there are other
+      things listed ('Latest version', 'Also available', etc).
+
+Update Status 5.x-1.2  (2007-04-13)
+  Fixed broken notify on administer and status pages.
+
+Update Status 5.x-1.1  (2007-04-13)
+  o #123100: Provide a graceful error message and exit if 'gzinflate' cannot be found.
+  o Attempt to guess at the project and version for projects checked out of CVS.
+  o #131049: (by Senpai) Fix for CSS to ensure the font color is visible with our backgrounds.
+  o #124377: Add a link to the release notes.
+  o #125489: Include date with available version.
+  o #124440 and #126298: Settings page, set to check or not, and notes to remind yourself why.
+
+Update Status 5.x-1.0  (2007-02-25)
+  Initial release.

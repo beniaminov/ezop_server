@@ -1,0 +1,469 @@
+<?php
+
+//$Id: sitemenu.module,v 1.23.2.16 2007/06/01 04:38:10 kbahey Exp $
+
+// Copyright 2005 Khalid Baheyeldin http://2bits.com
+
+// W3C compliant patch by Méléis 2005/09/07 http://www.meleis.yi.org/
+
+define('SITEMENU_VOCAB_TYPE_NONE',     0);
+define('SITEMENU_VOCAB_TYPE_IMAGE',    1);
+define('SITEMENU_VOCAB_TYPE_FORUM',    2);
+define('SITEMENU_CACHING',             'sitemenu_caching');
+define('SITEMENU_OVERVIEW_TITLE',      'sitemenu_overview_title');
+define('SITEMENU_DESCRIPTION',         'sitemenu_description');
+define('SITEMENU_OVERVIEW_VOCAB',      'sitemenu_overview_vocab');
+define('SITEMENU_BLOCK_TITLE',         'sitemenu_block_title');
+define('SITEMENU_NODE_COUNT',          'sitemenu_node_count');
+define('SITEMENU_AUTHOR_AND_COMMENTS', 'sitemenu_author_and_comments');
+define('SITEMENU_MAX_ROWS',            'sitemenu_max_rows');
+define('SITEMENU_FOOTER',              'sitemenu_footer');
+define('SITEMENU_SHOW_VOCAB_TITLES',   'sitemenu_show_vocab_titles');
+
+function sitemenu_help($section) {
+  switch ($section) {
+    case 'admin/help#sitemenu':
+      $output = t("This module provides a site map based on the hierarchy of the site's taxonomy. The site map page shows all vocabularies, terms, and recent nodes within each term. It also provides a block that can be used in the side bar as a navigation menu.");
+      break;
+  }
+
+  return $output;
+}
+
+function sitemenu_menu($may_cache) {
+  $items = array();
+
+  if ($may_cache) {
+    $items[] = array(
+      'path'     => 'sitemenu',
+      'title'    => variable_get('SITEMENU_OVERVIEW_TITLE', t('Site map')),
+      'access'   => user_access('use sitemenu'),
+      'callback' => 'theme',
+      'callback arguments' => array('sitemenu_page'),
+      'type' => MENU_SUGGESTED_ITEM,
+      );
+
+    $items[] = array(
+      'path' => 'admin/settings/sitemenu',
+      'title' => t('Sitemenu'),
+      'description' => t('Settings for the sitemenu module.'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('sitemenu_settings'),
+      'type' => MENU_NORMAL_ITEM,
+      );
+  }
+
+  return $items;
+}
+
+function sitemenu_perm() {
+  return array ('use sitemenu', 'administer sitemenu');
+}
+
+function sitemenu_settings() {
+
+  cache_clear_all('sitemenu', 'cache', TRUE);
+
+  $vocabularies = taxonomy_get_vocabularies();
+  $select[0] = '<'. t("none") .'>';
+  foreach ($vocabularies as $vocabulary) {
+    $select[$vocabulary->vid] = $vocabulary->name;
+  }
+
+  $form[SITEMENU_DESCRIPTION] = array(
+    '#type' => 'textarea',
+    '#title' => t('Description'),
+    '#default_value' => variable_get(SITEMENU_DESCRIPTION, t('This is the site map page.')),
+    '#cols' => 70,
+    '#rows' => 7,
+    '#description' => t('This text will be displayed at the top of the site menu page'),
+    );
+
+  $form[SITEMENU_OVERVIEW_VOCAB] = array(
+    '#type' => 'select',
+    '#title' => t('Omitted vocabularies'),
+    '#default_value' => variable_get(SITEMENU_OVERVIEW_VOCAB, array()),
+    '#options' => $select,
+    '#multiple' => TRUE,
+    '#description' => t('Select vocabularies which should be <b>omitted</b> from listings.'),
+    );
+
+  $form[SITEMENU_OVERVIEW_TITLE] = array(
+    '#type' => 'textfield',
+    '#title' => t('Navigation link text'),
+    '#required' => TRUE,
+    '#default_value' => variable_get(SITEMENU_OVERVIEW_TITLE, t('site map')),
+    '#size' => 35,
+    '#maxsize' => 255,
+    '#description' => t('The text in the navigation link which points to the site menu page.')
+    );
+
+  $form[SITEMENU_BLOCK_TITLE] = array(
+    '#type' => 'textfield',
+    '#title' => t('Block title text'),
+    '#required' => TRUE,
+    '#default_value' => variable_get(SITEMENU_BLOCK_TITLE, t('Menu')),
+    '#size' => 35,
+    '#maxsize' => 255,
+    '#description' => t('If configured as a block, this text shows as the block title.'),
+    );
+
+  $form[SITEMENU_NODE_COUNT] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show number of nodes for each term'),
+    '#default_value' => variable_get(SITEMENU_NODE_COUNT, 1),
+    );
+
+  $form[SITEMENU_CACHING] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Cache the taxonomy tree for performance.'),
+    '#default_value' => variable_get(SITEMENU_CACHING, 1),
+    '#description' => t('This reduces the load of generating the site menu block for every page, as well as the site map page. It may be suitable only for sites with one language. In some cases, using the i18n module is incompatible with this caching option. In this case, uncheck this box.'),
+    );
+
+  $form[SITEMENU_AUTHOR_AND_COMMENTS] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show Author and number of Comments (in mousover)'),
+    '#default_value' => variable_get(SITEMENU_AUTHOR_AND_COMMENTS, 1),
+    );
+
+  $form[SITEMENU_SHOW_VOCAB_TITLES] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show vocabulary titles'),
+    '#default_value' => variable_get(SITEMENU_SHOW_VOCAB_TITLES, 1),
+    );
+
+  $form[SITEMENU_MAX_ROWS] = array(
+    '#type' => 'textfield',
+    '#title' => t('Number of nodes to show'),
+    '#required' => TRUE,
+    '#default_value' => variable_get(SITEMENU_MAX_ROWS, 0),
+    '#size' => 10,
+    '#maxsize' => 10,
+    '#description' => t('Number of nodes to show per taxonomy term. Set to 0 if you do not want nodes to listed.'),
+    );
+
+  $form[SITEMENU_FOOTER] = array(
+    '#type' => 'textarea',
+    '#title' => t('Closing description'),
+    '#default_value' => variable_get(SITEMENU_FOOTER, null),
+    '#cols' => 70,
+    '#rows' => 7,
+    '#description' => t('This text will be displayed at the bottom of the site menu page'),
+    );
+
+  return system_settings_form($form);
+}
+
+function _sitemenu_contents() {
+  $boxes = _sitemenu_overview('block');
+  return _sitemenu_print_boxes($boxes, 'block');
+} 
+
+/**
+ * Check whether the vocabulary is used by a known core 
+ * module, image or forum.
+ *
+ * @param int $vid
+ * @return boolean
+ */
+function _sitemenu_check_vid($vid) {
+
+  $vocab_type = SITEMENU_VOCAB_TYPE_NONE;
+
+  if ($vid == variable_get('image_gallery_nav_vocabulary', '')) {
+    $vocab_type = SITEMENU_VOCAB_TYPE_IMAGE;
+  }
+  elseif ($vid == variable_get('forum_nav_vocabulary', '')) {
+    $vocab_type = SITEMENU_VOCAB_TYPE_FORUM;
+  }
+
+  return $vocab_type;
+}
+
+/**
+ * Get only requested vocabularies
+ *
+ * @param string $type Node type name
+ * @return array
+ */
+function _sitemenu_get_vocabularies() { 
+  $vocabularies = taxonomy_get_vocabularies();    
+  $omits = variable_get(SITEMENU_OVERVIEW_VOCAB, array()); //omit undesired vocabularies from listing  
+  foreach ($omits as $omit) {
+    unset($vocabularies[$omit]);
+  }
+  return $vocabularies;
+}  
+
+function _sitemenu_inject_nodes($tree, $mode = 'page') {
+  $tree_node = $tree;
+  if ( $mode == 'page' ) {
+    $max_rows = variable_get(SITEMENU_MAX_ROWS, 0);
+    $get_author_and_comments = variable_get(SITEMENU_AUTHOR_AND_COMMENTS, 1);
+
+    // iterate over the tree backwards, so I don't trip on the new items
+    for ($i=count($tree)-1; $i>=0 ; $i--) {
+      $term = $tree[$i];
+      $sql = "SELECT n.nid, n.title, n.type ";
+      if ($get_author_and_comments) {
+        $sql .= ", u.uid, u.name ";
+      }
+      $sql .= "FROM {term_node} r LEFT JOIN {node} n ON r.nid = n.nid ";
+      if ($get_author_and_comments) {
+        $sql .= "LEFT JOIN {users} u ON n.uid = u.uid ";
+      }
+      $sql .= "WHERE n.status = '1' AND r.tid = %d ORDER BY n.changed ASC";
+      $result = db_query_range($sql, $term->tid, 0, $max_rows);
+      while ($node = db_fetch_object($result)) {
+        if ($get_author_and_comments) {
+          $detail = t('Author: ') . $node->name;
+          if (module_exists('comment')) {
+            $detail .= t(", comments: ") . comment_num_all($node->nid);
+          }
+          $link = l($node->title, "node/$node->nid", array ('title' => $detail)); 
+        }
+        else {
+          $link = l($node->title, "node/$node->nid"); 
+        }
+        $term_node = (object)(array ('nid' => $node->nid, 'depth' => $term->depth+1, 'link' => $link));
+        $part1 = array_slice($tree_node, 0, $i+1);
+        $part2 = array_slice($tree_node, $i+1, count($tree_node));
+        $part1[] = $term_node;
+        $tree_node = array_merge($part1, $part2);
+      }
+    }
+  }
+  
+  return $tree_node;
+}
+
+/**
+ * accepts an optional param for restricting nodes to a particular type
+ * @param string $type Node type name. Default to invalid node type '(integer) 0'
+ * @param string $mode Only 'page' mode can have node counts optionally displayed
+ * @return array Array of outline boxes, possibly empty, but never NULL
+ */
+function _sitemenu_overview($mode = 'page') {
+  $n = 0;
+  $vocabularies = _sitemenu_get_vocabularies();
+  $use_cache = variable_get(SITEMENU_CACHING, 1);
+  foreach ($vocabularies as $vocabulary) {
+    $tree_nodes = NULL;
+    if ($use_cache) {
+      $cache_id = 'sitemenu:' . $vocabulary->vid . '_' . $mode;
+      if ($cached = cache_get($cache_id)) {
+        $tree_nodes = unserialize($cached->data);
+      }
+    }
+
+    if (!$tree_nodes) {
+      $tree = taxonomy_get_tree($vocabulary->vid);
+      $get_node_count = variable_get(SITEMENU_NODE_COUNT, 1);
+      if ($get_node_count && $mode == 'page') {
+        // append the node count to each term name
+        for ($m=0; $m<count($tree); $m++) {
+          if ($count = taxonomy_term_count_nodes($tree[$m]->tid)) {
+            $tree[$m]->count = $count;
+          } 
+        }
+      }
+      $tree_nodes = _sitemenu_inject_nodes($tree, $mode);
+      if ($use_cache) {
+        cache_set($cache_id, 'cache', serialize($tree_nodes), CACHE_TEMPORARY);
+      }
+    }  
+
+    $vocab_type = _sitemenu_check_vid($vocabulary->vid);
+
+    $boxes[$n]['content'] = theme('sitemenu_render_outline', $tree_nodes, $vocab_type);
+    $boxes[$n]['subject'] = $vocabulary->name;
+    $n++;
+  }
+  return $boxes ? $boxes : array();
+}
+
+/**
+ * Build the themed set of outline boxes
+ *
+ * @param array $boxes Each row has 'subject' and 'content' subrows
+ * @param string $mode If $mode == 'page', add pre- and post- content from settings
+ * @return string themed HTML
+ */
+function _sitemenu_print_boxes($boxes, $mode = 'page') {
+  if ($mode == 'page') {
+    $output .= variable_get(SITEMENU_DESCRIPTION, '');
+  }
+  foreach ($boxes as $box) {
+    $subject = variable_get(SITEMENU_SHOW_VOCAB_TITLES, 1) ? $box['subject'] : '';
+    if ($mode == 'page') {
+      $output .= theme('box', $subject, $box['content']);
+    }
+    else {
+      $output .= theme('sitemenu_box', $subject, $box['content']);
+    }
+  }
+  if ($mode == 'page') {
+    $output .= variable_get(SITEMENU_FOOTER, '');
+  }
+  return $output;
+}
+
+/**
+ * Drupal Hooks implementation
+ */
+
+
+/**
+ * hook_block
+ */
+function sitemenu_block($op = 'list', $delta = 0) {
+  $title = variable_get(SITEMENU_BLOCK_TITLE, t('Menu'));
+
+  switch ($op) {
+    case 'list':
+      $block[0]['info'] = $title;
+      break;
+
+    case 'view':
+      switch ($delta) {
+        case 0:
+          $block['subject'] = $title;
+          $block['content'] = _sitemenu_contents();
+          break;
+      }
+      break;
+
+    default:
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Themeable elements
+ */
+
+/**
+ * Theme the box containing the outline for a given vocabulary
+ *
+ * @param string $subtitle 
+ * @param string $content
+ * @return string Themed HTML
+ * @see theme_sitemenu_render_outline for the generation of $content
+ * @see _sitemenu_overview() which actually uses this function
+ */
+function theme_sitemenu_box($subtitle, $content) {
+  $output  = "<h3>$subtitle</h3>";
+  $output .= $content;
+  return $output;
+}
+
+/**
+ * Theme the main sitemenu page
+ *
+ * @return string HTML
+ */
+function theme_sitemenu_page() {
+  if (user_access("use sitemenu")) {
+    $title = variable_get(SITEMENU_OVERVIEW_TITLE, t('site map'));
+    $boxes = _sitemenu_overview();
+    $output = _sitemenu_print_boxes($boxes, 'page');
+    return $output;
+  }
+}
+
+/**
+ * Theme a vocabulary outline
+ *
+ * @param array $tree Vocabulary tree
+ *
+ * @param string $vocab_type Node type for the vocabulary
+ *
+ * @return string Themed HTML
+ */
+function theme_sitemenu_render_outline($tree, $vocab_type) {
+  global $ul;
+
+  $old_depth = -1;
+  $output = "";
+
+  for ($m = 0; $m < count($tree); $m++) {
+    $term = $tree[$m];
+    
+    if ($term->depth > $old_depth) {
+      $output .= "<ul class=\"menu\">\n";
+      $ul++;
+    }
+    if ($term->depth < $old_depth) {
+      $delta = $old_depth - $term->depth;
+      $output .= str_repeat("</ul>\n", $delta);
+      $output .= '</li>'."\n";
+    }
+    
+    $old_depth = $term->depth;
+
+    switch($vocab_type) {
+      case SITEMENU_VOCAB_TYPE_IMAGE:
+        $path = 'image/tid/';
+        break;
+      case SITEMENU_VOCAB_TYPE_FORUM:
+        $path = 'forum/';
+        break;
+      default:
+        $path = 'taxonomy/term/';
+        break;
+    }
+
+    $count = ($term->count) ? ' (' . $term->count . ')' : '';
+    if (isset($term->description)) {
+      // use the description as a title attribute for terms
+      $link = l($term->name . $count, $path . $term->tid,  array ("title" => $term->description));
+    }
+    else {
+      if (isset($term->link)) {
+        // This is a node
+        $link = $term->link . $count;
+      }
+      else {
+        $link = l($term->name . $count, $path . $term->tid );
+      }
+    }
+
+    // if children exist, output with proper class and id attributes, else, output item with
+    // specified link or default link
+    if ($term->depth < $tree[$m+1]->depth) {
+      $output .= "<li class=\"expanded\">". $link ."\n";
+    }
+    else {
+      $output .= "<li class=\"leaf\">". $link ."</li>\n";  
+    }
+    unset($description);
+  }
+  if ($term->depth >= 1) { $output .= '</ul></li>'."\n"; }
+  if ($term->depth == 0) { $output .= '</ul>'."\n"; }
+  $output .= str_repeat("</ul>\n", $term->depth);
+  return $output;
+}
+
+function sitemenu_taxonomy($op, $type, $object) {
+  // Expire the sitemenu cache when a taxonomy is added/changed/deleted
+  $use_cache = variable_get(SITEMENU_CACHING, 1);
+  if ($use_cache) {
+    cache_clear_all('sitemenu', 'cache', TRUE);
+  }
+}
+
+function sitemenu_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  // Expire the sitemenu cache when a node is inserted/deleted/updated
+  switch($op) {
+    case 'delete':
+    case 'insert':
+    case 'update':
+      $use_cache = variable_get(SITEMENU_CACHING, 1);
+      if ($use_cache) {
+        cache_clear_all('sitemenu:', 'cache', TRUE);
+      }
+      break;
+  }
+}

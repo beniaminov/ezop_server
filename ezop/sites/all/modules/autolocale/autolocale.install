@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function autolocale_install() {
+  // Check whether we run later than install time
+  if (!function_exists('install_main')) {
+    drupal_set_message(t('Now you can <a href="@url">import interface translations</a> automatically', array('@url' => url('admin/settings/locale/language/autoimport'))));
+  }
+}
+
+/**
+ * Import all PO files for the given locale.
+ *
+ * @param langcode
+ *   The code of the language as used in filenames and in the database
+ */
+function _autolocale_import_po_files($langcode) {
+  // Try to set time limit to unlimited if host allows that
+  @set_time_limit(0);
+
+  // Get a list of modules turned on plus the autolocale module
+  $result = db_query("SELECT name, filename FROM {system} WHERE status = 1 OR name = 'autolocale'");
+  while ($component = db_fetch_object($result)) {
+    _autolocale_import_po_files_for_component($langcode, $component);
+  }
+}
+
+/**
+ * Import all PO files for one component to the given locale.
+ *
+ * @param langcode
+ *   The code of the language as used in filenames and in the database
+ * @param component
+ *   An object representation of a {system} table row
+ */
+function _autolocale_import_po_files_for_component($langcode, $component) {
+  // Although the locale module is turned on this is not included
+  // This is not only used from here, so ensure we have locale.inc included
+  include_once 'includes/locale.inc';
+
+  // PO files under the component folder
+  $podir = dirname($component->filename) . '/po/';
+
+  // Search for filename.langcode.po named files
+  // Could have been done using glob(), but it is disabled on many shared hosts
+  $files = array();
+  if (is_dir($podir) && ($dh = opendir($podir))) {
+    while (($file = readdir($dh)) !== false) {
+      if (preg_match("!^.*\\.$langcode\\.po$!", $file) && is_readable($podir . $file)) {
+        $files[] = $podir . $file;
+      }
+    }
+    closedir($dh);
+  }
+ 
+  // Add langcode.po file if exists and readable
+  if (is_readable($podir. $langcode .'.po')) {
+    $files[] = $podir . $langcode . '.po';
+  }
+
+  // Import all PO files (this may take a while...)
+  foreach ($files as $filepath) {
+    $file = (object) array('filepath' => $filepath);
+    // Keep existing translations, so site specific modifications are left intact
+    _locale_import_read_po('db-store', $file, 'keep', $langcode);
+    drupal_set_message(t('Imported translation file @filename', array('@filename' => $filepath)));
+    watchdog('locale', t('Imported %filepath into %langcode.', array('%filepath' => $filepath, '%langcode' => $langcode)));
+  }
+}
+
+/**
+ * Keep installer locale in database and import all PO files.
+ *
+ * Ensure that this runs *install time* (ie. it is a required module in the install profile),
+ * or the locale addition and autoimport will not work. See localized.profile for an
+ * installation profile for this module.
+ */
+function _autolocale_install_po_files() {
+  global $install_locale;
+
+  // If there is a non-English locale used to install
+  if (!empty($install_locale) && ($install_locale != 'en')) {
+
+    // Although the locale module is turned on this is not included
+    include_once 'includes/locale.inc';
+
+    // Add language into database
+    $isocodes = _locale_get_iso639_list();
+    db_query('UPDATE {locales_meta} SET isdefault = 0');
+    db_query("INSERT INTO {locales_meta} (locale, name, enabled, isdefault) VALUES ('%s', '%s', %d, %d)", $install_locale, $isocodes[$install_locale][0], 1, 1);
+    $initialized = TRUE;
+    
+    // Import files for the install locale
+    _autolocale_import_po_files($install_locale);
+  }
+}

@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * Implementation of hook_help()
+ *
+ * @param section
+ *   Drupal path to provide help for
+ */
+function autolocale_help($section) {
+  if ($section == 'admin/settings/locale/language/autoimport') {
+    return t('Automatic import scans all enabled modules and themes for interface translation files under their directories and imports all files found for the selected language. This operation could be resource intensive, and is irreversible.');
+  }
+  return '';
+}
+
+/**
+ * Implementation of hook_menu()
+ *
+ * @param may_cache
+ *   Whether we are about to return menu items to cache
+ * @return
+ *   An array of menu items
+ */
+function autolocale_menu($may_cache) {
+  $items = array();
+
+  if (!$may_cache) {
+    $items[] = array(
+      'path' => 'admin/settings/locale/language/autoimport',
+      'title' => t('Automatic import'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('autolocale_autoimport_form'),
+      'access' => user_access('administer locales'),
+      'weight' => 15,
+      'type' => MENU_LOCAL_TASK
+    );
+  }
+
+  return $items;
+}
+
+/**
+ * Menu callback to wipe one language and automatically import PO files
+ *
+ * @param langcode
+ *   Language code as used in filenames and in the database
+ */
+function autolocale_autoimport_form() {
+  $languages = _autolocale_languages();
+  
+  // No foreign language enabled
+  if (count($languages['name']) == 0) {
+    drupal_set_message(t('No foreign language enabled on your site. You need to <a href="@urladd">add</a> and <a href="@urlenable">enable</a> at least one foreign language to import strings for.', array('@urladd' => url('admin/settings/locale/language/add'), '@urlenable' => url('admin/settings/locale'))), 'error');
+    return array();
+  }
+  
+  // Build language selection form
+  $form = array();
+  $form['language'] = array(
+    '#type' => 'radios',
+    '#title' => t('Language'),
+    '#default_value' => array_shift(array_keys($languages['name'])),
+    '#options' => array_map('check_plain', array_map('t', $languages['name'])),
+    '#description' => t('Select the language to autoimport translation files into.'),
+  );
+  
+  $form['cleanup'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Remove existing translations first'),
+    '#default_value' => TRUE,
+    '#description' => t('It is advised to remove the existing translations in the given language for performance reasons, if you have no custom strings added, which are not available in the PO files to import. This removes strings left from upgrades or previously tried and removed modules.')
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Perform automatic import'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implementation of hook_form_validate()
+ */
+function autolocale_autoimport_form_validate($form_id, $form_values) {
+  $languages = _autolocale_languages();
+  if (!in_array($form_values['language'], array_keys($languages['name']))) {
+    form_set_error('language', t('Invalid language code (@langcode) choosen for automatic import.', array('@langcode' => $form_values['language'])));
+  }
+}
+
+/**
+ * Implementation of hook_form_submit()
+ */
+function autolocale_autoimport_form_submit($form_id, $form_values) {
+  $languages = _autolocale_languages();
+  $language = t($languages['name'][$form_values['language']]);
+
+  if ($form_values['cleanup']) {
+    db_query("DELETE FROM {locales_target} WHERE locale = '%s'", $form_values['language']);
+    drupal_set_message(t('Existing translations removed from @language.', array('@language' => $language)));
+    watchdog('locale', t('Existing translations removed from @language.', array('@language' => $language)));
+  }
+
+  // Use the same routine we used in install time
+  include_once 'autolocale.install';
+  _autolocale_import_po_files($form_values['language']);
+  _autolocale_clear();  
+  drupal_set_message(t('New @language strings imported.', array('@language' => $language)));
+  watchdog('locale', t('New @language strings imported.', array('@language' => $language)));
+  
+  return 'admin/settings/locale';
+}
+
+/**
+ * Implementation of hook_form_alter()
+ *
+ * The module management form uses a two step process. Once modules are enabled/installed,
+ * Drupal redirects to the confirm page (even if that is not required), so we
+ * cannot stick submit functions before and after the form handler in the same
+ * HTTP request. This is why we need to first store the previous state in the
+ * session, then compare that with the new state of modules when we get to
+ * the final stage.
+ *
+ * WARNING: since we need to bridge two HTTP requests, if multiple admins
+ * fiddle with modules at the same time, things might get interesting. This
+ * is not a real problem until we deal with modules getting disabled.
+ */
+function autolocale_form_alter($form_id, &$form) {
+  // Skip confirm page alltogether (we cannot identify it by the form id
+  // or form base,/ because the confirm page might not show any form at all)
+  if (($form_id == "system_modules") && ($_GET['q'] != 'admin/build/modules/list/confirm')) {
+
+    // Determine what does the form say about modules enabled at the moment
+    if (is_array($form['status']['#default_value'])) {
+      $enabled_now = $form['status']['#default_value'];
+
+      // We have a previous list to compare to
+      if (is_array($_SESSION['autolocale_modules'])) {
+        // Does the list of enabled modules changed since we have last been here?
+        $new = array_diff($enabled_now, $_SESSION['autolocale_modules']);
+        if (count($new)) {
+          include_once 'autolocale.install';
+          // Import all PO files for all enabled languages
+          $languages = locale_supported_languages();
+          $langcodes = array_keys($languages['name']);
+          foreach($new as $module) {
+            $component = db_fetch_object(db_query("SELECT name, filename FROM {system} WHERE name = '%s'", $module));
+            foreach($langcodes as $langcode) {
+              _autolocale_import_po_files_for_component($langcode, $component);
+            }
+          }
+          _autolocale_clear();
+        }
+      }
+
+      // Store modules for next reload
+      $_SESSION['autolocale_modules'] = $enabled_now;
+    }
+  }
+}
+
+/**
+ * Helper function to get the languages we can work with.
+ */
+function _autolocale_languages() {
+  static $languages = NULL;
+  if (!isset($languages)) {
+    $languages = locale_supported_languages();
+    unset($languages['name']['en']);
+  }
+  return $languages;
+}
+
+/**
+ * Clear every affected cache. To be called after an import.
+ */
+function _autolocale_clear() {
+  cache_clear_all('*', 'cache', TRUE);
+  cache_clear_all('*', 'cache_page', TRUE);
+  cache_clear_all('*', 'cache_menu', TRUE);
+  cache_clear_all('*', 'cache_filter', TRUE);
+}

@@ -1,0 +1,171 @@
+<?php
+// $Id: taxonomy_defaults.module,v 1.11.2.3 2006/12/20 09:34:11 heine Exp $
+
+/**
+ * @file
+ * Taxonomy defaults - allows assignment of default terms to node types, either
+ *  - hidden, added after node submission. Change is not possible.
+ *  - preselected in the category form for vocabularies assigned to the node type. Change is allowed.
+ */
+
+/**
+ * Implementation of hook_help().
+ *
+ */
+function taxonomy_defaults_help($section) {
+  switch ($section) {
+    case 'admin/content/taxonomy/taxonomy_defaults':
+      $output  = '<p>'. t("Below you may select default terms for each content type. Check the 'active' box next to the vocabulary, then select the terms.") .'</p>' ;
+      $output .= '<p>'. t('If <strong>not active</strong>, this vocabulary is not enabled for this content type (on the <a href="@url">categories page</a>). The terms will be added to the content without appearing on the add and edit pages.', array('@url' => url('admin/content/taxonomy'))) .'</p>';
+      $output .= '<p>'. t('If <strong>active</strong>, these taxonomy terms will simply be pre-selected on the submission page for this content type.') .'</p>';
+      return $output;
+  }
+}
+
+
+/**
+ * Adds the defaults for active vocabularies as preselected terms to '$node->taxonomy'
+ * This requires a weight lower than taxonomy.module.
+ */
+function taxonomy_defaults_form_alter($form_id, &$form) {
+  // Only alter node forms
+  if (isset($form['type']) && $form['type']['#value'] .'_node_form' == $form_id) {
+    $node = $form['#node'];
+    // Do not preselect terms on nodes that already have been edited
+    if (!isset($node->nid)) {
+     // Add the default 'pre-selected' terms to $node->taxonomy
+     foreach (taxonomy_get_vocabularies($node->type) as $vid => $vocab) {
+       if (variable_get("taxdef_{$node->type}_{$vid}_active", FALSE)) {
+         $default_tids = variable_get("taxdef_{$node->type}_{$vid}", array());
+         foreach ($default_tids as $default_tid) {
+            $term = taxonomy_get_term($default_tid);
+            $form['#node']->taxonomy[$default_tid] = $term;
+         }
+       }
+     }
+    }
+  }
+}
+
+/**
+ * Adds selected default terms from non-active vocabularies to newly created nodes
+ */
+function taxonomy_defaults_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  if ($op == 'submit') {
+    $taxonomy = $node->taxonomy;
+    $type_vocabularies = taxonomy_get_vocabularies($node->type);
+    foreach (taxonomy_get_vocabularies() as $vid => $vocab) {
+      $activevocab = array_key_exists($vid, $type_vocabularies);
+      // Active vocabs have been inserted via the form already and may have been modified by the user
+      if (!$activevocab && variable_get("taxdef_{$node->type}_{$vid}_active", FALSE)) {
+        $default_tids = variable_get("taxdef_{$node->type}_{$vid}", array());
+        $taxonomy[$vid] = $vocab->multiple ? $default_tids : $default_tids[0];
+      }
+    }
+    if (isset($taxonomy)) {
+      $node->taxonomy = $taxonomy;
+    }
+  }
+}
+
+/**
+ * Define a custom callback to assign default terms menu at a tab on admin/taxonomy
+ */
+function taxonomy_defaults_menu($maycache) {
+  if ($maycache) {
+    $items[] = array(
+      'path' => 'admin/content/taxonomy/taxonomy_defaults',
+      'type' => MENU_LOCAL_TASK,
+      'title' => t('Default terms'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => 'taxonomy_defaults_form',
+      'access' => user_access('administer site configuration'),
+    );
+    return $items;
+  }
+}
+
+/**
+ * Defines the page at admin/taxonomy/taxonomy_defaults
+ */
+function taxonomy_defaults_form() {
+  // For each node type we generate per vocabulary a checkbox & term select
+  $form['#tree'] = TRUE;
+  $vocabularies = taxonomy_get_vocabularies();
+  foreach (node_get_types() as $type => $name) {
+    $type_vocabularies = taxonomy_get_vocabularies($type);
+    // Loop over all vocabularies
+    foreach ($vocabularies as $vid => $vocab) {
+      $activevocab = array_key_exists($vid, $type_vocabularies);
+      $form[$type][$vid]['active'] = array(
+        '#type' => 'checkbox',
+        '#title' => $activevocab ? t('active') : t('not active'),
+        '#default_value' => variable_get("taxdef_{$type}_{$vid}_active", FALSE),
+        '#weight' => -16,
+      );
+      $form[$type][$vid]['select'] = taxonomy_form($vid, variable_get("taxdef_{$type}_{$vid}", 0));
+    }
+    if (count($vocabularies) > 0) {
+      $form['buttons']['submit'] = array('#type' => 'submit', '#value' => t('Save configuration') );
+      $form['buttons']['reset'] = array('#type' => 'submit', '#value' => t('Reset to defaults') );
+    }
+    else {
+      $form['text'] = array(
+        '#value' => t('Before you can assign default terms to node types, go to !link to create and fill vocabularies.', array('!link' => l(t('add vocabulary'), 'admin/taxonomy/add/vocabulary'))),
+      );
+    }
+  }
+  return $form;
+}
+
+
+/**
+ * Store settings in the variable table
+ */
+function taxonomy_defaults_form_submit($form_id, $form_values) {
+  $op = $form_values['op'];
+
+  if ($op == t('Reset to defaults')) {
+    foreach (node_get_types() as $type => $name) {
+      foreach ($form_values[$type] as $vid => $values) {
+        variable_del("taxdef_{$type}_{$vid}_active");
+        variable_del("taxdef_{$type}_{$vid}");
+      }
+    }
+    drupal_set_message(t('The configuration options have been reset to their default values.'));
+  }
+  else {
+    foreach (node_get_types() as $type => $name) {
+      foreach ($form_values[$type] as $vid => $values) {
+        variable_set("taxdef_{$type}_{$vid}_active", $values['active']);
+        if ($values['active']) {
+          variable_set("taxdef_{$type}_{$vid}", is_array($values['select']) ? $values['select'] : array($values['select']));
+        }
+      }
+    }
+    drupal_set_message(t('The configuration options have been saved.'));
+  }
+}
+
+/**
+ * Renders the settings form in a table
+ */
+function theme_taxonomy_defaults_form($form) {
+  drupal_add_css(drupal_get_path('module', 'taxonomy_defaults') .'/taxonomy_defaults.css', 'module', 'all', FALSE);
+  foreach (node_get_types() as $type => $name) {
+    $table[$type][] = array('data' => $name->name, 'class' => 'taxdef-name');
+    $rowcount = 0;
+    foreach (element_children($form[$type]) as $key) {
+      $vocabtable[$rowcount][] = drupal_render($form[$type][$key]['active']);
+      $vocabtable[$rowcount][] = drupal_render($form[$type][$key]['select']);
+      $rowcount++;
+    }
+    $subtable = theme('table', array(), $vocabtable);
+    unset($vocabtable);
+    $table[$type][] = array('data'=> $subtable, 'class' => 'taxdef-subtable');
+  }
+  $output = theme('table', array(t('content type'), t('vocabularies and terms')), $table);
+  // Render remaining fields
+  $output .= drupal_render($form);
+  return $output;
+}

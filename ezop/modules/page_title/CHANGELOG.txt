@@ -1,0 +1,9 @@
+Page Title 5.x-1.1
+  * Added Russian translation by SadhooKlay.
+  * Removed inaccurate package description from .info file.
+  * Added ability to uninstall module.
+  * Increased length of page title to 255 characters for MySQL users.
+  #158104: Updated MySQL tables to use the system default table type instead of always using MyISAM.
+
+Page Title 5.x-1.0
+  * Initial release.

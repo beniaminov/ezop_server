@@ -1,0 +1,67 @@
+# $Id: unicode-inc.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: unicode.inc,v 1.23 2006/12/06 16:15:52 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 14:24+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: includes/unicode.inc:151
+msgid "Could not convert XML encoding %s to UTF-8."
+msgstr "Не удалось конвертировать кодировку XML %s в UTF-8."
+
+#: includes/unicode.inc:184
+msgid "Unsupported encoding %s. Please install iconv, GNU recode or mbstring for PHP."
+msgstr "Неподдерживаемая кодировка %s. Установите iconv, GNU recode или mbstring для PHP."
+
+#: includes/unicode.inc:48
+msgid "The PCRE library in your PHP installation is outdated. This will cause problems when handling Unicode text. If you are running PHP 4.3.3 or higher, make sure you are using the PCRE library supplied by PHP. Please refer to the <a href=\"@url\">PHP PCRE documentation</a> for more information."
+msgstr "Библиотека PCRE, установленная с PHP устарела. Это может вызвать проблемы при обработке строк Unicode. Если Вы используете версию PHP не менее 4.3.3, убедитесь, что используется библиотека PCRE той же версии. Подробнее читайте <a href=\"@url\">документацию PHP PCRE</a>."
+
+#: includes/unicode.inc:53
+msgid "Operations on Unicode strings are emulated on a best-effort basis. Install the <a href=\"@url\">PHP mbstring extension</a> for improved Unicode support."
+msgstr "Действия над строками Unicode будут эмулироваться. Установите <a href=\"@url\">расширение PHP mbstring</a> для улучшенной поддержки Unicode."
+
+#: includes/unicode.inc:58
+msgid "Multibyte string function overloading in PHP is active and must be disabled. Check the php.ini <em>mbstring.func_overload</em> setting. Please refer to the <a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr "Включена перегрузка (overloading) мультибайтовых строк в PHP, но ее нужно отключить. Проверьте настройку <em>mbstring.func_overload</em> в php.ini. Подробности вы сможете найти в <a href=\"@url\">документации по PHP mbstring</a>."
+
+#: includes/unicode.inc:61
+msgid "Multibyte string input conversion in PHP is active and must be disabled. Check the php.ini <em>mbstring.encoding_translation</em> setting. Please refer to the <a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr "Конвертация ввода мультибайтовых строк в PHP включена, но ее нужно отключить. Проверьте настройку <em>mbstring.encoding_translation</em> в php.ini. Подробности Вы сможете найти в <a href=\"@url\">документации по PHP mbstring</a>."
+
+#: includes/unicode.inc:64
+msgid "Multibyte string input conversion in PHP is active and must be disabled. Check the php.ini <em>mbstring.http_input</em> setting. Please refer to the <a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr "Конвертация ввода мультибайтовых строк в PHP включена, но ее нужно отключить. Проверьте настройку <em>mbstring.http_input</em> в php.ini. Подробности Вы сможете найти в <a href=\"@url\">документации по PHP mbstring</a>."
+
+#: includes/unicode.inc:67
+msgid "Multibyte string output conversion in PHP is active and must be disabled. Check the php.ini <em>mbstring.http_output</em> setting. Please refer to the <a href=\"@url\">PHP mbstring documentation</a> for more information."
+msgstr "Конвертация вывода мультибайтовых строк в PHP включена, но ее нужно отключить. Проверьте настройку <em>mbstring.http_output</em> в php.ini. Подробности Вы сможете найти в <a href=\"@url\">документации по PHP mbstring</a>."
+
+#: includes/unicode.inc:84
+msgid "Standard PHP"
+msgstr "Стандартный PHP"
+
+#: includes/unicode.inc:85
+msgid "PHP Mbstring Extension"
+msgstr "PHP расширение Mbstring"
+
+#: includes/unicode.inc:86
+msgid "Error"
+msgstr "Ошибка"
+
+#: includes/unicode.inc:96
+msgid "Unicode library"
+msgstr "Библиотека Unicode"
+

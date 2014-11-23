@@ -1,0 +1,311 @@
+# $Id: forum-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: forum.module,v 1.375 2007/01/10 15:17:51 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-21 21:17+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/forum/forum.module:15
+msgid "The forum module lets you create threaded discussion forums for a particular topic on your site. This is similar to a message board system such as phpBB. Forums are very useful because they allow community members to discuss topics with one another, and they are archived for future reference."
+msgstr "Модуль форумов позволяет создавать обсуждения, разбитые на различные темы. Они похожи на форумные системы, такие как, например, phpBB. Форумы очень удобны тем, что позволяют посетителям вести обсуждения между собой, а также сохранять материалы обсуждений для последующих обращений."
+
+#: modules/forum/forum.module:16
+msgid "Forums can be organized under what are called <em>containers</em>. Containers hold forums and, in turn, forums hold threaded discussions. Both containers and forums can be placed inside other containers and forums. By planning the structure of your containers and forums well, you make it easier for users to find a topic area of interest to them. Forum topics can be moved by selecting a different forum and can be left in the existing forum by selecting <em>leave a shadow copy</em>. Forum topics can also have their own URL."
+msgstr "Форумы могут быть сгруппированы при помощи так называемых <em>контейнеров</em>. Контейнеры содержат форумы, а форумы, в свою очередь, ветки обсуждений. Как контейнеры, так и форумы могут располагаться внутри других контейнеров и форумов. При планировании структуры контейнеров и форумов нужно помочь пользователям облегчить поиск обсуждений в сфере  их интересов. Обсуждения могут быть выборочно перенесены в другой форум, при этом можно <em>оставить ссылку в исходном форуме</em>. Обсуждения на форуме могут иметь собственные адреса."
+
+#: modules/forum/forum.module:17
+msgid "Forums module <strong>requires Taxonomy and Comments module</strong> be enabled."
+msgstr "Модулю форумов <strong>необходимы модули таксономии и комментариев</strong>."
+
+#: modules/forum/forum.module:18
+msgid "For more information please read the configuration and customization handbook <a href=\"@forum\">Forum page</a>."
+msgstr "Подробная информация находится в руководстве по настройке <a href=\"@forum\">форума</a>."
+
+#: modules/forum/forum.module:21
+msgid "This is a list of existing containers and forums that you can edit. Containers hold forums and, in turn, forums hold threaded discussions. Both containers and forums can be placed inside other containers and forums. By planning the structure of your containers and forums well, you make it easier for users to find a topic area of interest to them."
+msgstr "Это список контейнеров и форумов, доступных для редактирования. Контейнеры содержат форумы, а форумы, в свою очередь, содержат обсуждения. И контейнеры, и форумы могут быть помещены внутрь других форумов и контейнеров. Планируя их структуру, вы облегчаете пользователям поиск в области их интересов."
+
+#: modules/forum/forum.module:23
+msgid "Containers help you organize your forums. The job of a container is to hold, or contain, other forums that are related. For example, a container named \"Food\" might hold two forums named \"Fruit\" and \"Vegetables\"."
+msgstr "Контейнеры помогают вам организовать ваши форумы. Работа контейнеров состоит в том, чтобы удержать (или содержать) другие форумы, связанные между собой. Например, контейнер \"Еда\" может содержать два форума – \"Фрукты\" и \"Овощи\"."
+
+#: modules/forum/forum.module:25
+msgid "A forum holds discussion topics that are related. For example, a forum named \"Fruit\" might contain topics titled \"Apples\" and \"Bananas\"."
+msgstr "Форум содержит обсуждения, которые связаны между собой. Например, форум с названием \"Фрукты\" может содержать обсуждения \"Яблоки\" или \"Бананы\"."
+
+#: modules/forum/forum.module:27
+msgid "These settings provide the ability to fine tune the display of your forum topics."
+msgstr "Настройки позволяют провести детальную настройку обсуждений на форумах."
+
+#: modules/forum/forum.module:39;44
+msgid "Forums"
+msgstr "Форумы"
+
+#: modules/forum/forum.module:45
+msgid "Control forums and their hierarchy and change forum settings."
+msgstr "Управление иерархией форумов и их настройка."
+
+#: modules/forum/forum.module:55
+msgid "Add container"
+msgstr "Добавить контейнер"
+
+#: modules/forum/forum.module:61
+msgid "Add forum"
+msgstr "Добавить форум"
+
+#: modules/forum/forum.module:79
+msgid "Edit container"
+msgstr "Изменить контейнер"
+
+#: modules/forum/forum.module:85
+msgid "Edit forum"
+msgstr "Изменить форум"
+
+#: modules/forum/forum.module:107
+msgid "Forum topic"
+msgstr "Тема на форуме"
+
+#: modules/forum/forum.module:109
+msgid "Create a new topic for discussion in the forums."
+msgstr "Создать новую тему для обсуждения на форуме."
+
+#: modules/forum/forum.module:181
+msgid "Hot topic threshold"
+msgstr "Порог горячего обсуждения"
+
+#: modules/forum/forum.module:184
+msgid "The number of posts a topic must have to be considered hot."
+msgstr "Количество сообщений в обсуждении, необходимое для признания его \"горячим\"."
+
+#: modules/forum/forum.module:188
+msgid "Topics per page"
+msgstr "Обсуждений на страницу"
+
+#: modules/forum/forum.module:191
+msgid "The default number of topics displayed per page; links to browse older messages are automatically being displayed."
+msgstr "Количество обсуждений на страницу по умолчанию. Ссылки для просмотра более старых сообщений отображаются автоматически."
+
+#: modules/forum/forum.module:193
+msgid "Posts - most active first"
+msgstr "Сообщения - активные вверху"
+
+#: modules/forum/forum.module:193
+msgid "Posts - least active first"
+msgstr "Сообщения - активные внизу"
+
+#: modules/forum/forum.module:195
+msgid "Default order"
+msgstr "Порядок по умолчанию"
+
+#: modules/forum/forum.module:198
+msgid "The default display order for topics."
+msgstr "Порядок показа обсуждений по умолчанию."
+
+#: modules/forum/forum.module:211
+msgid "This is the designated forum vocabulary. Some of the normal vocabulary options have been removed."
+msgstr "Этот словарь предназначен для форумов. Некоторые стандартные для словарей возможности недоступны."
+
+#: modules/forum/forum.module:214
+msgid "forum topic"
+msgstr "обсуждение на форуме"
+
+#: modules/forum/forum.module:214
+msgid "forum topic is affixed to the forum vocabulary."
+msgstr "обсуждения закреплены за словарём форумов"
+
+#: modules/forum/forum.module:245;261
+msgid "Active forum topics"
+msgstr "Активные обсуждения форума"
+
+#: modules/forum/forum.module:246;270
+msgid "New forum topics"
+msgstr "Новые обсуждения форума"
+
+#: modules/forum/forum.module:250
+msgid "Number of topics"
+msgstr "Количество обсуждений"
+
+#: modules/forum/forum.module:280
+msgid "Read the latest forum topics."
+msgstr "Прочитать свежие обсуждения форума."
+
+#: modules/forum/forum.module:368
+msgid "The item %forum is only a container for forums. Please select one of the forums below it."
+msgstr "Элемент \"%forum\" является только контейнером для форумов. Выберите один из форумов, содержащихся в нём."
+
+#: modules/forum/forum.module:398
+msgid "Leave shadow copy"
+msgstr "Оставить ссылку в исходном обсуждении"
+
+#: modules/forum/forum.module:398
+msgid "If you move this topic, you can leave a link in the old forum to the new forum."
+msgstr "Если вы переместите эту обсуждение, можете оставить на старом месте ссылку на её новый адрес."
+
+#: modules/forum/forum.module:440
+msgid "Container name"
+msgstr "Название контейнера"
+
+#: modules/forum/forum.module:444
+msgid "The container name is used to identify related forums."
+msgstr "Название контейнера используется для обозначения группы связанных одной тематикой форумов."
+
+#: modules/forum/forum.module:452
+msgid "The container description can give users more information about the forums it contains."
+msgstr "Описание контейнера может дать пользователям больше информации о содержащихся в нем форумах."
+
+#: modules/forum/forum.module:459
+msgid "When listing containers, those with with light (small) weights get listed before containers with heavier (larger) weights. Containers with equal weights are sorted alphabetically."
+msgstr "Когда выводится список контейнеров, то контейнеры с более легким (малым) весом будут показаны до контейнеров с более тяжелым (большим) весом. Контейнеры с одинаковым весом сортируются по алфавиту."
+
+#: modules/forum/forum.module:498
+msgid "Forum name"
+msgstr "Название форума"
+
+#: modules/forum/forum.module:501
+msgid "The forum name is used to identify related discussions."
+msgstr "Название форума используется для обозначения группы обсуждений по схожим вопросам."
+
+#: modules/forum/forum.module:507
+msgid "The forum description can give users more information about the discussion topics it contains."
+msgstr "Описание форума может дать пользователям больше информации о содержащихся в нем обсуждениях."
+
+#: modules/forum/forum.module:514
+msgid "When listing forums, those with lighter (smaller) weights get listed before containers with heavier (larger) weights. Forums with equal weights are sorted alphabetically."
+msgstr "Когда выводится список форумов, то форумы с более легким (малым) весом показываются раньше контейнеров с более тяжелым (большим) весом. Форумы с равными весами показываются в алфавитном порядке."
+
+#: modules/forum/forum.module:534
+msgid "forum container"
+msgstr "контейнер форумов"
+
+#: modules/forum/forum.module:538;0
+msgid "forum"
+msgstr "форум"
+
+#: modules/forum/forum.module:549
+msgid "Created new @type %term."
+msgstr "Создан новый @type %term."
+
+#: modules/forum/forum.module:552
+msgid "The @type %term has been updated."
+msgstr "@type %term обновлен."
+
+#: modules/forum/forum.module:569
+msgid "Are you sure you want to delete the forum %name?"
+msgstr "Вы действительно хотите удалить форум %name?"
+
+#: modules/forum/forum.module:569
+msgid "Deleting a forum or container will delete all sub-forums and associated posts as well. This action cannot be undone."
+msgstr "Удаление форума или контейнера приведет к удалению всех подфорумов и связанных с ними сообщений. Это действие нельзя отменить."
+
+#: modules/forum/forum.module:577
+msgid "The forum %term and all sub-forums and associated posts have been deleted."
+msgstr "Форум %term, а также все подфорумы и связанные сообщения удалены."
+
+#: modules/forum/forum.module:578
+msgid "forum: deleted %term and all its sub-forums and associated posts."
+msgstr "форум: удален %term, а также все подфорумы и связанные сообщения."
+
+#: modules/forum/forum.module:593
+msgid "edit container"
+msgstr "изменить контейнер"
+
+#: modules/forum/forum.module:596
+msgid "edit forum"
+msgstr "изменить форум"
+
+#: modules/forum/forum.module:602
+msgid "There are no existing containers or forums. You may add some on the <a href=\"@container\">add container</a> or <a href=\"@forum\">add forum</a> pages."
+msgstr "Нет контейнеров и форумов. Вы можете создать новый <a href=\"@container\">контейнер</a> или <a href=\"@forum\">форум</a>."
+
+#: modules/forum/forum.module:643
+msgid "Containers are usually placed at the top (root) level of your forum but you can also place a container inside a parent container or forum."
+msgstr "Контейнеры обычно располагаются на верхнем (корневом) уровне вашего форума, но вы можете разместить контейнер внутри родительского контейнера или форума."
+
+#: modules/forum/forum.module:646
+msgid "You may place your forum inside a parent container or forum, or at the top (root) level of your forum."
+msgstr "Вы можете разместить ваш форум внутри родительского контейнера или форума, или вверху (в корне) вашего форума. "
+
+#: modules/forum/forum.module:694
+msgid "@time ago<br />by !author"
+msgstr "@time назад<br />от !author"
+
+#: modules/forum/forum.module:779
+msgid "Topic"
+msgstr "Обсуждение"
+
+#: modules/forum/forum.module:781
+msgid "Created"
+msgstr "Создано"
+
+#: modules/forum/forum.module:782
+msgid "Last reply"
+msgstr "Последний ответ"
+
+#: modules/forum/forum.module:863
+msgid "The forum module requires both the taxonomy module and the comment module to be enabled and configured."
+msgstr "Модуль форумы требует, чтобы были включены и настроены модули таксономия и комментарии."
+
+#: modules/forum/forum.module:908
+msgid "Post new forum topic."
+msgstr "Начать новую тему обсуждения."
+
+#: modules/forum/forum.module:911
+msgid "You are not allowed to post a new forum topic."
+msgstr "Вы не имеете достаточно прав, чтобы создавать новые обсуждения в форуме."
+
+#: modules/forum/forum.module:914
+msgid "<a href=\"@login\">Login</a> to post a new forum topic."
+msgstr "<a href=\"@login\">Войти</a>, чтобы создать новую тему обсуждения."
+
+#: modules/forum/forum.module:927
+msgid "No forums defined"
+msgstr "Форумы не определены"
+
+#: modules/forum/forum.module:944
+msgid "Topics"
+msgstr "Обсуждения"
+
+#: modules/forum/forum.module:944
+msgid "Posts"
+msgstr "Сообщений"
+
+#: modules/forum/forum.module:944
+msgid "Last post"
+msgstr "Последнее сообщение"
+
+#: modules/forum/forum.module:1003
+msgid "This topic has been moved"
+msgstr "Это обсуждение было перемещено"
+
+#: modules/forum/forum.module:1089
+msgid "Go to previous forum topic"
+msgstr "К предыдущему обсуждению"
+
+#: modules/forum/forum.module:1096
+msgid "Go to next forum topic"
+msgstr "К следующему обсуждению"
+
+#: modules/forum/forum.module:136
+msgid "create forum topics"
+msgstr "создавать обсуждения на форуме"
+
+#: modules/forum/forum.module:136
+msgid "edit own forum topics"
+msgstr "изменять собственные обсуждения на форуме"
+
+#: modules/forum/forum.module:136
+msgid "administer forums"
+msgstr "управлять форумами"
+

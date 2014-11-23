@@ -1,0 +1,163 @@
+<?php
+// $Id: taxonomy_access.install,v 1.8 2006/11/05 13:31:57 keve Exp $
+
+/**
+ *  Implementations of hook_update (called by update.php)
+ */
+
+// Update#1: updating the tables to UTF-8
+function taxonomy_access_update_1() {
+  return _system_update_utf8(array('term_access', 'term_access_defaults'));
+}
+
+// Update#2: adding field 'grant_list' to tables 'term_access' and 'term_access_defaults'.
+function taxonomy_access_update_2() {
+  switch ($GLOBALS['db_type']) {
+    case 'pgsql':
+      // Checking if column 'grant_list' exists
+      if (db_result(db_query("SELECT a.attname FROM pg_attribute a LEFT JOIN pg_class c ON c.oid = a.attrelid WHERE c.relname = 'term_access' AND a.attname = 'grant_list'"))) {
+        drupal_set_message(t("Taxonomy Access - Update #2: No queries executed. Field 'grant_list' already exists in tables 'term_access'."), 'error');
+        $ret = array();
+      }
+      else {
+        $ret[] = update_sql("ALTER TABLE {term_access} ADD grant_list smallint");
+        $ret[] = update_sql("ALTER TABLE {term_access} ALTER COLUMN grant_list SET DEFAULT '0'");
+        $ret[] = update_sql("ALTER TABLE {term_access} ALTER COLUMN grant_list SET NOT NULL ");
+        $ret[] = update_sql("UPDATE {term_access} SET grant_list = grant_view");
+        $ret[] = update_sql("ALTER TABLE {term_access_defaults} ADD grant_list smallint");
+        $ret[] = update_sql("ALTER TABLE {term_access_defaults} ALTER COLUMN grant_list SET DEFAULT '0");
+        $ret[] = update_sql("ALTER TABLE {term_access_defaults} ALTER COLUMN grant_list SET NOT NULL ");
+        $ret[] = update_sql("UPDATE {term_access_defaults} SET grant_list = grant_view");
+      }
+      break;
+
+    case 'mysql':
+    case 'mysqli':
+      // Checking if column 'grant_list' exists
+      if (db_result(db_query("DESC {term_access} 'grant_list'"))) {
+        drupal_set_message(t("Taxonomy Access - Update #2: No queries executed. Field 'grant_list' already exists in tables 'term_access'."), 'error');
+        $ret = array();
+      }
+      else {
+        $ret[] = update_sql("ALTER TABLE {term_access} ADD grant_list TINYINT(1) UNSIGNED DEFAULT '0'  NOT NULL");
+        $ret[] = update_sql("UPDATE {term_access} SET grant_list = grant_view");
+        $ret[] = update_sql("ALTER TABLE {term_access_defaults} ADD grant_list TINYINT(1) UNSIGNED DEFAULT '0'  NOT NULL");
+        $ret[] = update_sql("UPDATE {term_access_defaults} SET grant_list = grant_view");
+      }
+      break;
+  }
+
+  return $ret;
+}
+
+function taxonomy_access_update_3() {
+  // new module weights in core: put taxonomy_access to the bottom (but before the very last ones) in the chain.
+  $ret[] = update_sql("UPDATE {system} SET weight = 9 WHERE name = 'taxonomy_access'");
+  return $ret;
+}
+
+// Update#4: Delete variable 'taxonomy_access_enabled'
+function taxonomy_access_update_4() {
+  variable_del('taxonomy_access_enabled');
+  return array();
+}
+
+/**
+ * Implementation of hook_install.
+ * Adding tables to database: 'term_access', 'term_access_defaults'
+ */
+function taxonomy_access_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'pgsql':
+      /*
+       * Not using pg_version() because it is only available in PHP 5 and with
+       * PostgreSQL library: 7.4.  More importantly, the 'server_version'
+       * is missing, at least in PHP 5.1.2.
+       */
+      $row = db_fetch_object(db_query('SELECT version() AS version'));
+      $version = preg_replace('/^[^0-9]+([^ ]+).*/i', '\\1', $row->version);
+
+      if (version_compare($version, '8.0', '<')) {
+        // PRIOR TO POSTGRESQL 8.0: making a BIT_OR aggregate function
+        db_query("CREATE AGGREGATE BIT_OR (
+          basetype = smallint,
+          sfunc = int2or,
+          stype = smallint
+        );");
+      }
+
+      db_query("CREATE TABLE {term_access} (
+        tid integer  NOT NULL default '0',
+        rid integer  NOT NULL default '0',
+        grant_view smallint NOT NULL default '0',
+        grant_update smallint NOT NULL default '0',
+        grant_delete smallint NOT NULL default '0',
+        grant_create smallint NOT NULL default '0',
+        grant_list smallint NOT NULL default '0',
+        PRIMARY KEY  (tid,rid)
+      );");
+
+      db_query("CREATE TABLE {term_access_defaults} (
+        vid integer  NOT NULL default '0',
+        rid integer  NOT NULL default '0',
+        grant_view smallint NOT NULL default '0',
+        grant_update smallint NOT NULL default '0',
+        grant_delete smallint NOT NULL default '0',
+        grant_create smallint NOT NULL default '0',
+        grant_list smallint NOT NULL default '0',
+        PRIMARY KEY  (vid,rid)
+      );");
+
+      // new module weights in core: put taxonomy_access to the bottom (but before the very last ones) in the chain.
+      db_query("UPDATE {system} SET weight = 9 WHERE name = 'taxonomy_access'");
+
+      $success = TRUE; 
+      break;
+
+    case 'mysql':
+    case 'mysqli':
+
+      db_query("CREATE TABLE {term_access} (
+        tid int(10) unsigned NOT NULL default '0',
+        rid int(10) unsigned NOT NULL default '0',
+        grant_view tinyint(1) unsigned NOT NULL default '0',
+        grant_update tinyint(1) unsigned NOT NULL default '0',
+        grant_delete tinyint(1) unsigned NOT NULL default '0',
+        grant_create tinyint(1) unsigned NOT NULL default '0',
+        grant_list tinyint(1) unsigned NOT NULL default '0',
+        PRIMARY KEY  (tid,rid)
+      ) TYPE=MyISAM /*!40100 DEFAULT CHARACTER SET utf8 */;");
+
+      db_query("CREATE TABLE {term_access_defaults} (
+        vid int(10) unsigned NOT NULL default '0',
+        rid int(10) unsigned NOT NULL default '0',
+        grant_view tinyint(1) unsigned NOT NULL default '0',
+        grant_update tinyint(1) unsigned NOT NULL default '0',
+        grant_delete tinyint(1) unsigned NOT NULL default '0',
+        grant_create tinyint(1) unsigned NOT NULL default '0',
+        grant_list tinyint(1) unsigned NOT NULL default '0',
+        PRIMARY KEY  (vid,rid)
+      ) TYPE=MyISAM /*!40100 DEFAULT CHARACTER SET utf8 */;");
+
+      // new module weights in core: put taxonomy_access to the bottom (but before the very last ones) in the chain.
+      db_query("UPDATE {system} SET weight = 9 WHERE name = 'taxonomy_access'");
+
+      $success = TRUE; 
+      break;
+  } // End case 
+
+  // Notify of changes
+  if ($success) {
+    drupal_set_message(t('Taxonomy Access module installed tables successfully.'));
+  }
+  else {
+    drupal_set_message(t('The installation of Taxonomy Access module was unsuccessful.'), 'error');
+  }
+}
+
+function taxonomy_access_uninstall() {
+  db_query('DROP TABLE {term_access}');
+  db_query('DROP TABLE {term_access_defaults}');
+  //variable_del('taxonomy_access_enabled');
+  drupal_set_message(t('Taxonomy Access have been successfully uninstalled.'));
+}

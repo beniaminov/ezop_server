@@ -1,0 +1,933 @@
+# translation of project_issue-5.x-1.3.po to russian
+# $Id: ru.po,v 1.1.2.1 2008/04/13 19:38:22 thehunmonkgroup Exp $
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  comment.inc,v 1.85.2.1 2008/01/01 20:48:11 thehunmonkgroup
+#  project_issue.module,v 1.38.2.8 2008/01/04 15:18:04 thehunmonkgroup
+#  issue.inc,v 1.255.2.13 2008/01/06 16:16:14 dww
+#  mail.inc,v 1.76.2.8 2008/01/06 10:20:18 dww
+#  project_issue.info,v 1.3 2007/06/13 19:33:51 dww
+#
+# Vlad Savitsky <vlad_savitsky@mail.ru>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: project_issue-5.x-1.3\n"
+"POT-Creation-Date: 2008-01-06 13:54-0800\n"
+"PO-Revision-Date: 2008-02-14 14:11+0200\n"
+"Last-Translator: Vlad Savitsky <vlad_savitsky@mail.ru>\n"
+"Language-Team: russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: comment.inc:13;33;83;87
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: comment.inc:13;36;85 project_issue.module:483
+msgid "Submit"
+msgstr "Отправить"
+
+#: comment.inc:27
+msgid "New comment"
+msgstr "Новый комментарий"
+
+#: comment.inc:49
+msgid "You are not authorized to follow up on issues."
+msgstr "Вы не зарегистрированы и не можете просматривать проблемы."
+
+#: comment.inc:124
+msgid "Updates"
+msgstr "Обновления"
+
+#: comment.inc:146 issue.inc:669
+msgid "Title"
+msgstr "Заголовок"
+
+#: comment.inc:147 issue.inc:340;486;598;710;1601;1744 mail.inc:20;207 project_issue.module:582 project_issue.info:0
+msgid "Project"
+msgstr "Проект"
+
+#: comment.inc:148 issue.inc:117;606;1608 mail.inc:24;208
+msgid "Version"
+msgstr "Версия"
+
+#: comment.inc:149 issue.inc:144;613 mail.inc:22;209
+msgid "Component"
+msgstr "Компонент"
+
+#: comment.inc:150 issue.inc:302;626;1606;1756 mail.inc:21;210
+msgid "Category"
+msgstr "Категория"
+
+#: comment.inc:151 issue.inc:632;1605;1762 mail.inc:23;211
+msgid "Priority"
+msgstr "Приоритет"
+
+#: comment.inc:152 issue.inc:1611 mail.inc:25;212
+msgid "Assigned to"
+msgstr "Отвественный"
+
+#: comment.inc:153 issue.inc:320;645;657;1241;1604;1750 mail.inc:26;215
+msgid "Status"
+msgstr "Состояние"
+
+#: comment.inc:184 issue.inc:938
+msgid "Attachment:"
+msgstr "Вложения:"
+
+#: comment.inc:190
+msgid "!count submitted by !user on !date"
+msgstr "!user отправил(а) !count (!date)"
+
+#: comment.inc:249
+msgid "project_issue: added comment %title"
+msgstr "project_issue: добавлен комментарий \"%title\""
+
+#: comment.inc:276
+msgid "Preview comment"
+msgstr "Просмотр перед отправкой"
+
+#: comment.inc:249
+msgid "content"
+msgstr "содержимое"
+
+#: issue.inc:40;474;1547;1585 project_issue.module:272
+msgid "Subscribe"
+msgstr "Подписаться"
+
+#: issue.inc:54
+msgid "You must have a valid e-mail address in order to subscribe to issues. Please <a href=\"@update\">update your account</a>."
+msgstr "Вы должны иметь рабочий адрес электронной почты, чтобы подписаться на проблемы. Пожалуйста <a href=\"@update\">обновите ваши личные данные</a>."
+
+#: issue.inc:59
+msgid "Please <a href=\"@login\">login</a> or <a href=\"@register\">register</a> in order to subscribe to issues."
+msgstr "Пожалуйста, <a href=\"@login\">войдите</a> или <a href=\"@register\">зарегистрируйтесь</a>, чтобы подписаться на проблемы."
+
+#: issue.inc:85
+msgid "Malicious attempt to access unauthorized information detected."
+msgstr "Обнаружена злонамеренная попытка доступа к закрытой информации."
+
+#: issue.inc:105;134;531;566;570;576 mail.inc:173;175;187;192 project_issue.module:107
+msgid "<none>"
+msgstr "нет"
+
+#: issue.inc:302;320
+msgid "Overall"
+msgstr "Всего с начала"
+
+#: issue.inc:302;320
+msgid "Last month"
+msgstr "Последний месяц"
+
+#: issue.inc:317
+msgid "Average lifetime"
+msgstr "Среднее время существования"
+
+#: issue.inc:335
+msgid "Issue activity"
+msgstr "Активность по проблеме"
+
+#: issue.inc:340
+msgid "Total"
+msgstr "Итого"
+
+#: issue.inc:358
+msgid "Project overview"
+msgstr "О проекте"
+
+#: issue.inc:371;399;485
+msgid "None"
+msgstr "Нет"
+
+#: issue.inc:371;399;485
+msgid "Own issues"
+msgstr "Мои проблемы"
+
+#: issue.inc:371;399;485
+msgid "All issues"
+msgstr "Все проблемы"
+
+#: issue.inc:390
+msgid "Subscription settings saved."
+msgstr "Настройки подписки сохранены."
+
+#: issue.inc:409
+msgid "Subscribe to receive e-mail notification when an issue for this project is updated."
+msgstr "Подписаться на получение уведомлений по электронной почте, когда проблема по этому проекту обновляется."
+
+#: issue.inc:414
+msgid "Subscribe to @project issues"
+msgstr "Подписаться на проблемы для @project"
+
+#: issue.inc:424
+msgid "All projects"
+msgstr "Все проекты"
+
+#: issue.inc:533
+msgid "You do not have access to any projects."
+msgstr "Вы не имеете права доступа ни к одному проекту."
+
+#: issue.inc:581
+msgid "Unassign"
+msgstr "Передать ответственность"
+
+#: issue.inc:585;925
+msgid "Unassigned"
+msgstr "Ответственный не назначен"
+
+#: issue.inc:592
+msgid "Project information"
+msgstr "Информация о проекте"
+
+#: issue.inc:620 project_issue.module:383
+msgid "Issue information"
+msgstr "Информация о проблеме"
+
+#: issue.inc:638;1257
+msgid "Assigned"
+msgstr "Ответственный"
+
+#: issue.inc:664
+msgid "Issue details"
+msgstr "Подробности проблемы"
+
+#: issue.inc:676
+msgid "Note: modifying this value will change the title of the entire issue, not your follow-up comment."
+msgstr "Замечание: изменение этого значения изменит заголовок всей проблемы, а не вашего комментария."
+
+#: issue.inc:680;945
+msgid "Description"
+msgstr "Описание"
+
+#: issue.inc:691
+msgid "File attachment"
+msgstr "Вложение"
+
+#: issue.inc:693
+msgid "A file named %filename has already been uploaded. If you upload another file %filename will be replaced."
+msgstr "Файл с именем %filename уже был закачан. Если вы закачаете ещё один файл, то %filename будет перезаписан."
+
+#: issue.inc:693
+msgid "Optionally attach a file, for example a patch or a screenshot."
+msgstr "Дополнительно вы можете присоединить файл, например заплату или снимок экрана."
+
+#: issue.inc:697
+msgid "File attachments are disabled. The issue directory has not been properly configured."
+msgstr "Присоединение файлов отключено. Папка для проблем не была корректно настроена."
+
+#: issue.inc:699
+msgid "Please visit the !admin-project-issue-settings page."
+msgstr "Пожалуйста, посетите страницу !admin-project-issue-settings."
+
+#: issue.inc:699 project_issue.module:299
+msgid "Project issue settings"
+msgstr "Настройки проблем проекта"
+
+#: issue.inc:702
+msgid "Please contact the site administrator."
+msgstr "Пожалуйста, свяжитесь с администратором сайта."
+
+#: issue.inc:738
+msgid "Next"
+msgstr "Следующий"
+
+#: issue.inc:793;890
+msgid "You have to specify a valid project."
+msgstr "Вам нужно указать корректный проект."
+
+#: issue.inc:801;850
+msgid "You have to specify a valid version."
+msgstr "Вам нужно указать корректную версию."
+
+#: issue.inc:806;863
+msgid "You have to specify a valid component."
+msgstr "Вам нужно указать корректный компонент."
+
+#: issue.inc:807;864
+msgid "You have to specify a valid category."
+msgstr "Вам нужно указать корректную категорию."
+
+#: issue.inc:808
+msgid "You have to specify a valid title."
+msgstr "Вам нужно указать корректный заголовок."
+
+#: issue.inc:809
+msgid "You have to specify a valid description."
+msgstr "Вам нужно указать корректное описание."
+
+#: issue.inc:880
+msgid "You must either specify a description or change something about this issue."
+msgstr "Вам нужно или указать описание или изменить что-либо в этой проблеме."
+
+#: issue.inc:908
+msgid "The selected file %name can not be attached to this post, because it is only possible to attach files with the following extensions: %files-allowed."
+msgstr "Выбранный файл %name не может быть прикреплен, потому что прикреплять можно только файлы с такими расширениями: %files-allowed."
+
+#: issue.inc:932
+msgid "Component:"
+msgstr "Компонент:"
+
+#: issue.inc:933
+msgid "Category:"
+msgstr "Категория:"
+
+#: issue.inc:934
+msgid "Priority:"
+msgstr "Приоритет:"
+
+#: issue.inc:935
+msgid "Assigned:"
+msgstr "Ответственный:"
+
+#: issue.inc:936
+msgid "Status:"
+msgstr "Состояние:"
+
+#: issue.inc:1101
+msgid "critical"
+msgstr "критическая"
+
+#: issue.inc:1101
+msgid "normal"
+msgstr "обычная"
+
+#: issue.inc:1101
+msgid "minor"
+msgstr "незначительная"
+
+#: issue.inc:1107
+msgid "bug reports"
+msgstr "сообщения об ошибках"
+
+#: issue.inc:1107
+msgid "tasks"
+msgstr "задачи"
+
+#: issue.inc:1107
+msgid "feature requests"
+msgstr "предложения"
+
+#: issue.inc:1107
+msgid "support requests"
+msgstr "просьбы о помощи"
+
+#: issue.inc:1110
+msgid "bug report"
+msgstr "сообщение об ошибке"
+
+#: issue.inc:1110
+msgid "task"
+msgstr "задача"
+
+#: issue.inc:1110
+msgid "feature request"
+msgstr "предложение"
+
+#: issue.inc:1110
+msgid "support request"
+msgstr "нужна помощь"
+
+#: issue.inc:1139
+msgid "Search issues for %name"
+msgstr "Найти проблемы для %name"
+
+#: issue.inc:1152
+msgid "Search issues for all projects"
+msgstr "Найти проблемы для всех проектов"
+
+#: issue.inc:1175
+msgid "Search for"
+msgstr "Искать"
+
+#: issue.inc:1181
+msgid "Has attachment."
+msgstr "Есть вложения."
+
+#: issue.inc:1188
+msgid "Projects"
+msgstr "Проекты"
+
+#: issue.inc:1196;1224 project_issue.module:437
+msgid "Categories"
+msgstr "Категории"
+
+#: issue.inc:1207
+msgid "Versions"
+msgstr "Версия"
+
+#: issue.inc:1216 project_issue.module:399
+msgid "Components"
+msgstr "Компоненты"
+
+#: issue.inc:1233
+msgid "Priorities"
+msgstr "Приоритеты"
+
+#: issue.inc:1249
+msgid "Submitted by"
+msgstr "Добавлено пользователем"
+
+#: issue.inc:1265
+msgid "Participant"
+msgstr "Участник"
+
+#: issue.inc:1273;1776 project_issue.module:255;625
+msgid "Search"
+msgstr "Поиск"
+
+#: issue.inc:1329
+msgid "ID"
+msgstr "ID"
+
+#: issue.inc:1330
+msgid "Name"
+msgstr "Название"
+
+#: issue.inc:1331 project_issue.module:38
+msgid "Weight"
+msgstr "Вес"
+
+#: issue.inc:1332 project_issue.module:40
+msgid "Author may set"
+msgstr "Автор может установить"
+
+#: issue.inc:1333 project_issue.module:42
+msgid "In default queries"
+msgstr "В комбинации по умолчанию"
+
+#: issue.inc:1334 project_issue.module:44
+msgid "Default status"
+msgstr "Состояние по умолчанию"
+
+#: issue.inc:1335
+msgid "Operations"
+msgstr "Операции"
+
+#: issue.inc:1391;1485 project_issue.module:321
+msgid "Delete"
+msgstr "Удалить"
+
+#: issue.inc:1420
+msgid "Save"
+msgstr "Сохранить"
+
+#: issue.inc:1452
+msgid "Status %status already exists."
+msgstr "Состояние \"%status\" уже существует."
+
+#: issue.inc:1466
+msgid "Reassign status"
+msgstr "Состояние смены ответственного"
+
+#: issue.inc:1469
+msgid "There are !total existing issues with the status of @name. Please select a new status for these issues."
+msgstr "Существует !total проблем в состоянии \"@name\". Пожалуйста, установите новое состояние для этих проблем."
+
+#: issue.inc:1482
+msgid "Are you sure you want to delete the status option %name?"
+msgstr "Вы уверены, что хотите удалить состояние \"%name\"?"
+
+#: issue.inc:1484
+msgid "This action cannot be undone."
+msgstr "Это действие необратимо."
+
+#: issue.inc:1485
+msgid "Cancel"
+msgstr "Отмена"
+
+#: issue.inc:1491
+msgid "Choose a new issue status for existing issues of status %name."
+msgstr "Выберите новое состояние для существующих проблем в состоянии \"%name\"."
+
+#: issue.inc:1497
+msgid "Project issue status %issue deleted."
+msgstr "Состояние проблемы проекта \"%issue\" было удалено."
+
+#: issue.inc:1508;1509;1510;1702
+msgid "<all>"
+msgstr "<все>"
+
+#: issue.inc:1519
+msgid "Issues for %name"
+msgstr "Проблемы для %name"
+
+#: issue.inc:1529;1567 project_issue.module:235;629
+msgid "Create"
+msgstr "Создать"
+
+#: issue.inc:1531
+msgid "Create a new issue for @project."
+msgstr "Описать новую проблему @project."
+
+#: issue.inc:1541;1579 project_issue.module:248
+msgid "Statistics"
+msgstr "Статистика"
+
+#: issue.inc:1543
+msgid "See statistics about @project issues."
+msgstr "Смотреть статистику проблем проекта @project."
+
+#: issue.inc:1549
+msgid "Receive email updates about @project issues."
+msgstr "Получать изменения проблем @project по электронной почте."
+
+#: issue.inc:1553;1591
+msgid "Advanced search"
+msgstr "Расширенный поиск"
+
+#: issue.inc:1555
+msgid "Use the advanced search page to find @project issues."
+msgstr "Используйте страницу расширенного поиска, чтобы найти проблемы для @project."
+
+#: issue.inc:1562
+msgid "Issues for all projects"
+msgstr "Проблемы всех проектов"
+
+#: issue.inc:1569
+msgid "Create a new issue."
+msgstr "Описать новую проблему."
+
+#: issue.inc:1581
+msgid "See statistics about issues."
+msgstr "Смотреть статистику проблем."
+
+#: issue.inc:1587
+msgid "Receive email updates about issues."
+msgstr "Получать изменения проблем по электронной почте."
+
+#: issue.inc:1593
+msgid "Use the advanced search page for finding issues."
+msgstr "Используйте страницу расширенного поиска для того, чтобы найти проблемы."
+
+#: issue.inc:1603
+msgid "Summary"
+msgstr "Краткое описание"
+
+#: issue.inc:1610
+msgid "Last updated"
+msgstr "Последнее обновление"
+
+#: issue.inc:1676
+msgid "#"
+msgstr "#"
+
+#: issue.inc:1676
+msgid "Permalink to search query."
+msgstr "Постоянная ссылка на поисковый запрос."
+
+#: issue.inc:1682
+msgid "No issues found."
+msgstr "Нет проблем."
+
+#: issue.inc:1964
+msgid "Username '@user' not found."
+msgstr "Имя пользователя '@user' не найдено."
+
+#: issue.inc:1972
+msgid "issues for !name"
+msgstr "Проблемы !name"
+
+#: issue.inc:1975
+msgid "issues"
+msgstr "проблемы"
+
+#: issue.inc:1996
+msgid "<a href=\"@login\">Login</a> or <a href=\"@register\">register</a> to follow up"
+msgstr "<a href=\"@login\">Войдите</a> или <a href=\"@register\">зарегистрируйтесь</a>, чтобы дополнять"
+
+#: issue.inc:1999
+msgid "<a href=\"@login\">Login</a> to follow up"
+msgstr "<a href=\"@login\">Войдите</a>, чтобы дополнять"
+
+#: issue.inc:2013
+msgid "<a href=\"@login\">Login</a> or <a href=\"@register\">register</a> to create an issue"
+msgstr "<a href=\"@login\">Войдите</a> или <a href=\"@register\">зарегистрируйтесь</a>, чтобы описать проблему"
+
+#: issue.inc:2016
+msgid "<a href=\"@login\">Login</a> to create an issue"
+msgstr "<a href=\"@login\">Войдите</a>, чтобы описать проблему"
+
+#: mail.inc:100
+msgid "You are not authorized to access this page."
+msgstr "Зарегистрируйтесь, чтобы получить доступ к этой странице."
+
+#: mail.inc:111
+msgid "You had some errors in your submission:"
+msgstr "В вашем сообщении есть некоторые ошибки:"
+
+#: mail.inc:116
+msgid "Email submission to !sn failed - !subj"
+msgstr "Подписка по электронной почте для !sn не удалась - !subj"
+
+#: mail.inc:183
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: mail.inc:190
+msgid "Anonymous"
+msgstr "Гость"
+
+#: mail.inc:213
+msgid "Reported by"
+msgstr "Сообщил пользователь"
+
+#: mail.inc:214
+msgid "Updated by"
+msgstr "Обновлено пользователем"
+
+#: mail.inc:250
+msgid "Issue status update for !link"
+msgstr "Обновление состояния проблемы !link"
+
+#: mail.inc:251
+msgid "Post a follow up: !link"
+msgstr "Сделать добавление: !link"
+
+#: mail.inc:265;309
+msgid "Attachment"
+msgstr "Вложение"
+
+#: mail.inc:275
+msgid "!name (!site)"
+msgstr "!name (!site)"
+
+#: mail.inc:300
+msgid "Previous comments:"
+msgstr "Предыдущие комментарии:"
+
+#: mail.inc:332
+msgid "[!short_name] [!category] !title"
+msgstr "[!short_name] [!category] !title"
+
+#: mail.inc:379
+msgid "Your submitted bugs for !date"
+msgstr "Ошибки описанные вами за !date"
+
+#: mail.inc:441
+msgid "Release critical bugs for !date"
+msgstr "Показать критичные ошибки за !date"
+
+#: project_issue.module:23
+msgid "Mailhandler support"
+msgstr "Поддержка Mailhandler"
+
+#: project_issue.module:24
+msgid "Basic mail format:"
+msgstr "Простой формат письма:"
+
+#: project_issue.module:25
+msgid "Type: project\nProject: chatbox\nCategory: bug report\nVersion: cvs\nPriority: normal\nStatus: active\nComponent: code\n\nWhatever I type here will be the body of the node.\n"
+msgstr "Тип: проект\nПроект: chatbox\nКатегория: отчёт об ошибке\nВерсия: cvs\nПриоритет: нормальная\nСостояние: активная\nКомпонент: код\n\nЧтобы я ни напечатал тут - это будет тело документа.\n"
+
+#: project_issue.module:26
+msgid "See the mailhandler help for more information on using the mailhandler module."
+msgstr "Смотрите помощь к модулю mailhandler, чтобы получить больше информации по использованию этого модуля."
+
+#: project_issue.module:28
+msgid "Add a new issue (bug report, feature request, etc) to an existing project."
+msgstr "Новая проблема (отчет об ошибке, предложение и др.) с существующим проектом."
+
+#: project_issue.module:30
+msgid "Use this page to add new status options for project issues or to change or delete existing options."
+msgstr "Используйте эту страницу, чтобы добавить новое состояние для проблем проектов, изменить или удалить существующее состояние."
+
+#: project_issue.module:32
+msgid "Adding"
+msgstr "Добавление"
+
+#: project_issue.module:33
+msgid "To add a new status option, put its name in one of the blank places at the bottom of the form and assign it a weight."
+msgstr "Чтобы добавить новое состояние, укажите название в пустом поле внизу формы и укажите вес."
+
+#: project_issue.module:34
+msgid "Updating"
+msgstr "Обновление"
+
+#: project_issue.module:35
+msgid "When renaming existing issues, keep in mind that issues with the existing name will receive the new one."
+msgstr "При переименовании существующей проблемы помните, что существующая проблема получит новое название."
+
+#: project_issue.module:36
+msgid "Deleting"
+msgstr "Удаление"
+
+#: project_issue.module:37
+msgid "If you delete an existing issue status, you will be prompted for a new status to assign to existing issues with the deleted status."
+msgstr "Если вы удаляете существующее состояние проблемы, то вам будет предложено перевести в новое состояние проблемы, которые находятся в удаляемом состоянии."
+
+#: project_issue.module:39
+msgid "The weight of an issue determines the order it appears in lists, like in the select box where users designate a status for their issue."
+msgstr "Вес проблем определяет порядок, в котором они отображаются в списках. Также как и выпадающий список, где пользователи указывают состояние их проблемы."
+
+#: project_issue.module:41
+msgid "Check this option to give the original poster of an issue the right to set a status option, even if she or he isn't part of a role with this permission. You may wish, for example, to allow issue authors to close their own issues."
+msgstr "Установите этот параметр, чтобы дать автору описания проблемы право устанавливать состояние даже если автор не обладает таким правом через права роли. Вы можете, например, позволить авторам закрывать их собственные проблемы."
+
+#: project_issue.module:43
+msgid "There are a number of pages that display a list of issues based on a certain query. For all of these views of the issue queues, if no status options are explicitly selected, a certain set of defaults will be used to construct the query."
+msgstr "Есть несколько страниц, которые показывают список проблем, основываясь на определённых фильтрах. Если не выбраны значения состояний для видов всех этих списков проблем, то будет использоваться значения состояний по умолчанию для фильтрации."
+
+#: project_issue.module:45
+msgid "The default status option will be used for new issues, and all users with the permission to create issues will automatically have permission to set this status. The default issue status cannot be deleted. If you wish to delete this status, first set a different status to default."
+msgstr "Состояние по умолчанию будет использовано для новых проблем и все пользователи с правом описания проблем будут автоматически иметь право устанавливать это состояние. Состояние по умолчанию не может быть удалено. Если вы хотите удалить это состояние - сначала нужно установить другое состояние по умолчанию."
+
+#: project_issue.module:53
+msgid "Issue"
+msgstr "Проблема"
+
+#: project_issue.module:55
+msgid "An issue that can be tracked, such as a bug report, feature request, or task."
+msgstr "Проблема, которую можно отслеживать. Например, сообщение об ошибке, предложение или задача."
+
+#: project_issue.module:80;157;160
+msgid "Issues per page"
+msgstr "Проблем на одну страницу"
+
+#: project_issue.module:85
+msgid "Number of issues to display on a single page when viewing the issue queues."
+msgstr "Количество проблем, которое нужно показывать на отдельной странице, при просмотре очереди проблем."
+
+#: project_issue.module:91
+msgid "Issue directory"
+msgstr "Проблемная папка"
+
+#: project_issue.module:95
+msgid "Subdirectory in the directory '%dir' where attachments to issues will be stored."
+msgstr "Подпапка в папке '%dir', где будут храниться вложения к описаниям проблем."
+
+#: project_issue.module:101
+msgid "Reply-to address on e-mail notifications"
+msgstr "Обратный адрес для уведомлений по электронной почте"
+
+#: project_issue.module:103
+msgid "All issue e-mails sent via subscriptions will appear from this e-mail address. You can use %project as a placeholder which will be replaced with the %short_project_name setting for the issue's current project."
+msgstr "Все письма о проблемах будут отправлены с этого адреса электронной почты. Вы можете использовать %project как шаблон, который будет заменён на %short_project_name из настроект для проблем текущего проекта."
+
+#: project_issue.module:103
+msgid "Short project name"
+msgstr "Краткое название проекта"
+
+#: project_issue.module:120
+msgid "Default permitted file extensions"
+msgstr "Допустимые по умолчанию расширения файлов"
+
+#: project_issue.module:123
+msgid "Default file extensions that users can upload and attach to issues. These defaults are used if none of the roles for a given user define their own allowed extensions. Separate the extensions with a space and do not include the leading dot."
+msgstr "Расширения по умолчанию, которые пользователи могут закачивать и прикреплять к проблемам. Эти расширения используются, если ни одна из ролей пользователя не определяет допустимые расширения. Разделяйте расширения пробелом и не включайте ведущую точку."
+
+#: project_issue.module:139
+msgid "Settings for @role"
+msgstr "Настройки для @role"
+
+#: project_issue.module:145
+msgid "Permitted file extensions"
+msgstr "Допустимые расширения файлов"
+
+#: project_issue.module:148
+msgid "Extensions that users in this role can upload. Separate the extensions with a space and do not include the leading dot."
+msgstr "Расширения, которые пользователи этой роли могут закачивать. Разделяйте расширения пробелом и не включайте ведущую точку."
+
+#: project_issue.module:157
+msgid "%setting must be a number."
+msgstr "%setting должно быть числом."
+
+#: project_issue.module:160
+msgid "%setting must be greater than 0."
+msgstr "%setting должно быть больше 0."
+
+#: project_issue.module:195
+msgid "Follow up"
+msgstr "Обновить"
+
+#: project_issue.module:227;263;337;589;705;907
+msgid "Issues"
+msgstr "Проблемы"
+
+#: project_issue.module:281
+msgid "My projects"
+msgstr "Мои проекты"
+
+#: project_issue.module:290
+msgid "My issues"
+msgstr "Мои проблемы"
+
+#: project_issue.module:300
+msgid "Specify where attachments to issues should be stored on your site, and what filename extensions should be allowed."
+msgstr "Определите, где должны храниться вложения к проблемам на вашем сайте. А также какие расширения допустимы."
+
+#: project_issue.module:311
+msgid "Project issue status options"
+msgstr "Настройки состояний проблем проектов"
+
+#: project_issue.module:312
+msgid "Configure what issue status values should be used on your site."
+msgstr "Настройте состояния проблем, которые должны использоваться на вашем сайте."
+
+#: project_issue.module:349
+msgid "Comments"
+msgstr "Комментарии"
+
+#: project_issue.module:388
+msgid "Issue tracker"
+msgstr "Следить за проблемами"
+
+#: project_issue.module:392
+msgid "Enable issue tracker"
+msgstr "Включить слежение за проблемами"
+
+#: project_issue.module:395
+msgid "Let users submit bug requests, patches, feature requests, support requests, etc."
+msgstr "Позволить пользователям отправлять сообщения об ошибках, заплатки, предложения, просьбы о помощи и др."
+
+#: project_issue.module:406
+msgid "Submission guidelines"
+msgstr "Руководство по описанию проблем"
+
+#: project_issue.module:415
+msgid "Issue e-mail options"
+msgstr "Параметры электронной почты для проблем"
+
+#: project_issue.module:420
+msgid "Weekly critical issues report"
+msgstr "Еженедельные отчеты о критических проблемах"
+
+#: project_issue.module:424
+msgid "To get a weekly digest of critical issues specify an e-mail address."
+msgstr "Чтобы получать еженедельный обзор критичных проблем, укажите ваш адрес электронной почты."
+
+#: project_issue.module:428
+msgid "Issues e-mail address"
+msgstr "Адрес электронной почты для проблем"
+
+#: project_issue.module:432
+msgid "If you wish to receive a copy of all the issues to a central location specify an address here."
+msgstr "Если Вы хотите получать копию всех проблем на один основной адрес - укажите его здесь."
+
+#: project_issue.module:438
+msgid "Which issue categories to e-mail. If none is checked all categories will be posted."
+msgstr "Какие категории задач отправлять по электронной почте. Если ничего не выбрано, то будут отправлены все категории."
+
+#: project_issue.module:453
+msgid "States"
+msgstr "Состояния"
+
+#: project_issue.module:454
+msgid "Which issue states to e-mail. If none is checked all states will be posted."
+msgstr "Какие состояния отправлять по электронной почте. Если ничего не выбрано, все состояния будут отправлены."
+
+#: project_issue.module:469
+msgid "Monthly reminder"
+msgstr "Ежемесячное напоминание"
+
+#: project_issue.module:473
+msgid "Send monthly reminders to users"
+msgstr "Отправить ежемесячные напоминания пользователям"
+
+#: project_issue.module:476
+msgid "Enabling this will send a monthly reminder to users that have open issues registered."
+msgstr "Если включено, то ежемесячно будут отсылаться напоминания пользователям, которые имеют нерешённые проблемы."
+
+#: project_issue.module:514
+msgid "Issue settings have been saved."
+msgstr "Настройки проблемы были сохранены."
+
+#: project_issue.module:550
+msgid "Invalid issue status %status: you do not have permission to set this status"
+msgstr "Неверное состояние %status: вы не имеете прав для перевода в это состояние"
+
+#: project_issue.module:568
+msgid "Projects by @user"
+msgstr "Проекты пользователя @user"
+
+#: project_issue.module:578
+msgid "You need to log in to see your projects."
+msgstr "Вам нужно войти, чтобы увидеть ваши проекты."
+
+#: project_issue.module:584
+msgid "Last issue update"
+msgstr "Последнее обновление проблемы"
+
+#: project_issue.module:593
+msgid "Issue links"
+msgstr "Ссылки проблемы"
+
+#: project_issue.module:595
+msgid "Project updated"
+msgstr "Проект обновлён"
+
+#: project_issue.module:604
+msgid "You have no projects."
+msgstr "У вас нет проектов."
+
+#: project_issue.module:604
+msgid "This user has no projects."
+msgstr "Этот пользователь не имеет проектов."
+
+#: project_issue.module:621
+msgid "View"
+msgstr "Смотреть"
+
+#: project_issue.module:636
+msgid "Edit"
+msgstr "Изменить"
+
+#: project_issue.module:642
+msgid "Add release"
+msgstr "Добавить релиз"
+
+#: project_issue.module:654
+msgid "n/a"
+msgstr "нет"
+
+#: project_issue.module:687
+msgid "Issue tracking is disabled for this project."
+msgstr "Слежение за проблемами запрещено для этого проекта."
+
+#: project_issue.module:691
+msgid "Enable"
+msgstr "Включить"
+
+#: project_issue.module:700
+msgid "Project links"
+msgstr "Ссылки проекта"
+
+#: project_issue.module:62
+msgid "create project issues"
+msgstr "описывать проблемы проектов"
+
+#: project_issue.module:63
+msgid "access project issues"
+msgstr "иметь доступ к проблемам проектов"
+
+#: project_issue.module:64
+msgid "edit own project issues"
+msgstr "изменять свои проблемы проектов"
+
+#: project_issue.module:65
+msgid "access own project issues"
+msgstr "иметь доступ к своим проблемам проектов"
+
+#: project_issue.module:69
+msgid "set issue status "
+msgstr "видеть состояние проблемы"
+
+#: project_issue.module:69
+msgid "'"
+msgstr "'"
+
+#: project_issue.module:0
+msgid "project_issue"
+msgstr "project_issue"
+
+#: project_issue.info:0
+msgid "Project issue tracking"
+msgstr "Слежение за проблемами проектов"
+
+#: project_issue.info:0
+msgid "Provides issue tracking for the project.module."
+msgstr "Предоставляет слежение за проблемами для модуля Проект."
+

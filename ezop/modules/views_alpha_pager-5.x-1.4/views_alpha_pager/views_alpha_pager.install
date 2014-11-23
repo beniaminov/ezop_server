@@ -1,0 +1,76 @@
+<?php
+// $Id: views_alpha_pager.install,v 1.1.2.3 2008/01/17 12:53:29 douggreen Exp $
+
+/**
+ * Implementation of hook_install().
+ */
+function views_alpha_pager_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("
+        CREATE TABLE IF NOT EXISTS {views_alpha_pager} (
+          vid int(10) unsigned NOT NULL default '0',
+          placement int(2)
+        )
+      ");
+      break;
+    case 'pgsql':
+      db_query("
+        CREATE TABLE {views_alpha_pager} (
+          vid integer NOT NULL default '0',
+          placement smallint
+        )
+      ");
+      break;
+  }
+}
+
+/*
+ * update module from variable_get implementation.
+ */
+function views_alpha_pager_update_1() {
+  $ret = array();
+
+  // create the views_alpha_pager table
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("
+        CREATE TABLE IF NOT EXISTS {views_alpha_pager} (
+          vid int(10) unsigned NOT NULL default '0',
+          placement int(2)
+        )
+      ");
+      break;
+    case 'pgsql':
+      $ret[] = update_sql("
+        CREATE TABLE {views_alpha_pager} (
+          vid integer NOT NULL default '0',
+          placement smallint
+        )
+      ");
+      break;
+  }
+
+  // convert the variables to use the new table
+  $result = db_query("SELECT name FROM {variable} WHERE name LIKE 'views_alpha_pager.%'");
+  while ($variable = db_fetch_object($result)) {
+    $vid = array_pop(explode('.', $variable->name));
+    $value = variable_get($variable->name, 0);
+    $ret[] = update_sql("INSERT INTO {views_alpha_pager} (placement, vid) VALUES (". $value .", ". $vid .")");
+  }
+
+  // remove the old variables
+  $ret[] = update_sql("DELETE FROM {variable} WHERE name LIKE 'views_alpha_pager.%'");
+  return $ret;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function views_alpha_pager_uninstall() {
+  db_query("DROP TABLE {views_alpha_pager}");
+  variable_del('views_alpha_pager_ignore');
+  variable_del('views_alpha_pager_default');
+}

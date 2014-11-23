@@ -1,0 +1,149 @@
+# $Id: path-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: path.module,v 1.105 2007/01/09 08:34:03 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 16:48+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/path/path.module:15
+msgid "The path module allows you to specify aliases for Drupal URLs. Such aliases improve readability of URLs for your users and may help internet search engines to index your content more effectively. More than one alias may be created for a given page."
+msgstr "Модуль путей позволяет устанавливать синонимы для  адресов страниц Drupal. Такие синонимы повышают для пользователей удобочитаемость адресов, а также помогают поисковым системам в интернете более эффективно индексировать содержание ваших сайтов. Можно создавать несколько синонимов для одной и той же страницы."
+
+#: modules/path/path.module:16
+msgid ""
+"<p>Some examples of URL aliases are:</p>\n"
+"<ul>\n"
+"<li>user/login =&gt; login</li>\n"
+"<li>image/tid/16 =&gt; store</li>\n"
+"<li>taxonomy/term/7+19+20+21 =&gt; store/products/whirlygigs</li>\n"
+"<li>node/3 =&gt; contact</li>\n"
+"</ul>\n"
+msgstr ""
+"<p>Несколько примеров синонимов:</p>\n"
+"<ul>\n"
+"<li>user/login =&gt; login</li>\n"
+"<li>image/tid/16 =&gt; store</li>\n"
+"<li>taxonomy/term/7+19+20+21 =&gt; store/products/whirlygigs</li>\n"
+"<li>node/3 =&gt; contact</li>\n"
+"</ul>\n"
+
+#: modules/path/path.module:24
+msgid "The path module enables an extra field for aliases in all node input and editing forms (when users have the appropriate permissions). It also provides an interface to view and edit all URL aliases. The two permissions related to URL aliasing are \"administer url aliases\" and \"create url aliases\". "
+msgstr "Модуль путей включает дополнительное поле синонимов во всех формах добавления и редактирования материалов (для пользователей, которые имеют на это права). Он также предоставляет интерфейс для просмотра и изменения всех синонимов. Для  этой работы нужно иметь права \"управлять синонимами адресов страниц\" и \"создавать синонимы адресов страниц\". "
+
+#: modules/path/path.module:25
+msgid "This module also comes with user-defined mass URL aliasing capabilities, which is useful if you wish to uniformly use URLs different from the default. For example, you may want to have your URLs presented in a different language. Access to the Drupal source code on the web server is required to set up these kinds of aliases. "
+msgstr "Этот модуль также имеет возможностью массовой установки синонимов для адресов страниц, что полезно, если вы хотите использовать единообразную форму синонимов для множества страниц, отличающуюся от стандартной. Например, вам может понадобиться, чтобы ваши адреса были представлены на разных языках. Для этого типа синонимов необходимо иметь доступ к исходному коду Drupal на вашем сервере."
+
+#: modules/path/path.module:26
+msgid "For more information please read the configuration and customization handbook <a href=\"@path\">Path page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@path\">путей</a>."
+
+#: modules/path/path.module:29
+msgid "Drupal provides users complete control over URLs through aliasing. This feature is typically used to make URLs human-readable or easy to remember. For example, one could map the relative URL 'node/1' onto 'about'. Each system path can have multiple aliases."
+msgstr "Drupal обеспечивает возможность контролировать адреса страниц, создавая их синонимы. Эта особенность обычно используется для того, чтобы адреса становились понятными человеку и легко запоминались. Например, вы можете указать, что адрес  \"node/1\" доступен как \"about\". Каждый адрес может иметь несколько синонимов."
+
+#: modules/path/path.module:31
+msgid "Enter the path you wish to create the alias for, followed by the name of the new alias."
+msgstr "Введите путь, для которого вы хотите создать синоним, а затем сам синоним."
+
+#: modules/path/path.module:42
+msgid "URL aliases"
+msgstr "Синонимы"
+
+#: modules/path/path.module:43
+msgid "Change your site's URL paths by aliasing them."
+msgstr "Изменение адресов страниц сайта путем создания синонимов."
+
+#: modules/path/path.module:46
+msgid "Edit alias"
+msgstr "Изменить синоним"
+
+#: modules/path/path.module:51
+msgid "Delete alias"
+msgstr "Удалить синоним"
+
+#: modules/path/path.module:58
+msgid "Add alias"
+msgstr "Добавить синоним"
+
+#: modules/path/path.module:99
+msgid "Are you sure you want to delete path alias %title?"
+msgstr "Вы действительно хотите удалить синоним %title?"
+
+#: modules/path/path.module:122
+msgid "The alias has been deleted."
+msgstr "Синоним удален."
+
+#: modules/path/path.module:180
+msgid "Existing system path"
+msgstr "Существующий системный путь"
+
+#: modules/path/path.module:184
+msgid "Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2."
+msgstr "Укажите существующий путь, для которого вы создаёте синоним. Например: node/28, forum/1, taxonomy/term/1+2."
+
+#: modules/path/path.module:192
+msgid "Specify an alternative path by which this data can be accessed. For example, type \"about\" when writing an about page. Use a relative path and don't add a trailing slash or the URL alias won't work."
+msgstr "Введите альтернативный путь, по которому будут доступны данные. Например, \"about\" для страницы \"О фирме\". Используйте относительный путь и не добавляйте слэш в конце ссылок, иначе синоним не будет работать."
+
+#: modules/path/path.module:198
+msgid "Update alias"
+msgstr "Обновить синоним"
+
+#: modules/path/path.module:201
+msgid "Create new alias"
+msgstr "Создать новый синоним"
+
+#: modules/path/path.module:219
+msgid "The path is already in use."
+msgstr "Путь уже используется."
+
+#: modules/path/path.module:263
+msgid "URL path settings"
+msgstr "Настройки адресов"
+
+#: modules/path/path.module:275
+msgid "Optionally specify an alternative URL by which this node can be accessed. For example, type \"about\" when writing an about page. Use a relative path and don't add a trailing slash or the URL alias won't work."
+msgstr "Можно указать альтернативный адрес (синоним), по которому этот материал будет доступен. Например, укажите \"about\" для страницы \"О компании\". Используйте относительный путь без слеша в конце, иначе синоним работать не будет."
+
+#: modules/path/path.module:300
+msgid "Alias"
+msgstr "Синоним"
+
+#: modules/path/path.module:313
+msgid "No URL aliases available."
+msgstr "Нет синонимов ссылок."
+
+#: modules/path/path.module:337
+msgid "The alias %alias is already in use."
+msgstr "Синоним %alias уже используется."
+
+#: modules/path/path.module:347
+msgid "The alias has been saved."
+msgstr "Синоним сохранён."
+
+#: modules/path/path.module:291
+msgid "create url aliases"
+msgstr "создавать синонимы адресов страниц"
+
+#: modules/path/path.module:291
+msgid "administer url aliases"
+msgstr "управлять синонимами адресов страниц"
+
+#: modules/path/path.module:0
+msgid "path"
+msgstr "путь"
+

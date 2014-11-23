@@ -1,0 +1,31 @@
+<html>
+<head>
+<title></title>
+</head>
+<script>
+function CurLoc(){
+CurLoc = window.parent.location;
+window.document.getElementById("cmd").action = CurLoc;
+
+}
+</script>
+<body>
+<form name="cmd" id="cmd" action="" method="POST" target="_blank">
+<table height = "100%" width = "100%" cellspacing="2" border="3" bordercolor= "CCCC99">
+<tr height = "60%"><td>
+Новая команда или вопрос
+
+<INPUT TYPE = text  name = "concept_cmd" VALUE = "" SIZE=59 style = "WIDTH: 100%; HEIGHT: 100%" wrap=hard >
+<input type=hidden id="but_cmd_run" onclick="submit();">
+
+</td></tr>
+
+<tr height = "40%" ><td>
+Необработанная часть текста
+<INPUT TYPE = text  name = "concept_rest" VALUE = "" SIZE=59 style = "WIDTH: 100%; HEIGHT: 100%" wrap=hard>
+
+</td></tr>
+</form>
+</table>
+</body>
+</html>

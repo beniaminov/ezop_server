@@ -1,0 +1,122 @@
+<?php
+// $Id: update_status.install,v 1.1.2.9 2009/09/29 18:18:22 dww Exp $
+
+/**
+ * Implementation of hook_install().
+ */
+function update_status_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE {cache_update_status} (
+        cid varchar(255) NOT NULL default '',
+        data longblob,
+        expire int(11) NOT NULL default '0',
+        created int(11) NOT NULL default '0',
+        PRIMARY KEY (cid)
+      )");
+      break;
+    case 'pgsql':
+      db_query("CREATE TABLE {cache_update_status} (
+        cid varchar(255) NOT NULL default '',
+        data bytea,
+        expire int NOT NULL default '0',
+        created int NOT NULL default '0',
+        PRIMARY KEY (cid)
+      )");
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function update_status_uninstall() {
+  $variables = array(
+    'update_status_settings',
+    'update_status_notify_emails',
+    'update_status_check_frequency',
+    'update_status_notification_threshold',
+    'update_status_last',
+    'update_status_fetch_url',
+    'update_status_check_disabled',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+  db_query("DROP TABLE {cache_update_status}");
+  cache_clear_all();
+}
+
+/**
+ * Remove the old data in stale variables used by the 5.x-1.* releases.
+ */
+function update_status_update_5200() {
+  $ret = array();
+  foreach (array('update_status_last', 'update_status') as $variable) {
+    variable_del($variable);
+    $ret[] = array('success' => TRUE, 'query' => "variable_del($variable)");
+  }
+  return $ret;
+}
+
+/**
+ * Database changes required for 5.x-2.0-rc2:
+ * - Rename and prune dead variables.
+ * - Clear menu cache.
+ */
+function update_status_update_5201() {
+  $ret = array();
+  $error_threshold = variable_get('update_status_error_threshold', '');
+  if (!empty($error_threshold)) {
+    variable_set('update_status_notification_threshold', $error_threshold);
+    $ret[] = array('success' => TRUE, 'query' => "variable_set('update_status_notification_threshold', $error_threshold)");
+  }
+  foreach (array('update_status_error_threshold', 'update_status_usage_stats') as $variable) {
+    variable_del($variable);
+    $ret[] = array('success' => TRUE, 'query' => "variable_del($variable)");
+  }
+  // Reset the menu cache since admin/logs/updates/check is a new path.
+  cache_clear_all();
+  return $ret;
+}
+
+/**
+ * More thorough attempt at rebuilding the menu cache, since
+ * admin/logs/updates/check is a new path.
+ */
+function update_status_update_5202() {
+  $ret = array();
+  cache_clear_all();
+  menu_rebuild();
+  return $ret;
+}
+
+/**
+ * Backport seperate cache table and functionality from 6.x (#155450).
+ */
+function update_status_update_5203() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("CREATE TABLE {cache_update_status} (
+        cid varchar(255) NOT NULL default '',
+        data longblob,
+        expire int(11) NOT NULL default '0',
+        created int(11) NOT NULL default '0',
+        PRIMARY KEY (cid)
+      )");
+      break;
+    case 'pgsql':
+      $ret[] = update_sql("CREATE TABLE {cache_update_status} (
+        cid varchar(255) NOT NULL default '',
+        data bytea,
+        expire int NOT NULL default '0',
+        created int NOT NULL default '0',
+        PRIMARY KEY (cid)
+      )");
+      break;
+  }
+  return $ret;
+}

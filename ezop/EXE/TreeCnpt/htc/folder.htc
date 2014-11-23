@@ -1,0 +1,81 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="SwitchExpansion()" />
+     <PUBLIC:PROPERTY name = "IsExpanded"/>
+     <PUBLIC:PROPERTY name = "IsRoot"/>
+     <PUBLIC:PROPERTY name = "CatID"/>  
+     <PUBLIC:PROPERTY name = "SelectedDir"/>
+
+<SCRIPT LANGUAGE="JScript">
+
+function FindChild(){
+var cur;
+var i = 0;
+while (i< this.parentElement.childNodes.length) {
+	alert(this.parentElement.childNodes.item(i).id);
+ if (this.parentElement.childNodes.item(i).id< "oTD") i++;
+			else {cur=this.parentElement.childNodes.item(i); break;}
+	}
+return cur;
+}
+var res=window.parent.frames("tree");
+var pictureClosed = "pict/closed.bmp";
+var pictureOpened = "pict/opened.bmp";
+
+var source = new ActiveXObject("MSXML2.FreeThreadedDOMDocument");
+   source.async = false;
+   source.load("dir.xml");  
+
+var style = new ActiveXObject("MSXML2.FreeThreadedDOMDocument");
+   style.async = false; 
+   style.load("dir.xsl"); 
+
+
+function SwitchExpansion(){    
+    		var i = 0;
+		var j = 0;
+		var oCatID ="oDiv" + this.CatID;
+		while (i< this.parentElement.childNodes.length) {
+				//alert(this.parentElement.childNodes.item(i).id);
+		 if (this.parentElement.childNodes.item(i).id!= oCatID) i++;
+			else {j=i; i = this.parentElement.childNodes.length+1;} 
+		}
+			
+     if(this.IsExpanded == "true"){
+              	//collapse
+		//alert("collapse");
+		this.IsExpanded = "false";
+		if(SelectedDirID && this.parentElement.id == "oDivExt"+SelectedDirID)   
+			{
+			//alert(this.parentElement.id);
+			//alert(SelectedDirID);
+			 SelectedName = "";
+			 SelectedID = "";
+			 SelectedDirID = null;
+			 window.open("about:blank","textarea");
+			}
+		if(this.IsRoot != "true")  this.src = pictureClosed;
+		result = this.parentElement.childNodes.item(j);         
+        	result.innerHTML = "";         
+     }
+     else {
+		//expand
+	
+	      	this.IsExpanded = "true";
+		if(this.IsRoot != "true")  this.src = pictureOpened;
+	      	var xslt = new ActiveXObject("MSXML2.XSLTemplate");   
+     		var xslProc;
+		xslt.stylesheet = style;   
+		xslProc=xslt.createProcessor();
+		xslProc.input=source; 
+       		xslProc.addParameter("curName",this.CatID); 
+        	xslProc.transform();
+		result = this.parentElement.childNodes.item(j);
+        	result.innerHTML = xslProc.output; 
+     }		
+}
+</SCRIPT>
+</PUBLIC:COMPONENT>
+
+
+
+

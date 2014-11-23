@@ -1,0 +1,121 @@
+# LANGUAGE translation of Drupal (sitemenu.module)
+# Copyright 2006 Jakob Petsovits <jpetso@gmx.at>
+# Copyright 2006 Lukas Gangoly <lukas.gangoly@univie.ac.at>
+# Generated from file: sitemenu.module,v 1.16.2.5 2006/08/18 23:29:03 kbahey
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: German\n"
+"POT-Creation-Date: 2006-12-01 15:39+0100\n"
+"PO-Revision-Date: 2006-12-15 16:31+0100\n"
+"Last-Translator: Jakob Petsovits <jpetso@gmx.at>\n"
+"Language-Team: Luke & jpetso <jpetso@gmx.at>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: sitemenu.module:93
+msgid "Author: %username"
+msgstr "Autor: %username"
+
+#: sitemenu.module:95
+msgid ", comments: "
+msgstr ", Kommentare:"
+
+#: sitemenu.module:190;269
+msgid "Menu"
+msgstr "Menü"
+
+#: sitemenu.module:220
+msgid "site map page and block menu, based on taxonomy"
+msgstr "Eine auf Taxonomie basierende Sitemap-Seite und plus Menüblock."
+
+#: sitemenu.module:224
+msgid "This module provides a site map based on the hierarchy of the site's taxonomy. The site map page shows all vocabularies, terms, and recent nodes within each term. It also provides a block that can be used in the side bar as a navigation menu."
+msgstr "Dieses Modul stellt eine Sitemap zur Verfügung, die auf der Hierarchie der Taxonomie der Site basiert. Die Sitemap-Seite zeigt alle Kategorien, Begriffe und neueste Seiten eines jeden Begriffs an. Weiters bringt das Modul einen Block mit, der in den Seitenleisten als Navigationsmenü benutzt werden kann."
+
+#: sitemenu.module:236
+msgid "none"
+msgstr "keine"
+
+#: sitemenu.module:242
+msgid "Description"
+msgstr "Beschreibung"
+
+#: sitemenu.module:243
+msgid "This is the site map page."
+msgstr "Das ist die Sitemap-Seite."
+
+#: sitemenu.module:246
+msgid "This text will be displayed at the top of the site menu page"
+msgstr "Dieser Text wird auf der Sitemap-Seite unter der Überschrift angezeigt."
+
+#: sitemenu.module:250
+msgid "Omitted vocabularies"
+msgstr "Ausgelassene Kategorien"
+
+#: sitemenu.module:254
+msgid "Select vocabularies which should be <b>omitted</b> from listings."
+msgstr "Wählen Sie jene Kategorien aus, die von der Auflistung <b>ausgelassen</b> werden sollen."
+
+#: sitemenu.module:258
+msgid "Navigation link text"
+msgstr "Name der Sitemap-Seite"
+
+#: sitemenu.module:260;338;379
+msgid "site map"
+msgstr "Sitemap"
+
+#: sitemenu.module:263
+msgid "The text in the navigation link which points to the site menu page."
+msgstr "Der Titel der Sitemap, der als Überschrift der Sitemap-Seite und im Menüpunkt des Navigationsblocks angezeigt wird."
+
+#: sitemenu.module:267
+msgid "Block title text"
+msgstr "Titel des Menüblocks"
+
+#: sitemenu.module:272
+msgid "If configured as a block, this text shows as the block title."
+msgstr "Dieser Text wird als Überschrift für den Menüblock verwendet, wenn dieser sichtbar ist."
+
+#: sitemenu.module:276
+msgid "Link to vocabulary page when listing vocabulary"
+msgstr "Aufgelistete Kategorien zur jeweiligen Kategorie-Seite verlinken."
+
+#: sitemenu.module:281
+msgid "Show number of nodes for each term"
+msgstr "Anzahl der Seiten anzeigen, die einem jeden Begriff zugeordnet sind."
+
+#: sitemenu.module:286
+msgid "Show Author and number of Comments (in mousover)"
+msgstr "Autor und Anzahl der Kommentare als Tooltip anzeigen"
+
+#: sitemenu.module:291
+msgid "Number of nodes to show"
+msgstr "Anzahl der Seiten, die angezeigt werden sollen"
+
+#: sitemenu.module:293
+msgid "0"
+msgstr "0"
+
+#: sitemenu.module:296
+msgid "Number of nodes to show per taxonomy term. Set to 0 if you do not want nodes to listed."
+msgstr "Anzahl der Seiten pro Taxonomie-Begriff. 0, wenn keine Seiten gelistet werden sollen."
+
+#: sitemenu.module:300
+msgid "Closing description"
+msgstr "Abschließende Beschreibung"
+
+#: sitemenu.module:304
+msgid "This text will be displayed at the bottom of the site menu page"
+msgstr "Dieser Text wird am Ende der Sitemap-Seite angezeigt."
+
+#: sitemenu.module:318;0
+msgid "sitemenu"
+msgstr "Sitemenu"
+
+#: sitemenu.module:328
+msgid "use sitemenu"
+msgstr "Sitemenu benutzen"
+

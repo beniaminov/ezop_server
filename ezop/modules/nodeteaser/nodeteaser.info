@@ -1,0 +1,10 @@
+; $Id: nodeteaser.info,v 1.1 2007/02/14 00:22:36 ideaoforder Exp $
+name = Node Teaser
+description = This module provides a separate teaser field.
+
+version = "5.0" 
+
+; Information added by drupal.org packaging script on 2007-02-16
+version = "5.x-1.1"
+project = "nodeteaser"
+

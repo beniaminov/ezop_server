@@ -1,0 +1,37 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="OnClick()" />
+<SCRIPT LANGUAGE="JScript">
+function OnClick(){
+window.parent.document.getElementById("main_form").target = "content";
+if (window.document.all.select_left.selectedIndex!=-1) {
+
+	window.parent.document.getElementById("menu_item").value = "toolbar";
+	window.parent.document.getElementById("toolbar_button").value = id;
+	
+	if(id == "fldr_left_intoenv")
+		{window.parent.document.getElementById("env").value = window.parent.document.getElementById("explorer_selected_left").value;
+		 window.parent.document.getElementById("curcnpt_name").value = "Новое понятие";
+		 window.parent.document.getElementById("curcnpt_text").value = "";
+		//alert(window.parent.document.getElementById("env").value );
+			}
+
+	if(id == "fldr_left_create" || id == "fldr_right_create"){
+		var retval = showModalDialog("newfolder.html","Dialog Arguments Value","dialogHeight: 210px; dialogWidth: 250px;");
+		if (retval) window.parent.document.getElementById("new_folder_name").value = retval;
+		else {	return 0;}
+	}
+//alert(window.parent.document.getElementById("menu_item").value);
+//alert(window.parent.document.getElementById("kb_name").value);
+//alert(window.parent.document.getElementById("location").value);
+//alert(window.parent.document.getElementById("curcnpt_name").value);
+//alert(window.parent.document.getElementById("curcnpt_text").value);
+//alert(window.parent.document.getElementById("env").value);
+//alert(window.parent.document.getElementById("cmd").value);
+//alert(window.parent.document.getElementById("rest").value);
+window.parent.document.getElementById("button").fireEvent("onclick");
+}
+}
+</SCRIPT>
+</PUBLIC:COMPONENT>
+
+

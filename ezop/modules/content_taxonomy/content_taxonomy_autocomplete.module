@@ -1,0 +1,315 @@
+<?php
+// $Id: content_taxonomy_autocomplete.module,v 1.2.2.4 2007/09/03 07:50:27 mh86 Exp $
+
+/**
+ * @file
+ * Defines a widget type for content_taxonomy with autocomplete
+ **/
+
+/**
+ * Implementation of hook_help().
+ **/
+function content_taxonomy_autocomplete_help($section) {
+  switch ($section) {
+    case 'admin/modules#description':
+      return t('Defines a widget type for content_taxonomy with autocomplete. <em>Note: Requires content.module.</em>');
+  }
+}
+
+/**
+ * Implementation of hook_widget_info().
+ */
+function content_taxonomy_autocomplete_widget_info() {
+  return array(
+    'content_taxonomy_autocomplete' => array(
+      'label' => 'Autocomplete',
+      'field types' => array('content_taxonomy'),
+    ),
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_widget_settings
+ */
+function content_taxonomy_autocomplete_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      $form = array();
+      
+      $form['autocomplete'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Autocomplete'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+      );
+      $form['autocomplete']['new_terms'] = array(
+        '#type' => 'radios',
+        '#title' => t('How to manage new inputed terms from a user?'),
+        '#default_value' => isset($widget['new_terms']) ? $widget['new_terms'] : 'insert',
+        '#options' => array('insert' => t('Allow and insert new terms into the taxonomy tree'),
+                            'deny' => t('Deny any new terms'),
+                            ),
+      );
+      return $form;
+
+    case 'save':
+      return array('new_terms');
+  }
+}
+
+/**
+ * Implementation of hook_widget().
+ */
+function content_taxonomy_autocomplete_widget($op, &$node, $field, &$node_field) {
+  $vid = $field['vid'];
+  $tid = $field['tid'];
+  $depth = (!empty($field['depth'])) ? $field['depth'] : NULL;
+
+  switch ($op) {
+    case 'form':
+      $form = array();
+      $form[$field['field_name']] = array(
+        '#tree' => TRUE, 
+        '#weight' => $field['widget']['weight'], 
+      );
+      $form[$field['field_name']]['values'] = array(
+        '#type' => 'textfield',
+        '#title' => $field['widget']['label'],
+        '#autocomplete_path' => 'content_taxonomy/autocomplete/'. $field['field_name'] .'/'.$field['multiple'],
+        '#default_value' => isset($node_field[$field['tid']]) ? content_taxonomy_autocomplete_merge_tags($node_field[$field['tid']], $vid, $tid) : $field['widget']['default_value']['values'],
+        '#description' => t($field['widget']['description']),
+		'#required' => $field['required'],
+      );
+      return $form;
+      
+    case 'validate':
+      if ($field['multiple'] == 'single' && count(content_taxonomy_autocomplete_split_tags($node_field['values'],$vid)) > 1) {
+        form_set_error($field['field_name'] .'][value', t('You can provide only one value'));
+      }
+      if ($field['widget']['new_terms'] == 'deny') {
+        $tids = content_taxonomy_autocomplete_tags_get_tids($node_field['values'], $vid, $field['tid']);
+        if (is_array($tids['non_existing_terms'])) {
+          form_set_error($field['field_name'],t('New tags are not allowed'));
+        }
+      }
+      break;
+        
+    case 'process form values':
+      $all_tids = content_taxonomy_autocomplete_tags_get_tids($node_field['values'], $vid, $field['tid']);
+      $node_field['tids'] = $all_tids['existing_tids'];
+      if ($field['widget']['new_terms'] == 'insert') {
+        if (is_array($all_tids['non_existing_terms'])) {
+          if ($tid && $depth == 1) {
+            $new_tids = content_taxonomy_autocomplete_insert_tags($all_tids['non_existing_terms'], $tid);
+          }
+          else {
+            $new_tids = content_taxonomy_autocomplete_insert_tags($all_tids['non_existing_terms']);          
+          }
+          if (is_array($node_field['tids'])) {
+            $node_field['tids'] += $new_tids;
+          }
+          else {
+            $node_field['tids'] = $new_tids;
+          }
+        }
+      }
+	    if (isset($field['save']) && $field['save'] != 'tag') {
+        $keys = array();
+        if(!$node_field['tids']){ 
+          $node_field['tids'] = array();
+        }
+		    foreach ($node_field['tids'] as $key => $tid) {
+          if ($tid != 0) $keys[$key] = $tid; 
+		    }
+		    $node_field = content_transpose_array_rows_cols(array('value' => $keys));
+      }
+      unset($node_field['values']);
+      break;
+            
+  }     
+}
+
+
+/**
+ * Implementation of hook_menu
+ */
+function content_taxonomy_autocomplete_menu($may_cache) {
+  $access = user_access('access content');
+  $items = array();
+  if (!$may_cache) {
+    $items[] = array(
+      'path' => 'content_taxonomy/autocomplete', 
+      'callback' => 'content_taxonomy_autocomplete_load', 
+      'access' => $access,
+      'type' => MENU_CALLBACK);
+  }
+  return $items;
+}
+
+/**
+ * Retrieve a pipe delimited string of autocomplete suggestions
+ * 
+ * @param String Fieldname
+ * @param Integer TID of a parent (optional)
+ * @param BOOLEAN whether a multiple field or not
+ * @param STRING typed input
+ */
+function content_taxonomy_autocomplete_load($field_name, $multiple = TRUE, $string = '') {
+   // The user enters a comma-separated list of tags. We only autocomplete the last tag.
+  // This regexp allows the following types of user input:
+  // this, "somecmpany, llc", "and ""this"" w,o.rks", foo bar
+  $content_type_info = _content_type_info();
+  $vid = $content_type_info['fields'][$field_name]['vid'];
+  if ($content_type_info['fields'][$field_name]['tid']) {
+    $tid = $content_type_info['fields'][$field_name]['tid'];
+  }
+  elseif ($content_type_info['fields'][$field_name]['parent']) {
+    $tid = $content_type_info['fields'][$field_name]['parent'];
+  }
+  
+  $regexp = '%(?:^|,\ *)("(?>[^"]*)(?>""[^"]* )*"|(?: [^",]*))%x';
+  preg_match_all($regexp, $string, $matches);
+  $array = $matches[1];
+
+  // Fetch last tag
+  $last_string = trim(array_pop($array));
+  if ($last_string != '') {
+    if ($tid) {
+      $result = db_query_range(db_rewrite_sql("SELECT t.name FROM {term_data} t 
+        LEFT JOIN {term_synonym} s ON t.tid = s.tid
+        INNER JOIN {term_hierarchy} h ON  t.tid = h.tid
+        WHERE h.parent = %d 
+        AND (LOWER(t.name) LIKE LOWER('%%%s%%') OR LOWER(s.name) LIKE LOWER('%%%s%%'))", 't', 'tid'),
+        $tid,$last_string,$last_string,0,10);
+    }
+    else {
+      $result = db_query_range(db_rewrite_sql("SELECT t.name FROM {term_data} t 
+        LEFT JOIN {term_synonym} s ON t.tid = s.tid
+        WHERE t.vid = %d 
+        AND (LOWER(t.name) LIKE LOWER('%%%s%%') OR LOWER(s.name) LIKE LOWER('%%%s%%'))", 't', 'tid'),
+        $vid, $last_string, $last_string, 0, 10);
+    }
+      
+    if ($multiple) {
+      $prefix = count($array) ? implode(',', $array) .', ' : '';
+    }
+    else {
+      $prefix = '';
+    }
+
+    $matches = array();
+    while ($tag = db_fetch_object($result)) {
+      $n = $tag->name;
+      // Commas and quotes in terms are special cases, so encode 'em.
+      if (preg_match('/,/', $tag->name) || preg_match('/"/', $tag->name)) {
+        $n = '"'. preg_replace('/"/', '""', $tag->name) .'"';
+      }
+      $matches[$prefix . $n] = check_plain($tag->name);
+    }
+    print drupal_to_js($matches);
+    exit();
+  }
+}
+
+/**
+ * Get TIDs for freetagging tags
+ *  Free tagging vocabularies do not send their tids in the form,
+ *  so we'll detect them here and process them independently.
+ * @param $typed_input A string containing all comma separated tags. As the user typed it.
+ */
+function content_taxonomy_autocomplete_tags_get_tids($typed_input, $vid, $parent = 0) {
+  // This regexp allows the following types of user input:
+  // this, "somecmpany, llc", "and ""this"" w,o.rks", foo bar
+  $typed_terms = content_taxonomy_autocomplete_split_tags($typed_input);
+
+  foreach ($typed_terms as $typed_term) {
+    // If a user has escaped a term (to demonstrate that it is a group,
+    // or includes a comma or quote character), we remove the escape
+    // formatting so to save the term into the DB as the user intends.
+    $typed_term = str_replace('""', '"', preg_replace('/^"(.*)"$/', '\1', $typed_term));
+    $typed_term = trim($typed_term);
+    if ($typed_term == "") { continue; }
+
+    // See if the term exists in the chosen vocabulary
+    // and return the tid, otherwise, add a new record.
+    $possibilities = taxonomy_get_term_by_name($typed_term);
+
+    $typed_term_tid = NULL; // tid match if any.
+    foreach ($possibilities as $possibility) {
+      if ($possibility->vid == $vid) {
+        if ($parent) {
+          $parents = array();
+          $parents = taxonomy_get_parents($possibility->tid);
+          if (in_array($parent, array_keys($parents))) {
+            $result['existing_tids'][$possibility->tid] = $possibility->tid;
+            $typed_term_tid = $possibility->tid;  
+          }
+        }
+        else {
+          $result['existing_tids'][$possibility->tid] = $possibility->tid;
+          $typed_term_tid = $possibility->tid;
+        }
+      }
+    }
+
+    if (!$typed_term_tid) {
+      $result['non_existing_terms'][] = array(
+        'name' => $typed_term,
+        'vid' => $vid,
+      );
+    }
+  }
+
+  return $result;
+}
+
+/**
+ * Insert new tags
+ * @param $nid the node id
+ * @param $terms an array of all <strong>nonexisting</strong> terms.
+ * @return an array of newly inserted term ids
+ */
+function content_taxonomy_autocomplete_insert_tags($terms, $parent = NULL) {
+  foreach ($terms as $term) {
+    $edit = array('vid' => $term['vid'], 'name' => $term['name']);
+    if ($parent) $edit['parent'] = $parent;
+    $status = taxonomy_save_term($edit);
+    $saved_terms[$edit['tid']] = $edit['tid'];
+  }
+  return $saved_terms;
+}
+
+/**
+ * Helper function to split the tags
+ */
+function content_taxonomy_autocomplete_split_tags($typed_input) {
+  $regexp = '%(?:^|,\ *)("(?>[^"]*)(?>""[^"]* )*"|(?: [^",]*))%x';
+  preg_match_all($regexp, $typed_input, $matches);
+  return $matches[1];
+}
+
+/**
+ * Helper function to merge the tags, to prefill the fields when editing a node.
+ */
+function content_taxonomy_autocomplete_merge_tags($terms, $vid, $parent = NULL) {
+  $typed_terms = array();
+  if (!empty($terms)) {
+    foreach ($terms as $term) {
+      // Extract terms belonging to the vocabulary in question.
+      if ($term->vid == $vid) {
+        //if ($tid && in_array($term->tid,drupal_map_assoc(array_keys((taxonomy_get_children($tid,$vid)))))) {
+          // Commas and quotes in terms are special cases, so encode 'em.
+          if (preg_match('/,/', $term->name) || preg_match('/"/', $term->name)) {
+            $term->name = '"'.preg_replace('/"/', '""', $term->name).'"';
+          }
+          $typed_terms[] = $term->name;
+       // }
+      }
+    }
+  }
+
+  return implode(', ', $typed_terms);
+}
+
+?>

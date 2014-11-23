@@ -1,0 +1,6 @@
+form#-taxonomy-access-permissions-form .form-radio {
+ margin: 0; padding: 0;
+}
+form#-taxonomy-access-permissions-form .form-select {
+ font-size: 10px;
+}

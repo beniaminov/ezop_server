@@ -1,0 +1,207 @@
+# $Id: book-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: book.module,v 1.406 2007/01/09 08:31:22 drumm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 22:59+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/book/book.module:15
+msgid "Book page"
+msgstr "Страница подшивки"
+
+#: modules/book/book.module:17
+msgid "A book is a collaborative writing effort: users can collaborate writing the pages of the book, positioning the pages in the right order, and reviewing or modifying pages previously written. So when you have some information to share or when you read a page of the book and you didn't like it, or if you think a certain page could have been written better, you can do something about it."
+msgstr "Подшивка - это коллективная авторская работа: пользователи могут взаимодействовать при написании страниц подшивки, расстановке страниц в верном порядке, а также в пересмотре уже написанных страниц. Подшивка позволяет добавлять информацию и улучшать непонравившиеся вам страницы. Если у вас есть дополнительная информация для всех или вы прочитали страницу и она вам не понравилась или вы считаете, что можете написать лучше - пожалуйста, вы можете это сделать."
+
+#: modules/book/book.module:68
+msgid "Add child page"
+msgstr "добавить дочернюю страницу"
+
+#: modules/book/book.module:74
+msgid "Printer-friendly version"
+msgstr "версия для печати"
+
+#: modules/book/book.module:76
+msgid "Show a printer-friendly version of this book page and its sub-pages."
+msgstr "Показать версию этой подшивки со всеми дочерними страницами в виде, удобном для печати."
+
+#: modules/book/book.module:94;111
+msgid "Books"
+msgstr "Подшивки"
+
+#: modules/book/book.module:95
+msgid "Manage site's books and orphaned book pages."
+msgstr "Управление подшивками на сайте и потерянными страницами подшивок."
+
+#: modules/book/book.module:104
+msgid "Orphan pages"
+msgstr "Потерянные страницы"
+
+#: modules/book/book.module:134
+msgid "Outline"
+msgstr "Оглавление"
+
+#: modules/book/book.module:156
+msgid "Book navigation"
+msgstr "Навигация по подшивке"
+
+#: modules/book/book.module:216
+msgid "The parent section in which to place this page. Note that each page whose parent is &lt;top-level&gt; is an independent, top-level book."
+msgstr "Родительский раздел, в который вы хотите разместить данную страницу. Обратите внимание, что страницы, родительским разделом которых является &lt;Верхний уровень&gt;, - это независимые подшивки."
+
+#: modules/book/book.module:216
+msgid "The parent that this page belongs in."
+msgstr "Родительский раздел, к которому принадлежит эта страница."
+
+#: modules/book/book.module:240;272
+msgid "Pages at a given level are ordered first by weight and then by title."
+msgstr "Страницы на данном уровне сортируются сначала по весу, затем по заголовку."
+
+#: modules/book/book.module:266
+msgid "The parent page in the book."
+msgstr "Родительская страница подшивки."
+
+#: modules/book/book.module:276
+msgid "An explanation to help other authors understand your motivations to put this post into the book."
+msgstr "Пояснение, чтобы другие авторы могли понять смысл размещения вами данного материала в подшивке."
+
+#: modules/book/book.module:282;309
+msgid "Update book outline"
+msgstr "Обновить оглавление подшивки"
+
+#: modules/book/book.module:285;314
+msgid "Remove from book outline"
+msgstr "Удалить из оглавления подшивки"
+
+#: modules/book/book.module:289;304
+msgid "Add to book outline"
+msgstr "Добавить в оглавление подшивки"
+
+#: modules/book/book.module:307
+msgid "The post has been added to the book."
+msgstr "Материал добавлен в подшивку."
+
+#: modules/book/book.module:312
+msgid "The book outline has been updated."
+msgstr "Оглавление подшивки обновлено."
+
+#: modules/book/book.module:316
+msgid "The post has been removed from the book."
+msgstr "Материал удален из подшивки."
+
+#: modules/book/book.module:493
+msgid "up"
+msgstr "Вверх"
+
+#: modules/book/book.module:493
+msgid "Go to parent page"
+msgstr "Перейти к родительской странице"
+
+#: modules/book/book.module:548
+msgid "top-level"
+msgstr "верхний уровень"
+
+#: modules/book/book.module:653
+msgid "Unknown export format."
+msgstr "Неизвестный формат экспорта."
+
+#: modules/book/book.module:884;918
+msgid "Save book pages"
+msgstr "Сохранить страницы подшивки"
+
+#: modules/book/book.module:923
+msgid "There are no orphan pages."
+msgstr "Нет потерянных страниц."
+
+#: modules/book/book.module:938
+msgid "%type: updated %title."
+msgstr "%type: обновлён %title."
+
+#: modules/book/book.module:938;0
+msgid "book"
+msgstr "подшивка"
+
+#: modules/book/book.module:945
+msgid "Updated book %title."
+msgstr "Обновлена подшивка %title."
+
+#: modules/book/book.module:949
+msgid "Updated orphan book pages."
+msgstr "Обновлены потерянные страницы подшивки."
+
+#: modules/book/book.module:971
+msgid "outline"
+msgstr "оглавление подшивки"
+
+#: modules/book/book.module:984
+msgid "The <em>book</em> module is suited for creating structured, multi-page hypertexts such as site resource guides, manuals, and Frequently Asked Questions (FAQs). It permits a document to have chapters, sections, subsections, etc. Authors with suitable permissions can add pages to a collaborative book,  placing them into the existing document by adding them to a table of contents menu."
+msgstr "Модуль подшивка предназначен для создания структурированных многостраничных гипертекстов, таких как справочники по сайтам, руководства и ЧАстые ВОпросы (FAQ). Подшивки допускают наличие в документе глав, секций, подразделов и т.д. Авторы с соответствующими полномочиями могут добавлять страницы к общей подшивке, помещать их в существующий документ, добавляя в меню оглавления."
+
+#: modules/book/book.module:985
+msgid "Book pages have navigation elements at the bottom of the page for moving through the text.  These link to the previous and next pages in the book, as well as a link labeled <em>up</em>, leading to the level above in the structure.  More comprehensive navigation may be provided by enabling the <em>book navigation block</em> on the <a href=\"@admin-block\">block administration page</a>."
+msgstr "Страницы подшивки имеют навигационные элементы внизу страниц для перемещения по тексту.  Это ссылки на предыдущую и следующую страницы книги, ссылка <em>вверх</em>, ведущая на уровень выше в структуре подшивки.  Более полной навигации можно добиться, включив блок <em>навигации по подшивке</em> на странице <a href=\"@admin-block\">управление подшивками</a>."
+
+#: modules/book/book.module:986
+msgid "Users can select the <em>printer-friendly version</em> link visible at the bottom of a book page to generate a printer-friendly display of the page and all of its subsections. "
+msgstr "Пользователи могут выбирать ссылку на <em>версию для печати</em>, размещаемую внизу страницы подшивки, для того, чтобы просмотреть версию для печати самой страницы и всех ее частей. "
+
+#: modules/book/book.module:987
+msgid "Posts of type %book are automatically added to the book hierarchy. Users with the <em>outline posts in books</em> permission can also add content of any other type to a book, placing it into the existing book structure through the interface that's available by clicking on the <em>outline</em> tab while viewing that post."
+msgstr "Материалы типа %book автоматически добавляются в иерархию подшивки. Пользователи с правами <em>включать сообщения в подшивки</em> могут также добавлять материалы любого типа в подшивку, размещать их в существующей структуре подшивки благодаря интерфейсу, который доступен на вкладке <em>структура подшивки</em> при просмотре сообщения."
+
+#: modules/book/book.module:988
+msgid "Administrators can view a list of all books on the <a href=\"@admin-node-book\">book administration page</a>.  In this list there is a link to an outline page for each book, from which is it possible to change the titles of sections, or to change their weight, thus reordering sections. From this administrative interface, it is also possible to determine whether there are any orphan pages - pages that have become disconnected from the rest of the book structure."
+msgstr "Администраторы могут просматривать списки всех подшивок на странице <a href=\"@admin-node-book\">управления подшивками</a>.  В этом списке есть ссылка на страницу оглавления каждой подшивки, откуда возможно изменитьзаголовки разделов или их веса для реогранизации разделов. Из этого административного интерфейса можно также определить, где есть потерянные страницы, т.е. страницы, оторванные от общей структуры подшивки."
+
+#: modules/book/book.module:989
+msgid "For more information please read the configuration and customization handbook <a href=\"@book\">Book page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@book\">подшивки</a>."
+
+#: modules/book/book.module:992
+msgid "The book module offers a means to organize content, authored by many users, in an online manual, outline or FAQ."
+msgstr "Модуль подшивка позволяет управлять материалами, созданными многими пользователями, например, при создании онлайнового руководства или FAQ."
+
+#: modules/book/book.module:994
+msgid "Pages in a book are like a tree. As pages are edited, reorganized and removed, child pages might be left with no link to the rest of the book. Such pages are referred to as \"orphan pages\". On this page, administrators can review their books for orphans and reattach those pages as desired."
+msgstr "Страницы подшивки имеют иерархическое строение. По мере того, как страницы изменяются, реорганизуются и убираются, дочерние страницы могут остаться вне связи с остальной подшивкой. Такие страницы называются потерянными. На этой странице администраторы могут просмотреть подшивки на предмет потерянных страниц и прикрепить их в случае необходимости заново."
+
+#: modules/book/book.module:998
+msgid "The outline feature allows you to include posts in the <a href=\"@book\">book hierarchy</a>."
+msgstr "Оглавление позволяет включать материалы в <a href=\"@book\">иерархию подшивки</a>."
+
+#: modules/book/book.module:26
+msgid "outline posts in books"
+msgstr "управлять сообщениями в подшивках"
+
+#: modules/book/book.module:26
+msgid "create book pages"
+msgstr "создавать страницы в подшивках"
+
+#: modules/book/book.module:26
+msgid "create new books"
+msgstr "создавать новые подшивки"
+
+#: modules/book/book.module:26
+msgid "edit book pages"
+msgstr "изменять страницы подшивки"
+
+#: modules/book/book.module:26
+msgid "edit own book pages"
+msgstr "изменять свои страницы подшивки"
+
+#: modules/book/book.module:26
+msgid "see printer-friendly version"
+msgstr "смотреть версию для печати"
+

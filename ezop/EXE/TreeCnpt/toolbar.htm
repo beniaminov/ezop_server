@@ -1,0 +1,113 @@
+<html>
+<head>
+<title></title>
+    <STYLE>  
+	.MenuButton {font-family: Book Antiqua; font-size:13; font-weight: bolder;  color:#336699;} 
+     </STYLE>
+<script>
+
+function SelName (){
+var SelName = window.parent.frames("tree").document.getElementById("SelectedNameTree").value;
+//alert(SelName);
+window.document.getElementById("SelectedName").value = SelName;
+return SelName;
+}
+
+function SelCurCnptName(){
+window.parent.parent.document.getElementById("curcnpt_name").value = window.parent.frames("tree").document.getElementById("SelectedNameTree").value;
+}
+
+
+function KBName (){
+var KBName = window.parent.document.getElementById("kb_name").value;
+window.document.getElementById("kb_name").value = KBName;
+return KBName;
+}
+
+function GetParams(){
+window.document.getElementById("kb_name_hidden").value = KBName();
+window.document.getElementById("selectedName_hidden").value =window.document.getElementById("SelectedName").value;
+}
+
+
+function CurLoc(){
+CurLoc = window.parent.location;
+window.document.getElementById("tree_cnt_toolbar").action = CurLoc;
+window.document.getElementById("tree_cnt_toolbar_hidden").action = CurLoc;
+window.document.getElementById("location").value = CurLoc;
+window.document.getElementById("location_hidden").value = CurLoc;
+}
+
+function SetParams (MainFormTarget, MenuItem, CurCnptName, CurCnptText, Cmd, Rest, ToolbarButton, ExplorerSelectedLeft, Inset) {
+	window.parent.parent.document.getElementById("main_form").target = MainFormTarget;
+	window.parent.parent.document.getElementById("menu_item").value = MenuItem;
+	window.parent.parent.document.getElementById("curcnpt_text").value = CurCnptText;
+	window.parent.parent.document.getElementById("cmd").value = Cmd;
+	window.parent.parent.document.getElementById("rest").value = Rest;
+	window.parent.parent.document.getElementById("toolbar_button").value = ToolbarButton;
+	window.parent.parent.document.getElementById("explorer_selected_left").value = ExplorerSelectedLeft; 
+	window.parent.parent.document.getElementById("inset").value = Inset;
+
+////
+//alert(window.parent.parent.document.getElementById("menu_item").value);
+//alert(window.parent.parent.document.getElementById("kb_name").value);
+//alert(window.parent.parent.document.getElementById("location").value);
+//alert(window.parent.parent.document.getElementById("curcnpt_name").value);
+//alert(window.parent.parent.document.getElementById("curcnpt_text").value);
+//alert(window.parent.parent.document.getElementById("env").value);
+//alert(window.parent.parent.document.getElementById("cmd").value);
+//alert(window.parent.parent.document.getElementById("rest").value);
+////
+	window.parent.parent.document.getElementById("button").fireEvent("onclick");
+}
+
+function IntoCur(){
+if(SelName()) {
+	SelCurCnptName();// name of the current concept
+	SetParams ("content", "cnpt_intocur","", "" ,"", "", "", "", "CC");
+	}
+}
+
+function IntoEnv(){
+var ExplSL; 
+ExplSL = window.parent.frames("tree").document.getElementById("SelectedNameTree").value;
+if(SelName()){
+	SetParams ("content", "toolbar", "Новое понятие", "", "", "", "fldr_left_intoenv", ExplSL,"CC");
+	}
+}
+
+function DispBlank(){
+if(SelName()){
+	window.parent.parent.document.getElementById("main_form").target = "_blank";
+	window.parent.parent.document.getElementById("menu_item").value = "toolbar";
+	window.parent.parent.document.getElementById("toolbar_button").value = "fldr_left_display";
+	window.parent.parent.document.getElementById("explorer_selected_left").value = window.document.getElementById("SelectedName").value ;
+	window.parent.parent.document.getElementById("button").fireEvent("onclick");
+	}
+}
+</script>
+</head>
+<body onload="CurLoc();">
+
+
+<form id="tree_cnt_toolbar" name="tree_cnt_toolbar" >
+<input type=hidden ID = "kb_name" Name = "kb_name_toolbar">
+<input type=hidden ID = "location" Name = "location">
+<input type=hidden ID = "selectedAction" Name = "selectedAction">
+<input type=hidden ID = "selectedName" Name = "selectedName">
+
+<input type=button  class = "MenuButton" onclick="DispBlank();" VALUE = "Показать" style="WIDTH: 100px; HEIGHT: 24px" size=12>
+<input type=button  class = "MenuButton" onclick="IntoCur();" VALUE = "Сделать текущим" style="WIDTH: 125px; HEIGHT: 24px" size=12>
+<input type=button   class = "MenuButton" onclick="IntoEnv();" VALUE = "Сделать средой" style="WIDTH: 115px; HEIGHT: 24px" size=14>
+</form>
+
+<form name="tree_cnt_toolbar_hidden" action="" TARGET ="textarea" method="POST">
+<input type=hidden ID = "kb_name_hidden" Name = "kb_name_toolbar">
+<input type=hidden ID = "location_hidden" Name = "location">
+<input type=hidden ID = "selectedAction_hidden" Name = "selectedAction" value = "show">
+<input type=hidden ID = "selectedName_hidden" Name = "selectedName">
+<input type=hidden ID = "showDef_textarea" onclick ="if(SelName()){GetParams();submit();}">
+</form>
+
+</body>
+</html>

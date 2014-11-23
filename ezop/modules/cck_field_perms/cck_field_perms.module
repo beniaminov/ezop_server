@@ -1,0 +1,337 @@
+<?php
+
+// $Id: cck_field_perms.module,v 1.3.2.24 2007/05/10 21:14:03 arthuregg Exp $ 
+
+/*
+ * This module adds the ability to restrict some fields in a CCK node 
+ * to certian user roles based on create, updated, and view. Note that 
+ * when this module is enabled, you must positively grant view access 
+ * if you want users to have view access.
+ * 
+ */
+
+/* ********************************************* */
+/* Drupal functions */
+/* ********************************************* */
+
+
+/**
+ * Implementation of hook_help().
+ */
+function cck_field_perms_help($section) {
+  switch ($section) {
+    case 'admin/help#cck_field_perms':
+      return t('<p>Gives the option of limited access to CCK data for user roles.</p>');
+      break;
+  }
+} 
+
+/**
+ * Implentation of hook menu
+ */
+function cck_field_perms_menu($may_cache){
+  $items = array();
+  $items[] = array(
+    'path' => 'admin/settings/cck_field_perms',
+    'title' => t('CCK Field Permissions'),
+    'description' => t('Restrict create, update and view access on specific CCK fields.'),
+    'callback' => 'cck_field_perms_admin_settings',
+    'access' => user_access('administer cck field permissions'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+
+/**
+ * Impementation of hook perms
+ */
+function cck_field_perms_perm(){
+  $perm_list[] = "administer cck field permissions";
+  $field_perms = unserialize(variable_get('cfp_values', null));
+  if ($field_perms) { 
+    foreach ($field_perms as $type_name => $fields) {
+      foreach ($fields as $field_name => $value) {
+        if ($value) {
+          foreach (cck_field_perms_verbs() as $verb){
+            $perm_list[] = _cfp_content_to_readable($type_name, $field_name, $verb);
+          }
+        }
+      }
+    }
+  }
+  return $perm_list;
+}
+
+/**
+ * Implementation of hook_nodeapi
+ * removes fields if a user does not have perms to view it
+ */
+function cck_field_perms_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) { 
+  if ($op == 'view') {
+    $type = $node->type;
+    if ($types = variable_get('cfp_types', null)) {
+      if ($types[$type]) {
+        $disallowed_fields = unserialize(variable_get('cfp_values', null));
+        if ($disallowed_fields) { 
+          foreach ($disallowed_fields[$type] as $disallowed_field => $value ) {
+            if ($value == 0) {continue; }
+              if (!(user_access(_cfp_content_to_readable($type, $disallowed_field, "view")))) {     
+                $node->$disallowed_field['#access'] = false;
+                $node->content[$disallowed_field]['#access'] = false;                   
+            }   
+          }
+        }   
+      }
+    }
+  }  
+}
+
+
+/**
+ * Implemenation of hook form_alter
+ */
+function cck_field_perms_form_alter($form_id, &$form){
+  if ($form['#id'] != 'node-form') return;
+  // detect if we're editing or creating
+  if ($form['#node']->nid) {
+    global $user;
+    $verb = $form['uid']['#value'] == $user->uid ?  "edit own" : "edit"; 
+  } 
+  else { 
+    $verb = "create"; 
+  }
+  $form =  _cfp_form_helper($form_id, $form, $verb);
+}
+
+
+/* ********************************************* */
+/* CFP functions */
+/* ********************************************* */
+
+/**
+ * Defines the CRUD.
+ */ 
+function cck_field_perms_verbs(){
+  return array('create', 'edit', 'edit own', 'view',);
+}
+
+/**
+ * perms helper
+ * converts drupal content names to human readable names
+ */
+function _cfp_content_to_readable ($content_type, $field_name, $verb){
+  static $content_types;
+  if (! ($content_types)) {$content_types = content_types();} 
+  
+  // support fieldgroup content
+  if(strstr($field_name, "group_")){
+    $output = $verb . " " . $content_types[$content_type]['name'] . " " . $field_name;
+  } 
+  else {  
+    $output = $verb . " " . $content_types[$content_type]['name'] . " " . $content_types[$content_type]['fields'][$field_name]['widget']['label'];
+  }
+  return $output;
+}
+
+/**
+ * gets list of form groups from a form and removes
+ * field groups if the user does not have permission
+ * helper function for the form alter
+ * 
+ */
+function _cfp_form_group_fieldset_helper(&$form, $disallowed, $type, $verb){
+  if (module_exists("fieldgroup")){
+    foreach($form as $name => $item){
+      if($disallowed[$name]){
+        if (!(user_access(_cfp_content_to_readable($type, $name, $verb)))){        
+          unset($form[$name]);
+        }
+      }
+      
+      // check this item to see if it is a group
+      // if group, recurse to check for sub groups and or fieldsets
+      if (strstr($name, "group")){
+        if(is_array($form[$name])){    
+          _cfp_form_group_fieldset_helper($form[$name], $disallowed, $type, $verb);
+        }        
+      }
+    }
+  }
+} 
+
+
+/**
+ * helper function to unset form values
+ * 
+ * @form is drupal form
+ * @verb is create or update
+ * @return is the modified drupal form
+ * 
+ */
+function _cfp_form_helper($form_id, $form, $verb){
+  //content_video_node_form
+  $types = variable_get('cfp_types', null);
+  if ($types) {
+    foreach ($types as $type) {
+      if ($form_id == $type . "_node_form") {       
+        $disallowed_fields = unserialize(variable_get('cfp_values', null));                          
+        if ($disallowed_fields) {          
+          // removes fieldgroups
+          _cfp_form_group_fieldset_helper($form, $disallowed_fields[$type], $type, $verb);     
+          foreach ($disallowed_fields[$type] as $disallowed_field => $value){
+            if ($value == 0 ) {continue;}
+              if (! user_access(_cfp_content_to_readable($type, $disallowed_field, $verb))) { 
+               $form[$disallowed_field]['#access'] = false;          
+            }
+          }
+        }   
+      }   
+    }
+  }
+  return $form;
+}
+
+
+/* ************************ */
+/* ADMIN Functions */
+/* ************************ */
+
+
+/**
+ * page for the admin settings form
+ * use this instead of standard settings for b/c we 
+ * serialize all the data into one variable
+ */
+function cck_field_perms_admin_settings(){
+  $output = drupal_get_form('cck_field_perms_admin_settings_form');
+  return $output;
+}
+
+/**
+ * creates the admin form
+ */
+function cck_field_perms_admin_settings_form(){
+  $form['field_perms'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Enable field permissions on content types.'),
+    '#description' => t("This module allows an administrator to restrict CCK fields to some roles. " .
+                        "Once you have enabled a content type, select which fields you'd like to restrict. " .
+                        "Then, go to " . l("admin/user/access", "admin/user/access"). " to allow user roles acces to that field. " .
+                        "Please note: you must grant view access for a field once you enable this field to be permissions controlled. " .
+                        "If you do not do this, no users will be able to view the field. "),
+  );
+  
+  $types = content_types();
+
+  foreach ($types as $key => $value) {
+    $options[$key] = $value['name']; 
+  }
+  $enabled_types = variable_get('cfp_types', null);
+  $form['field_perms']['cfp_types'] = array(
+   '#type' => 'checkboxes',
+   '#title' => t('Content types'),
+   '#description' => t('Select content types for which you wish to enable permissions.'),
+   '#options' => $options,
+   '#default_value' =>  $enabled_types,
+  );
+
+  $the_settings = unserialize(variable_get('cfp_values', ''));
+
+  if ($enabled_types ) {
+    foreach ($enabled_types as $enabled_type) {
+      if ($enabled_type) {
+        $form['field_fields'][$enabled_type] = array(
+          '#type' => 'fieldset',
+          '#title' => $types[$enabled_type]['name'] . " content fields",                           
+        );
+
+        if ($types[$enabled_type]['fields']) {
+          
+          // deal with grouped content
+          _cfp_group_form_fields($form, $types[$enabled_type]['fields'], $enabled_type, $the_settings);
+          
+          foreach ($types[$enabled_type]['fields'] as $field) {          
+            $field_perms[$field['field_name']] = $field['widget']['label'];                   
+          
+            $form['field_fields'][$enabled_type]["{$enabled_type}_{$field['field_name']}"]= array(
+              '#type' => 'checkbox',
+              '#title' => $field['widget']['label'],
+              '#description' => t(''),
+              '#default_value' => $the_settings[$enabled_type][$field['field_name']],
+              '#description' => t("Enable permissions on this field."),
+            );
+          }
+        }
+      }
+    }       
+  }
+  
+  $form['submit'] = array(
+    '#type' => 'submit', 
+    '#value' => t('Save')
+  );
+  return $form;
+}
+
+/**
+ * fetches the list of fields contained within a group
+ * returns fieldset form of check boxes to handle content
+ */
+function _cfp_group_form_fields(&$form, &$fields, $type, $values) {
+  if (module_exists("fieldgroup")) {
+    $groups = fieldgroup_groups($type);
+    foreach ($groups as $group_name => $data) {
+      $form['field_fields'][$type][$group_name . "_fields"] = array(
+        '#type' => 'fieldset',
+        '#title' => $data['label'] . " field group",
+      );
+      $form['field_fields'][$type][$group_name . "_fields"][$type ."_" .$group_name] = array(
+        '#type' => 'checkbox',
+        '#title' => $data['label'],
+        '#description' => t("Checking this box will hide this complete field group"),
+        '#default_value' => $values[$type][$group_name],
+      );
+
+      foreach ($data['fields'] as $afield) {
+        $form['field_fields'][$type][$group_name . "_fields"][$type . "_" .$afield['field_name']] = array(
+          '#type' => 'checkbox',
+          '#title' => $afield['label'] ." field",
+          '#description' => t("Checking this box will hide this field "),
+          '#default_value' => $values[$type][$afield['field_name']],
+          
+        );
+        //remove this field from the list of fields that we have      
+        unset($fields[$afield['field_name']]);
+      }
+    }
+  }
+}
+
+
+/**
+ * save the incoming values
+ */
+function cck_field_perms_admin_settings_form_submit($form_id, $form_values){
+
+  // @ TODO figure out why the hell it is neccessary to do this
+  if ($form_values['cfp_types'][0]) { unset($form_values['cfp_types'][0]); }
+  if ($form_values['cfp_types'][1]) { unset($form_values['cfp_types'][1]); }
+  
+  variable_set('cfp_types', $form_values['cfp_types']); 
+  
+  foreach ($form_values as $key => $value) {
+    if (strstr($key, "_field_") ) { 
+      $type = substr($key, 0, strpos($key, "_field"));
+      $field = substr($key, strpos($key, "field"));
+      $stored_values[$type][$field] = $value;
+    }
+    if (strstr($key, "_group_") ) { 
+      $type = substr($key, 0, strpos($key, "_group"));
+      $field = substr($key, strpos($key, "group"));
+      $stored_values[$type][$field] = $value;
+    }
+  }  
+  variable_set('cfp_values', serialize($stored_values));
+  drupal_set_message("Remember to update ". l("admin/user/access", "admin/user/access") ." after you've changed permissions.");
+}

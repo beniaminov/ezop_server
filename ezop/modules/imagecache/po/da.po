@@ -1,0 +1,280 @@
+# Danish translation of Drupal (imagecache.module)
+# Copyright 2007 Morten Wulff <wulff@ratatosk.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: Danish translation of Drupal (imagecache.module) $Id: da.po,v 1.1.2.1 2007/12/15 15:40:46 wulff Exp $\n"
+"POT-Creation-Date: 2007-12-07 20:35+0100\n"
+"PO-Revision-Date: 2007-12-08 13:08+0100\n"
+"Last-Translator: Morten Wulff <wulff@ratatosk.net>\n"
+"Language-Team: Danish <l10n@drupaldanmark.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+
+#: imagecache.module:52
+msgid "Image cache"
+msgstr "Billedlager"
+
+#: imagecache.module:53
+msgid "Configure rulesets and actions for imagecache."
+msgstr "Indstil billedlagerets regelsæt og handlinger."
+
+#: imagecache.module:163
+msgid "Could not create destination: %dir"
+msgstr "Kan ikke oprette katalog: %dir"
+
+#: imagecache.module:182
+msgid "Imagecache resize action ID %id failed."
+msgstr "Handling med ID %id mislykkedes (ændring af størrelse)."
+
+#: imagecache.module:196
+msgid "Imagecache scale action ID %id failed."
+msgstr "Handling med ID %id mislykkedes (skalering)."
+
+#: imagecache.module:201
+msgid "Imagecache crop action ID %id failed."
+msgstr "Handling med ID %id mislykkedes (beskæring)."
+
+#: imagecache.module:224
+msgid "There were problems generating an image from %image using imagecache preset %preset."
+msgstr "Der opstod problemer ved oprettelse af et billede fra %image med billedlager-forvalget %preset."
+
+#: imagecache.module:373
+msgid "Imagecache presets"
+msgstr "Forvalg"
+
+#: imagecache.module:386;423
+msgid "Preset namespace"
+msgstr "Navnerum for forvalg"
+
+#: imagecache.module:388
+msgid "String that will be used as an identifier in the url for this set of handlers. Final urls will look like http://example.com/files/imagecache/%namespace/&lt;path to orig&gt;"
+msgstr "Streng der bruges i URLen for billeder oprettet af dette forvalg. Endelige URLer vil være på formen http://example.com/files/imagecache/%namespace/&lt;sti til original&gt;"
+
+#: imagecache.module:392
+msgid "Image handlers"
+msgstr "Billedhåndtering"
+
+#: imagecache.module:401;455
+msgid "Update preset"
+msgstr "Opdater forvalg"
+
+#: imagecache.module:406;478
+msgid "Delete preset"
+msgstr "Slet forvalg"
+
+#: imagecache.module:411;481
+msgid "Flush preset images"
+msgstr "Tøm forvalgets billedlager"
+
+#: imagecache.module:417
+msgid "New preset"
+msgstr "Nyt forvalg"
+
+#: imagecache.module:425
+msgid "The namespace of an imagecache preset. It represents a series of actions to be performed when imagecache dynamically generates an image. This will also be used in the url for images. Please no spaces."
+msgstr "Navnerummet for et billedlager forvalg. Det repræsenterer en række handlinger som udføres når billedlageret genererer et billede dynamisk. Navnerummet bruges også i billedernes URL. Undgå mellemrum i navnet."
+
+#: imagecache.module:430;452
+msgid "Create preset"
+msgstr "Opret forvalg"
+
+#: imagecache.module:441
+msgid "Please only use alphanumic characters, underscores (_), and hyphens (-) for preset names."
+msgstr "Brug kun alfanumeriske tegn, _ og - i forvalgsnavne."
+
+#: imagecache.module:534
+msgid "Updated preset \"%name\" (ID: @id)"
+msgstr "Forvalg \"%name\" (ID: @id) opdateret."
+
+#: imagecache.module:544
+msgid "Preset \"%name\" (ID: @id) deleted."
+msgstr "Forvalg \"%name\" (ID: @id) slettet."
+
+#: imagecache.module:556
+msgid "Flushed Preset Images (ID: @id)"
+msgstr "Billedlager for forvalg tømt (ID: @id)"
+
+#: imagecache.module:618
+msgid "Weight"
+msgstr "Vægt"
+
+#: imagecache.module:625
+msgid "<strong>Inside dimensions</strong>: Final dimensions will be less than or equal to the entered width and height. Useful for ensuring a maximum height and/or width."
+msgstr "<strong>Indvendige dimensioner</strong>: Endelige dimensioner vil være mindre end eller lig med den indtastede bredde og højde. Bruges til at sikre, at billedet holder sig indenfor en maksimal højde og/eller bredde."
+
+#: imagecache.module:626
+msgid "<strong>Outside dimensions</strong>: Final dimensions will be greater than or equal to the entered width and height. Ideal for cropping the result to a square."
+msgstr "<strong>Udvendige dimensioner</strong>: Endelige dimensioner vil være større end eller lig med den indtastede bredde og højde. Bruges hvis du vil lave en kvadratisk beskæring."
+
+#: imagecache.module:631
+msgid "Scale to fit"
+msgstr "Skalér til"
+
+#: imagecache.module:632
+msgid "Inside dimensions"
+msgstr "Indvendige dimensioner"
+
+#: imagecache.module:632
+msgid "Outside dimensions"
+msgstr "Udvendige dimensioner"
+
+#: imagecache.module:640;654
+msgid "Width"
+msgstr "Bredde"
+
+#: imagecache.module:642;656
+msgid "Enter a width in pixels or as a percentage. i.e. 500 or 80%."
+msgstr "Indtast en bredde i pixels eller procent. F.eks. 500 eller 80%."
+
+#: imagecache.module:646;660
+msgid "Height"
+msgstr "Højde"
+
+#: imagecache.module:648;662
+msgid "Enter a height in pixels or as a percentage. i.e. 500 or 80%."
+msgstr "Indtast en højde i pixels eller procent. F.eks. 500 eller 80%."
+
+#: imagecache.module:666
+msgid "X offset"
+msgstr "X-forskydning"
+
+#: imagecache.module:668
+msgid "Enter an offset in pixels or use a keyword: <em>left</em>, <em>center</em>, or <em>right</em>."
+msgstr "Indtast en forskydning i pixels eller brug et nøgleord: <em>left</em>, <em>center</em> eller <em>right</em>."
+
+#: imagecache.module:672
+msgid "Y offset"
+msgstr "Y-forskydning"
+
+#: imagecache.module:674
+msgid "Enter an offset in pixels or use a keyword: <em>top</em>, <em>center</em>, or <em>bottom</em>."
+msgstr "Indtast en forskydning i pixels eller brug et nøgleord: <em>top</em>, <em>center</em> eller <em>bottom</em>."
+
+#: imagecache.module:682
+msgid "Remove this action"
+msgstr "Fjern denne handling"
+
+#: imagecache.module:687
+msgid "<strong>Scale</strong>: Resize an image maintaining the original aspect-ratio (only one value necessary)."
+msgstr "<strong>Skalér</strong>: Skift størrelsen på billedet, men fasthold forholdet mellem højde og bredde (kun en værdi er nødvendig)."
+
+#: imagecache.module:688
+msgid "<strong>Resize</strong>: Resize an image to an exact set of dimensions, ignoring aspect ratio."
+msgstr "<strong>Skift størrelse</strong>: Skift størrelsen på billedet til en præcis højde og bredde. Forholdet mellem højde og bredde ignoreres."
+
+#: imagecache.module:689
+msgid "<strong>Crop</strong>: Crop an image to the rectangle specified by the given offsets and dimensions."
+msgstr "<strong>Beskær</strong>: Beskær billedet til et rektangel baseret på de angivne dimensioner og forskydninger."
+
+#: imagecache.module:694
+msgid "select..."
+msgstr "vælg…"
+
+#: imagecache.module:694
+msgid "Scale"
+msgstr "Skalér"
+
+#: imagecache.module:694
+msgid "Resize"
+msgstr "Skift størrelse"
+
+#: imagecache.module:694
+msgid "Crop"
+msgstr "Beskær"
+
+#: imagecache.module:695
+msgid "Add a new action"
+msgstr "Tilføj handling"
+
+#: imagecache.module:715
+msgid "Make sure you have a working image toolkit installed and enabled, for more information see: %settings."
+msgstr "Undersøg om du har et fungerende billedværktøj installeret. Se %settings for yderligere information."
+
+#: imagecache.module:715
+msgid "Image toolkit settings"
+msgstr "Indstillinger for billedværktøj"
+
+#: imagecache.module:75
+msgid "Clean URLs"
+msgstr "Rene URLer"
+
+#: imagecache.module:76
+msgid "Not enabled"
+msgstr "Ikke aktiveret."
+
+#: imagecache.module:78
+msgid "Imagecache will not operate properly if <a href=\"!url\">Clean URLs</a> is not enabled on your site."
+msgstr "Billedlageret virker ikke korrekt med mindre <a href=\"!url\">rene URLer</a> er slået til på dit site."
+
+#: imagecache.module:84
+msgid "Image Toolkit"
+msgstr "Billedværktøj"
+
+#: imagecache.module:85
+msgid "No image toolkits available"
+msgstr "Ingen tilgængelige billedværktøjer."
+
+#: imagecache.module:87
+msgid "Imagecache requires an imagetoolkit such as <a href=\"http://php.net/gd\">GD2</a> or <a href=\"http://www.imagemagick.org\">Imagemagick</a> be installed on your server."
+msgstr "Billedlageret kræver at et billedværktøj som <a href=\"http://php.net/gd\">GD2</a> eller <a href=\"http://www.imagemagick.org\">Imagemagick</a> er installeret på din server."
+
+#: imagecache.module:93
+msgid "File Download Method"
+msgstr "Metode til download af filer"
+
+#: imagecache.module:94
+msgid "Private Downloads"
+msgstr "Private filoverførsler"
+
+#: imagecache.module:96
+msgid "Imagecache will not operate properly using Private Files. Please enable <a href=\"!url\">Public File Transfer</a>."
+msgstr "Billedlageret virker ikke når private filoverførsler er slået til. Aktiver venligst <a href=\"!url\">offentlige filoverførsler</a>."
+
+#: imagecache.module:104
+msgid "GD !format Support"
+msgstr "GD !format understøttelse"
+
+#: imagecache.module:105
+msgid "Not installed"
+msgstr "Ikke installeret."
+
+#: imagecache.module:107
+msgid "PHP was not compiled with %format support. Imagecache will not be able to process %format images."
+msgstr "PHP er ikke kompileret med understøttelse af %format. Billedlageret kan ikke behandle %format-billeder."
+
+#: imagecache.module:163;182;196;201;224;0
+msgid "imagecache"
+msgstr "billedlager"
+
+#: imagecache.module:35
+msgid "administer imagecache"
+msgstr "administrer billedlager"
+
+#: imagecache.module:35
+msgid "flush imagecache"
+msgstr "tøm billedlager"
+
+#: imagecache.install:42
+msgid "Imagecache module installed succesfully."
+msgstr "Billedlager installeret korrekt."
+
+#: imagecache.install:44
+msgid "Imagecache module installation was unsuccessfull. Necessary database tables should be created by hand."
+msgstr "Installationen af billedlager kunne ikke færdiggøres. Nødvendige databasetabeller skal oprettes manuelt."
+
+#: imagecache.info:0
+msgid "Imagecache"
+msgstr "Billedlager"
+
+#: imagecache.info:0
+msgid "Dynamic image manipulator and cache."
+msgstr "Dynamisk billedmanipulation og mellemlager"
+
+#: imagecache.info:0
+msgid "Image"
+msgstr "Billede"
+

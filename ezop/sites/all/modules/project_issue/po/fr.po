@@ -1,0 +1,1168 @@
+# translation of fr.po to
+# Augustin <beginner2005@masquilier.org>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: fr\n"
+"POT-Creation-Date: 2008-02-03 19:22+0800\n"
+"PO-Revision-Date: 2008-02-04 13:37+0800\n"
+"Last-Translator: Augustin <beginner2005@masquilier.org>\n"
+"Language-Team:  <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: KBabel 1.10.2\n"
+
+#: comment.inc:52
+msgid "Edit issue settings"
+msgstr "Changer les paramètres des problèmes de projets"
+
+#: comment.inc:53
+msgid "Note: changing any of these items will update the issue's overall values."
+msgstr "Note: changer n'importe lesquelles de ces valeurs va affecter tout le problème. "
+
+#: comment.inc:60
+msgid "Issue title"
+msgstr "Titre du problème"
+
+#: comment.inc:102
+msgid ""
+"There was an error submitting your comment -- please try again. If the "
+"problem persists, contact the system administrator."
+msgstr "Une erreur s'est produite lorsque votre commentaire a été soumis. Veuillez réessayer. Si le problème continue,veuillez contacter l'administrateur du système."
+
+#: comment.inc:103
+msgid "Error obtaining lock for project issue %nid"
+msgstr ""
+
+#: comment.inc:159 issue.inc:835
+msgid "You have to specify a valid version."
+msgstr "Vous devez spécifier une version valide."
+
+#: comment.inc:166 issue.inc:840
+msgid "You have to specify a valid component."
+msgstr "Vous devez spécifier un composant valide."
+
+#: comment.inc:169 issue.inc:830
+msgid "You have to specify a valid project."
+msgstr "Vous devez spécifier un projet valide."
+
+#: comment.inc:171 issue.inc:841
+msgid "You have to specify a valid category."
+msgstr "Vous devez spécifier une catégorie valide."
+
+#: comment.inc:203
+msgid "You must either add a comment or change something about this issue."
+msgstr "Vous devez ajouter un commentaire ou changer quelque chose dans ce problème."
+
+#: comment.inc:459
+msgid "Preview comment"
+msgstr "Aperçu du commentaire"
+
+#: comment.inc:103 project_issue.module:292;297
+msgid "project_issue"
+msgstr "project_issue"
+
+#: issue.inc:40;532;1552;1590 project_issue.module:438
+msgid "Subscribe"
+msgstr "S'abonner"
+
+#: issue.inc:54
+msgid ""
+"You must have a valid e-mail address in order to subscribe to issues. Please "
+"<a href=\"@update\">update your account</a>."
+msgstr ""
+"Vous devez avoir une adresse email valide afin de vous abonner aux "
+"problèmes. Veuillez <a href=\"@update\">mettre à jour votre compte</a>."
+
+#: issue.inc:59
+msgid ""
+"Please <a href=\"@login\">login</a> or <a href=\"@register\">register</a> in "
+"order to subscribe to issues."
+msgstr "Veuillez <a href=\"@login\">vous identifier</a> ou bien <a href=\"@register\">vous enregistrer</a> afin de vous abonner aux problèmes."
+
+#: issue.inc:85
+msgid "Malicious attempt to access unauthorized information detected."
+msgstr ""
+
+#: issue.inc:105;136;581;634;669;673;679;2040;2042;2054;2059
+#: project_issue.module:211
+msgid "<none>"
+msgstr "<rien>"
+
+#: issue.inc:119;724;1613;2005 mail.inc:24
+msgid "Version"
+msgstr "Version"
+
+#: issue.inc:148;732;2006 mail.inc:22
+msgid "Component"
+msgstr "Composant"
+
+#: issue.inc:307;746;1611;1761;2007 mail.inc:21
+msgid "Category"
+msgstr "Catégorie"
+
+#: issue.inc:307;328
+msgid "Overall"
+msgstr "Global"
+
+#: issue.inc:307;330
+msgid "Last month"
+msgstr "Le mois dernier"
+
+#: issue.inc:314
+msgid "N/A"
+msgstr ""
+
+#: issue.inc:323
+msgid "Average lifetime"
+msgstr "Durée de vie moyenne"
+
+#: issue.inc:327;766;778;1246;1609;1755;2010 mail.inc:26
+msgid "Status"
+msgstr "État"
+
+#: issue.inc:347
+msgid "Issue activity"
+msgstr "Activité problèmes"
+
+#: issue.inc:356;544;588;716;1606;1749;2004 mail.inc:20
+#: project_issue.module:837 project_issue.info:0
+msgid "Project"
+msgstr "Projet"
+
+#: issue.inc:360
+msgid "Total"
+msgstr "Total"
+
+#: issue.inc:410
+msgid "Project overview"
+msgstr "Vue générale du projet"
+
+#: issue.inc:429;457;543
+msgid "None"
+msgstr "Aucun"
+
+#: issue.inc:429;457;543
+msgid "Own issues"
+msgstr "Mes problèmes"
+
+#: issue.inc:429;457;543
+msgid "All issues"
+msgstr "Tous les problèmes"
+
+#: issue.inc:448
+msgid "Subscription settings saved."
+msgstr "Paramètres d'abonnement enregistrés"
+
+#: issue.inc:467
+msgid ""
+"Subscribe to receive e-mail notification when an issue for this project is "
+"updated."
+msgstr ""
+"S'abonner aux notifications par courriel des mises à jour appliquées aux "
+"problèmes relatifs à ce projet"
+
+#: issue.inc:472
+msgid "Subscribe to @project issues"
+msgstr "S'abonner aux problèmes de @project"
+
+#: issue.inc:482
+msgid "All projects"
+msgstr "Tous les projets"
+
+#: issue.inc:568
+msgid "Submit @name"
+msgstr "Envoyer @name"
+
+#: issue.inc:583;636
+msgid "You do not have access to any projects."
+msgstr "Vous n'avez accès à'aucun projet."
+
+#: issue.inc:594
+msgid "Next"
+msgstr "Suivant"
+
+#: issue.inc:601
+msgid "You must select a project."
+msgstr "Vous devez spécifier un projet."
+
+#: issue.inc:605;655
+msgid "Invalid project selected."
+msgstr ""
+
+#: issue.inc:622
+msgid "Home"
+msgstr "Accueil"
+
+#: issue.inc:623
+msgid "Create content"
+msgstr "Créer un contenu"
+
+#: issue.inc:686;858
+msgid "Unassigned"
+msgstr "Non affecté"
+
+#: issue.inc:690
+msgid "Unassign"
+msgstr "Désaffecter"
+
+#: issue.inc:710
+msgid "Project information"
+msgstr "Informations sur le projet"
+
+#: issue.inc:740 project_issue.module:571
+msgid "Issue information"
+msgstr "Information sur le problème"
+
+#: issue.inc:753;1610;1767;2008 mail.inc:23
+msgid "Priority"
+msgstr "Priorité"
+
+#: issue.inc:759;1262
+msgid "Assigned"
+msgstr "Affecté"
+
+#: issue.inc:785
+msgid "Issue details"
+msgstr "Détails du problème"
+
+#: issue.inc:790;1997
+msgid "Title"
+msgstr "Titre"
+
+#: issue.inc:798;877
+msgid "Description"
+msgstr "Description"
+
+#: issue.inc:807
+msgid ""
+"File attachments are disabled. The issue directory has not been properly "
+"configured."
+msgstr ""
+"Les pièces jointes sont désactivées. Le répertoire des problèmes n'a pas été "
+"configuré correctement."
+
+#: issue.inc:809
+msgid "Please visit the !admin-project-issue-settings page."
+msgstr "Veuillez consulter la page !admin-project-issue-settings."
+
+#: issue.inc:809 project_issue.module:465
+msgid "Project issue settings"
+msgstr "Paramètres des problèmes de projets"
+
+#: issue.inc:812
+msgid "Please contact the site administrator."
+msgstr "Merci de contacter l'administrateur du site."
+
+#: issue.inc:865
+msgid "Component:"
+msgstr "Composant :"
+
+#: issue.inc:866
+msgid "Category:"
+msgstr "Catégorie :"
+
+#: issue.inc:867
+msgid "Priority:"
+msgstr "Priorité :"
+
+#: issue.inc:868
+msgid "Assigned:"
+msgstr "Affecté à :"
+
+#: issue.inc:869
+msgid "Status:"
+msgstr "État :"
+
+#: issue.inc:899
+msgid "Jump to:"
+msgstr "Allez:"
+
+#: issue.inc:919
+msgid "First unread comment"
+msgstr "Au premier commentaire non lu"
+
+#: issue.inc:925
+msgid "Most recent comment"
+msgstr "Au commentaire le plus récent"
+
+#: issue.inc:932
+msgid "Most recent attachment"
+msgstr "À la pièce jointe la plus récente"
+
+#: issue.inc:942;946
+msgid "Add new comment"
+msgstr "Ajouter un nouveau commentaire"
+
+#: issue.inc:1106
+msgid "critical"
+msgstr "critique"
+
+#: issue.inc:1106
+msgid "normal"
+msgstr "normal"
+
+#: issue.inc:1106
+msgid "minor"
+msgstr "mineur"
+
+#: issue.inc:1112
+msgid "bug reports"
+msgstr "rapports de bogues"
+
+#: issue.inc:1112
+msgid "tasks"
+msgstr "tâches"
+
+#: issue.inc:1112
+msgid "feature requests"
+msgstr "demandes de nouvelle fonction"
+
+#: issue.inc:1112
+msgid "support requests"
+msgstr "demande d'assistance"
+
+#: issue.inc:1115
+msgid "bug report"
+msgstr "rapport de bogue"
+
+#: issue.inc:1115
+msgid "task"
+msgstr "tâche"
+
+#: issue.inc:1115
+msgid "feature request"
+msgstr "demande de nouvelle fonction"
+
+#: issue.inc:1115
+msgid "support request"
+msgstr "demande d'assistance"
+
+#: issue.inc:1144
+msgid "Search issues for %name"
+msgstr "Recherche les problèmes relatifs à %name"
+
+#: issue.inc:1157
+msgid "Search issues for all projects"
+msgstr "Recherche les problèmes de tous les projets"
+
+#: issue.inc:1180
+msgid "Search for"
+msgstr "Rechercher"
+
+#: issue.inc:1186
+msgid "Has attachment."
+msgstr "Avec pièce jointe."
+
+#: issue.inc:1193
+msgid "Projects"
+msgstr "Projets"
+
+#: issue.inc:1201;1229 project_issue.module:625
+msgid "Categories"
+msgstr "Catégories"
+
+#: issue.inc:1212
+msgid "Versions"
+msgstr "Versions"
+
+#: issue.inc:1221 project_issue.module:587
+msgid "Components"
+msgstr "Composants"
+
+#: issue.inc:1238
+msgid "Priorities"
+msgstr "Priorités"
+
+#: issue.inc:1254
+msgid "Submitted by"
+msgstr "Soumis par"
+
+#: issue.inc:1270
+msgid "Participant"
+msgstr "Participant"
+
+#: issue.inc:1278;1781 project_issue.module:421;876
+msgid "Search"
+msgstr "Rechercher"
+
+#: issue.inc:1334
+msgid "ID"
+msgstr "ID"
+
+#: issue.inc:1335
+msgid "Name"
+msgstr "Nom"
+
+#: issue.inc:1336 project_issue.module:38
+msgid "Weight"
+msgstr "Poids"
+
+#: issue.inc:1337 project_issue.module:40
+msgid "Author may set"
+msgstr "Définissable par l'auteur"
+
+#: issue.inc:1338 project_issue.module:42
+msgid "In default queries"
+msgstr "Dans les requêtes par défaut"
+
+#: issue.inc:1339 project_issue.module:44
+msgid "Default status"
+msgstr "État par défaut"
+
+#: issue.inc:1340
+msgid "Operations"
+msgstr "Opérations"
+
+#: issue.inc:1396;1490 project_issue.module:487
+msgid "Delete"
+msgstr "Supprimer"
+
+#: issue.inc:1425
+msgid "Save"
+msgstr "Enregistrer"
+
+#: issue.inc:1457
+msgid "Status %status already exists."
+msgstr "L'état %status existe déjà."
+
+#: issue.inc:1471
+msgid "Reassign status"
+msgstr "Réaffecter l'état"
+
+#: issue.inc:1474
+msgid ""
+"There are !total existing issues with the status of @name. Please select a "
+"new status for these issues."
+msgstr ""
+"Il y a !total problèmes existants dans l'état @name. Veuillez choisir un "
+"nouvel état pour ces problmes."
+
+#: issue.inc:1487
+msgid "Are you sure you want to delete the status option %name?"
+msgstr "Etes-vous sûr de vouloir détruire l'option d'état %name ?"
+
+#: issue.inc:1489
+msgid "This action cannot be undone."
+msgstr "Cette action est irréversible."
+
+#: issue.inc:1490
+msgid "Cancel"
+msgstr "Annuler"
+
+#: issue.inc:1496
+msgid "Choose a new issue status for existing issues of status %name."
+msgstr "Choisissez un nouvel état pour les problèmes existants dans l'état %name"
+
+#: issue.inc:1502
+msgid "Project issue status %issue deleted."
+msgstr "L'état de problème %issue a été supprimé."
+
+#: issue.inc:1513;1514;1515;1707
+msgid "<all>"
+msgstr "<tout>"
+
+#: issue.inc:1524
+msgid "Issues for %name"
+msgstr "Problèmes relatifs à %name"
+
+#: issue.inc:1534;1572 project_issue.module:401;880
+msgid "Create"
+msgstr "Créer"
+
+#: issue.inc:1536
+msgid "Create a new issue for @project."
+msgstr "Soumettre un nouveau problème relatif à @project."
+
+#: issue.inc:1546;1584 project_issue.module:414
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: issue.inc:1548
+msgid "See statistics about @project issues."
+msgstr "Voir les statistiques des problèmes relatifs à %project"
+
+#: issue.inc:1554
+msgid "Receive email updates about @project issues."
+msgstr "Recevoir des mises à jour par courriel à propos des problèmes de @project."
+
+#: issue.inc:1558;1596
+msgid "Advanced search"
+msgstr "Recherche approfondie"
+
+#: issue.inc:1560
+msgid "Use the advanced search page to find @project issues."
+msgstr ""
+"Utiliser la page de recherche approfondie pour trouver les problèmes "
+"relatifs à @project"
+
+#: issue.inc:1567
+msgid "Issues for all projects"
+msgstr "Problèmes relatifs à l'ensemble des projets"
+
+#: issue.inc:1574
+msgid "Create a new issue."
+msgstr "Soumettre un nouveau problème."
+
+#: issue.inc:1586
+msgid "See statistics about issues."
+msgstr "Voir les statistiques des problèmes."
+
+#: issue.inc:1592
+msgid "Receive email updates about issues."
+msgstr "Recevoir des mises à jour par courriel à propos des problèmes."
+
+#: issue.inc:1598
+msgid "Use the advanced search page for finding issues."
+msgstr "Utiliser la page de recherche approfondie pour trouver des problèmes."
+
+#: issue.inc:1608
+msgid "Summary"
+msgstr "Résumé"
+
+#: issue.inc:1615
+msgid "Last updated"
+msgstr "Dernière MAJ"
+
+#: issue.inc:1616;2009 mail.inc:25
+msgid "Assigned to"
+msgstr "Affecté à"
+
+#: issue.inc:1681
+msgid "#"
+msgstr "#"
+
+#: issue.inc:1681
+msgid "Permalink to search query."
+msgstr "Lien permanent vers cette recherche"
+
+#: issue.inc:1687
+msgid "No issues found."
+msgstr "Aucun problème trouvé."
+
+#: issue.inc:1969
+msgid "Username '@user' not found."
+msgstr "L'utilisateur '@user' n'a pas été trouvé."
+
+#: issue.inc:1977
+msgid "issues for !name"
+msgstr "Problèmes relatif à !name"
+
+#: issue.inc:1980
+msgid "issues"
+msgstr "Problèmes"
+
+#: issue.inc:2015
+msgid "Reported by"
+msgstr "Signalé par"
+
+#: issue.inc:2016
+msgid "Updated by"
+msgstr "Mis à jour par"
+
+#: issue.inc:2050
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: issue.inc:2057 project_issue.module:189;242;251;297
+msgid "Anonymous"
+msgstr "Anonyme"
+
+#: issue.inc:2075
+msgid ""
+"<a href=\"@login\">Login</a> or <a href=\"@register\">register</a> to follow "
+"up"
+msgstr ""
+
+#: issue.inc:2078
+msgid "<a href=\"@login\">Login</a> to follow up"
+msgstr ""
+
+#: issue.inc:2092
+msgid ""
+"<a href=\"@login\">Login</a> or <a href=\"@register\">register</a> to create "
+"an issue"
+msgstr ""
+
+#: issue.inc:2095
+msgid "<a href=\"@login\">Login</a> to create an issue"
+msgstr ""
+
+#: mail.inc:100
+msgid "You are not authorized to access this page."
+msgstr "Vous n'êtes pas habilité à accéder à cette page."
+
+#: mail.inc:111
+msgid "You had some errors in your submission:"
+msgstr "Le contenu que vous soumettez présente des erreurs :"
+
+#: mail.inc:116
+msgid "Email submission to !sn failed - !subj"
+msgstr "Echec de soumission par courriel à !sn - !subj"
+
+#: mail.inc:219
+msgid "!name (!site)"
+msgstr "!name (!site)"
+
+#: mail.inc:259
+msgid "Issue status update for !link"
+msgstr "Mise à jour de l'état pour !link"
+
+#: mail.inc:260
+msgid "Post a follow up: !link"
+msgstr "Émettre un suivi : !link"
+
+#: mail.inc:269
+msgid "[!short_name] [!category] !title"
+msgstr ""
+
+#: mail.inc:366
+msgid "Original issue:"
+msgstr "Problème d'origine:"
+
+#: mail.inc:369
+msgid "Previous comments (!count):"
+msgstr "Commentaires précédents (!count):"
+
+#: mail.inc:403
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#: mail.inc:489
+msgid "Your submitted bugs for !date"
+msgstr "Vos rapports de bogues pour le !date"
+
+#: mail.inc:554
+msgid "Release critical bugs for !date"
+msgstr "Bogues critiques de l'édition pour le !date"
+
+#: project_issue.module:23
+msgid "Mailhandler support"
+msgstr ""
+
+#: project_issue.module:24
+msgid "Basic mail format:"
+msgstr ""
+
+#: project_issue.module:25
+msgid ""
+"Type: project\n"
+"Project: chatbox\n"
+"Category: bug report\n"
+"Version: cvs\n"
+"Priority: normal\n"
+"Status: active\n"
+"Component: code\n"
+"\n"
+"Whatever I type here will be the body of the node.\n"
+msgstr ""
+
+#: project_issue.module:26
+msgid ""
+"See the mailhandler help for more information on using the mailhandler "
+"module."
+msgstr ""
+
+#: project_issue.module:28
+msgid "Add a new issue (bug report, feature request, etc) to an existing project."
+msgstr ""
+"Soumettre un nouveau problème (rapport de bogue, demande de nouvelle "
+"fonction, etc) à un projet existant."
+
+#: project_issue.module:30
+msgid ""
+"Use this page to add new status options for project issues or to change or "
+"delete existing options."
+msgstr ""
+
+#: project_issue.module:32
+msgid "Adding"
+msgstr ""
+
+#: project_issue.module:33
+msgid ""
+"To add a new status option, put its name in one of the blank places at the "
+"bottom of the form and assign it a weight."
+msgstr ""
+
+#: project_issue.module:34
+#| msgid "Updates"
+msgid "Updating"
+msgstr "Mise à jour"
+
+#: project_issue.module:35
+msgid ""
+"When renaming existing issues, keep in mind that issues with the existing "
+"name will receive the new one."
+msgstr ""
+
+#: project_issue.module:36
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleting"
+msgstr "Supprimer"
+
+#: project_issue.module:37
+msgid ""
+"If you delete an existing issue status, you will be prompted for a new "
+"status to assign to existing issues with the deleted status."
+msgstr ""
+
+#: project_issue.module:39
+msgid ""
+"The weight of an issue determines the order it appears in lists, like in the "
+"select box where users designate a status for their issue."
+msgstr ""
+
+#: project_issue.module:41
+msgid ""
+"Check this option to give the original poster of an issue the right to set a "
+"status option, even if she or he isn't part of a role with this permission. "
+"You may wish, for example, to allow issue authors to close their own issues."
+msgstr ""
+
+#: project_issue.module:43
+msgid ""
+"There are a number of pages that display a list of issues based on a certain "
+"query. For all of these views of the issue queues, if no status options are "
+"explicitly selected, a certain set of defaults will be used to construct the "
+"query."
+msgstr ""
+
+#: project_issue.module:45
+msgid ""
+"The default status option will be used for new issues, and all users with "
+"the permission to create issues will automatically have permission to set "
+"this status. The default issue status cannot be deleted. If you wish to "
+"delete this status, first set a different status to default."
+msgstr ""
+
+#: project_issue.module:126
+msgid "Issue"
+msgstr "Problème"
+
+#: project_issue.module:128
+msgid "An issue that can be tracked, such as a bug report, feature request, or task."
+msgstr ""
+"Un problème qui peut être suivi, comme un rapport de bogue, une demande de "
+"nouvelle fonction, ou une tâche."
+
+#: project_issue.module:153;227;230
+msgid "Issues per page"
+msgstr "Problèmes par page"
+
+#: project_issue.module:158
+msgid "Number of issues to display on a single page when viewing the issue queues."
+msgstr ""
+
+#: project_issue.module:164
+msgid "Issue directory"
+msgstr "Répertoire des problèmes"
+
+#: project_issue.module:168
+msgid ""
+"Subdirectory in the directory '%dir' where attachments to issues will be "
+"stored."
+msgstr ""
+"Sous-répertoire du répertoire '%dir' où sont stockées les pièces jointes "
+"liées aux problèmes."
+
+#: project_issue.module:174
+msgid "Display user signatures on issue followups"
+msgstr ""
+
+#: project_issue.module:176
+msgid ""
+"If selected, user signatures will be appended to the display of issue "
+"followups."
+msgstr ""
+
+#: project_issue.module:181
+msgid "Reply-to address on e-mail notifications"
+msgstr "Adresse de réponse (reply-to) des notifications par courriel"
+
+#: project_issue.module:183
+msgid ""
+"All issue e-mails sent via subscriptions will appear from this e-mail "
+"address. You can use %project as a placeholder which will be replaced with "
+"the %short_project_name setting for the issue's current project."
+msgstr ""
+
+#: project_issue.module:183
+msgid "Short project name"
+msgstr ""
+
+#: project_issue.module:200
+msgid "Auto-close user"
+msgstr ""
+
+#: project_issue.module:204
+msgid ""
+"Enter the user which will auto-close fixed issues -- leave empty to disable "
+"auto-closing or set to %anon to use the anonymous user."
+msgstr ""
+
+#: project_issue.module:227
+msgid "%setting must be a number."
+msgstr ""
+
+#: project_issue.module:230
+msgid "%setting must be greater than 0."
+msgstr ""
+
+#: project_issue.module:251;297
+msgid "%name does not have sufficient permissions to auto-close issues."
+msgstr ""
+
+#: project_issue.module:255
+msgid "%name is not a valid user."
+msgstr ""
+
+#: project_issue.module:292
+msgid "Auto-close user failed to load."
+msgstr ""
+
+#: project_issue.module:374
+msgid "Automatically closed -- issue fixed for two weeks with no activity."
+msgstr ""
+"Fermé automatiquement: le problème est résolu et sans activité depuis deux "
+"semaines."
+
+#: project_issue.module:393;429;515;956;1055
+msgid "Issues"
+msgstr "Problèmes"
+
+#: project_issue.module:447
+msgid "My projects"
+msgstr "Mes projets"
+
+#: project_issue.module:456
+msgid "My issues"
+msgstr "Mes problèmes"
+
+#: project_issue.module:466
+msgid ""
+"Specify where attachments to issues should be stored on your site, and what "
+"filename extensions should be allowed."
+msgstr ""
+"Emplacement de stockage des pièces jointes sur le site, et extensions de "
+"fichiers autorisées."
+
+#: project_issue.module:477
+msgid "Project issue status options"
+msgstr "Options d'état des problèmes"
+
+#: project_issue.module:478
+msgid "Configure what issue status values should be used on your site."
+msgstr "Configuration des états de problèmes utilisés sur le site."
+
+#: project_issue.module:527
+msgid "Comments"
+msgstr "Commentaires"
+
+#: project_issue.module:576
+msgid "Issue tracker"
+msgstr "Traqueur de problèmes"
+
+#: project_issue.module:580
+msgid "Enable issue tracker"
+msgstr "Activer le traqueur de problèmes"
+
+#: project_issue.module:583
+msgid ""
+"Let users submit bug requests, patches, feature requests, support requests, "
+"etc."
+msgstr ""
+"Permet aux utilisateurs de soumettre des rapports de bogues, correctifs "
+"(patches), demandes de nouvelle fonction, demandes d'assistance, etc."
+
+#: project_issue.module:594
+msgid "Submission guidelines"
+msgstr "Instructions pour la soumission de problèmes"
+
+#: project_issue.module:603
+msgid "Issue e-mail options"
+msgstr "Options de courriel pour les problèmes"
+
+#: project_issue.module:608
+msgid "Weekly critical issues report"
+msgstr "Rapport hebdomadaire des problèmes critiques"
+
+#: project_issue.module:612
+msgid "To get a weekly digest of critical issues specify an e-mail address."
+msgstr ""
+"Pour recevoir une liste hebdomadaire des problèmes critiques, spécifiez une "
+"adresse électronique."
+
+#: project_issue.module:616
+msgid "Issues e-mail address"
+msgstr "Adresse électronique pour les problèmes"
+
+#: project_issue.module:620
+msgid ""
+"If you wish to receive a copy of all the issues to a central location "
+"specify an address here. <em>Note: the copy will contain links to file "
+"attachments.</em>"
+msgstr ""
+"Si vous souhaitez recevoir une copie de tous les problèmes à une adresse "
+"centrale, spécifiez-là ici.<em>Note: les liens vers les fichiers attachés seront inclus dans la copie.</em>"
+
+#: project_issue.module:626
+msgid ""
+"Which issue categories to e-mail. If none is checked all categories will be "
+"posted."
+msgstr ""
+"Quelles catégories de problèmes envoyer par courriel. Si aucune catégorie "
+"n'est cochée, les problèmes de toutes les catégories sont transmis."
+
+#: project_issue.module:641
+msgid "States"
+msgstr "États"
+
+#: project_issue.module:642
+msgid "Which issue states to e-mail. If none is checked all states will be posted."
+msgstr ""
+"Etats des problèmes à envoyer par courriel. Si aucun état n'est coché, les "
+"problèmes dans tous les états seront transmis."
+
+#: project_issue.module:657
+msgid "Monthly reminder"
+msgstr "Rappel mensuel"
+
+#: project_issue.module:661
+msgid "Send monthly reminders to users"
+msgstr "Envoyer des rappels mensuels aux utilisateurs"
+
+#: project_issue.module:664
+msgid ""
+"Enabling this will send a monthly reminder to users that have open issues "
+"registered."
+msgstr ""
+"Envoyer un rappel mensuel à tous les utilisateurs ayant soumis des problèmes "
+"encore ouverts."
+
+#: project_issue.module:671
+msgid "Submit"
+msgstr "Envoyer"
+
+#: project_issue.module:702
+msgid "Issue settings have been saved."
+msgstr "Les paramètres des problèmes ont été enregistrés."
+
+#: project_issue.module:738
+msgid "Invalid issue status %status: you do not have permission to set this status"
+msgstr ""
+"Etat de problème invalide %status: vous n'êtes pas autorisé à définir cet "
+"état."
+
+#: project_issue.module:823
+msgid "Projects by @user"
+msgstr "Projets de @user"
+
+#: project_issue.module:833
+msgid "You need to log in to see your projects."
+msgstr "Vous devez avoir ouvert une session pour voir vos projets."
+
+#: project_issue.module:839
+msgid "Last issue update"
+msgstr "Dernière MAJ"
+
+#: project_issue.module:844
+msgid "Open issues"
+msgstr "Problèmes ouverts"
+
+#: project_issue.module:848
+msgid "Issue links"
+msgstr "Liens vers les problèmes"
+
+#: project_issue.module:854
+msgid "You have no projects."
+msgstr "Vous n'êtes administrateur d'aucun projet."
+
+#: project_issue.module:854
+msgid "This user has no projects."
+msgstr "Cet utilisateur n'est administrateur d'aucun projet."
+
+#: project_issue.module:872
+msgid "View"
+msgstr "Voir"
+
+#: project_issue.module:887
+msgid "Edit"
+msgstr "Modifier"
+
+#: project_issue.module:893
+msgid "Add release"
+msgstr "Ajouter une édition"
+
+#: project_issue.module:905
+msgid "n/a"
+msgstr "n.d."
+
+#: project_issue.module:925
+msgid "Issue tracking is disabled."
+msgstr ""
+
+#: project_issue.module:931
+msgid "Enable"
+msgstr ""
+
+#: project_issue.module:951
+msgid "Project links"
+msgstr "Liens vers les projets"
+
+#: project_issue.module:1110
+msgid ""
+"References to project issues in the form of [#1234] (or [#1234-2] for "
+"comments) turn into links automatically, with the title of the issue "
+"appended. The status of the issue is shown on hover."
+msgstr "Les références aux problèmes de projet sous la forme [#1234] (ou bien [#1234-2] pour les commentaires) seront automatiquement changées en lien avec le titre du problème. L' état du problème est montré en mettant le pointeur de la souris au dessus du lien. "
+
+#: project_issue.module:1113
+msgid "Project issue numbers (ex. [#12345]) turn into links automatically."
+msgstr "Les numéros de problème de projet (exp. [#12345]) sont automatiquement changés en liens."
+
+#: project_issue.module:1124;1188;1190;1197;1199;1211
+msgid "Project Issue to link filter"
+msgstr "Filtre de problèmes de projets à lien."
+
+#: project_issue.module:1126
+msgid ""
+"Converts references to project issues (in the form of [#12345]) into links. "
+"Caching should be disabled if node access control modules are used."
+msgstr ""
+
+#: project_issue.module:1189
+msgid "Some module conflicts were detected."
+msgstr ""
+
+#: project_issue.module:1190
+msgid ""
+"%issuefilter should not be enabled when a node access control is also in "
+"use. Users may be able to see cached titles of project issues they would "
+"otherwise not have access to. You should disable this filter in !inputformat "
+"input format."
+msgstr ""
+
+#: project_issue.module:1198
+msgid "Some security conflicts were detected."
+msgstr ""
+
+#: project_issue.module:1199
+msgid ""
+"%issuefilter conflicts with project issue access settings. Users who do not "
+"have access to all project issues may be able to see titles of project "
+"issues. You should disable this filter in !inputformat input format."
+msgstr ""
+
+#: project_issue.module:1212
+msgid "Some filter conflicts were detected."
+msgstr ""
+
+#: project_issue.module:1213
+msgid ""
+"%issuefilter should come after %lowfilter to prevent loss of layout and "
+"highlighting."
+msgstr ""
+
+#: project_issue.module:1213
+msgid "Please rearrange the filters."
+msgstr ""
+
+#: project_issue.install:400
+
+msgid "Comment upload"
+msgstr ""
+
+#: project_issue.install:401
+msgid "Comment"
+msgstr "Commentaire"
+
+#: project_issue.install:402
+msgid "Upload"
+msgstr ""
+
+#: project_issue.install:568
+msgid "Converted issue followups to comments for @count issues"
+msgstr ""
+
+#: project_issue.install:667
+msgid "Converted issue file attachments for @count issues"
+msgstr ""
+
+#: project_issue.install:711
+msgid "The %module module is not enabled."
+msgstr ""
+
+#: project_issue.install:715
+msgid "The update was aborted for the following reasons: !messages"
+msgstr ""
+
+#: project_issue.install:749
+msgid ""
+"This and all subsequent updates of Project issue were safely aborted. \n"
+"        Correct the problems listed above, then <a href=\"!update_path\">re-"
+"run update.php</a>, \n"
+"        click 'Select versions', select update %update for project_issue, "
+"and click 'Update'."
+msgstr ""
+
+#: project_issue.install:753
+msgid ""
+"Note: you will most likely need to disable the Project issue module "
+"temporarily in order to resolve the issues above. \n"
+"        If necessary, please refer to Project issue's UPGRADE.txt for "
+"further details regarding this upgrade problem."
+msgstr ""
+
+#: project_issue.info:0
+msgid "Project issue tracking"
+msgstr "Suivi des problèmes"
+
+#: project_issue.info:0
+msgid "Provides issue tracking for the project.module."
+msgstr "Fournit un suivi des problèmes pour les projets gérés par project.module"
+
+#: generate/project_issue_generate.inc:129
+msgid "Your comment has been created."
+msgid_plural "@count comments have been created."
+msgstr[0] ""
+msgstr[1] ""
+
+#: generate/project_issue_generate.module:13
+msgid "Generate issues"
+msgstr ""
+
+#: generate/project_issue_generate.module:14
+msgid "Generate random issues and issue comments."
+msgstr ""
+
+#: generate/project_issue_generate.module:27
+msgid "How many issues would you like to generate?"
+msgstr ""
+
+#: generate/project_issue_generate.module:33
+msgid "How many issue comments would you like to generate?"
+msgstr ""
+
+#: generate/project_issue_generate.module:39
+msgid "Do it!"
+msgstr ""
+
+#: generate/project_issue_generate.info:0
+#, fuzzy
+#| msgid "Project issue settings"
+msgid "Project issue generator"
+msgstr "Paramètres des problèmes de projets"
+
+#: generate/project_issue_generate.info:0
+msgid "Generate random issues and comments."
+msgstr ""
+
+#: generate/project_issue_generate.info:0
+msgid "Development"
+msgstr ""
+

@@ -1,0 +1,10 @@
+.taxdef-name {
+  padding:5px;
+  border:2px solid #CCC;
+  font-weight: bold;
+}
+
+.taxdef-subtable {
+  padding: 5px; 
+  border:2px solid #CCC;
+}

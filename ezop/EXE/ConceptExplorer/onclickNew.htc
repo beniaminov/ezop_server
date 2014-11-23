@@ -1,0 +1,33 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="OnClick()" />
+<SCRIPT LANGUAGE="JScript">
+function OnClick(){
+var Name, res;
+window.parent.document.getElementById("main_form").target = "content";
+if (window.document.all.select_left.selectedIndex!=-1) {
+Name = window.parent.document.all.explorer_selected_left.value;
+res = checkName (Name);
+//var ss = Name.search(/[[..]]/);
+//alert(res);
+if(res ==-1){
+	window.parent.document.getElementById("menu_item").value = "cnpt_intocur";
+	window.parent.document.getElementById("curcnpt_name").value = Name;
+	window.parent.document.getElementById("curcnpt_text").value = "";
+	window.parent.document.getElementById("cmd").value = "";
+	window.parent.document.getElementById("rest").value = "";
+	window.parent.document.getElementById("button").fireEvent("onclick");
+		}
+	}
+}
+
+
+function checkName (Name){
+var s,  rr, boolres;
+	s = Name;	
+	rr = s.search (/[[..]]/);
+
+return (rr);
+ 
+}
+</SCRIPT>
+</PUBLIC:COMPONENT>

@@ -1,0 +1,143 @@
+# Russian translation of Drupal (update_status.module)
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: update_status.info,v 1.2 2007/02/25 21:12:34 merlinofchaos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.x\n"
+"POT-Creation-Date: 2007-02-28 00:10+0500\n"
+"PO-Revision-Date: 2007-02-28 01:01+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((($n%10==1) && ($n%100!=11))?(0):((((($n%10)>=2)&&(($n%10)<=4))&&((($n%100)<10)||(($n%100)>=20)))?(1):2))\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: update_status.module:13
+msgid "Here you can find information on the update status of your installed modules. Note that each module is part of a \"project\", which may have the same name as the module or may have a different name. Also note that this can only check the status for \"official releases\", and will not be able to check update status for development snapshots and modules updated directly from CVS."
+msgstr "Здесь можно найти информацию о статусе обновления установленных модулей. Обратите внимание, что каждый модуль - часть \"проекта\", который может называться как одинаково с модулем, так и отличаться по названию. Также имейте в виду, что можно проверить статус только \"официальных релизов\", но не проверяется статус обновления промежуточных сборок и модулей, обновленных напрямую из CVS."
+
+#: update_status.module:17;243
+msgid "There are updates available for one or more of your modules. To ensure the security of your server, you should update immediately. See the !status_page for more information"
+msgstr "Есть доступные сейчас обновления для одного или нескольких модулей. Для поддержания безопасности вашего сервера, стоит обновиться немедленно. Для дополнительной информации посмотрите !status_page "
+
+#: update_status.module:19
+msgid "See the <a href=\"!updates\">updates log page</a> for information on available updates."
+msgstr "За информацией о доступных обновлениях обращайтесь на  <a href=\"!updates\">страницу обновлений</a>."
+
+#: update_status.module:31
+msgid "Available updates"
+msgstr "Доступные обновления"
+
+#: update_status.module:32
+msgid "Get a status report on your installed modules and available updates."
+msgstr "Получение отчета об установленных модулях и доступных обновлениях."
+
+#: update_status.module:38
+msgid "Manual update check"
+msgstr "Проверка обновления"
+
+#: update_status.module:67
+msgid "No update data is available. To fetch data, you may need to !run_cron."
+msgstr "Данные об обновлениях недоступны. Для получения данных может понадобится !run_cron."
+
+#: update_status.module:67
+msgid "run cron"
+msgstr "запуск cron"
+
+#: update_status.module:78
+msgid "Update Status: Error %code: %message"
+msgstr "Статус обновления: ошибка %code: %message"
+
+#: update_status.module:153
+msgid "Last checked: "
+msgstr "Последняя проверка: "
+
+#: update_status.module:153
+msgid "Never"
+msgstr "Никогда"
+
+#: update_status.module:154
+msgid "Check manually"
+msgstr "Проверить"
+
+#: update_status.module:165
+msgid "Project"
+msgstr "Проект"
+
+#: update_status.module:166
+msgid "Status"
+msgstr "Статус"
+
+#: update_status.module:167
+msgid "Current version"
+msgstr "Текущая версия"
+
+#: update_status.module:168
+msgid "Available version"
+msgstr "Доступная версия"
+
+#: update_status.module:169
+msgid "Download latest version"
+msgstr "Скачать последнюю версию"
+
+#: update_status.module:193;235;237
+msgid "Up to date"
+msgstr "Обновлен"
+
+#: update_status.module:196
+msgid "Update available"
+msgstr "Доступно обновление"
+
+#: update_status.module:199
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: update_status.module:208
+msgid "Includes: %modules"
+msgstr "Включает: %modules"
+
+#: update_status.module:224
+msgid "Module update status"
+msgstr "Статус обновления модулей"
+
+#: update_status.module:225
+msgid "Drupal core update status"
+msgstr "Статус обновления ядра Drupal"
+
+#: update_status.module:230
+msgid "Out of date. Version @version available."
+msgstr "Устарело. Доступна версия @version."
+
+#: update_status.module:232
+msgid "There are updates available for your version of Drupal. To ensure the security of your server, you should update immediately.See the !status_page for more information"
+msgstr "Есть доступное сейчас обновление для вашей версии Drupal. Для поддержания безопасности вашего сервера, стоит обновиться немедленно. Для дополнительной информации посмотрите !status_page "
+
+#: update_status.module:241
+msgid "Out of date"
+msgstr "Устарел"
+
+#: update_status.module:249;250
+msgid "Update status is unavailable. cron may need to be run."
+msgstr "Статус обновления недоступен. Для запуска может потребоваться cron. "
+
+#: update_status.module:78;0
+#: update_status.info:0
+msgid "update_status"
+msgstr "update_status"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "Статус обновления"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "Проверьте, чтобы убедиться, что ваша установка Drupal и модули обновлены."
+
+#: update_status.module:17;232;243
+msgid "update status page"
+msgstr "страницу статуса обновлений"
+

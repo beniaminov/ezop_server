@@ -1,0 +1,41 @@
+Description:
+------------
+	
+This module provides a site map page for your taxonomy, and a block that can be 
+used as a navigation menu.
+
+Requirements:
+-------------
+	
+This module requires drupal 4.5.x or greater.
+
+Installation:
+-------------
+
+1. Copy the sitemenu directory and all its contents to your modules/ directory.
+
+2. Enable the module by visiting Administer -> Site Building -> Modules.
+
+3. Allow access to it under Administer -> User management -> Access control.
+
+4. Configure the module under Administer -> Site configuration -> sitemenu
+
+   - You may choose to omit one or more vocabularies. Normally leave that as it is.
+
+   - You can change the navigation link text if you want. Normally leave that as it is.
+
+   - Number of nodes to show per taxonomy term. This sets the maximum number of nodes
+     to show per term. Set it to 0 if you want to disable listing of nodes altogether.
+
+   - Show number of nodes for each term. This displays the total number of nodes per
+     term.
+
+   - Show Author and number of Comments. Enable this if you want to show the author and 
+     number of comments when the user moves the mouse over the node title.
+
+   - If you want to configure the module as a block for a side bar navigation menu, then
+     do the following:
+     . Go to Administer -> Site Building -> sitemenu, and choose a title for the block
+       text (e.g. Menu)
+     . Go to Administer -> Site Building -> Blocks, and enable the block, and place it
+       wherever you want (normally on the left, at the top with a low weight value.

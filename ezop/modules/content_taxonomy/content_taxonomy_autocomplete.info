@@ -1,0 +1,13 @@
+; $Id: content_taxonomy_autocomplete.info,v 1.1.2.4 2007/06/18 23:06:35 dww Exp $
+name = Content Taxonomy Autocomplete
+description = Defines a autocomplete widget type for content_taxonomy
+dependencies = content content_taxonomy
+package = CCK
+
+
+
+; Information added by drupal.org packaging script on 2008-01-30
+version = "5.x-1.x-dev"
+project = "content_taxonomy"
+datestamp = "1201651373"
+

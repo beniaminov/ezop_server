@@ -1,0 +1,10 @@
+name = Fieldgroup Table
+description = Turn multiple value fields on fieldgroups into tables.
+dependencies = content fieldgroup
+package = CCK
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "5.x-1.x-dev"
+project = "fieldgroup_table"
+datestamp = "1380578744"
+

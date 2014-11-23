@@ -1,0 +1,549 @@
+# $Id: node-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-21 02:35+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/node/node.module:18
+msgid "All content in a website is stored and treated as <b>nodes</b>. Therefore nodes are any postings such as blogs, stories, polls and forums. The node module manages these content types and is one of the strengths of Drupal over other content management systems."
+msgstr "Все содержимое сайта состоит из <b>материалов</b>. Материалами являются любые сообщения, например, блоги (дневники), заметки, опросы или форумы. Модуль материалов управляет этими типами содержания и является одним из преимуществ Drupal по сравнению с другими системами управления содержанием (CMS)."
+
+#: modules/node/node.module:19
+msgid "Treating all content as nodes allows the flexibility of creating new types of content. It also allows you to painlessly apply new features or changes to all content. Comments are not stored as nodes but are always associated with a node."
+msgstr "Рассматрение всего содержимое сайта как набора материалов позволяет достичь гибкости при создании новых типов содержимого. Это также позволяет вам безболезненно применять новые возможности или изменения ко всему содержимому. Комментарии сами по себе не являются материалами, но всегда связаны с каким-либо материалом."
+
+#: modules/node/node.module:20
+msgid ""
+"<p>Node module features</p>\n"
+"<ul>\n"
+"<li>The list tab provides an interface to search and sort all content on your site.</li>\n"
+"<li>The configure settings tab has basic settings for content on your site.</li>\n"
+"<li>The configure content types tab lists all content types for your site and lets you configure their default workflow.</li>\n"
+"<li>The search tab lets you search all content on your site</li>\n"
+"</ul>\n"
+msgstr ""
+"<p>Возможности модуля материалов</p>\n"
+"<ul>\n"
+"<li>Вкладка списка обеспечивает интерфейс для поиска и сортировки всего содержимого на вашем сайте.</li>\n"
+"<li>Вкладка установок конфигурации содержит основные настройки содержимого на вашем сайте.</li>\n"
+"<li>Вкладка настройки типов содержания содержит список всех типов содержимого вашего сайта и позволяет настраивать их типичный порядок использования.</li>\n"
+"<li>Вкладка поиска позволяет вам проводить поиск по всему содержимому вашего сайта.</li>\n"
+"</ul>\n"
+
+#: modules/node/node.module:28
+msgid "For more information please read the configuration and customization handbook <a href=\"@node\">Node page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@node\">публикаций</a>."
+
+#: modules/node/node.module:31
+msgid "Enter a simple pattern to search for a post. Words are matched exactly. Phrases can be surrounded by quotes to do an exact search."
+msgstr "Укажите простой шаблон для поиска сообщения. Поиск идет по точному совпадению с введенным словом. Если фраза заключена в  кавычки, будет искаться точно это сочетание слов."
+
+#: modules/node/node.module:33
+msgid "Below is a list of all the content types on your site. All posts that exist on your site are instances of one of these content types."
+msgstr "Ниже располагается список типов содержимого на вашем сайте. Все сообщения на сайте представляют собой один из этих типов."
+
+#: modules/node/node.module:35
+msgid "To create a new content type, enter the human-readable name, the machine-readable name, and all other relevant fields that are on this page. Once created, users of your site will be able to create posts that are instances of this content type."
+msgstr "Для того, чтобы создать новый тип материалов, укажите понятное для человека имя этого типа, машинное имя и заполните все другие важные поля, которые находятся на этой странице. Как только тип материалов будет создан, пользователи вашего сайта смогут создавать материалы данного типа."
+
+#: modules/node/node.module:39
+msgid "The revisions let you track differences between multiple versions of a post."
+msgstr "Версии позволяют вам следить за изменениями в разных версиях сообщений."
+
+#: modules/node/node.module:798
+#: ;1074;1128
+msgid "Content"
+msgstr "Содержание"
+
+#: modules/node/node.module:815
+msgid "Content ranking"
+msgstr "Ранжирование содержания"
+
+#: modules/node/node.module:817
+msgid "The following numbers control which properties the content search should favor when ordering the results. Higher numbers mean more influence, zero means the property is ignored. Changing these numbers does not require the search index to be rebuilt. Changes take effect immediately."
+msgstr "Следующие числа определяют, каким образом будет сортироваться результат поиска по содержанию. Большие числа означают больший приоритет, ноль означает, что данный фактор при сортировке не учитывается. Изменение этих значений не требует перестройки поискового индекса. Сделанные изменения действуют сразу же."
+
+#: modules/node/node.module:819
+msgid "Keyword relevance"
+msgstr "Релевантность ключевого слова"
+
+#: modules/node/node.module:820
+msgid "Recently posted"
+msgstr "Недавно отправленные"
+
+#: modules/node/node.module:822
+msgid "Number of comments"
+msgstr "Число комментариев"
+
+#: modules/node/node.module:825
+msgid "Number of views"
+msgstr "Число просмотров"
+
+#: modules/node/node.module:952
+msgid "Factor"
+msgstr "Фактор"
+
+#: modules/node/node.module:972
+msgid "If the site is experiencing problems with permissions to content, you may have to rebuild the permissions cache. Possible causes for permission problems are disabling modules or configuration changes to permissions. Rebuilding will remove all privileges to posts, and replace them with permissions based on the current modules and settings."
+msgstr "Если сайт испытывает проблемы с правами на содержимое, вам может понадобиться пересоздать кеш прав доступа. Возможные причины для проблем с правами - это выключение модулей или изменения в конфигурации прав доступа. Пересоздание удалит все настройки правд для сообщений и заменит их правами, основанными на действующих модулях и настройках."
+
+#: modules/node/node.module:973
+msgid "Rebuilding may take some time if there is a lot of content or complex permission settings. After rebuilding has completed posts will automatically use the new permissions."
+msgstr "Пересоздание может занять некоторое время, если содержимого много или задана сложная комбинация прав доступа. После того, как пересоздание будет завершено, сообщения автоматически получают новые права доступа."
+
+#: modules/node/node.module:975
+msgid "Node access status"
+msgstr "Состояние доступа к материалу"
+
+#: modules/node/node.module:977
+#: ;1005;1015
+msgid "Rebuild permissions"
+msgstr "Обновить права доступа"
+
+#: modules/node/node.module:981
+msgid "Number of posts on main page"
+msgstr "Количество материалов на главной странице"
+
+#: modules/node/node.module:983
+msgid "The default maximum number of posts to display per page on overview pages such as the main page."
+msgstr "Максимальное количество материалов на страницу для таких страниц, как главная."
+
+#: modules/node/node.module:986
+msgid "Length of trimmed posts"
+msgstr "Длина усеченных материалов"
+
+#: modules/node/node.module:987
+msgid "200 characters"
+msgstr "200 знаков"
+
+#: modules/node/node.module:987
+msgid "400 characters"
+msgstr "400 знаков"
+
+#: modules/node/node.module:987
+msgid "600 characters"
+msgstr "600 знаков"
+
+#: modules/node/node.module:988
+msgid "800 characters"
+msgstr "800 знаков"
+
+#: modules/node/node.module:988
+msgid "1000 characters"
+msgstr "1000 знаков"
+
+#: modules/node/node.module:988
+msgid "1200 characters"
+msgstr "1200 знаков"
+
+#: modules/node/node.module:988
+msgid "1400 characters"
+msgstr "1400 знаков"
+
+#: modules/node/node.module:989
+msgid "1600 characters"
+msgstr "1600 знаков"
+
+#: modules/node/node.module:989
+msgid "1800 characters"
+msgstr "1800 знаков"
+
+#: modules/node/node.module:989
+msgid "2000 characters"
+msgstr "2000 знаков"
+
+#: modules/node/node.module:990
+msgid "The maximum number of characters used in the trimmed version of a post. Drupal will use this setting to determine at which offset long posts should be trimmed. The trimmed version of a post is typically used as a teaser when displaying the post on the main page, in XML feeds, etc. To disable teasers, set to 'Unlimited'. Note that this setting will only affect new or updated content and will not affect existing teasers."
+msgstr "Максимальное число знаков в усеченной версии материала. Drupal использует эту настройку, чтобы отрезать определенное  количество знаков в начале текста для усеченного варианта, который обычно используется как анонс основной страницы, XML-лент и т.п. Для отключения анонсов, установите 'Неограничено'. Обратите внимание, что это изменение будет касаться только новых или обновленных материалов и не повлияет на существующие анонсы."
+
+#: modules/node/node.module:994
+msgid "Preview post"
+msgstr "Просмотр материала"
+
+#: modules/node/node.module:995
+msgid "Must users preview posts before submitting?"
+msgstr "Обязателен ли просмотр материала перед его отправкой?"
+
+#: modules/node/node.module:1014
+msgid "Are you sure you want to rebuild node permissions on the site?"
+msgstr "Вы действительно хотите обновить права доступа на сайте?"
+
+#: modules/node/node.module:1015
+msgid "This will wipe all current node permissions and rebuild them based on current settings. Rebuilding the permissions may take a while so please be patient. This action cannot be undone."
+msgstr "Эта действие удалит все текущие права доступа и пересоздаст их, основываясь на текущих настройках. Обновление прав доступа может занять некоторое время, будьте терпеливы. Эту операцию нельзя отменить."
+
+#: modules/node/node.module:1023
+msgid "The node access table has been rebuilt."
+msgstr "Таблица прав доступа успешно обновлена."
+
+#: modules/node/node.module:1047
+msgid "Read more"
+msgstr "Читать далее"
+
+#: modules/node/node.module:1049
+msgid "Read the rest of this posting."
+msgstr "Читать продолжение."
+
+#: modules/node/node.module:1064
+msgid "Content management"
+msgstr "Содержание"
+
+#: modules/node/node.module:1065
+msgid "Manage your site's content."
+msgstr "Управление содержанием сайта."
+
+#: modules/node/node.module:1075
+msgid "View, edit, and delete your site's content."
+msgstr "Просмотр, изменение и удаление материалов сайта."
+
+#: modules/node/node.module:1084
+msgid "Search content"
+msgstr "Поиск по содержанию"
+
+#: modules/node/node.module:1085
+msgid "Search content by keyword."
+msgstr "Поиск содержания по ключевым словам."
+
+#: modules/node/node.module:1093
+msgid "Post settings"
+msgstr "Публикация"
+
+#: modules/node/node.module:1094
+msgid "Control posting behavior, such as teaser length, requiring previews before posting, and the number of posts on the front page."
+msgstr "Настройка режима публикации: длина анонса, необходимость просмотра перед публикацией и количество сообщений на главной странице."
+
+#: modules/node/node.module:1101
+msgid "rebuild permissions"
+msgstr "обновить права доступа"
+
+#: modules/node/node.module:1109
+msgid "Content types"
+msgstr "Типы материалов"
+
+#: modules/node/node.module:1110
+msgid "Manage posts by content type, including default status, front page promotion, etc."
+msgstr "Управление материалами по типам, включая значения по умолчанию, размещение на главной странице и т.д."
+
+#: modules/node/node.module:1122
+msgid "Add content type"
+msgstr "Добавить тип материала"
+
+#: modules/node/node.module:1133
+#: ;2214
+msgid "Create content"
+msgstr "Создать материал"
+
+#: modules/node/node.module:1198
+msgid "Revisions"
+msgstr "Версии"
+
+#: modules/node/node.module:1251
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: modules/node/node.module:1255
+msgid "Unpublish"
+msgstr "Не публиковать"
+
+#: modules/node/node.module:1259
+msgid "Promote to front page"
+msgstr "Поместить на главную"
+
+#: modules/node/node.module:1263
+msgid "Demote from front page"
+msgstr "Убрать с главной"
+
+#: modules/node/node.module:1267
+msgid "Make sticky"
+msgstr "Закрепить вверху"
+
+#: modules/node/node.module:1271
+msgid "Remove stickiness"
+msgstr "Не закреплять вверху"
+
+#: modules/node/node.module:1329
+#: ;1558
+msgid "published"
+msgstr "опубликовано"
+
+#: modules/node/node.module:1329
+#: ;1558
+msgid "not published"
+msgstr "не опубликовано"
+
+#: modules/node/node.module:1330
+msgid "promoted"
+msgstr "на главной"
+
+#: modules/node/node.module:1330
+msgid "not promoted"
+msgstr "не на главной"
+
+#: modules/node/node.module:1331
+msgid "sticky"
+msgstr "закреплено вверху списков"
+
+#: modules/node/node.module:1331
+msgid "not sticky"
+msgstr "не закреплено вверху списков"
+
+#: modules/node/node.module:1332
+msgid "type"
+msgstr "тип"
+
+#: modules/node/node.module:1335
+msgid "category"
+msgstr "категория"
+
+#: modules/node/node.module:1383
+msgid "Show only items where"
+msgstr "Показывать только элементы, где"
+
+#: modules/node/node.module:1515
+msgid "No items selected."
+msgstr "Нет выбранных элементов."
+
+#: modules/node/node.module:1613
+msgid "Are you sure you want to delete these items?"
+msgstr "Вы уверены, что хотите удалить эти элементы?"
+
+#: modules/node/node.module:1623
+msgid "The items have been deleted."
+msgstr "Элементы удалены."
+
+#: modules/node/node.module:1632
+msgid "Revisions for %title"
+msgstr "Версии %title"
+
+#: modules/node/node.module:1634
+msgid "Revision"
+msgstr "Версия"
+
+#: modules/node/node.module:1652
+#: ;1658
+msgid "!date by !username"
+msgstr "!date от !username"
+
+#: modules/node/node.module:1655
+msgid "current revision"
+msgstr "текущая версия"
+
+#: modules/node/node.module:1661
+msgid "revert"
+msgstr "вернуть"
+
+#: modules/node/node.module:1685
+msgid "Copy of the revision from %date."
+msgstr "Копия версии от %date."
+
+#: modules/node/node.module:1692
+msgid "%title has been reverted back to the revision from %revision-date"
+msgstr "Был произведен возрат %title к версии от %revision-date"
+
+#: modules/node/node.module:1693
+msgid "@type: reverted %title revision %revision."
+msgstr "@type: %title возвращен к версии %revision."
+
+#: modules/node/node.module:1696
+msgid "You tried to revert to an invalid revision."
+msgstr "Вы пытались произвести возврат к неверной версии."
+
+#: modules/node/node.module:1717
+msgid "Deleted %title revision %revision."
+msgstr "Удалена версия %revision материала %title."
+
+#: modules/node/node.module:1718
+msgid "@type: deleted %title revision %revision."
+msgstr "@type: %title удалена версия %revision."
+
+#: modules/node/node.module:1722
+msgid "Deletion failed. You tried to delete the current revision."
+msgstr "Удаление невозможно. Вы пытались удалить текущую версию."
+
+#: modules/node/node.module:1758
+#: ;1762
+msgid "Syndicate"
+msgstr "Сбор новостей"
+
+#: modules/node/node.module:1920
+msgid "The body of your @type is too short. You need at least %words words."
+msgstr "Текст @type слишком короткий. Нужно минимум %words слов."
+
+#: modules/node/node.module:1924
+msgid "This content has been modified by another user, changes cannot be saved."
+msgstr "Содержимое было изменено другим пользователем,  изменения не удается сохранить."
+
+#: modules/node/node.module:1933
+msgid "The username %name does not exist."
+msgstr "Имя пользователя %name не существует."
+
+#: modules/node/node.module:2018
+msgid "An explanation of the additions or updates being made to help other authors understand your motivations."
+msgstr "Пояснения к вашим добавлениям или обновлениям, чтобы помочь другим авторам понять смысл ваших действий."
+
+#: modules/node/node.module:2026
+msgid "Authoring information"
+msgstr "Информация об авторе"
+
+#: modules/node/node.module:2031
+msgid "Leave blank for %anonymous."
+msgstr "Если поле оставить пустым, автором будет %anonymous."
+
+#: modules/node/node.module:2032
+msgid "Format: %time. Leave blank to use the time of form submission."
+msgstr "Формат: %time. Если поле оставить пустым, будет добавлено время отправки сообщения."
+
+#: modules/node/node.module:2042
+msgid "Publishing options"
+msgstr "Публикация"
+
+#: modules/node/node.module:2144
+#: ;2214
+msgid "Submit @name"
+msgstr "Отправить @name"
+
+#: modules/node/node.module:2152
+msgid "Add a new @s."
+msgstr "Добавить новый материал типа @s."
+
+#: modules/node/node.module:2161
+msgid "Choose the appropriate item from the list:"
+msgstr "Выберите пункт из списка:"
+
+#: modules/node/node.module:2229
+msgid "The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication. You can insert the delimiter \"&lt;!--break--&gt;\" (without the quotes) to fine-tune where your post gets split."
+msgstr "Усеченная версия вашего сообщения показывает, как выглядит ваш материал, помещенный на основную страницу или экспортированный в RSS. Вы можете вставить разделитель '&lt;!--break--&gt'  (без кавычек) для того, чтобы указать точно, где сделать разрыв страницы."
+
+#: modules/node/node.module:2230
+msgid "Preview trimmed version"
+msgstr "Просмотр усеченной версии"
+
+#: modules/node/node.module:2232
+msgid "Preview full version"
+msgstr "Просмотр полной версии"
+
+#: modules/node/node.module:2244
+msgid "Log"
+msgstr "Журнал"
+
+#: modules/node/node.module:2256
+msgid "@type: updated %title."
+msgstr "@type: обновлено %title."
+
+#: modules/node/node.module:2257
+msgid "The %post has been updated."
+msgstr "Сообщение %post успешно обновлено."
+
+#: modules/node/node.module:2261
+msgid "@type: added %title."
+msgstr "@type: добавлен %title."
+
+#: modules/node/node.module:2262
+msgid "Your %post has been created."
+msgstr "Ваш материал типа %post успешно добавлен."
+
+#: modules/node/node.module:2283
+msgid "Are you sure you want to delete %title?"
+msgstr "Вы уверены, что хотите удалить %title?"
+
+#: modules/node/node.module:2322
+msgid "%title has been deleted."
+msgstr "Материал %title удален."
+
+#: modules/node/node.module:2323
+msgid "@type: deleted %title."
+msgstr "@type: удален %title."
+
+#: modules/node/node.module:2346
+msgid "Revision of %title from %date"
+msgstr "Версия %title от %date"
+
+#: modules/node/node.module:2374
+msgid "RSS"
+msgstr "RSS"
+
+#: modules/node/node.module:2386
+msgid "<h1 class=\"title\">Welcome to your new Drupal website!</h1><p>Please follow these steps to set up and start using your website:</p>"
+msgstr "<h1 class=\"title\">Добро пожаловать на ваш новый сайт на Drupal!</h1><p>Сделайте несколько шагов для настройки и запуска вашего сайта:</p>"
+
+#: modules/node/node.module:2390
+msgid "<strong>Create your administrator account</strong> To begin, <a href=\"@register\">create the first account</a>. This account will have full administration rights and will allow you to configure your website."
+msgstr "<strong>Создание учетной записи администратора</strong> Начните с <b></><a href=\"@register\">создания первой учетной записи</a></b>. Этот пользователь обладает полными правами управления сайтом, что позволит вам настроить ваш сайт."
+
+#: modules/node/node.module:2392
+msgid "<strong>Configure your website</strong> Once logged in, visit the <a href=\"@admin\">administration section</a>, where you can <a href=\"@config\">customize and configure</a> all aspects of your website."
+msgstr "<strong>Настройка вашего сайта</strong> Зайдя на сайт, посетите <a href=\"@admin\">администраторский раздел</a>, где вы сможете <a href=\"@config\">провести настройку и конфигурацию</a> всех параметров вашего сайта."
+
+#: modules/node/node.module:2393
+msgid "<strong>Enable additional functionality</strong> Next, visit the <a href=\"@modules\">module list</a> and enable features which suit your specific needs. You can find additional modules in the <a href=\"@download_modules\">Drupal modules download section</a>."
+msgstr "<strong>Подключение дополнительных функций</strong> Затем зайдите на страницу <a href=\"@modules\">списка модулей</a> и включите те возможности, которые вам нужны. Дополнительные модули вы можете найти в разделе <a href=\"@download_modules\">загрузка модулей</a> на сайте Drupal.org."
+
+#: modules/node/node.module:2394
+msgid "<strong>Customize your website design</strong> To change the \"look and feel\" of your website, visit the <a href=\"@themes\">themes section</a>. You may choose from one of the included themes or download additional themes from the <a href=\"@download_themes\">Drupal themes download section</a>."
+msgstr "<strong>Настройка дизайна сайта</strong> Для изменения внешнего облика вашего сайта зайдите в раздел <a href=\"@themes\">темы оформления</a>. Там вы можете выбрать из одну из существующих или загрузить дополнительную тему оформления со страниц <a href=\"@download_themes\">загрузки тем оформления</a> сайта Drupal.org."
+
+#: modules/node/node.module:2395
+msgid "<strong>Start posting content</strong> Finally, you can <a href=\"@content\">create content</a> for your website. This message will disappear once you have promoted a post to the front page."
+msgstr "<strong>Размещение материалов</strong> Теперь, наконец, вы можете <a href=\"@content\">создавать материалы</a> вашего сайта. А эта инструкция исчезнет, как только вы поместите свой первый материал на главную страницу сайта."
+
+#: modules/node/node.module:2397
+msgid "For more information, please refer to the <a href=\"@help\">help section</a>, or the <a href=\"@handbook\">online Drupal handbooks</a>. You may also post at the <a href=\"@forum\">Drupal forum</a>, or view the wide range of <a href=\"@support\">other support options</a> available."
+msgstr "За дополнительной информацией обращайтесь в раздел <a href=\"@help\">Справка</a>, либо к сетевому <a href=\"@handbook\">справочнику по Drupal</a>. Можно также написать на <a href=\"@forum\">форум Drupal.org</a> или использовать широкий диапазон других услуг <a href=\"@support\">службы поддержки</a> сайта Drupal.org.<br/>Существует также русскоязычное сообщество на сайте <a href=\"http://drupal.ru\">Drupal.ru</a>.<br /><br /><small>Drupal 5.x. Русский перевод &copy;2007 <a href=\"mailto:vadbars@mail.ru\">vadbars</a></small>"
+
+#: modules/node/node.module:2492
+#: ;2544
+msgid "Advanced search"
+msgstr "Расширенный поиск"
+
+#: modules/node/node.module:2503
+msgid "Containing any of the words"
+msgstr "Содержит одно из слов"
+
+#: modules/node/node.module:2509
+msgid "Containing the phrase"
+msgstr "Содержит фразу"
+
+#: modules/node/node.module:2515
+msgid "Containing none of the words"
+msgstr "Не содержит ни одно из слов"
+
+#: modules/node/node.module:2524
+msgid "Only in the category(s)"
+msgstr "Только в категории(-ях)"
+
+#: modules/node/node.module:2537
+msgid "Only of the type(s)"
+msgstr "Только для типа(-ов)"
+
+#: modules/node/node.module:777
+msgid "administer content types"
+msgstr "управлять типами материалов"
+
+#: modules/node/node.module:777
+msgid "administer nodes"
+msgstr "управлять материалами"
+
+#: modules/node/node.module:777
+msgid "access content"
+msgstr "иметь доступ к материалам сайта"
+
+#: modules/node/node.module:777
+msgid "view revisions"
+msgstr "просматривать варианты"
+
+#: modules/node/node.module:777
+msgid "revert revisions"
+msgstr "переключаться между вариантами"
+

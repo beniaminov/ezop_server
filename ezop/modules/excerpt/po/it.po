@@ -1,0 +1,54 @@
+# LANGUAGE translation of Drupal (moduli\excerpt\excerpt.module)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from file: excerpt.module,v 1.5.2.1 2005/04/23 03:37:45 unconed
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Excerpt 4.6.x\n"
+"POT-Creation-Date: 2006-01-26 10:34+0100\n"
+"PO-Revision-Date: 2006-01-27 14:09+0100\n"
+"Last-Translator: Uccio <ucciopan@aicomputer.it>\n"
+"Language-Team: drupalitalia.org <webmaster@jsdir.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+
+#: moduli\excerpt\excerpt.module:7
+msgid "Allows users to enter a separate excerpt for nodes."
+msgstr "Consente di inserire introduzioni personalizzate per i nodi."
+
+#: moduli\excerpt\excerpt.module:9
+msgid "<p>If you want users to be able to enter separate excerpts for nodes, check the <em>excerpt</em> box in the appropriate column.</p>"
+msgstr "<p>Il box <em>\"Introduzione\"</em> (\"excerpt\") consente ai vostri utenti, se riempito, di visualizzare il testo inserito come introduzione per il contenuto, piuttosto che le prime righe troncate (impostazione di default).</p>"
+
+#: moduli\excerpt\excerpt.module:16
+msgid "Teasers"
+msgstr "Introduzioni/Stralci"
+
+#: moduli\excerpt\excerpt.module:16
+msgid "Auto-generated"
+msgstr "Autogenerato"
+
+#: moduli\excerpt\excerpt.module:16
+msgid "Manual excerpt"
+msgstr "Personalizzato"
+
+#: moduli\excerpt\excerpt.module:16
+msgid "Choose whether teasers are generated automatically or can be entered manually by the author."
+msgstr "Scegliete se le introduzioni sono generate automaticamente in base al testo del documento, oppure sono inserite manualmente dall'autore."
+
+#: moduli\excerpt\excerpt.module:19
+msgid "Excerpt"
+msgstr "Introduzione"
+
+#: moduli\excerpt\excerpt.module:19
+msgid "Enter an excerpt for this item. It will be shown on listing pages along with a <em>read more</em> link which leads to the full view. Leave empty to auto-generate one from the body."
+msgstr "Inserisci un'introduzione per questo contenuto. <br />Sarà mostrata nelle pagine elenco insieme ad un link tipo <em>\"leggi tutto\"</em> collegato alla vista totale. <br />Lascia vuoto questo campo per far sì che Drupal generi automaticamente un'introduzione."
+
+#: moduli\excerpt\excerpt.module:0
+msgid "excerpt"
+msgstr "introduzione"
+

@@ -1,0 +1,8 @@
+tmessage(err,"Ошибка","on")
+tmessage(did,"Сделано","on")
+tmessage(warning,"Предупреждение","on")
+tmessage(diagn,"Диагностика","on")
+tmessage(gr_an,"Грамматический анализ","on")
+tmessage(calc,"Вычисление","on")
+tmessage(approx,"Изменение в аппроксимации","on")
+tmessage(rwrt,"Правило переписывания","off")

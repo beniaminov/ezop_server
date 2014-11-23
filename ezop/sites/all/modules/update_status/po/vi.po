@@ -1,0 +1,295 @@
+# $Id: vi.po,v 1.1 2007/09/04 16:09:36 dww Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+# update_status.module,v 1.83.2.19 2007/08/08 18:43:09 dww
+# update_status.info,v 1.3 2007/06/13 19:32:05 dww
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2007-08-08 13:47-0700\n"
+"PO-Revision-Date: 2007-08-18 11:37+0700\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: update_status.module:24
+msgid "Here you can find information about available updates for your installed modules. Note that each module is part of a \"project\", which may have the same name as the module or may have a different name."
+msgstr "Ở đây, bạn có thể tìm thấy thông tin về các bản cập nhật cho các module bạn đã cài đặt. Chú ý rằng, mỗi module là một phần của một \"project\", có thể có cùng tên hoặc không với module."
+
+#: update_status.module:27
+msgid "Here you can configure what kinds of available updates for your installed modules should be marked as an error on the <a href=\"@status_report\">Status report</a> and the <a href=\"@modules_page\">Modules</a> page, and other related settings."
+msgstr "Ở đây bạn có thể cấu hình loại cập nhật hợp lệ nào nên được đánh dấu là một lỗi ở trang <a href=\"@status_report\">Báo cáo tình trạng</a> và trang <a href=\"@modules_page\">Điều hành module</a>, cũng như cấu hình một số thiết lập liên quan khác."
+
+#: update_status.module:43
+msgid "See the <a href=\"@available_updates\">available updates</a> page for information on installed modules with new versions released."
+msgstr "Xem trang <a href=\"@available_updates\">các bản cập nhật hợp lệ</a> để nắm thông tin về các bản phát hành mới cho các module bạn đã cài đặt"
+
+#: update_status.module:78
+msgid "Available updates"
+msgstr "Các bản cập nhật hợp lệ"
+
+#: update_status.module:79
+msgid "Get a status report on installed modules and available updates."
+msgstr "Lấy một bản báo cáo về tình trạng của các module đã được cài đặt và các bản cập nhật hợp lệ."
+
+#: update_status.module:86
+msgid "List"
+msgstr "Liệt kê"
+
+#: update_status.module:93
+msgid "Settings"
+msgstr "Các thiết lập"
+
+#: update_status.module:101
+msgid "Manual update check"
+msgstr "Thủ công kiểm tra bản cập nhật"
+
+#: update_status.module:140
+msgid "E-mail addresses to notify when updates are available"
+msgstr "Các địa chỉ email sẽ được thông báo khi khi có bản cập nhật hợp lệ."
+
+#: update_status.module:143
+msgid "Whenever your site checks for available updates and finds new releases, it can notify a list of users via e-email. Put each address on a separate line. If blank, no e-mails will be sent."
+msgstr "Mỗi khi site của bạn kiểm tra các bản cập nhật hợp lệ và tìm thấy có bản mới, nó sẽ thông báo cho danh sách các thành viên qua email. Đặt mỗi địa chỉ email ở mỗi dòng riêng biệt. Nếu để trống, sẽ không có email nào được gửi đi."
+
+#: update_status.module:148
+msgid "Check for updates"
+msgstr "Kiểm tra các bản cập nhật"
+
+#: update_status.module:151
+msgid "Daily"
+msgstr "Mỗi ngày"
+
+#: update_status.module:152
+msgid "Weekly"
+msgstr "Mỗi tuần"
+
+#: update_status.module:154
+msgid "Select how frequently you want to automatically check for new releases of your currently installed modules."
+msgstr "Chọn chu kỳ bạn muốn để tự động kiểm tra các bản phát hành mới cho các module bạn đã cài đặt."
+
+#: update_status.module:159
+msgid "Notification threshold"
+msgstr "Ngưỡng cảnh báo"
+
+#: update_status.module:162
+msgid "All newer versions"
+msgstr "Tất cả các phiên bản mới hơn"
+
+#: update_status.module:163
+msgid "Only security updates"
+msgstr "Chỉ các bản cập nhật lỗi bảo mật"
+
+#: update_status.module:165
+msgid "If there are updates available of Drupal core or any of your installed modules, your site will print an error message on the <a href=\"@status_report\">status report</a> and the <a href=\"@modules_page\">modules page</a>. You can choose to only see these error messages if a security update is available, or to be notified about any newer versions."
+msgstr "Nếu có bản cập nhật hợp lệ ở nhân Drupal hay các module bạn đã cài đặt, site của bạn sẽ in một thông báo lỗi ở trang <a href=\"@status_report\">báo cáo tình trạng</a> và trang <a href=\"@modules_page\">điều hành module</a>. Bạn có thể chọn để chỉ thấy thông báo lỗi khi có bản cập nhật lỗi bảo mật, hay chỉ cảnh báo khi có các bản phát hành mới hơn."
+
+#: update_status.module:169
+msgid "These settings allow you to control if a certain project, or even a specific release of that project, should be ignored by the available updates report. For each project, you can select if it should always warn you about a newer release, never warn you (ignore the project completely), or ignore a specific available release you do not want to upgrade to. You can also specify a note explaining why you are ignoring a specific project or version, and that will be displayed on the available updates report."
+msgstr "Các thiết lập ở mục này cho phép bạn điều khiển được mức độ bạn được cảnh báo đối với từng module. Đối với từng module, bạn có thể thiết lập mức độ cảnh báo là, luôn luôn hoặc không bao giờ, hoặc bỏ qua việc cảnh báo đối với một bản phát hành cụ thể. Bạn cũng có thể tùy biến nội dung cảnh báo đối với từng module."
+
+#: update_status.module:182
+msgid "Always"
+msgstr "Luôn luôn"
+
+#: update_status.module:184
+msgid "Ignore @version"
+msgstr "Bỏ qua @version"
+
+#: update_status.module:186;944
+msgid "Never"
+msgstr "Không bao giờ"
+
+#: update_status.module:202
+msgid "Submit changes"
+msgstr "Đệ trình các thay đổi"
+
+#: update_status.module:226
+msgid "Project"
+msgstr "Project"
+
+#: update_status.module:227
+msgid "Warn if out of date"
+msgstr "Cảnh báo nếu quá ngày"
+
+#: update_status.module:228
+msgid "Notes"
+msgstr "Ghi chú"
+
+#: update_status.module:280
+msgid "%email is not a valid e-mail address."
+msgstr "%email không hợp lệ."
+
+#: update_status.module:283
+msgid "%emails are not valid e-mail addresses."
+msgstr "%emails không hợp lệ."
+
+#: update_status.module:306
+msgid "Your changes have been saved."
+msgstr "Các thay đổi của bạn đã được lưu."
+
+#: update_status.module:328
+msgid "Drupal core update status"
+msgstr "Tình trạng cập nhật nhân Drupal"
+
+#: update_status.module:334
+msgid "Out of date (version @version available)"
+msgstr "Quá ngày (phiên bản @version hợp lệ)"
+
+#: update_status.module:341
+msgid "Not secure! (version @version available)"
+msgstr "Không an toàn! (phiên bản @version hợp lệ)"
+
+#: update_status.module:348;357;985
+msgid "Up to date"
+msgstr "Đã cập nhật"
+
+#: update_status.module:355
+msgid "Module update status"
+msgstr "Tình trạng cập nhật module"
+
+#: update_status.module:361
+msgid "Not secure!"
+msgstr "Không bảo mật!"
+
+#: update_status.module:374
+msgid "Out of date"
+msgstr "Quá ngày"
+
+#: update_status.module:381
+msgid "No update data available"
+msgstr "Không có dữ liệu cập nhật hợp lệ"
+
+#: update_status.module:425
+msgid "See the available updates page for more information:"
+msgstr "Xem trang các bản cập nhật hợp lệ để có thêm thông tin:"
+
+#: update_status.module:426
+msgid "New release(s) available for !site_name"
+msgstr "(Các) Bản phát hành hợp lệ cho !site_name"
+
+#: update_status.module:480
+msgid "There are updates available for your version of Drupal. To ensure the proper functioning of your site, you should update as soon as possible."
+msgstr "Có các bản cập nhật hợp lệ cho phiên bản Drupal bạn đã cài đặt. Để đảm bảo việc xử lý chính xác cho site của bạn, bạn nên cập nhật sớm nhất khi có thể."
+
+#: update_status.module:483
+msgid "There are updates available for one or more of your modules. To ensure the proper functioning of your site, you should update as soon as possible."
+msgstr "Có các bản cập nhật hợp lệ cho (các) module bạn đã cài đặt. Để đảm bảo việc xử lý chính xác cho site của bạn, bạn nên cập nhật sớm nhất khi có thể."
+
+#: update_status.module:489
+msgid "There is a security update available for your version of Drupal. To ensure the security of your server, you should update immediately!"
+msgstr "Có một bản cập nhật lỗi bảo mật hợp lệ cho phiên bản Drupal của bạn. Để đảm bảo tính bảo mật của máy phục vụ của bạn, bạn nên cập nhật ngay!"
+
+#: update_status.module:492
+msgid "There are security updates available for one or more of your modules. To ensure the security of your server, you should update immediately!"
+msgstr "Có các bản cập nhật lỗi bảo mật hợp lệ cho (các) module của bạn. Để đảm bảo tính bảo mật của máy phục vụ của bạn, bạn nên cập nhật ngay!"
+
+#: update_status.module:498
+msgid "See the <a href=\"@available_updates\">available updates</a> page for more information."
+msgstr "Xem trang <a href=\"@available_updates\">các bản cập nhật</a> để có thêm thông tin."
+
+#: update_status.module:509;1143
+msgid "Fetched information about all available new releases and updates."
+msgstr "Đã lấy được thông tin về các bản cập nhật, các bản phân phối hợp lệ."
+
+#: update_status.module:512
+msgid "Unable to fetch any information on available new releases and updates."
+msgstr "Không thể lấy được thông tin về các bản cập nhật, các bản phân phối hợp lệ."
+
+#: update_status.module:522
+msgid "No information is available about potential new releases for currently installed modules. To check for updates, you may need to <a href=\"@run_cron\">run cron</a> or you can <a href=\"@check_manually\">check manually</a>. Please note that checking for available updates can take a long time, so please be patient."
+msgstr "Không có thông tin hợp lệ về các bản phân phối mới cho các module hiện thời bạn đã cài đặt. Để kiểm tra các bản cập nhật, bạn có thể cần <a href=\"@run_cron\">chạy cron</a> hoặc bạn có thể <a href=\"@check_manually\">kiểm tra thủ công</a>. Xin nhớ rằng việc kiểm tra các bản cập nhật hợp lệ có thể mất một khoảng thời gian lâu, vì vậy xin kiên nhẫn."
+
+#: update_status.module:674
+msgid "Unknown"
+msgstr "Không biết"
+
+#: update_status.module:875;933
+msgid "No available releases found"
+msgstr "Không tìm thấy bản phát hành hợp lệ"
+
+#: update_status.module:885
+msgid "Ignored by settings"
+msgstr "Bị bỏ qua bởi các thiết lập"
+
+#: update_status.module:916
+msgid "No filedate available"
+msgstr "Không có filedate hợp lệ"
+
+#: update_status.module:928
+msgid "Invalid info"
+msgstr "Thông tin không hợp lệ"
+
+#: update_status.module:944
+msgid "Last checked: "
+msgstr "Lầm kiểm tra cuối: "
+
+#: update_status.module:944
+msgid "ago"
+msgstr "cách đây"
+
+#: update_status.module:945
+msgid "Check manually"
+msgstr "Kiểm tra thủ công"
+
+#: update_status.module:989
+msgid "Security update required!"
+msgstr "Yêu cầu cập nhật lỗi bảo mật"
+
+#: update_status.module:993
+msgid "Update available"
+msgstr "Cập nhật hợp lệ"
+
+#: update_status.module:1047
+msgid "Recommended version:"
+msgstr "Phiên bản đề nghị:"
+
+#: update_status.module:1053
+msgid "Security update:"
+msgstr "Cập nhật lỗi bảo mật:"
+
+#: update_status.module:1059
+msgid "Latest version:"
+msgstr "Phiên bản mới nhất:"
+
+#: update_status.module:1064
+msgid "Development version:"
+msgstr "Phiên bản phát triên:"
+
+#: update_status.module:1070
+msgid "Also available:"
+msgstr "Cũng hợp lệ:"
+
+#: update_status.module:1079
+msgid "Administrator note: %notes"
+msgstr "Ghi chú người điều hành: %notes"
+
+#: update_status.module:1084
+msgid "Includes: %modules"
+msgstr "Bao gồm: %modules"
+
+#: update_status.module:1110
+msgid "Download"
+msgstr "Tải về"
+
+#: update_status.module:1110
+msgid "Release notes"
+msgstr "Các ghi chú phát hành"
+
+#: update_status.module:1143;1146;0
+msgid "update_status"
+msgstr "update_status"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "Tình trạng cập nhật"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "Kiểm tra để xem bản cài đặt Drupal và các module có được cập nhật hay không."

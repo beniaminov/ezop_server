@@ -1,0 +1,128 @@
+<?php
+// $Id: imagecache.install,v 1.3.2.2 2007/06/16 17:32:12 dopry Exp $
+
+function imagecache_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret1 = db_query('CREATE TABLE {imagecache_preset} (
+            presetid INT UNSIGNED NOT NULL PRIMARY KEY,
+            presetname VARCHAR(255) NOT NULL DEFAULT \'\' )
+            /*!40100 DEFAULT CHARACTER SET utf8 */'
+      );
+
+      $ret2 = db_query('CREATE TABLE {imagecache_action} (
+            actionid INT UNSIGNED NOT NULL PRIMARY KEY,
+            presetid INT UNSIGNED NOT NULL DEFAULT 0,
+            weight INT NOT NULL DEFAULT 0,
+            data TEXT NOT NULL)
+            /*!40100 DEFAULT CHARACTER SET utf8 */'
+      );
+      break;
+
+    case 'pgsql':
+      $ret1 = db_query('CREATE TABLE {imagecache_preset} (
+            presetid INTEGER NOT NULL CHECK (presetid > 0),
+            presetname VARCHAR(255) NOT NULL DEFAULT \'\',
+            PRIMARY KEY (presetid));'
+      );
+      $ret2 = db_query('CREATE TABLE {imagecache_action} (
+            actionid INTEGER NOT NULL CHECK (actionid > 0),
+            presetid INTEGER NOT NULL DEFAULT 0,
+            weight INTEGER NOT NULL DEFAULT 0,
+            data TEXT NOT NULL DEFAULT \'\',
+            PRIMARY KEY (actionid));'
+      );
+      db_query("CREATE SEQUENCE imagecache_preset_presetid_seq INCREMENT 1 START 1;");
+      db_query("CREATE SEQUENCE imagecache_action_actionid_seq INCREMENT 1 START 1;");
+      break;
+  }
+
+  if ($ret1 && $ret2) {
+    drupal_set_message(t('Imagecache module installed succesfully.'));
+  } else {
+    drupal_set_message(t('Imagecache module installation was unsuccessfull. Necessary database tables should be created by hand.', 'error'));
+  }
+  return $ret;
+}
+
+// Add action id to actions table.
+function imagecache_update_1() {
+  $ret = array();
+  $ret[] = update_sql('ALTER TABLE {imagecache_actions} ADD COLUMN actionid INT UNSIGNED NOT NULL  primary key auto_increment');
+  return $ret;
+}
+
+// Rename rulesets to presets; Make all table names singular;
+function imagecache_update_2() {
+  $ret = array();
+  $ret[] = update_sql('ALTER TABLE {imagecache_rulesets} RENAME TO {imagecache_preset}');
+  $ret[] = update_sql('ALTER TABLE {imagecache_actions} RENAME TO {imagecache_action}');
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql('ALTER TABLE {imagecache_preset} CHANGE rulesetid presetid INT UNSIGNED NOT NULL AUTO_INCREMENT');
+      $ret[] = update_sql('ALTER TABLE {imagecache_preset} CHANGE rulesetname presetname VARCHAR(255) NOT NULL DEFAULT \'\'');
+      $ret[] = update_sql('ALTER TABLE {imagecache_action} CHANGE rulesetid presetid  INTEGER NOT NULL DEFAULT 0');
+      break;
+    
+    case 'pgsql':
+      $ret[] = update_sql('ALTER TABLE {imagecache_preset} RENAME COLUMN rulesetid TO presetid');
+      $ret[] = update_sql('ALTER TABLE {imagecache_preset} RENAME COLUMN rulesetname TO presetname');
+      $ret[] = update_sql('ALTER TABLE {imagecache_action} RENAME COLUMN rulesetid TO presetid');
+      break;
+  }
+  return $ret;
+}
+
+
+/** 
+ * Remove auto-increment from tables, instead depending on the sequences table and db_next_id()
+ */  
+function imagecache_update_3() {
+  $ret = array();
+  
+  $count_action = db_result(db_query('SELECT max(actionid) FROM {imagecache_action}')) + 1;
+  $count_preset = db_result(db_query('SELECT max(presetid) FROM {imagecache_preset}')) + 1;
+  
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {imagecache_action} CHANGE actionid actionid INT UNSIGNED NOT NULL");
+      $ret[] = update_sql("ALTER TABLE {imagecache_preset} CHANGE presetid presetid INT UNSIGNED NOT NULL");
+      // Add the sequences
+      $ret[] = update_sql("INSERT INTO {sequences} (name, id) VALUES ('{imagecache_action}_actionid', $count_action)");
+      $ret[] = update_sql("INSERT INTO {sequences} (name, id) VALUES ('{imagecache_preset}_presetid', $count_preset)");
+      break;
+    case 'pgsql':
+      db_change_column($ret, 'imagecache_action', 'actionid', 'actionid', 'INT', $attributes = array('not null' => TRUE, 'default' => '0'));
+      db_change_column($ret, 'imagecache_preset', 'presetid', 'presetid', 'INT', $attributes = array('not null' => TRUE, 'default' => '0'));
+      // Re-add our indexes
+      $ret[] = update_sql("ALTER TABLE {imagecache_action} ADD PRIMARY KEY (actionid)");
+      $ret[] = update_sql("ALTER TABLE {imagecache_preset} ADD PRIMARY KEY (rulesetid)");
+      // Add the sequences
+      $ret[] = update_sql("CREATE SEQUENCE {imagecache_action}_actionid_seq INCREMENT 1 START $count_action;");
+      $ret[] = update_sql("CREATE SEQUENCE {imagecache_preset}_presetid_seq INCREMENT 1 START $count_preset;");
+  }
+  return $ret;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function imagecache_uninstall() {
+  db_query('DROP TABLE {imagecache_preset}');
+  db_query('DROP TABLE {imagecache_action}');
+
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("DELETE FROM {sequences} WHERE name = '{imagecache_action}_actionid'");
+      db_query("DELETE FROM {sequences} WHERE name = '{imagecache_action}_presetid'");
+      break;
+    case 'pgsql':
+      db_query('DROP SEQUENCE {imagecache_action}_actionid_seq');
+      db_query('DROP SEQUENCE {imagecache_preset}_presetid_seq');
+      break;
+  }
+}

@@ -1,0 +1,127 @@
+<?php
+// $Id: fieldgroup_table.module,v 1.1 2006/12/28 21:33:46 bdragon Exp $
+
+/**
+ * @file
+ * Turn multiple value fields on fieldgroups into tables.
+ */
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function fieldgroup_table_form_alter($form_id, &$form) {
+  // Add our setting to the group edit form.
+  if ($form_id == 'fieldgroup_edit_group_form') {
+    $form['settings']['multiple'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Multiple values'),
+      '#default_value' => fieldgroup_table_get_multiple($form),
+    );
+  }
+
+  // Alter any fieldgroups we find.
+  if (isset($form['type']) && !$form['#programmed'] && $form['type']['#value'] .'_node_form' == $form_id) {
+    foreach (fieldgroup_groups($form['type']['#value']) as $group_name => $group) {
+      // Are we allowed to touch this fieldgroup?
+      if (isset($group['settings']['multiple']) && $group['settings']['multiple']) {
+        $fields = array();
+        $header = array();
+        // Hijack the fields with multiple values enabled.
+        foreach ($group['fields'] as $field_name => $field) {
+          if (isset($form[$group_name][$field_name])) {
+            if (fieldgroup_table_check_field_multiple($field_name)) {
+              $header[] = t($field['label']);
+              // @@@ Description is currently lost -- add legend?
+              $fields[$field_name] = $form[$group_name][$field_name];
+              // Yoink!
+              unset($form[$group_name][$field_name]);
+            }
+          }
+        }
+        $rows = array();
+        $delta = 0;
+        // Rewrite the array.
+        while (TRUE) {
+          $row = array();
+          foreach ($fields as $field_name => $field) {
+            if (isset($field[$delta])) {
+              $row[$field_name] = $field[$delta];
+              // Enable tree.
+              $row[$field_name]['#tree'] = TRUE;
+              // Override the parents with the "normal" path.
+              $row[$field_name]['#parents'] = array($field_name,$delta);
+            }
+          }
+          if (empty($row)) {
+            break;
+          }
+          $rows[] = $row;
+          $delta++;
+        }
+
+        $form[$group_name]['fieldgroup_table'] = array(
+          '#header' => $header,
+          '#type' => 'fieldgroup_table',
+          '#weight' => -10, // @@@ Configurable?
+        );
+
+        foreach ($rows as $row) {
+          $form[$group_name]['fieldgroup_table'][] = $row;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_elements().
+ */
+function fieldgroup_table_elements() {
+  return array(
+    'fieldgroup_table' => array(),
+  );
+}
+
+/**
+ * Theme callback for the fieldgroup_table type.
+ */
+function theme_fieldgroup_table($element) {
+  $rows = array();
+  $delta = 0;
+  while ($result = $element[$delta]) {
+    $row = array();
+    foreach (element_children($result) as $field) {
+      $row[] = $result[$field]['#children'];
+    }
+    $rows[] = $row;
+    $delta++;
+  }
+  return theme('table',$element['#header'],$rows);
+}
+
+///////////////////////////// Fragile functions //////////////////////////
+
+/**
+ * Check if a fieldgroup is multiple value.
+ * Potentially fragile, so it's split into a seperate function.
+ */
+function fieldgroup_table_get_multiple($form) {
+  // This is probabaly subject to change.
+  $type_name = $form['#parameters'][1]['type'];
+  $group_name = $form['#parameters'][2];
+  $result = db_query("SELECT settings FROM {node_group} WHERE type_name = '%s' AND group_name = '%s'",$type_name,$group_name);
+  if ($settings = db_result($result)) {
+    $settings = unserialize($settings);
+    return isset($settings['multiple']) ? $settings['multiple'] : FALSE;
+  }
+  return FALSE;
+}
+
+/**
+ * Check if a field is multiple value.
+ * Potentially fragile.
+ */
+function fieldgroup_table_check_field_multiple($field_name) {
+  return db_result(db_query("SELECT multiple FROM {node_field} WHERE field_name = '%s'",$field_name));
+}
+

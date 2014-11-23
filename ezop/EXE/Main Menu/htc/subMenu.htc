@@ -1,0 +1,165 @@
+<PUBLIC:COMPONENT>
+     <PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="Hilite()" />
+     <PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="Restore()" />
+     <PUBLIC:ATTACH EVENT="onclick"  ONEVENT="DisplayContent()" />
+
+<SCRIPT LANGUAGE="JScript">
+var ContentWindow = window.parent.frames("content");
+var WinParDoc = window.parent.document;
+var normalSpacing, normalbgcolor;
+   
+
+function Hilite(){
+
+	normalbgcolor = this.style.backgroundcolor;
+	this.style.backgroundcolor = "lightblue";
+}
+
+function Restore(){
+	this.style.backgroundcolor = normalbgcolor;
+
+}
+
+function CurLoc(){
+CurLoc = window.parent.location;
+window.parent.document.getElementById("location").value = CurLoc;
+}
+
+function GetCommand(){
+
+	WinParDoc.getElementById("curcnpt_text").value = ContentWindow.document.getElementById("concept_text").value;
+	WinParDoc.getElementById("cmd").value = ContentWindow.document.getElementById("concept_cmd").value ;
+	WinParDoc.getElementById("rest").value = ContentWindow.document.getElementById("concept_rest").value;
+}
+
+function NotNew (){
+
+if (ContentWindow.document.getElementById ("name_cnpt").innerText == "Новое понятие ") { return false;}
+else {return true;}
+}
+
+function GetNewCnptName (){
+	var retval = showModalDialog("newcnptname.html","Dialog Arguments Value","dialogHeight: 210px; dialogWidth: 250px;");
+	if (retval) {WinParDoc.getElementById("new_cnpt_name").value = retval; GetCommand();}
+	else {	return 0;}
+}
+
+
+function DisplayContent(){
+
+var CurCnptName = WinParDoc.getElementById("curcnpt_name").value;// name of the curent concept if it was chosen
+var Inset= WinParDoc.getElementById("inset").value;
+SelectedID=LastSelection;
+WinParDoc.getElementById("menu_item").value=id;
+WinParDoc.getElementById("main_form").target = "content";
+CurLoc();//value for location parameter 
+
+if(id=="KB_open_another") {
+		var retval = showModalDialog("changeKB.html","Dialog Arguments Value","dialogHeight: 360px; dialogWidth: 500px;");
+		if (retval == "new"){ 
+			WinParDoc.getElementById("main_form").target="_self";
+			WinParDoc.getElementById("button").fireEvent("onclick");
+				}
+		else {return 0;}
+		}
+	if (id == "MSG_set") {
+		WinParDoc.getElementById("inset").value = "MSG";
+		WinParDoc.getElementById("button").fireEvent("onclick");
+		}
+	
+	if (id == "HLP_purp" || id == "HLP_lang" || id == "HLP_hist" || id =="HLP_techn" ) {
+		WinParDoc.getElementById("inset").value = "HLP";
+		}
+	
+	if (id == "KB_folders" || id == "KB_cnpt_tree" ) {
+		WinParDoc.getElementById("inset").value = "KB";
+		WinParDoc.getElementById("button").fireEvent("onclick");
+		}
+		
+	if (id=="DIC_all_ext_templ" ||id=="DIC_all_cur_c" ||id=="DIC_all_cur_env" || id =="DIC_rules") {
+		WinParDoc.getElementById("button").fireEvent("onclick");
+		WinParDoc.getElementById("inset").value = "DIC";
+		}
+	
+	if (id == "MSG_show") {
+		open ("about:blank","bottom");
+		open ("messages.html","bottom");
+		WinParDoc.getElementById("inset").value = "MSG";
+		return 0;
+		}
+
+
+if (Inset == "CC"){
+
+	if(id=="CMD_run" || id=="CC_build_all" || id=="CC_build_complete") {
+		if(CurCnptName)	GetCommand();
+		else {
+			window.open("curcnpt.html", "content");
+			alert("Команда не может быть пустой");
+			return 0;	
+			}
+	}
+
+	if(id=="CC_edit" && CurCnptName) {
+			GetCommand();
+			WinParDoc.getElementById("inset").value = "CC";
+			WinParDoc.getElementById("button").fireEvent("onclick");
+			return 0;
+			}
+	
+
+
+	if(id == "CC_save")  {
+		if (NotNew()) GetCommand();
+		else { if(!GetNewCnptName ()) return 0; }
+			}
+
+	if(id == "CC_save_as") {
+			//GetNewCnptName (); 
+			if(!GetNewCnptName ()) return 0;
+				}
+
+		
+WinParDoc.getElementById("button").fireEvent("onclick");
+}
+
+	if(id=="CC_disp") {
+			//GetCommand();
+			WinParDoc.getElementById("inset").value = "CC";
+			WinParDoc.getElementById("button").fireEvent("onclick");
+			return 0;
+			}
+
+
+	if(id == "CC_new_c_krnl") {
+			WinParDoc.getElementById("env").value = "Ядро системы";
+				}
+
+	if(id == "CC_new_c_env" || id == "CC_new_c_krnl") {
+			WinParDoc.getElementById("curcnpt_name").value = "Новое понятие";
+			WinParDoc.getElementById("curcnpt_text").value = "";
+			WinParDoc.getElementById("inset").value = "CC";
+
+			WinParDoc.getElementById("button").fireEvent("onclick");
+				}
+
+	if (id == "HLP_purp") {
+		open ("help/HLP_purp.html","content");
+		}
+		
+	if (id == "HLP_lang") {
+		open ("help/HLP_lang.html","content");
+		}
+
+	if (id == "HLP_hist") {
+		open ("help/HLP_hist.html","content");
+		}
+
+	if (id == "HLP_techn") {
+		open ("help/HLP_techn.html","content");
+		}
+}
+
+  
+</SCRIPT>
+</PUBLIC:COMPONENT>

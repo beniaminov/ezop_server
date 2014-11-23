@@ -1,0 +1,171 @@
+// $Id: API.txt,v 1.4 2006/04/09 05:11:52 jaza Exp $
+
+Implementing activeselect in other modules
+------------------------------------------
+
+These are instructions for developers who wish to use activeselect in their modules. Activeselect defines a new type of AJAX-enabled form element (the 'activeselect' element). As such, in order to make use of this functionality, developers must define instances of this element within a form, and must also write callback functions that will be executed via AJAX.
+
+1. Defining instances of the element
+
+Defining an activeselect is very similar to defining a regular select element, except that there are a few additional properties, of special significance, that need to be provided. Example:
+
+<?php
+function foo_form_page() {
+  $activeselect = module_exist('activeselect');
+  
+  $form['bar-1'] = array(
+    '#type' => 'select',
+    '#title' => t('Bar 1'),
+    '#default_value' => array('val-1'),
+    '#options' => array('val-1' => t('Value 1'), 'val-2' => t('Value 2'), 'val-3' => t('Value 3')),
+    '#description' => t('Foo bar bar.'),
+    '#required' => TRUE,
+  );
+  if ($activeselect) {
+    $form['bar-1']['#type'] = 'activeselect';
+    $form['bar-1']['#activeselect_path'] = 'foo/activeselect';
+    $form['bar-1']['#activeselect_targets'] = 'bar-2,bar-3';
+    $form['bar-1']['#activeselect_extra'] = '';
+  }
+  
+  $form['bar-2'] = array(
+    '#type' => 'select',
+    '#title' => t('Bar 2'),
+    '#default_value' => array('val-1-bar-2'),
+    '#options' => array('val-1-bar-2' => t('Value 1 (bar-2)'), 'val-2-bar-2' => t('Value 2 (bar-2)'), 'val-3-bar-2' => t('Value 3 (bar-2)')),
+    '#description' => t('Foo bar bar.'),
+    '#multiple' => TRUE,
+    '#required' => TRUE,
+  );
+  $form['bar-3'] = array(
+    '#type' => 'select',
+    '#title' => t('Bar 3'),
+    '#default_value' => array('val-1-bar-3'),
+    '#options' => array('val-1-bar-3' => t('Value 1 (bar-3)'), 'val-2-bar-3' => t('Value 2 (bar-3)'), 'val-3-bar-3' => t('Value 3 (bar-3)')),
+    '#description' => t('Foo bar bar.'),
+    '#multiple' => TRUE,
+    '#required' => TRUE,
+  );
+  
+  return drupal_get_form('foo_form_page', $form);
+}
+?>
+
+As the example shows, the additional activeselect properties are as follows:
+
+- #activeselect_path: the Drupal system path of the activeselect menu callback page, which will be requested using JavaScript. This is usually in the form '[modulename]/activeselect'.
+- #activeselect_targets: the names of one or more target elements for this activeselect, separated by commas (no spaces). Each target element must be either a select or an activeselect.
+- #activeselect_extra: any additional data that needs to be passed to the callback function as a parameter (as a string, NOT as an array or an object).
+
+It is very important that the values defined in the '#options' array for each target element include EVERY POSSIBLE OPTION that could be outputted by your activeselect callback function. There are two reasons for this. Firstly, if the activeselect module is not present (or if it is present, but the user's browser has inadequate JavaScript support), then the form will degrade gracefully, and the page will still be reasonably usable. Secondly, if activeselect is present (and adequate JS support is available), then whatever values the user submits must be defined in the '#options' array for that element. This is because Drupal checks this presence as part of its default validation routine, and so this validation will fail if the option element cannot be verified.
+
+It is also recommended that you use the technique provided in the example, for dynamically determining whether or not to make the element an activeselect. This allows your module to function just as (or almost as) effectively without activeselect as it does with it.
+
+2. Defining the menu callback
+
+<?php
+function foo_menu($may_cache) {
+  $items = array();
+
+  if ($may_cache) {
+    $items[] = array('path' => 'foo/activeselect',
+      'title' => t('activeselect foo'),
+      'callback' => 'foo_activeselect',
+      'access' => user_access('access content'),
+      'type' => MENU_CALLBACK,
+    );
+    
+    // Other items ...
+    $items[] = array('path' => 'foo/page',
+      'title' => t('foo bar'),
+      'callback' => 'foo_form_page',
+      'access' => user_access('access content'),
+      'type' => MENU_CALLBACK,
+    );
+  }
+  
+  return $items;
+}
+?>
+
+This makes 'foo/activeselect' a page, that can be accessed through its URL, just like any other page on your site.
+
+3. Writing the callback function
+
+The callback function must have the name that you specified in the 'callback' field of your menu item. It must also have exactly the right parameters, and it must have a return value that matches a precise format. But apart from that, what the callback function does is completely up to you. Example:
+
+function foo_activeselect($source, $targets, $string, $extra = NULL) {
+  if (empty($source) || empty($targets) || empty($string)) {
+    exit();
+  }
+  
+  $targets = explode(',', $targets);
+  $output = array();
+  
+  $array = activeselect_explode_values($string);
+  
+  foreach ($targets as $target) {
+    $options = array();
+    
+    $first_element = TRUE;
+    foreach ($array as $key => $value) {
+      $options[$key. '-'. $target]['value'] = $value. ' ('. $target. ')';
+      
+      if ($first_element) {
+        $options[$key. '-'. $target]['selected'] = TRUE;
+        $first_element = FALSE;
+      }
+      else {
+        $options[$key. '-'. $target]['selected'] = FALSE;
+      }
+    }
+    $multiple = TRUE;
+    
+    $output[$target] = array('options' => $options, 'multiple' => $multiple);
+  }
+  
+  activeselect_set_header_nocache();
+  
+  print drupal_to_js($output);
+  exit();
+}
+
+The format of the variables passed in as parameters is as follows:
+
+- $source: the name of the source activeselect element, as defined by the module author in a $form array. The name does not include the 'edit-' prefix that is prepended to it when it is outputted on the page.
+- $targets: the names of the target activeselect element(s), separated by commas. These names also do not include the 'edit-' prefix.
+- $string: the options that the user has currently selected in the source activeselect, represented as a string. Each option in the string is separated by double pipe '|' symbols, and within each option, the option's internal value and its user-displayed text are separated by a single pipe '|' symbol. It is recommended that you use the activeselect_explode_values() function, as shown, to convert this string into an array of keys and values.
+- $extra: the data (if any) that has been defined for the source activeselect's 'extra' attribute. The format of this field is up to the module developer, but it must be stored as a string.
+
+And the format of the output value is as follows (when represented as a nested PHP array):
+
+array(
+  'target-name-1' => array(
+    'options' => array(
+      'opt-val-1' => array(
+        'value' => 'opt-text-1',
+        'selected' => TRUE
+      ),
+      'opt-val-2' => array(
+        'value' => 'opt-text-2',
+        'selected' => FALSE
+      )
+    ),
+    'multiple' => TRUE
+  ),
+  'target-name-2' => array(
+    'options' => array(
+      'opt-val-3' => array(
+        'value' => 'opt-text-3',
+        'selected' => FALSE
+      )
+    ),
+    'multiple' => FALSE
+  ),
+);
+
+Values are grouped first by target, and then by option element. Each target has an 'options' attribute (which holds the array of options), as well as a boolean 'multiple' attribute (to indicate whether or not the element should be a multi-select). Similarly, each option element has a 'value' attribute (which holds the user-displayed text of that element), as well as a boolean 'selected' attribute (to indicate whether or not the option should be set to 'selected' when it is added to the target element).
+
+As the example above illustrates, the best way to build your output is as a nested PHP array. However, the final output of your callback must be a string in JSON (JavaScript Object Notation) format. It is recommended that you use the drupal_to_js() function (which is part of Drupal core), as shown, to convert your nested PHP array into a JSON string, which can then be outputted. The activeselect JavaScript library will then be able to process your output, using the Drupal-provided parseJson() JavaScript function.
+
+It is also important that you call the activeselect_set_header_nocache() function before printing your output. This function sets the HTTP headers for the activeselect page, such that the user's browser is instructed not to cache the content of the page. If you do not set the headers in this way, then you may experience problems with your activeselect elements in MSIE (as this browser caches HTTP GET requests by default).

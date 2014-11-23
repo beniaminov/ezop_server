@@ -1,0 +1,163 @@
+# $Id: blogapi-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: blogapi.module,v 1.100 2007/01/05 19:05:54 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 23:22+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/blogapi/blogapi.module:15
+msgid "The blog API module enables a post to be posted to a site via external GUI applications. Many users prefer to use external tools to improve their ability to read and post responses in a customized way. The blog api provides users the freedom to use the blogging tools they want but still have the blogging server of choice."
+msgstr "Модуль API для блогов дает возможность размещать на сайте сообщения с помощью внешних программ. Многие из пользователей предпочитают использовать внешние программы, настроив их для себя, чтобы улучшить свои возможности по отправке и получению сообщений. API для блогов дает пользователям использовать те программы для работы с блогами, которые им нужны, но оставляет им свободу выбора сервера для размещения блогов."
+
+#: modules/blogapi/blogapi.module:16
+msgid "When this module is enabled and configured you can use programs like <a href=\"@external-http-ecto-kung-foo-tv\">Ecto</a> to create and publish posts from your desktop. Blog API module supports several XML-RPC based blogging APIs such as the <a href=\"@-\">Blogger API</a>, <a href=\"@external-http-www-xmlrpc-com-metaWeblogApi\">MetaWeblog API</a>, and most of the <a href=\"@external-http-www-movabletype-org-docs-mtmanual_programmatic-html\">Movable Type API</a>. Any desktop blogging tools or other services (e.g. <a href=\"@external-http-www-flickr-com\">Flickr's</a> \"post to blog\") that support these APIs should work with this site."
+msgstr "Когда этот модуль включен и настроен, вы можете использовать программы типа <a href=\"@external-http-ecto-kung-foo-tv\">Ecto</a> для создания и публикации сообщений прямо с рабочего стола вашего компьютера. Модуль API для блогов поддерживает несколько типов API для блогов, основанных на протоколе XML-RPC, таких как <a href=\"@-\">Blogger API</a>, <a href=\"@external-http-www-xmlrpc-com-metaWeblogApi\">MetaWeblog API</a> и <a href=\"@external-http-www-movabletype-org-docs-mtmanual_programmatic-html\">Movable Type API</a>. Любая программа для ведения блогов с поддержкой этих API или аналогичный сервис (см., например, кнопку \"отправить в блог\" на <a href=\"@external-http-www-flickr-com\">сайте Flickr</a> ) будут работать с вашим сайтом."
+
+#: modules/blogapi/blogapi.module:17
+msgid "This module also allows site administrators to configure which content types can be posted via the external applications. So, for instance, users can post forum topics as well as blog posts. Where supported, the external applications will display each content type as a separate \"blog\"."
+msgstr "Этот модуль позволяет администраторам настраивать, какие типы содержания возможно размещать на сайте, используя внешние программы. К примеру, пользователь может размещать как сообщения в форум, так и заметки в блог. Там, где это поддерживается, внешние программы могут показывать каждый тип материалов как отдельный \"blog\"."
+
+#: modules/blogapi/blogapi.module:18
+msgid "For more information please read the configuration and customization handbook <a href=\"@blogapi\">BlogApi page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@blogapi\">Api для блогов</a>"
+
+#: modules/blogapi/blogapi.module:32
+msgid "Returns a list of weblogs to which an author has posting privileges."
+msgstr "Возвращает список блогов, в которых автор имеет право размещения материалов."
+
+#: modules/blogapi/blogapi.module:37
+msgid "Returns information about an author in the system."
+msgstr "Возвращает информацию об авторе в системе."
+
+#: modules/blogapi/blogapi.module:42;67
+msgid "Creates a new post, and optionally publishes it."
+msgstr "Создает новую публикацию и, если необходимо, публикует."
+
+#: modules/blogapi/blogapi.module:47
+msgid "Updates the information about an existing post."
+msgstr "Обновляет информацию о существующей публикации."
+
+#: modules/blogapi/blogapi.module:52;77
+msgid "Returns information about a specific post."
+msgstr "Возвращает информацию о конкретной публикации."
+
+#: modules/blogapi/blogapi.module:57
+msgid "Deletes a post."
+msgstr "Удаляет материал."
+
+#: modules/blogapi/blogapi.module:62;92
+msgid "Returns a list of the most recent posts in the system."
+msgstr "Возвращает список последних публикаций в системе."
+
+#: modules/blogapi/blogapi.module:72
+msgid "Updates information about an existing post."
+msgstr "Обновляет информацию о существующей публикации."
+
+#: modules/blogapi/blogapi.module:82
+msgid "Uploads a file to your webserver."
+msgstr "Закачивает файлы на ваш сервер."
+
+#: modules/blogapi/blogapi.module:87;107
+msgid "Returns a list of all categories to which the post is assigned."
+msgstr "Возвращает список всех категорий, в которые входит эта публикация."
+
+#: modules/blogapi/blogapi.module:97
+msgid "Returns a bandwidth-friendly list of the most recent posts in the system."
+msgstr "Возвращает компактный список последних публикаций в системе."
+
+#: modules/blogapi/blogapi.module:102
+msgid "Returns a list of all categories defined in the weblog."
+msgstr "Возвращает список категорий, определенных в блоге."
+
+#: modules/blogapi/blogapi.module:112
+msgid "Sets the categories for a post."
+msgstr "Назначает категории для публикации."
+
+#: modules/blogapi/blogapi.module:117
+msgid "Retrieve information about the XML-RPC methods supported by the server."
+msgstr "Получить информацию о методах XML-RPC, поддерживаемых сервером."
+
+#: modules/blogapi/blogapi.module:122
+msgid "Retrieve information about the text formatting plugins supported by the server."
+msgstr "Получить информацию о плагинах форматирования текста, поддерживаемых сервером."
+
+#: modules/blogapi/blogapi.module:127
+msgid "Publish (rebuild) all of the static files related to an entry from your weblog. Equivalent to saving an entry in the system (but without the ping)."
+msgstr "Опубликовать (перестроить) все статичные файлы, связанные с компонентом вашего блога. Эквивалентно сохранению элемента в системе (но без пинга)."
+
+#: modules/blogapi/blogapi.module:204
+msgid "You do not have permission to create the type of post you wanted to create."
+msgstr "Вы не имеете прав на создание того типа материалов, который хотите создать."
+
+#: modules/blogapi/blogapi.module:221
+msgid "@type: added %title using blog API."
+msgstr "@type: добавлен %title с использованием API блогов."
+
+#: modules/blogapi/blogapi.module:226;281
+msgid "Error storing post."
+msgstr "Ошибка сохранения материала."
+
+#: modules/blogapi/blogapi.module:248;482
+msgid "You do not have permission to update this post."
+msgstr "Вы не имеете прав доступа к обновлению этого материала."
+
+#: modules/blogapi/blogapi.module:277
+msgid "@type: updated %title using blog API."
+msgstr "@type: обновление %title с использованием blog API."
+
+#: modules/blogapi/blogapi.module:362
+msgid "No file sent."
+msgstr "Файл не отправлен."
+
+#: modules/blogapi/blogapi.module:366
+msgid "Error storing file."
+msgstr "Ошибка сохранения файла."
+
+#: modules/blogapi/blogapi.module:477
+msgid "Invalid post."
+msgstr "Неверный материал."
+
+#: modules/blogapi/blogapi.module:517
+msgid "You either tried to edit somebody else's blog or you don't have permission to edit your own blog."
+msgstr "Вы либо пытаетесь отредактировать чей-то чужой блог, либо не имеете права доступа к изменению своего блога."
+
+#: modules/blogapi/blogapi.module:521
+msgid "Wrong username or password."
+msgstr "Неверное имя пользователя или пароль."
+
+#: modules/blogapi/blogapi.module:544
+msgid "Blog types"
+msgstr "Типы блогов"
+
+#: modules/blogapi/blogapi.module:548
+msgid "Select the content types for which you wish to enable posting via blogapi. Each type will appear as a different \"blog\" in the client application (if supported)."
+msgstr "Выбрать типы материалов, для которых вы хотите включить возможность публикации через API для блогов. В клиентском приложении каждый тип отображается как отдельный блог (если эта возможность поддерживается)."
+
+#: modules/blogapi/blogapi.module:560;567
+msgid "RSD"
+msgstr "RSD"
+
+#: modules/blogapi/blogapi.module:573
+msgid "Blog APIs"
+msgstr "API для блогов"
+
+#: modules/blogapi/blogapi.module:574
+msgid "Configure which content types and engines external blog clients can use."
+msgstr "Настройка того, какие типы содержания и движки поддерживает внешняя программа-клиент для размещения блогов."
+
+#: modules/blogapi/blogapi.module:0
+msgid "blogapi"
+msgstr "API блогов"
+

@@ -1,0 +1,26 @@
+// $Id: CHANGELOG.txt,v 1.1.2.4 2008/02/09 17:45:31 add1sun Exp $
+
+=== DRUPAL 5 ===
+5.x-1.2 (February 2008)
+- BUG #215477: Remove extra creation of iFrame and make it JS only as well as adding the JS src fix for SSL.
+
+5.x-1.1 (December 2007)
+- BUG #196323: Removed slideDown/Up in IE JS to improve performance.
+- BUG #200990: Changed iFrame dimensions to get rid of blank box in certain setups.
+- TASK: Adding newlines to lists so the view source isn't a nightmare of one long string.
+  
+5.x-1.0 (November 2007)
+- First official release.
+
+5.x-1.x-dev
+July 2007:
+- Add ability to create custom menu trees.
+- Add themeable primary links function.
+
+June 2007:
+- Now supports up to 3 levels of children menus.
+
+April 2007:
+- Upgraded to Drupal 5.
+- Class name changes to using dash(-) rather than underscore(_).
+- Add themeable function.

@@ -1,0 +1,233 @@
+# $Id: de.po,v 1.2.2.1 2008/01/09 05:19:15 nancyw Exp $
+# LANGUAGE translation of PROJECT
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: V 1.00\n"
+"POT-Creation-Date: 2007-07-16 14:08+0100\n"
+"PO-Revision-Date: 2007-07-16 14:27+0100\n"
+"Last-Translator: Christian Zwahlen <info@zwahlendesign.ch>\n"
+"Language-Team:   <info@zwahlendesign.ch>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: d:\ccoro\modules\glossary\glossary.module:8
+msgid ""
+"<p>Glossary helps newbies understand the jargon which always crops up when specialists talk about a topic. Doctors discuss CBC and EKG and CCs. Web developers keep talking about CSS, P2P, XSLT, etc. This is all intimidating for newbies.</p>\r\n"
+"      <p>The Glossary module scans posts for glossary terms (and their synonyms) in the body. If found, the glossary indicator is inserted after the term, or the term is turned into an indicator link depending on the settings. By hovering over the indicator, users may learn the definition of that term. Clicking leads the user to that term presented within the whole glossary.</p>\r\n"
+"      <p>Glossary terms are managed as vocabularies within the taxonomy.module. To get started with glossary, create a new vocabulary on the %taxonomy_admin page. The vocabulary need not be associated with any modules, although you can add detailed description to terms by attaching (story or other type of) nodes to them. Add a few terms to the vocabulary. The term title should be the glossary entry and the description should be its definition. You can make use of the hierarchy, synonym, and related terms features. These features impact the display of the glossary when viewed in an overview.</p>\r\n"
+"      <p>Next, you have to setup the input formats you want to use the glossary with. At the %input_formats page select an input format to configure. Select the Glossary filter checkbox and press Save configuration. Now select the configure filters tab and select the vocabulary and apply other settings.</p>\r\n"
+"      <p>You can see how a vocabulary would function as a glossary by going to the %glossaries page and selecting the vocabulary to view.</p>\r\n"
+"      <p>Administration of glossary requires <em>%permissions</em> permissions.</p>"
+
+msgstr ""
+"<p>Glossar hilft Neulinge die Fachsprache zu verstehen, welche immer bei speziellen Gesprächstemen verwendet wird. Ärzte reden über CBC und EKG und CCs. Web Entwickler reden über CSS, P2P, XSLT, etc. Dies ist für Neulinge alles einschüchternd.</p>\r\n"
+"      <p>Das Glossar Modul sucht Einträge für \"glossary terms\" (und ihre Synonyme) im Body ab. Bei Fund, trägt der Glossar Indikator nach den terms ein, oder der \"Term\" wechselt zu einem Indikator und verlinkt je nach dem auf die Einstellungen. Das Klicken auf den Link, führt den Anwender auf diesem \"term\" welcher im ganzen Glossar dargestellt wird.</p>\r\n"
+"      <p>Glossar-\"Terms\" werden als Vokabulare innerhalt des Taxonomy-Modul (taxonomy.module) verwaltet. Zum Starten mit dem Glossar, erstellen Sie ein neues Vokaublar in der Administration: Verwalten » Inhaltsverwaltung » Kategorien Seite. Das Vokabular muss mit anderen Modulen verknüpft sein, obwohl Sie detailierte Beschreibungen zu \"Terms\" hinzufügen können, indem sie \"nodes\" (als \"Story\" oder ander Typen) anhängen. Fügen Sie einige Begriffe (\"Terms\") zum Vokabular. Der Begriffs-Titel sollte den Glossar Eintrag und die Beschreibung die Definition sein. Sie können von der Hirarchie, Synonym, und \"Verwandte Begriffe\" gebrauch machen. Diese Eigenschaften setzen die Ansicht des Glossars fest, wenn es in einer Übersicht (Link: \".../glossary\") dargestellt wird.</p>\r\n"
+"      <p>Als nächstes müssen Sie das Eingabe Format einstellen mit dem Sie das Glossar verwenden. In der Administration: Verwalten » Einstellungen » Eingabeformate fügen Sie ein Eingabeformat hinzu (Link: \".../admin/settings/filters/add\"). Selektieren Sie \"Glossary filter\" Checkbos und drücken auf \"Konfiguration speichern\". Nun klicken Sie auf den Konfigurations Filter Tab (Glossar-Eingabeformat » Konfigurieren), wählen das Vokabular aus und fügen andere Einstellungen hinzu.</p>\r\n"
+"      <p>Sie können nun sehen, wie ein Vokabular wie ein Glossar funktionieren würde, beim direkten (verlinkten) Zugang zu den Glossar Seiten und Einstellungen für das Vokabular darzustellen.</p>\r\n"
+"      <p>Die Administration des Glossars benötigt <em>%permissions</em> Rechte.</p>"
+
+
+#: d:\ccoro\modules\glossary\glossary.module:14;29
+msgid "administer glossary"
+msgstr "Glossar administrieren"
+
+#: d:\ccoro\modules\glossary\glossary.module:14
+msgid "administer taxonomy"
+msgstr "Taxonomy administrieren"
+
+#: d:\ccoro\modules\glossary\glossary.module:14
+msgid "access administration pages"
+msgstr "Zugriff Administration Seiten"
+
+#: d:\ccoro\modules\glossary\glossary.module:17
+msgid "Maintain a glossary on your site."
+msgstr "Pflegen Sie ein Glossar auf Ihrer Site."
+
+#: d:\ccoro\modules\glossary\glossary.module:21
+msgid "Glossary terms will be automatically marked with links to their descriptions"
+msgstr "Glossar Begriffe werden automatisch mit den Links zu ihrer Beschreibungen markiert"
+
+#: d:\ccoro\modules\glossary\glossary.module:23
+msgid "Below are the defined categories which are in use as glossaries. Please select one to view or edit."
+msgstr "Unten sind die definierten Kategorien welche wie Glossarien in Gebauch sind. Bitte wählen Sie eine zur Ansicht oder zum Bearbeiten."
+
+#: d:\ccoro\modules\glossary\glossary.module:49;0
+msgid "glossary"
+msgstr "glossar"
+
+#: d:\ccoro\modules\glossary\glossary.module:62
+msgid "<none>"
+msgstr "<none>"
+
+#: d:\ccoro\modules\glossary\glossary.module:67
+msgid "Select Vocabulary"
+msgstr "Vocabular wählen"
+
+#: d:\ccoro\modules\glossary\glossary.module:67
+msgid "Select one or more vocabularies which hold all terms for your glossary. When enabled, posts will be scanned for glossary terms. An icon or a superscripted link is inserted beside each term. Hover over the icon or link to learn the meaning of that term."
+msgstr "Wählen Sie eine oder mehrere Vokabulare welche alle Begriffe für Ihr Glossar holt. Wenn verfügbar, Artikel werden gescannt für Glossar Begriffe. Ein Icon oder ein hochgestellter Link ist jedem Begriff eingefügt. Darüber hinaus das Icon oder Link lernt die Absicht über diesen Begriff."
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "Match type"
+msgstr "Verklinkungs Typ"
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "word"
+msgstr "Wort"
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "right or left substring"
+msgstr "rechte oder linke Teilzeichenfolge"
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "left substring"
+msgstr "linke Teilzeichenfolge"
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "right substring"
+msgstr "richtige Teilzeichenfolge"
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "any substring"
+msgstr "irgendeine Teilzeichenfolge"
+
+#: d:\ccoro\modules\glossary\glossary.module:68
+msgid "Choose the match type of glossary links."
+msgstr "Wählen Sie die Verknüpfungs-Typ für Ihr Glossar."
+
+#: d:\ccoro\modules\glossary\glossary.module:69
+msgid "Case sensitivity"
+msgstr "Kleinschreibung"
+
+#: d:\ccoro\modules\glossary\glossary.module:69
+msgid "case insensitive"
+msgstr "gross geschrieben"
+
+#: d:\ccoro\modules\glossary\glossary.module:69
+msgid "case sensitive"
+msgstr "klein geschrieben"
+
+#: d:\ccoro\modules\glossary\glossary.module:69
+msgid "Match either case sensitive or not. Case sensitive matches are far not that resource intensive."
+msgstr "Verknüpfung entweder Gross- oder Kleinschreibung. Kleinschreibungs-Verknüpfungen sind nichts weiteres als viel sicherer. "
+
+#: d:\ccoro\modules\glossary\glossary.module:70
+msgid "Replace matches"
+msgstr "Rimpiazza le ricerche trovate"
+
+#: d:\ccoro\modules\glossary\glossary.module:70
+msgid "only the first match"
+msgstr "Nur die erste Verknüpfung"
+
+#: d:\ccoro\modules\glossary\glossary.module:70
+msgid "all matches"
+msgstr "alle Verknüpfungen"
+
+#: d:\ccoro\modules\glossary\glossary.module:70
+msgid "Whether only the first match should be replaced or all matches."
+msgstr "Wenn auch nur die erste oder alle Verknüpfung überschreiben sein sollten."
+
+#: d:\ccoro\modules\glossary\glossary.module:71
+msgid "General settings"
+msgstr "Allgemeine Einstellungen"
+
+#: d:\ccoro\modules\glossary\glossary.module:73
+msgid "Term Indicator"
+msgstr "Begriffs Indikator"
+
+#: d:\ccoro\modules\glossary\glossary.module:73;74
+msgid "superscript"
+msgstr "Grossschreibung"
+
+#: d:\ccoro\modules\glossary\glossary.module:73;75
+msgid "icon"
+msgstr "icon"
+
+#: d:\ccoro\modules\glossary\glossary.module:73
+msgid "replace with acronym link"
+msgstr "überschreiben mit Acronym Link"
+
+#: d:\ccoro\modules\glossary\glossary.module:73
+msgid "Display terms using either a superscript formatted link, an icon, or an &lt;acronym&gt; tag."
+msgstr "Stellt Begriffe dar und verwendet entweder hochgestellt formatierter Link, ein Icon, oder ein &lt;acronym&gt; Tag."
+
+#: d:\ccoro\modules\glossary\glossary.module:74
+msgid "Superscript"
+msgstr "Hochgestellt"
+
+#: d:\ccoro\modules\glossary\glossary.module:74
+msgid "If you choose %superscript above, enter the superscript text."
+msgstr "Wenn Sie %superscript oben, geben Sie den hochgestellten Text ein."
+
+#: d:\ccoro\modules\glossary\glossary.module:75
+msgid "Glossary Icon URL"
+msgstr "URL icona glossario"
+
+#: d:\ccoro\modules\glossary\glossary.module:75
+msgid "If you choose %icon above, enter the URL of the glossary icon relative to the root of your Drupal site."
+msgstr "Wenn Sie %icon oben wählen, geben Sie den URL des Glossar-Icons relativ zum root von Ihrer Drupal Site."
+
+#: d:\ccoro\modules\glossary\glossary.module:76
+msgid "Indicator settings"
+msgstr "Indikator Einstellungen"
+
+#: d:\ccoro\modules\glossary\glossary.module:78;90
+msgid "Glossary filter"
+msgstr "Glossar Filter"
+
+#: d:\ccoro\modules\glossary\glossary.module:229;239;244
+msgid "Home"
+msgstr "Home"
+
+#: d:\ccoro\modules\glossary\glossary.module:229;240;244
+msgid "Glossaries"
+msgstr "Glossare"
+
+#: d:\ccoro\modules\glossary\glossary.module:245
+msgid "Glossary: "
+msgstr "Glossar:"
+
+#: d:\ccoro\modules\glossary\glossary.module:313
+msgid "edit term"
+msgstr "Begriff bearbeiten"
+
+#: d:\ccoro\modules\glossary\glossary.module:313
+msgid "edit this term and definition."
+msgstr "diesen Begriff und Definition bearbeiten "
+
+#: d:\ccoro\modules\glossary\glossary.module:317
+msgid "Detailed description"
+msgstr "Detailierte Beschreibung"
+
+#: d:\ccoro\modules\glossary\glossary.module:320
+msgid "See also"
+msgstr "Siehe auch"
+
+#: d:\ccoro\modules\glossary\glossary.module:331
+msgid "add term"
+msgstr "Begriff hinzufügen"
+
+#: d:\ccoro\modules\glossary\glossary.module:332
+msgid "edit glossary"
+msgstr "modifica glossario"
+
+#: d:\ccoro\modules\glossary\glossary.module:348
+msgid "Glossary"
+msgstr "Glossar"
+
+#: d:\ccoro\modules\glossary\glossary.module:348
+msgid "Operations"
+msgstr "Operationen"
+
+#: d:\ccoro\modules\glossary\glossary.module:353
+msgid "view"
+msgstr "darstellen"
+
+#: d:\ccoro\modules\glossary\glossary.module:355
+msgid "edit"
+msgstr "bearbeiten"

@@ -1,0 +1,92 @@
+# $Id: throttle-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: throttle.module,v 1.72 2006/12/20 10:29:31 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 20:36+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/throttle/throttle.module:15
+msgid "Control how your site cuts out content during heavy load."
+msgstr "Контроль за тем, как сайт сокращает показ своего содержимого при сильной нагрузке."
+
+#: modules/throttle/throttle.module:127
+msgid "The throttle module provides a congestion control throttling mechanism for automatically detecting a surge in incoming traffic. If the site gets linked to by a popular website, or otherwise comes under a \"Denial of Service\" (DoS) attack, your webserver might become overwhelmed. This mechanism is utilized by other modules to automatically optimize their performance by temporarily disabling CPU-intensive functionality. For example, in the site theme, you might choose to disable pictures when the site is too busy (reducing bandwidth), or in modules, you might choose to disable some complicated logic (reducing CPU utilization)."
+msgstr "Модуль регулятор осуществляет контроль за превышением нагрузки, используя механизм автоматического обнаружения роста входящего траффика. Если сайт был прорекламирован другим популярным сайтом или находится под атакой \"Отказ в обслуживании\" (DoS-атака), то ваш сервер может оказаться перегруженным. Этот модуль предоставляет механизм контроля для автоматического вычисления прироста траффика. Этот механизм используется другими модулями Drupal для автоматической оптимизации их производительности, временно отключая часть их функционала, сильно нагружающего процессор. Например, в теме оформления сайта вы можете отключать показ изображений, когда сайт перегружен (снижение пропускной способности) или в модулях вы можете отключать какую-то сложную логику (уменьшение использования процессора)."
+
+#: modules/throttle/throttle.module:128
+msgid "The congestion control throttle can be automatically enabled when the number of anonymous or authenticated users currently visiting the site exceeds the specified threshold. "
+msgstr "Регулятор перегрузки может автоматически включаться, если число анонимных или авторизованных пользователей, находящихся сейчас на сайте, превышает определенное значение. "
+
+#: modules/throttle/throttle.module:129
+msgid "For more information please read the configuration and customization handbook <a href=\"@throttle\">Throttle page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@throttle\">регулятора</a>."
+
+#: modules/throttle/throttle.module:132
+msgid "If your site gets linked to by a popular website, or otherwise comes under a \"Denial of Service\" (DoS) attack, your webserver might become overwhelmed. This module provides a congestion control throttling mechanism for automatically detecting a surge in incoming traffic. This mechanism is utilized by other Drupal modules to automatically optimize their performance by temporarily disabling CPU-intensive functionality."
+msgstr "Если ваш сайт был прорекламирован другим популярным сайтом или находится под атакой \"Отказ в обслуживании\" (DoS-атака), то ваш сервер может оказаться перегруженным. Этот модуль предоставляет механизм контроля для автоматического вычисления прироста траффика. Этот механизм используется другими модулями Drupal для автоматической оптимизации их производительности, временно отключая часть их функционала, сильно нагружающего процессор."
+
+#: modules/throttle/throttle.module:141
+msgid "Auto-throttle on anonymous users"
+msgstr "Авто-регулятор для анонимных посетителей"
+
+#: modules/throttle/throttle.module:145
+msgid "The congestion control throttle can be automatically enabled when the number of anonymous users currently visiting your site exceeds the specified threshold. For example, to start the throttle when your site has 250 anonymous users online at once, enter '250' in this field. Leave this value blank or set to \"0\" if you do not wish to auto-throttle on anonymous users. You can inspect the current number of anonymous users using the \"Who's online\" block."
+msgstr "Авто-регулятор может быть автоматически включён при достижении определённого числа анонимных посетителей на сайте. Например, для включения регулятора при 250 одновременных посетителях, введите '250' в этом поле. Оставьте поле пустым или укажите \"0\" если вы не хотите включать авто-регулятор для анонимных посетителей. Посмотреть текущее число посетителей можно с помощью блока \"Сейчас на сайте\"."
+
+#: modules/throttle/throttle.module:149
+msgid "Auto-throttle on authenticated users"
+msgstr "Авто-регулятор для зарегистрированных пользователей"
+
+#: modules/throttle/throttle.module:153
+msgid "The congestion control throttle can be automatically enabled when the number of authenticated users currently visiting your site exceeds the specified threshold. For example, to start the throttle when your site has 50 registered users online at once, enter '50' in this field. Leave this value blank or set to \"0\" if you do not wish to auto-throttle on authenticated users. You can inspect the current number of authenticated users using the \"Who's online\" block."
+msgstr "Авто-регулятор может быть автоматически включён при достижении определённого числа одновременных зарегистрированных пользователей на сайте. Например, для включения регулятора при 50 одновременных пользователей, введите '50' в этом поле. Оставьте поле пустым или укажите \"0\", если вы не хотите включать авто-регулятор для зарегистрированных пользователей. Посмотреть текущее число посетителей можно с помощью блока \"Сейчас на сайте\"."
+
+#: modules/throttle/throttle.module:157
+msgid "Auto-throttle probability limiter"
+msgstr "Вероятностный ограничитель авторегулятора"
+
+#: modules/throttle/throttle.module:160
+msgid "The auto-throttle probability limiter is an efficiency mechanism to statistically reduce the overhead of the auto-throttle. The limiter is expressed as a percentage of page views, so for example if set to the default of 10% we only perform the extra database queries to update the throttle status 1 out of every 10 page views. The busier your site, the lower you should set the limiter value."
+msgstr "Вероятностный ограничитель авторегулятора является эффективным механизмом для статистического уменьшения чрезмерной нагрузки на авторегулятор. Ограничитель выражается в процентах от просмотренных страниц, так что, например, если установлено значение 10%, то дополнительные запросы к базе данных для обновления статуса регулятора будут посылаться только при каждом десятом просмотре страницы. Это значение должно быть тем ниже, чем более загружен ваш сайт."
+
+#: modules/throttle/throttle.module:168;171
+msgid "%value is not a valid auto-throttle setting. Please enter a positive numeric value."
+msgstr "\"%value\" не является приемлемым значением авторегулятора.  Пожалуйста, введите положительное числовое значение."
+
+#: modules/throttle/throttle.module:116;0
+msgid "throttle"
+msgstr "регулятор"
+
+#: modules/throttle/throttle.module:93
+msgid "1 user accessing site; throttle enabled."
+msgid_plural "@count users accessing site; throttle enabled."
+msgstr[0] "@count пользователь на сайте; регулятор включен."
+msgstr[1] "@count пользователя на сайте; регулятор включен."
+msgstr[2] "@count пользователей на сайте; регулятор включен."
+
+#: modules/throttle/throttle.module:101
+msgid "1 guest accessing site; throttle enabled."
+msgid_plural "@count guests accessing site; throttle enabled."
+msgstr[0] "@count гость на сайте; регулятор включен"
+msgstr[1] "@count гостя на сайте; регулятор включен"
+msgstr[2] "@count гостей на сайте; регулятор включен"
+
+#: modules/throttle/throttle.module:111
+msgid "1 guest accessing site; throttle disabled"
+msgid_plural "@count guests accessing site; throttle disabled"
+msgstr[0] "@count гость на сайте; регулятор отключен"
+msgstr[1] "@count гостя на сайте; регулятор отключен"
+msgstr[2] "@count гостей на сайте; регулятор отключен"
+

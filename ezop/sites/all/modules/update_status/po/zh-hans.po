@@ -1,0 +1,144 @@
+# Russian translation of Drupal (update_status.module)
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: update_status.info,v 1.2 2007/02/25 21:12:34 merlinofchaos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 模块汉化 update_status-5.x-1.2\n"
+"POT-Creation-Date: 2007-02-28 00:10+0500\n"
+"PO-Revision-Date: 2007-05-14 12:39-0500\n"
+"Last-Translator: 大米 <verydummy@gmail.com>\n"
+"Language-Team: Drupal 汉化小组 DrupalChina.org <drupalchina.org@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=1;\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: update_status.module:13
+msgid "Here you can find information on the update status of your installed modules. Note that each module is part of a \"project\", which may have the same name as the module or may have a different name. Also note that this can only check the status for \"official releases\", and will not be able to check update status for development snapshots and modules updated directly from CVS."
+msgstr "您可以在这里找到已安装模块的更新状态。请注意模块的名称与其所隶属的项目(project)名称不一定完全一致。而且您将只能察看到已经“正式发布”的版本，而不能直接通过CVS看到所有的开发中版本。"
+
+#: update_status.module:17;243
+msgid "There are updates available for one or more of your modules. To ensure the security of your server, you should update immediately. See the !status_page for more information"
+msgstr "有一个或多个模块有更新版本。为保证站点的安全性，请立即进行更新。更多信息请见 !status_page 。"
+
+#: update_status.module:19
+msgid "See the <a href=\"!updates\">updates log page</a> for information on available updates."
+msgstr "请到 <a href=\"!updates\">更新日志页面</a> 察看相关更新信息。"
+
+#: update_status.module:31
+msgid "Available updates"
+msgstr "可用更新"
+
+#: update_status.module:32
+msgid "Get a status report on your installed modules and available updates."
+msgstr "已安装模块的更新状态信息报告。"
+
+#: update_status.module:38
+msgid "Manual update check"
+msgstr "手动检查更新"
+
+#: update_status.module:67
+msgid "No update data is available. To fetch data, you may need to !run_cron."
+msgstr "没有关于更新状态的数据。您需要运行 !run_cron 来抓取更新数据。"
+
+#: update_status.module:67
+msgid "run cron"
+msgstr "运行 cron"
+
+#: update_status.module:78
+msgid "Update Status: Error %code: %message"
+msgstr "更新状态：错误 %code: %message"
+
+#: update_status.module:153
+msgid "Last checked: "
+msgstr "上次检查时间： "
+
+#: update_status.module:153
+msgid "Never"
+msgstr "永远不"
+
+#: update_status.module:154
+msgid "Check manually"
+msgstr "手动检查"
+
+#: update_status.module:165
+msgid "Project"
+msgstr "项目"
+
+#: update_status.module:166
+msgid "Status"
+msgstr "状态"
+
+#: update_status.module:167
+msgid "Current version"
+msgstr "当前版本"
+
+#: update_status.module:168
+msgid "Available version"
+msgstr "可用版本"
+
+#: update_status.module:169
+msgid "Download latest version"
+msgstr "下载最新版本"
+
+#: update_status.module:193;235;237
+msgid "Up to date"
+msgstr "已为最新"
+
+#: update_status.module:196
+msgid "Update available"
+msgstr "有可用的更新"
+
+#: update_status.module:199
+msgid "Unknown"
+msgstr "未知"
+
+#: update_status.module:208
+msgid "Includes: %modules"
+msgstr "包含： %modules"
+
+#: update_status.module:224
+msgid "Module update status"
+msgstr "模块更新状态"
+
+#: update_status.module:225
+msgid "Drupal core update status"
+msgstr "Drupal 内核更新状态"
+
+#: update_status.module:230
+msgid "Out of date. Version @version available."
+msgstr "已过时。最新版本 @version"
+
+#: update_status.module:232
+msgid "There are updates available for your version of Drupal. To ensure the security of your server, you should update immediately.See the !status_page for more information"
+msgstr "您所用的Drupal版本有更新发布。为确保服务器安全，请立即进行更新。更多信息参见 !status_page 。"
+
+#: update_status.module:241
+msgid "Out of date"
+msgstr "已过时"
+
+#: update_status.module:249;250
+msgid "Update status is unavailable. cron may need to be run."
+msgstr "没有更新状态的信息。需要先运行 cron 。"
+
+#: update_status.module:78;0
+#: update_status.info:0
+msgid "update_status"
+msgstr "更新状态"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "更新状态"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "检查您的Drupal以及所安装模块是否有更新版本。"
+
+#: update_status.module:17;232;243
+msgid "update status page"
+msgstr "更新状态页面"
+

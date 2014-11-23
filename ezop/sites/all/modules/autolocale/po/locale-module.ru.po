@@ -1,0 +1,222 @@
+# $Id: locale-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-21 15:28+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/locale/locale.module:22
+msgid "The locale module allows you to present your Drupal site in a language other than the default English. You can use it to set up a multi-lingual web site or replace given <em>built-in</em> text with text which has been customized for your site. Whenever the locale module encounters text which needs to be displayed, it tries to translate it into the currently selected language. If a translation is not available, then the string is remembered, so you can look up untranslated strings easily."
+msgstr "Этот модуль перевода дает возможность показывать сайт не только на английском языке. Вы можете использовать его для создания многоязычного сайта или для замены <em>стандартного</em> текста на специальный текст для вашего сайта. Когда модуль перевода встречает текст, который нужно вывести на экран, он пытается перевести его на выбранный язык. Если перевод недоступен, строка запоминается, так что вы сможете просто найти непереведенные строки."
+
+#: modules/locale/locale.module:23
+msgid "The locale module provides two options for providing translations. The first is the integrated web interface, via which you can search for untranslated strings, and specify their translations. An easier and less time-consuming method is to import existing translations for your language. These translations are available as <em>GNU gettext Portable Object files</em> (<em>.po</em> files for short). Translations for many languages are available for download from the translation page."
+msgstr "Модуль перевода предоставляет две возможности для поддержки переводов. Первая - это веб-интерфейс, с помощью которого вы можете отыскать непереведенные строки и сделать их перевод. А самый простой и быстрый по времени метод - импортировать существующие переводы для вашего языка. Эти переводы находятся в файлах типа <em>GNU gettext Portable Object</em> (<em>.po</em> файлы).  Переводы для многих языков можно загрузить на странице переводов сайта drupal.org."
+
+#: modules/locale/locale.module:24
+msgid "If an existing translation does not meet your needs, the <em>.po</em> files are easily edited with special editing tools. The locale module's import feature allows you to add strings from such files into your site's database. The export functionality enables you to share your translations with others, generating Portable Object files from your site strings."
+msgstr "Если существующий перевод вас не устраивает, файлы <em>.po</em> можно достаточно просто редактировать с помощью специальных программ. Модуль перевода имеет возможность импорта, которая позволяет вам добавлять строки из таких файлов в базу данных вашего сайта. Функция экспорта позволяет вам поделиться вашими переводами с другими людьми, генерируя файлы Portable Object из строк вашего сайта."
+
+#: modules/locale/locale.module:25
+msgid "For more information please read the configuration and customization handbook <a href=\"@locale\">Locale page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@locale\">переводов</a>."
+
+#: modules/locale/locale.module:29
+msgid "<p>Drupal provides support for the translation of its interface text into different languages. This page provides an overview of the installed languages. You can add a language on the <a href=\"@add-language\">add language page</a>, or directly by <a href=\"@import\">importing a translation</a>. If multiple languages are enabled, registered users will be able to set their preferred language. The site default will be used for anonymous visitors and for users without their own settings.</p><p>Drupal interface translations may be added or extended by several courses: by <a href=\"@import\">importing</a> an existing translation, by <a href=\"@search\">translating everything</a> from scratch, or by a combination of these approaches.</p>"
+msgstr "<p>Drupal поддерживает перевод интерфейса на различные языки.  На этой странице представлен список установленных языков. Вы можете добавить язык на странице <a href=\"@add-language\">добавить язык</a>, или  прямо <a href=\"@import\">импортировать</a> перевод. Если на сайте включена многоязычность, зарегистрированные пользователи смогут выбирать предпочитаемый язык. Установки языка по умолчанию используются для анонимных посетителей и для пользователей, которые не указали свои собственные настройки.</p><p>Переводы интерфейса Drupal можно добавлять или изменять разными способами: <a href=\"@import\">импортом</a> готового перевода, <a href=\"@search\">изменением строк</a> какого-либо фрагмента, или комбинацией этих способов.</p>"
+
+#: modules/locale/locale.module:31
+msgid "You need to add all languages in which you would like to display the site interface. If you can't find the desired language in the quick-add dropdown, then you will need to provide the proper language code yourself. The language code may be used to negotiate with browsers and to present flags, etc., so it is important to pick a code that is standardised for the desired language. You can also add a language by <a href=\"@import\">importing a translation</a>."
+msgstr "<p>Вы должны добавить все языки, которые вы хотите видеть доступными для интерфейса сайта. Если в списке необходимого языка нет, вам необходимо  самостоятельно ввести правильный код языка. Этот код может использоваться для настроек браузера, для показа флагов и т.п., поэтому указывайте код, который соответствует стандарту для данного языка. Кроме того, вы можете добавить язык, используя <a href=\"@import\">импорт переводов</a>.</p>"
+
+#: modules/locale/locale.module:33
+msgid "This page allows you to import a translation provided in the gettext Portable Object (.po) format. The easiest way to get your site translated is to obtain an existing Drupal translation and to import it. You can find existing translations on the <a href=\"@url\">Drupal translation page</a>. Note that importing a translation file might take a while."
+msgstr "Эта страница позволяет импортировать переводы в формате gettext Portable Object (.po).  Самый простой путь перевести интерфейс вашего сайта - найти существующий файл перевода и импортировать его. Переводы можно искать на <a href=\"@url\">этой странице</a>. Обратите внимание, что импорт файла может занять некоторое время."
+
+#: modules/locale/locale.module:35
+msgid "This page allows you to export Drupal strings. The first option is to export a translation so it can be shared. The second option generates a translation template, which contains all Drupal strings, but without their translations. You can use this template to start a new translation using various software packages designed for this task."
+msgstr "Эта страница позволяет экспортировать строки сайта на Drupal. Первая опция используется для экспорта перевода. Вторая создает шаблон перевода, содержащий все строки сайта на Drupal без перевода. Вы можете использовать этот шаблон для нового перевода с использованием специализированной программы."
+
+#: modules/locale/locale.module:37
+msgid "It is often convenient to get the strings from your setup on the <a href=\"@export\">export page</a>, and use a desktop Gettext translation editor to edit the translations. On this page you can search in the translated and untranslated strings, and the default English texts provided by Drupal."
+msgstr "<p>Часто бывает удобно получить строки вашего сайта с помощью <a href=\"@export\">страницы экспорта</a> и использовать редактор Gettext для работы над переводом. На этой странице вы можете искать переведенные и непереведенные строки, а также английский текст, который предлагается Drupal по умолчанию.</p>"
+
+#: modules/locale/locale.module:51
+msgid "Localization"
+msgstr "Переводы"
+
+#: modules/locale/locale.module:52
+msgid "Configure site localization and user interface translation."
+msgstr "Настройка перевода сайта и пользовательского интерфейса."
+
+#: modules/locale/locale.module:58
+msgid "Manage languages"
+msgstr "Управлять языками"
+
+#: modules/locale/locale.module:63
+msgid "Manage strings"
+msgstr "Управлять строками"
+
+#: modules/locale/locale.module:107
+msgid "Edit string"
+msgstr "Изменить строку"
+
+#: modules/locale/locale.module:113
+msgid "Delete string"
+msgstr "Удалить строку"
+
+#: modules/locale/locale.module:142
+msgid "Interface language settings"
+msgstr "Настройки языка интерфейса"
+
+#: modules/locale/locale.module:149
+msgid "Selecting a different locale will change the interface language of the site."
+msgstr "Выбор другого перевода изменит язык интерфейса сайта."
+
+#: modules/locale/locale.module:314
+msgid "The English locale cannot be deleted."
+msgstr "Английский язык нельзя удалить."
+
+#: modules/locale/locale.module:326
+msgid "Are you sure you want to delete the language %name?"
+msgstr "Вы действительно желаете удалить язык %name?"
+
+#: modules/locale/locale.module:326
+msgid "Deleting a language will remove all data associated with it. This action cannot be undone."
+msgstr "Удаление языка повлечет за собой удаление всех данных, связанных с ним. Это действие нельзя отменить."
+
+#: modules/locale/locale.module:338
+msgid "The language %locale has been removed."
+msgstr "Язык %locale удален."
+
+#: modules/locale/locale.module:128
+msgid "administer locales"
+msgstr "управлять переводами"
+
+#:  modules/locale/locale.module:0
+msgid "January"
+msgstr "января"
+
+#:  modules/locale/locale.module:0
+msgid "Jan"
+msgstr "янв"
+
+#:  modules/locale/locale.module:0
+msgid "February"
+msgstr "февраля"
+
+#:  modules/locale/locale.module:0
+msgid "Feb"
+msgstr "фев"
+
+#:  modules/locale/locale.module:0
+msgid "March"
+msgstr "марта"
+
+#:  modules/locale/locale.module:0
+msgid "Mar"
+msgstr "мар"
+
+#:  modules/locale/locale.module:0
+msgid "April"
+msgstr "апреля"
+
+#:  modules/locale/locale.module:0
+msgid "Apr"
+msgstr "апр"
+
+#:  modules/locale/locale.module:0,  ;0
+msgid "May"
+msgstr "мая"
+
+#:  modules/locale/locale.module:0
+msgid "June"
+msgstr "июня"
+
+#:  modules/locale/locale.module:0
+msgid "Jun"
+msgstr "июн"
+
+#:  modules/locale/locale.module:0
+msgid "July"
+msgstr "июля"
+
+#:  modules/locale/locale.module:0
+msgid "Jul"
+msgstr "июл"
+
+#:  modules/locale/locale.module:0
+msgid "August"
+msgstr "августа"
+
+#:  modules/locale/locale.module:0
+msgid "Aug"
+msgstr "авг"
+
+#:  modules/locale/locale.module:0
+msgid "September"
+msgstr "сентября"
+
+#:  modules/locale/locale.module:0
+msgid "Sep"
+msgstr "сен"
+
+#:  modules/locale/locale.module:0
+msgid "October"
+msgstr "октября"
+
+#:  modules/locale/locale.module:0
+msgid "Oct"
+msgstr "окт"
+
+#:  modules/locale/locale.module:0
+msgid "November"
+msgstr "ноября"
+
+#:  modules/locale/locale.module:0
+msgid "Nov"
+msgstr "ноя"
+
+#:  modules/locale/locale.module:0
+msgid "December"
+msgstr "декабря"
+
+#: modules/locale/locale.module:0
+#: ;0
+msgid "Thu"
+msgstr "чт."
+
+#: modules/locale/locale.module:0
+msgid "Fri"
+msgstr "пт."
+
+#: modules/locale/locale.module:0
+msgid "Sat"
+msgstr "сб."
+
+#: modules/locale/locale.module:0
+msgid "Sun"
+msgstr "вс."
+
+#: modules/locale/locale.module:0
+msgid "Mon"
+msgstr "пн."
+
+#: modules/locale/locale.module:0
+msgid "Tue"
+msgstr "вт."
+
+#: modules/locale/locale.module:0
+msgid "Wed"
+msgstr "ср."
+

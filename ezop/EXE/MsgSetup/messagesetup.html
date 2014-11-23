@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<TITLE>
+Выводить сообщения:
+</TITLE>
+<STYLE>
+.text {font-family: Book Antiqua; font-size:15;font-weight: bolder; color:#336699; }
+.button {font-family: Book Antiqua; font-size:13; font-weight: bolder;  color:#336699; width:100px;}
+</STYLE>
+<SCRIPT SRC = "script.js">
+</SCRIPT>
+
+</HEAD>
+<BODY>
+<BR><BR>
+<TABLE bordercolor="#CCCC99" border="3" width = "100%">
+<tr><td width = "50%">
+<table width = "100%">
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch1" VALUE = "on" CHECKED = true>Ошибки</TD>
+</TR>
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch2" VALUE = "" CHECKED = true>Выполнение </TD>
+</TR>
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch3" VALUE = "" CHECKED = true>Предупреждения</TD>
+</TR>
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch4" VALUE = "" CHECKED = true>Диагностика</TD>
+</TR>
+</table>
+</td>
+<td width = "50%">
+<table width = "100%">
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch5" VALUE = "" CHECKED = true>Грамматический анализ</TD>
+</TR>
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch6" VALUE = "" CHECKED = true>Вычисление</TD>
+</TR>
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch7" VALUE = "" CHECKED = true>Изменения в аппроксимации</TD>
+</TR>
+<TR>
+<TD class = "text"><INPUT type=checkbox ID = "ch8" VALUE = "" >Правила Переписывания</TD>
+</TR>
+</table>
+</td></tr>
+
+</TABLE>
+<BR><BR>
+<CENTER>
+<INPUT TYPE=BUTTON VALUE="ОК" class= "button" ONCLICK = "GetState();">&nbsp;&nbsp; 
+
+<INPUT TYPE=BUTTON VALUE="Отмена" class="button" ONCLICK =  "history.back();"> 
+</CENTER>
+</BODY>

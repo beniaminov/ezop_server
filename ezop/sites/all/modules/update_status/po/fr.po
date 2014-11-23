@@ -1,0 +1,194 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: update_stats\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-06-19 13:38-0500\n"
+"Last-Translator: Mathieu Petit-Clair <mathieu@koumbit.org>\n"
+"Language-Team: Mathieu Petit-Clair <mathieu@koumbit.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: update_status.module:25
+msgid "Here you can find information on the update status of your installed modules. Note that each module is part of a \"project\", which may have the same name as the module or may have a different name."
+msgstr "Voici la liste des mises à jour disponibles pour les modules installés sur votre site.  Veuillez noter que chaque module fait partie d'un \"projet\", qui peut (ou pas) avoir le même nom que le module."
+
+#: update_status.module:29
+msgid "There are updates available for one or more of your modules. To ensure the security of your server, you should update immediately. See the !available_updates page for more information"
+msgstr "l y a des mises à jour disponible pour un ou plusieurs de vos modules.  Pour vous assurer de la sécurité de votre serveur, vous devriez faire les mises à jour immédiatement.  Allez voir la !status_page pour plus de détails"
+
+#: update_status.module:29;31
+msgid "available updates"
+msgstr "mises à jour disponibles"
+
+#: update_status.module:31
+msgid "See the !available_updates page for information on any modules listed below that have newer versions released."
+msgstr "Voir la page !available_updates pour avoir de l'information sur les modules, listés ci-dessous, qui ont des mises à jour disponible."
+
+#: update_status.module:44
+msgid "Available updates"
+msgstr "Mises à jour disponibles"
+
+#: update_status.module:45
+msgid "Get a status report on your installed modules and available updates."
+msgstr "Voir un état des mises à jour disponibles pour les modules installés sur votre site."
+
+#: update_status.module:52
+msgid "List"
+msgstr "Liste"
+
+#: update_status.module:59;441
+msgid "Settings"
+msgstr "Paramètres"
+
+#: update_status.module:67
+msgid "Manual update check"
+msgstr "Vérification manuelle"
+
+#: update_status.module:85;136
+msgid "No update data is available. To fetch data, you may need to !run_cron."
+msgstr "Aucune information de mise à jour n'est disponible.  Pour obtenir ces informations, vous devez peut-être !run_cron."
+
+#: update_status.module:85;136
+msgid "run cron"
+msgstr "lancer cron"
+
+#: update_status.module:113
+msgid "Always"
+msgstr "Toujours"
+
+#: update_status.module:114
+msgid "Ignore @version"
+msgstr "Ignorer @version"
+
+#: update_status.module:115;494
+msgid "Never"
+msgstr "Jamais"
+
+#: update_status.module:131
+msgid "Submit changes"
+msgstr "Soumettre les changements"
+
+#: update_status.module:149
+msgid "Project"
+msgstr "Projet"
+
+#: update_status.module:150
+msgid "Warn if out of date"
+msgstr "Avertir si périmé"
+
+#: update_status.module:151
+msgid "Notes"
+msgstr "Notes"
+
+#: update_status.module:175
+msgid "Your changes have been saved."
+msgstr "Vos changements ont été sauvegardés."
+
+#: update_status.module:183
+msgid "Module update status"
+msgstr "État des mises à jour des modules"
+
+#: update_status.module:184
+msgid "Drupal core update status"
+msgstr "État des mises à jour du noyau de Drupal"
+
+#: update_status.module:188
+msgid "Out of date. Version @version available."
+msgstr "Périmé. Version @version disponible."
+
+#: update_status.module:190
+msgid "There are updates available for your version of Drupal. To ensure the security of your server, you should update immediately.See the !status_page for more information"
+msgstr "Il y a des mises à jour disponible pour votre version de Drupal. Pour vous assurer de la sécurité de votre serveur, vous devriez faire les mises à jour immédiatement. Allez voir la !status_page pour plus de détails"
+
+#: update_status.module:193;197;532
+msgid "Up to date"
+msgstr "À jour"
+
+#: update_status.module:201
+msgid "Out of date"
+msgstr "Périmé"
+
+#: update_status.module:203
+msgid "There are updates available for one or more of your modules. To ensure the security of your server, you should update immediately. See the !status_page for more information"
+msgstr "Il y a des mises à jour disponible pour un ou plusieurs de vos modules.  Pour vous assurer de la sécurité de votre serveur, vous devriez faire les mises à jour immédiatement.  Allez voir la !status_page pour plus de détails"
+
+#: update_status.module:209;210
+msgid "Update status is unavailable, cron may need to be run."
+msgstr "L'état des mises à jour n'est pas disponible, il est peut-être nécessaire de lancer cron."
+
+#: update_status.module:324
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: update_status.module:461
+msgid "No filedate available"
+msgstr "Aucune date disponible"
+
+#: update_status.module:473
+msgid "Dev version"
+msgstr "Version de développement"
+
+#: update_status.module:477
+msgid "Invalid info"
+msgstr "Information invalide"
+
+#: update_status.module:482
+msgid "Missing info"
+msgstr "Information manquante"
+
+#: update_status.module:494
+msgid "Last checked: "
+msgstr "Dernière vérification : "
+
+#: update_status.module:495
+msgid "Check manually"
+msgstr "Vérifier manuellement"
+
+#: update_status.module:535
+msgid "Update available"
+msgstr "Mise à jour disponible"
+
+#: update_status.module:538
+msgid "Ignored"
+msgstr "Ignoré"
+
+#: update_status.module:543
+msgid "Security update required!"
+msgstr "Mise à jour de sécurité requise!"
+
+#: update_status.module:557
+msgid "Recommended version:"
+msgstr "Version recommandée : "
+
+#: update_status.module:561
+msgid "Security update:"
+msgstr "Mise à jour de sécurité : "
+
+#: update_status.module:566
+msgid "Latest version:"
+msgstr "Dernière version : "
+
+#: update_status.module:571
+msgid "Included modules: %modules"
+msgstr "Modules inclus : %modules"
+
+#: update_status.module:594
+msgid "Download"
+msgstr "Téléchargement"
+
+#: update_status.module:594
+msgid "Release notes"
+msgstr "Notes de mise à jour"
+
+#: update_status.info:0
+msgid "Update status"
+msgstr "État des mises à jour"
+
+#: update_status.info:0
+msgid "Checks to see if your installation of Drupal and its modules are up to date."
+msgstr "Vérifie si votre installation de Drupal et ses modules sont à jour."
+

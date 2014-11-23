@@ -1,0 +1,457 @@
+<?xml version = "1.0" encoding = "WINDOWS-1251" ?>
+<catalog>
+	<subdir name = "catalog" id ="0">
+<subdir name = "List" id = "1" pictureType = "paper" >
+</subdir>
+<subdir name = "Базы данных" id = "2" pictureType = "folder" >
+<subdir name = "SQL" id = "3" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставки" id = "4" pictureType = "folder_paper" >
+<subdir name = "E-R модель" id = "5" pictureType = "paper" >
+</subdir>
+<subdir name = "ER - модель данных поставки" id = "6" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставщики" id = "7" pictureType = "paper" >
+</subdir>
+<subdir name = "Спецификация деталей" id = "8" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Учебный процесс" id = "9" pictureType = "folder" >
+<subdir name = "Пример с таблицей свойств" id = "10" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация людей учебного процесса" id = "11" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация оборудования учебного процесса" id = "12" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация помещений учебного процесса" id = "13" pictureType = "paper" >
+</subdir>
+<subdir name = "некоторые факты о факультете автоматики ИАИ" id = "14" pictureType = "paper" >
+</subdir>
+<subdir name = "основные типы объектов" id = "15" pictureType = "paper" >
+</subdir>
+<subdir name = "пример размещения оборудования" id = "16" pictureType = "paper" >
+</subdir>
+<subdir name = "размещение оборудования учебного процесса" id = "17" pictureType = "paper" >
+</subdir>
+<subdir name = "типы объектов учебного процесса" id = "18" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "пример мира" id = "19" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Движение" id = "20" pictureType = "folder" >
+<subdir name = "Движение навстречу друг другу" id = "21" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача 6" id = "22" pictureType = "paper" >
+</subdir>
+<subdir name = "Равномерное движение" id = "23" pictureType = "folder" >
+<subdir name = "Задачи" id = "24" pictureType = "folder" >
+<subdir name = "Задача1" id = "25" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача2" id = "26" pictureType = "paper" >
+</subdir>
+<subdir name = "задача на равномерное движение" id = "27" pictureType = "paper" >
+</subdir>
+<subdir name = "использование равномерного движения" id = "28" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "равномерное движение" id = "29" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Равноускоренное движение" id = "30" pictureType = "folder_paper" >
+<subdir name = "Задачи 2" id = "31" pictureType = "folder" >
+<subdir name = "Задача 5" id = "32" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача на равноускоренное движение" id = "33" pictureType = "paper" >
+</subdir>
+</subdir>
+</subdir>
+<subdir name = "движение" id = "34" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Контектно-свободная грамматика в форме Бэкуса" id = "35" pictureType = "paper" >
+</subdir>
+<subdir name = "Особые примеры" id = "36" pictureType = "folder" >
+<subdir name = " цвета тел в среде измененые цвета" id = "37" pictureType = "paper" >
+</subdir>
+<subdir name = "Введение шаблонов" id = "38" pictureType = "folder" >
+<subdir name = "Локальный шаблон" id = "39" pictureType = "folder_paper" >
+<subdir name = "Локальный шаблон - синоним сложения чисел" id = "40" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с использованием локального шаблона" id = "41" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример правильного ввода шаблона для сложения" id = "42" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с шаблоном" id = "43" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример создания экземпляров понятия" id = "44" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример условного шаблона деления" id = "45" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример шаблона" id = "46" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример шаблона 2" id = "47" pictureType = "paper" >
+</subdir>
+<subdir name = "Примеры создания среды с измененными шаблонами" id = "48" pictureType = "folder" >
+<subdir name = "Пример задачи на движение в среде с измененным шаблоном с действием" id = "49" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример замены шаблонов в среде с измененными шаблонами" id = "50" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример изменения шаблона" id = "51" pictureType = "envpaper" >
+<subdir name = "Пример замены шаблонов в среде с измененными шаблонами" id = "52" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример среды для задач равномерного движения" id = "53" pictureType = "envpaper" >
+<subdir name = "Пример задачи на движение в среде с измененным шаблоном с действием" id = "54" pictureType = "paper" >
+</subdir>
+</subdir>
+</subdir>
+<subdir name = "Рекурсивные определения" id = "55" pictureType = "folder" >
+<subdir name = "Пример вычисления факториала" id = "56" pictureType = "paper" >
+</subdir>
+<subdir name = "Сумма списка" id = "57" pictureType = "paper" >
+</subdir>
+<subdir name = "Факториал" id = "58" pictureType = "paper" >
+</subdir>
+<subdir name = "Факториал1" id = "59" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Создание новой среды" id = "60" pictureType = "folder" >
+<subdir name = "English" id = "61" pictureType = "envpaper" >
+<subdir name = "Пример в среде English" id = "62" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример в среде English" id = "63" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Создание синонимов" id = "64" pictureType = "folder" >
+<subdir name = "Пример ввода синонимов с помощью равенств" id = "65" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример ввода синонимов шаблонов" id = "66" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример замены термина" id = "67" pictureType = "paper" >
+</subdir>
+<subdir name = "Синонимы для цвета" id = "68" pictureType = "paper" >
+</subdir>
+<subdir name = "Синонимы цвета1" id = "69" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Удаление шаблонов" id = "70" pictureType = "folder" >
+<subdir name = "Пример с удалением терма 'область'" id = "71" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с удалением шаблона" id = "72" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример удаления шаблона комментария" id = "73" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Шаблон с композицией отображений" id = "74" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Комментарии" id = "75" pictureType = "folder" >
+<subdir name = "Пример определения новых скобок комментария" id = "76" pictureType = "envpaper" >
+<subdir name = "Пример использования синонимов." id = "77" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Примеры комментария" id = "78" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Объекты понятий" id = "79" pictureType = "folder" >
+<subdir name = "Пример новый подход к экз. понятия" id = "80" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример создания экземпляров понятия" id = "81" pictureType = "paper" >
+</subdir>
+<subdir name = "использование равномерного движения" id = "82" pictureType = "paper" >
+</subdir>
+<subdir name = "кот" id = "83" pictureType = "paper" >
+</subdir>
+<subdir name = "человек" id = "84" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Понятие с противоречиями" id = "85" pictureType = "paper" >
+</subdir>
+<subdir name = "Правила переписывания" id = "86" pictureType = "folder" >
+<subdir name = "Пример с правилом переписывания" id = "87" pictureType = "paper" >
+</subdir>
+<subdir name = "Примеры с правилами переписывания в типе данных bool_выражения" id = "88" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример проверки равенства." id = "89" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример5" id = "90" pictureType = "paper" >
+</subdir>
+<subdir name = "Простой пример" id = "91" pictureType = "folder" >
+<subdir name = "Измененный цвет в среде цвет" id = "92" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета" id = "93" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета тел" id = "94" pictureType = "paper" >
+</subdir>
+<subdir name = "цвет" id = "95" pictureType = "envpaper" >
+<subdir name = " цвета тел в среде измененые цвета" id = "96" pictureType = "paper" >
+</subdir>
+<subdir name = "Измененный цвет в среде цвет" id = "97" pictureType = "paper" >
+</subdir>
+</subdir>
+</subdir>
+</subdir>
+<subdir name = "Пример использования синонимов." id = "98" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример использования списка" id = "99" pictureType = "paper" >
+</subdir>
+<subdir name = "Ядро с HTML" id = "100" pictureType = "paper" >
+</subdir>
+<subdir name = "Ядро системы" id = "101" pictureType = "envpaper" >
+<subdir name = "E-R модель" id = "102" pictureType = "paper" >
+</subdir>
+<subdir name = "ER - модель данных поставки" id = "103" pictureType = "paper" >
+</subdir>
+<subdir name = "English" id = "104" pictureType = "envpaper" >
+<subdir name = "Пример в среде English" id = "105" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "List" id = "106" pictureType = "paper" >
+</subdir>
+<subdir name = "U-группа" id = "107" pictureType = "paper" >
+</subdir>
+<subdir name = "boolean" id = "108" pictureType = "paper" >
+</subdir>
+<subdir name = "if_then_else  и real" id = "109" pictureType = "paper" >
+</subdir>
+<subdir name = "Алгебра" id = "110" pictureType = "envpaper" >
+<subdir name = "Булева алгебра" id = "111" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Базы данных" id = "112" pictureType = "folder" >
+<subdir name = "SQL" id = "113" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставки" id = "114" pictureType = "folder_paper" >
+<subdir name = "E-R модель" id = "115" pictureType = "paper" >
+</subdir>
+<subdir name = "ER - модель данных поставки" id = "116" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставщики" id = "117" pictureType = "paper" >
+</subdir>
+<subdir name = "Спецификация деталей" id = "118" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Учебный процесс" id = "119" pictureType = "folder" >
+<subdir name = "Пример с таблицей свойств" id = "120" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация людей учебного процесса" id = "121" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация оборудования учебного процесса" id = "122" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация помещений учебного процесса" id = "123" pictureType = "paper" >
+</subdir>
+<subdir name = "некоторые факты о факультете автоматики ИАИ" id = "124" pictureType = "paper" >
+</subdir>
+<subdir name = "основные типы объектов" id = "125" pictureType = "paper" >
+</subdir>
+<subdir name = "пример размещения оборудования" id = "126" pictureType = "paper" >
+</subdir>
+<subdir name = "размещение оборудования учебного процесса" id = "127" pictureType = "paper" >
+</subdir>
+<subdir name = "типы объектов учебного процесса" id = "128" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "пример мира" id = "129" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Группа" id = "130" pictureType = "paper" >
+</subdir>
+<subdir name = "Движение навстречу друг другу" id = "131" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача 5" id = "132" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача 6" id = "133" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача на равноускоренное движение" id = "134" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача1" id = "135" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача2" id = "136" pictureType = "paper" >
+</subdir>
+<subdir name = "Контектно-свободная грамматика в форме Бэкуса" id = "137" pictureType = "paper" >
+</subdir>
+<subdir name = "Локальный шаблон" id = "138" pictureType = "folder_paper" >
+<subdir name = "Локальный шаблон - синоним сложения чисел" id = "139" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с использованием локального шаблона" id = "140" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Локальный шаблон - синоним сложения чисел" id = "141" pictureType = "paper" >
+</subdir>
+<subdir name = "Множество" id = "142" pictureType = "paper" >
+</subdir>
+<subdir name = "Понятие с противоречиями" id = "143" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставки" id = "144" pictureType = "folder_paper" >
+<subdir name = "E-R модель" id = "145" pictureType = "paper" >
+</subdir>
+<subdir name = "ER - модель данных поставки" id = "146" pictureType = "paper" >
+</subdir>
+<subdir name = "Поставщики" id = "147" pictureType = "paper" >
+</subdir>
+<subdir name = "Спецификация деталей" id = "148" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Поставщики" id = "149" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример ввода синонимов с помощью равенств" id = "150" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример ввода синонимов шаблонов" id = "151" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример ввода условной операции деления" id = "152" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример вычисления факториала" id = "153" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример замены термина" id = "154" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример изменения шаблона" id = "155" pictureType = "envpaper" >
+<subdir name = "Пример замены шаблонов в среде с измененными шаблонами" id = "156" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример использования списка" id = "157" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример новый подход к экз. понятия" id = "158" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример определения новых скобок комментария" id = "159" pictureType = "envpaper" >
+<subdir name = "Пример использования синонимов." id = "160" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример пересечения областей" id = "161" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример правильного ввода шаблона для сложения" id = "162" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример проверки равенства." id = "163" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с boolean" id = "164" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с real" id = "165" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с использованием локального шаблона" id = "166" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с правилом переписывания" id = "167" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с таблицей свойств" id = "168" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с удалением терма 'область'" id = "169" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с удалением шаблона" id = "170" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с шаблоном" id = "171" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример создания экземпляров понятия" id = "172" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример среды для задач равномерного движения" id = "173" pictureType = "envpaper" >
+<subdir name = "Пример задачи на движение в среде с измененным шаблоном с действием" id = "174" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Пример удаления шаблона комментария" id = "175" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример условного шаблона деления" id = "176" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример шаблона" id = "177" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример шаблона 2" id = "178" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример шаблона с условной операцией в реализации" id = "179" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример5" id = "180" pictureType = "paper" >
+</subdir>
+<subdir name = "Примеры комментария" id = "181" pictureType = "paper" >
+</subdir>
+<subdir name = "Примеры с правилами переписывания в типе данных bool_выражения" id = "182" pictureType = "paper" >
+</subdir>
+<subdir name = "Примеры синонимов" id = "183" pictureType = "paper" >
+</subdir>
+<subdir name = "Равноускоренное движение" id = "184" pictureType = "folder_paper" >
+<subdir name = "Задачи 2" id = "185" pictureType = "folder" >
+<subdir name = "Задача 5" id = "186" pictureType = "paper" >
+</subdir>
+<subdir name = "Задача на равноускоренное движение" id = "187" pictureType = "paper" >
+</subdir>
+</subdir>
+</subdir>
+<subdir name = "Синонимы для цвета" id = "188" pictureType = "paper" >
+</subdir>
+<subdir name = "Синонимы цвета1" id = "189" pictureType = "paper" >
+</subdir>
+<subdir name = "Спецификация деталей" id = "190" pictureType = "paper" >
+</subdir>
+<subdir name = "Сумма списка" id = "191" pictureType = "paper" >
+</subdir>
+<subdir name = "Факториал" id = "192" pictureType = "paper" >
+</subdir>
+<subdir name = "Факториал1" id = "193" pictureType = "paper" >
+</subdir>
+<subdir name = "Шаблон с композицией отображений" id = "194" pictureType = "paper" >
+</subdir>
+<subdir name = "Ядро с HTML" id = "195" pictureType = "paper" >
+</subdir>
+<subdir name = "движение" id = "196" pictureType = "paper" >
+</subdir>
+<subdir name = "задача на равномерное движение" id = "197" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета" id = "198" pictureType = "paper" >
+</subdir>
+<subdir name = "изменение цвета тел" id = "199" pictureType = "paper" >
+</subdir>
+<subdir name = "использование равномерного движения" id = "200" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация людей учебного процесса" id = "201" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация оборудования учебного процесса" id = "202" pictureType = "paper" >
+</subdir>
+<subdir name = "классификация помещений учебного процесса" id = "203" pictureType = "paper" >
+</subdir>
+<subdir name = "кот" id = "204" pictureType = "paper" >
+</subdir>
+<subdir name = "некоторые факты о факультете автоматики ИАИ" id = "205" pictureType = "paper" >
+</subdir>
+<subdir name = "основные типы объектов" id = "206" pictureType = "paper" >
+</subdir>
+<subdir name = "пример мира" id = "207" pictureType = "paper" >
+</subdir>
+<subdir name = "пример размещения оборудования" id = "208" pictureType = "paper" >
+</subdir>
+<subdir name = "равномерное движение" id = "209" pictureType = "paper" >
+</subdir>
+<subdir name = "размещение оборудования учебного процесса" id = "210" pictureType = "paper" >
+</subdir>
+<subdir name = "типы объектов учебного процесса" id = "211" pictureType = "paper" >
+</subdir>
+<subdir name = "цвет" id = "212" pictureType = "envpaper" >
+<subdir name = " цвета тел в среде измененые цвета" id = "213" pictureType = "paper" >
+</subdir>
+<subdir name = "Измененный цвет в среде цвет" id = "214" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "человек" id = "215" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "алгебра" id = "216" pictureType = "folder" >
+<subdir name = "U-группа" id = "217" pictureType = "paper" >
+</subdir>
+<subdir name = "boolean" id = "218" pictureType = "paper" >
+</subdir>
+<subdir name = "if_then_else  и real" id = "219" pictureType = "paper" >
+</subdir>
+<subdir name = "Алгебра" id = "220" pictureType = "envpaper" >
+<subdir name = "Булева алгебра" id = "221" pictureType = "paper" >
+</subdir>
+</subdir>
+<subdir name = "Группа" id = "222" pictureType = "paper" >
+</subdir>
+<subdir name = "Множество" id = "223" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример пересечения областей" id = "224" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с boolean" id = "225" pictureType = "paper" >
+</subdir>
+<subdir name = "Пример с real" id = "226" pictureType = "paper" >
+</subdir>
+</subdir>
+	</subdir>
+</catalog>

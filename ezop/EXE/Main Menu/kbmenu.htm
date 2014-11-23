@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>
+Стартовая страница
+</TITLE>
+<STYLE>
+#kbase, #text, #kb_descr {font-family: Book Antiqua; font-size:15;font-weight: bolder; color:#336699; }
+#button {font-family: Book Antiqua; font-size:13; font-weight: bolder;  color:#336699;}
+#kbase {width:250 px; }
+</STYLE>
+</HEAD>
+<SCRIPT>
+function SubstNames(){
+var Index = window.document.getElementById("kbase").selectedIndex;
+var DirArray = new Array();
+DirArray[0] = "BaseExample";
+DirArray[1] = "Example";
+DirArray[2] = "BaseExample2";
+window.document.getElementById("kb_name").value = DirArray[Index];
+}
+
+function DisplayDescription(Index){
+var DescriptionArray = new Array ();
+
+DescriptionArray[0] = "База понятий <i>Base&nbsp;Example&nbsp;1.0</i>. Первая база понятий, созданная с помощью открытого языка системы <B>ЭЗОП.</B>";
+DescriptionArray[1] = "В базу понятий <i>Example</i> вошли основные примеры из базы понятий <i>Base&nbsp;Example&nbsp;1.0</i>.";
+DescriptionArray[2] = "База понятий <i>Base&nbsp;Example&nbsp;2.0</i> - это вторая (дополненная) версия базы понятий <i>Base&nbsp;Example&nbsp;1.0</i>.";
+
+window.document.getElementById("kb_descr").innerHTML = DescriptionArray[Index];
+}
+
+function Display(){
+var Index = window.document.getElementById("kbase").selectedIndex;
+DisplayDescription(Index);
+}
+
+function CurLoc(){
+CurLoc = window.location;
+window.document.getElementById("location").value = CurLoc;
+}
+
+</SCRIPT>
+
+<BODY onload = "DisplayDescription(0);">
+<P id="text">Доступные базы понятий:</P>
+
+<table style="width:100%;height=50%" border="0">
+<tr style="width:100%;height=100%">
+<td valign="top" width="255">
+   <p><SELECT ID="kbase" SIZE=7 onchange="Display();" >
+	<OPTION selected>База понятий BaseExample 1.0
+	<OPTION>База понятий Example
+	<OPTION>База понятий BaseExample 2.0
+	</SELECT></P>
+</td>
+<td valign="top">
+<table style="width:100%;height=100%" bordercolor="#CCCC99" border="3"><tr><td valign="top">
+<SPAN id="kb_descr" name="kb_descr"></SPAN></td></tr></table>
+</td>
+</tr>
+<tr><td valign="bottom">
+<form action="editor.exe"  method="POST">
+<INPUT TYPE = "hidden" id = "kb_name" NAME = "kb_name" value = "BaseExample">
+<INPUT TYPE = "hidden" Name = "location" ID = "location" value = "">
+<BR><input type="button" id="button" value = "Загрузить базу понятий" onclick = "SubstNames();CurLoc();submit();"></form>
+</td></tr>
+</table>
+
+</BODY>
+</HTML>

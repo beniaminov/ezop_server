@@ -1,0 +1,121 @@
+# LANGUAGE translation of Drupal (sitemenu.module)
+# Copyright 2007 Ruy Cervantes <ruy@iteso.mx>
+# Generated from file: sitemenu.module,v 1.16.2.5 2006/08/18 23:29:03 kbahey
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: es\n"
+"POT-Creation-Date: 2006-12-31 01:23+0100\n"
+"PO-Revision-Date: 2007-03-08 14:43-0600\n"
+"Last-Translator: Ruy Cervantes <ruy@iteso.mx>\n"
+"Language-Team:  Ruy Cervantes <ruy@iteso.mx>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: sitemenu.module:93
+msgid "Author: %username"
+msgstr "Autor:%username "
+
+#: sitemenu.module:95
+msgid ", comments: "
+msgstr ", comentarios: "
+
+#: sitemenu.module:190;269
+msgid "Menu"
+msgstr "Menú"
+
+#: sitemenu.module:220
+msgid "site map page and block menu, based on taxonomy"
+msgstr "Página del Mapa del sitio y bloque de menú, basado en taxonomías"
+
+#: sitemenu.module:224
+msgid "This module provides a site map based on the hierarchy of the site's taxonomy. The site map page shows all vocabularies, terms, and recent nodes within each term. It also provides a block that can be used in the side bar as a navigation menu."
+msgstr "Este módulo provee un mapa de sitio basado en la jerarquía que provee la taxonomía del sitio. La página del mapda del siti muestra todos los vocabularios, términos y nodos recientes que están asociados a un término. También provee un bloque que puede ser usado en la barra lateral como un menú de navegación.o"
+
+#: sitemenu.module:236
+msgid "none"
+msgstr "ninguno"
+
+#: sitemenu.module:242
+msgid "Description"
+msgstr "Descripción"
+
+#: sitemenu.module:243
+msgid "This is the site map page."
+msgstr "Esta es la página del mapa de sitio."
+
+#: sitemenu.module:246
+msgid "This text will be displayed at the top of the site menu page"
+msgstr "Este texto será mostrado en el título de la página del mapa de sitio"
+
+#: sitemenu.module:250
+msgid "Omitted vocabularies"
+msgstr "Vocabularios a ser omitidos"
+
+#: sitemenu.module:254
+msgid "Select vocabularies which should be <b>omitted</b> from listings."
+msgstr "Selecciona los vocalbularios <b>omitidos</b> del listado."
+
+#: sitemenu.module:258
+msgid "Navigation link text"
+msgstr "Texto de navegación"
+
+#: sitemenu.module:260;338;379
+msgid "site map"
+msgstr "mapa de sitio"
+
+#: sitemenu.module:263
+msgid "The text in the navigation link which points to the site menu page."
+msgstr "El texto en el enlace de navegación que apunta a la página del menú de sitio"
+
+#: sitemenu.module:267
+msgid "Block title text"
+msgstr "Texto del título del bloque "
+
+#: sitemenu.module:272
+msgid "If configured as a block, this text shows as the block title."
+msgstr "Si es configurado como un bloque, este texto es mostrado como el título."
+
+#: sitemenu.module:276
+msgid "Link to vocabulary page when listing vocabulary"
+msgstr "Enlaza a la página del vocabulario cuando se lista un vocabulario."
+
+#: sitemenu.module:281
+msgid "Show number of nodes for each term"
+msgstr "Muestra el número de nodos en cada término"
+
+#: sitemenu.module:286
+msgid "Show Author and number of Comments (in mousover)"
+msgstr "Muestra el autor y el número de comentarios (cuando se pasa el puntero del mouse por encima)"
+
+#: sitemenu.module:291
+msgid "Number of nodes to show"
+msgstr "Número de nodos a mostrar"
+
+#: sitemenu.module:293
+msgid "0"
+msgstr "0"
+
+#: sitemenu.module:296
+msgid "Number of nodes to show per taxonomy term. Set to 0 if you do not want nodes to listed."
+msgstr "Muestra el número de nodos por término de la taxonomía. Fíjelo a cero si no quiere listar ningún nodo."
+
+#: sitemenu.module:300
+msgid "Closing description"
+msgstr "Descripción de cierre"
+
+#: sitemenu.module:304
+msgid "This text will be displayed at the bottom of the site menu page"
+msgstr "Este texto será mostroado hacia el final de la página del mapa de sitio"
+
+#: sitemenu.module:318;0
+msgid "sitemenu"
+msgstr "\"sitemenu\""
+
+#: sitemenu.module:328
+msgid "use sitemenu"
+msgstr "usa \"sitemenu\""
+

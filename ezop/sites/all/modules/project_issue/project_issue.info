@@ -1,0 +1,11 @@
+; $Id: project_issue.info,v 1.5 2007/11/02 01:47:16 thehunmonkgroup Exp $
+name = Project issue tracking
+description = Provides issue tracking for the project.module.
+dependencies = project comment comment_upload upload
+package = Project
+
+; Information added by drupal.org packaging script on 2009-01-07
+version = "5.x-2.3"
+project = "project_issue"
+datestamp = "1231361440"
+

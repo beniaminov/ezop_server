@@ -1,0 +1,16 @@
+name = Content Taxonomy Views
+description = Views support for content taxonomy fields
+dependencies = content_taxonomy views
+package = Views
+
+
+
+; Information added by drupal.org packaging script on 2007-03-10
+project = "content_taxonomy"
+
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "5.x-1.x-dev"
+project = "content_taxonomy"
+datestamp = "1380567066"
+

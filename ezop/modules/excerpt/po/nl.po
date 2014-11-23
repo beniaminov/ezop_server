@@ -1,0 +1,60 @@
+# $Id: nl.po,v 1.1.2.2 2008/03/19 01:35:59 smk Exp $
+
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2007-04-21 14:50+0900\n"
+"Last-Translator: Kees Kodde | Qrios Webdiensten <k.kodde@NO S PAMqrios.nl>\n"
+"Language-Team: Kees Kodde\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2007-08-29 16:49+0100\n"
+
+#: excerpt.module:7
+msgid "Allows users to enter a separate excerpt for nodes."
+msgstr "Maakt het mogelijk een eigen introtekst in te voeren voor artikelen (nodes)."
+
+#: excerpt.module:9
+msgid "<p>If you want users to be able to enter separate excerpts for nodes, check the <em>excerpt</em> box in the appropriate column.</p>"
+msgstr "<p>Als u het mogelijk wilt maken eigen introtekst in te voeren, vink dan <em>excerpt</em> aan in de betreffende kolom.</p>"
+
+#: excerpt.module:31
+#: excerpt.info:0
+msgid "Excerpt"
+msgstr "Introtekst"
+
+#: excerpt.module:34
+msgid "Teasers"
+msgstr "Introtekst"
+
+#: excerpt.module:36
+msgid "Auto-generated"
+msgstr "Automatisch aangemaakt"
+
+#: excerpt.module:36
+msgid "Manual excerpt"
+msgstr "Handmatige introtekst"
+
+#: excerpt.module:37
+msgid "Choose whether teasers are generated automatically or can be entered manually by the author."
+msgstr "Kies of introteksten automatisch of handmatig moeten worden aangemaakt."
+
+#: excerpt.module:44
+msgid "Teaser"
+msgstr "Introtekst"
+
+#: excerpt.module:49
+msgid "Enter an excerpt for this item. It will be shown on listing pages along with a <em>read more</em> link which leads to the full view. Leave empty to auto-generate one from the body."
+msgstr "Voer een introtekst in voor dit item. Deze zal worden getoond op overzichtpagina's met een <em>lees meer</em> link naar de volledige tekst. U kunt dit veld leeg laten om automatisch een introtekst te genereren."
+
+#: excerpt.module:0
+#: excerpt.info:0
+msgid "excerpt"
+msgstr "introtekst"
+
+#: excerpt.info:0
+msgid "Allows users to manually control the teaser for a node."
+msgstr "Toestaan dat gebruikers handmatig de introtekst kunnen aanmaken voor een node."
+

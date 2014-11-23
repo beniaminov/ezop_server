@@ -1,0 +1,10 @@
+; $Id$
+name = CCK Field Permissions
+description = Allows admin to restrict create, update and view access on specific cck fields.
+dependencies = content
+package = "CCK"
+
+; Information added by drupal.org packaging script on 2007-05-10
+version = "5.x-1.10"
+project = "cck_field_perms"
+

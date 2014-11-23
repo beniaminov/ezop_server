@@ -1,0 +1,8 @@
+/* $Id: activeselect.css,v 1.1 2006/02/19 06:18:16 jaza Exp $ */
+
+html.js select.form-activeselect {
+  background: url(throbber.gif) no-repeat;
+}
+html.js select.form-activeselect option {
+  background-color: #fff;
+}

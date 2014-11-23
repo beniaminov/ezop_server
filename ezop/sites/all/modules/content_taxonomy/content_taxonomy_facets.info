@@ -1,0 +1,10 @@
+name = Content Taxonomy Facets
+description = "Exposes Content Taxonomy fields as facets."
+dependencies = content content_taxonomy faceted_search cck_facets search
+package = Faceted Search
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "5.x-1.x-dev"
+project = "content_taxonomy"
+datestamp = "1380567066"
+

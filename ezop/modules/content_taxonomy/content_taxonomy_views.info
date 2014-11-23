@@ -1,0 +1,17 @@
+; $Id: content_taxonomy.info,v 1.1.2.1 2007/03/01 18:50:33 mh86 Exp $
+name = Content Taxonomy Views
+description = Views support for content taxonomy fields
+dependencies = content_taxonomy views
+package = Views
+
+
+
+; Information added by drupal.org packaging script on 2007-03-10
+project = "content_taxonomy"
+
+
+; Information added by drupal.org packaging script on 2008-01-30
+version = "5.x-1.x-dev"
+project = "content_taxonomy"
+datestamp = "1201651373"
+

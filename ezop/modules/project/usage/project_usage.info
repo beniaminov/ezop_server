@@ -1,0 +1,11 @@
+; $Id: project_usage.info,v 1.1 2007/08/07 20:21:33 dww Exp $
+name = Project usage
+description = "Provides data about installed usage of projects (requires update_status.module clients connecting to this site -- most sites should NOT enable this module)."
+package = Project
+dependencies = project project_release
+
+; Information added by drupal.org packaging script on 2008-03-07
+version = "5.x-1.2"
+project = "project"
+datestamp = "1204929910"
+

@@ -1,0 +1,376 @@
+<?php
+// $Id: project_issue.install,v 1.17.2.1 2007/10/07 21:43:36 thehunmonkgroup Exp $
+// $Name: DRUPAL-5--1-3 $
+
+function project_issue_install() {
+  // We need to check this before we try to create the table, so that
+  // if it already exists, we don't attempt to insert our own values.
+  $project_issue_state_existed = db_table_exists('project_issue_state');
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE IF NOT EXISTS {project_issue_projects} (
+          nid int(10) unsigned NOT NULL default '0',
+          issues tinyint(4) NOT NULL default '0',
+          components text,
+          help text,
+          mail_digest varchar(255) NOT NULL default '',
+          mail_copy varchar(255) NOT NULL default '',
+          mail_copy_filter varchar(255) NOT NULL default '',
+          mail_copy_filter_state varchar(255) NOT NULL default '',
+          mail_reminder tinyint(4) NOT NULL default '0',
+          PRIMARY KEY (nid)
+        ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
+      db_query("CREATE TABLE IF NOT EXISTS {project_issues} (
+          nid int(10) unsigned NOT NULL default '0',
+          pid int(10) unsigned NOT NULL default '0',
+          category varchar(255) NOT NULL default '',
+          component varchar(255) NOT NULL default '',
+          priority tinyint(3) unsigned NOT NULL default '0',
+          rid int(10) unsigned NOT NULL default '0',
+          assigned int(10) unsigned NOT NULL default '0',
+          sid int(10) unsigned NOT NULL default '0',
+          file_path varchar(255) NOT NULL default '',
+          file_mime varchar(255) NOT NULL default '',
+          file_size int NOT NULL default 0,
+          PRIMARY KEY (nid),
+          KEY project_issues_pid (pid),
+          KEY project_issues_sid (sid),
+          KEY project_issues_nid_assigned (nid, assigned)
+        ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
+      db_query("CREATE TABLE IF NOT EXISTS {project_comments} (
+          cid int(10) unsigned NOT NULL default '0',
+          nid int(10) unsigned NOT NULL default '0',
+          uid int(10) unsigned NOT NULL default '0',
+          name varchar(255) NOT NULL default '',
+          created int(10) unsigned NOT NULL default '0',
+          changed int(10) unsigned NOT NULL default '0',
+          body blob,
+          data blob,
+          file_path varchar(255) NOT NULL default '',
+          file_mime varchar(255) NOT NULL default '',
+          file_size int NOT NULL default 0,
+          PRIMARY KEY (cid),
+          KEY project_comments_nid (nid)
+        ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
+      db_query("CREATE TABLE IF NOT EXISTS {project_subscriptions} (
+          nid int(10) unsigned NOT NULL default '0',
+          uid int(10) unsigned NOT NULL default '0',
+          level tinyint(3) unsigned NOT NULL default '0',
+          KEY project_subscriptions_nid_uid_level (nid, uid, level)
+        ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
+      db_query("CREATE TABLE IF NOT EXISTS {project_issue_state} (
+          sid int(10) unsigned NOT NULL auto_increment,
+          name varchar(32) NOT NULL default '',
+          weight tinyint(2) DEFAULT '0' NOT NULL,
+          author_has tinyint(2) DEFAULT '0' NOT NULL,
+          default_query tinyint(2) DEFAULT '0' NOT NULL,
+          PRIMARY KEY (sid)
+        ) /*!40100 DEFAULT CHARACTER SET utf8 */;");
+      break;
+
+    case 'pgsql':
+      if (!db_table_exists('project_issue_projects')) {
+        db_query("CREATE TABLE {project_issue_projects} (
+            nid int NOT NULL default '0',
+            issues smallint NOT NULL default '0',
+            components text,
+            help text,
+            mail_digest varchar(255) not null default '',
+            mail_copy varchar(255) not null default '',
+            mail_copy_filter varchar(255) not null default '',
+            mail_copy_filter_state varchar(255) default '' not null,
+            mail_reminder smallint NOT NULL default '0',
+            PRIMARY KEY (nid)
+          );");
+      }
+      if (!db_table_exists('project_issues')) {
+        db_query("CREATE TABLE {project_issues} (
+            nid int NOT NULL default '0',
+            pid int NOT NULL default '0',
+            category varchar(255) NOT NULL default '',
+            component varchar(255) NOT NULL default '',
+            priority smallint NOT NULL default '0',
+            rid int NOT NULL default '0',
+            assigned int NOT NULL default '0',
+            sid int NOT NULL default '0',
+            file_path varchar(255) NOT NULL default '',
+            file_mime varchar(255) default '' NOT NULL,
+            file_size int default 0 NOT NULL,
+            PRIMARY KEY (nid)
+          );");
+        db_query("CREATE INDEX {project_issues}_pid_idx ON {project_issues}(pid)");
+        db_query("CREATE INDEX {project_issues}_sid_idx ON {project_issues}(sid)");
+        db_query('CREATE INDEX {project_issues}_nid_assigned_idx ON {project_issues}(nid, assigned)');
+      }
+      if (!db_table_exists('project_comments')) {
+        db_query("CREATE TABLE {project_comments} (
+            cid int NOT NULL default '0',
+            nid int NOT NULL default '0',
+            uid int NOT NULL default '0',
+            name varchar(255) NOT NULL default '',
+            created int NOT NULL default '0',
+            changed int NOT NULL default '0',
+            body bytea,
+            data bytea,
+            file_path varchar(255) default '' NOT NULL,
+            file_mime varchar(255) default '' NOT NULL,
+            file_size int default 0 NOT NULL,
+            PRIMARY KEY (cid)
+          );");
+         db_query("CREATE SEQUENCE {project}_cid_seq INCREMENT 1 START 1");
+         db_query("CREATE INDEX {project_comments}_nid_idx ON {project_comments}(nid)");
+      }
+      if (!db_table_exists('project_subscriptions')) {
+        db_query("CREATE TABLE {project_subscriptions} (
+            nid int NOT NULL default '0',
+            uid int NOT NULL default '0',
+            level smallint NOT NULL default '0'
+          );");
+        db_query("CREATE INDEX {project_subscriptions}_nid_uid_level_idx ON {project_subscriptions}(nid, uid, level)");
+      }
+      if (!db_table_exists('project_issue_state')) {
+        db_query("CREATE TABLE {project_issue_state} (
+            sid SERIAL,
+            name varchar(32) NOT NULL default '',
+            weight smallint DEFAULT '0' NOT NULL,
+            author_has smallint DEFAULT '0' NOT NULL,
+            default_query smallint DEFAULT '0' NOT NULL,
+            PRIMARY KEY  (sid)
+          );");
+      }
+      break;
+  }
+
+  if (!$project_issue_state_existed) {
+    // sid, name, weight, author-can-set, in-default-queries
+    project_issue_init_state(1, 'active', -13, 0, 1);
+    project_issue_init_state(2, 'fixed', 1, 0, 1);
+    project_issue_init_state(3, 'duplicate', 4, 0, 0);
+    project_issue_init_state(4, 'postponed', 6, 0, 1);
+    project_issue_init_state(5, 'won\'t fix', 9, 0, 0);
+    project_issue_init_state(6, 'by design', 11, 0, 0);
+    project_issue_init_state(7, 'closed', 13, 1, 0);
+    project_issue_init_state(8, 'patch (code needs review)', -8, 0, 0);
+    project_issue_init_state(13, 'patch (code needs work)', -6, 0, 0);
+    project_issue_init_state(14, 'patch (ready to commit)', -2, 0, 0);
+
+    // Since we're hacking in auto-increment values here,
+    // update the sequence value for Postgres -- ugly but necessary for now.
+    if ($GLOBALS['db_type'] == 'pgsql') {
+      db_query("SELECT setval('project_issue_state_sid_seq', 14)");
+    }
+  }
+
+  project_issue_add_missing_projects();
+
+  db_query("UPDATE {system} SET weight = 2 WHERE name = 'project_issue'");
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function project_issue_uninstall() {
+  $tables = array(
+    'project_issue_projects',
+    'project_issues',
+    'project_comments',
+    'project_subscriptions',
+    'project_issue_state',
+  );
+  foreach ($tables as $table) {
+    if (db_table_exists($table)) {
+      db_query("DROP TABLE {$table}");
+    }
+  }
+
+  $variables = array(
+    'project_issue_default_state',
+    'project_directory_issues',
+    'project_issues_extensions_default',
+    'project_reply_to',
+    'project_issue_digest_last',
+    'project_issue_digest_interval',
+    'project_issue_reminder_last',
+    'project_issue_reminder_interval',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+
+  $variables = db_query("SELECT name FROM {variable} WHERE name LIKE 'project_issues_extensions_%%'");
+  while ($variable = db_fetch_object($variables)) {
+    variable_del($variable->name);
+  }
+}
+
+function project_issue_enable() {
+  project_issue_add_missing_projects();
+}
+
+/**
+ * Initialize a given issue state in the database.
+ */
+function project_issue_init_state($sid, $name, $weight, $author, $query) {
+  db_query("INSERT INTO {project_issue_state} (sid, name, weight, author_has, default_query) VALUES (%d, '%s', %d, %d, %d)", $sid, $name, $weight, $author, $query);
+}
+
+/**
+ * Check for existing project nodes that do not have an entry in the
+ * {project_issue_projects} table, and add them.
+ *
+ */
+function project_issue_add_missing_projects() {
+  $projects = db_query("SELECT n.nid, pip.nid AS pip_nid FROM {node} n LEFT JOIN {project_issue_projects} pip ON n.nid = pip.nid WHERE n.type = 'project_project' AND pip.nid IS NULL");
+  while ($project = db_fetch_object($projects)) {
+    db_query('INSERT INTO {project_issue_projects} (nid) VALUES (%d)', $project->nid);
+  }
+}
+
+/**
+ * Repairs DB from issues that were automatically closed and lost
+ * their version info.  See http://drupal.org/node/84555
+ */
+function project_issue_update_1() {
+  $ret = array();
+  // Instead of calling update_sql() on every query (which would
+  // generate 1000s of lines of output to update.php) this update is
+  // going to do the queries directly and just return a summary.
+  $fixed = 0;
+
+  $query = db_query("SELECT * FROM {project_comments} WHERE uid = 0 AND data RLIKE 'rid' ORDER by cid");
+  while ($comment = db_fetch_object($query)) {
+    $data = unserialize($comment->data);
+    $old_rid = $data['old']->rid;
+    $new_rid = $data['new']->rid;
+    if (isset($old_rid) && !isset($new_rid)) {
+      // This is the problem case.  Just clear out rid from both old
+      // and new, so we leave it alone with this comment.
+      unset($data['old']->rid);
+      unset($data['new']->rid);
+      db_query("UPDATE {project_comments} SET data = '%s' WHERE cid = %d", serialize($data), $comment->cid);
+      // Now, repair the issue node itself.  Note, this is potentially
+      // inefficient, since it's possible there are multiple comments
+      // in the same issue that need to be repaired.  However, since
+      // we "ORDER BY cid" in the query above, we know we'll always
+      // repair sequentially, so the last repaired comment in an issue
+      // will be what's stored in the issue when this update is over...
+      db_query("UPDATE {project_issues} SET rid = %d WHERE nid = %d", $old_rid, $comment->nid);
+      $fixed++;
+    }
+  }
+  $ret[] = array('success' => TRUE, 'query' => "Repaired $fixed comments");
+  return $ret;
+}
+
+/**
+ * Updates specific to Drupal 5.x are 500 and up...
+ */
+
+/**
+ * Need to set the system weight so the admin/project menu links work
+ * properly (project_issue must come after project).
+ */
+function project_issue_update_500() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {system} SET weight = 2 WHERE name = 'project_issue'");
+  return $ret;
+}
+
+function project_issue_update_501() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql('ALTER TABLE {project_issue_state} ADD default_query tinyint NOT NULL');
+      break;
+    case 'pgsql':
+      $ret[] = update_sql('ALTER TABLE {project_issue_state} ADD default_query smallint');
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Add missing sequence for project comments on pgsql.  To avoid SQL
+ * errors when update.php runs (in case the update is run multiple
+ * times, or a site manually fixed this bug already, etc), we make
+ * sure this sequence doesn't already exist before we try to create it.
+ * NOTE: in older versions of the code, this update was #2, but since
+ * 50[01] already exist, we need a higher number here.
+ */
+function project_issue_update_502() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'pgsql':
+      if (!db_num_rows(db_query("SELECT relname FROM pg_class WHERE relname = '{project}_cid_seq' AND relkind='S'"))) {
+        $ret[] = update_sql("CREATE SEQUENCE {project}_cid_seq INCREMENT 1 START 1");
+      }
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Fix custom issue states. The sid needs to be set properly for the sequence.
+ */
+function project_issue_update_5000() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'pgsql':
+      $last_sid = db_result(db_query('SELECT MAX(sid) FROM project_issue_state'));
+      db_query("SELECT setval('project_issue_state_sid_seq', %d)", $last_sid);
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Add an index to {project_issues}.sid
+ */
+function project_issue_update_5001() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql('ALTER TABLE {project_issues} ADD INDEX project_issues_sid (sid)');
+      break;
+    case 'pgsql':
+      $ret[] = update_sql('CREATE INDEX {project_issues}_sid_idx ON {project_issues}(sid)');
+      break;
+
+  }
+  return $ret;
+}
+
+/**
+ * Add missing pgsql indexes.
+ */
+function project_issue_update_5002() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'pgsql':
+      $ret[] = update_sql('CREATE INDEX {project_issues}_pid_idx ON {project_issues}(pid)');
+      $ret[] = update_sql('CREATE INDEX {project_comments}_nid_idx ON {project_comments}(nid)');
+      $ret[] = update_sql('CREATE INDEX {project_subscriptions}_nid_uid_level_idx ON {project_subscriptions}(nid, uid, level)');
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Add nid_assigned index to {project_issues}.
+ */
+function project_issue_update_5003() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql('ALTER TABLE {project_issues} ADD INDEX {project_issues}_nid_assigned (nid, assigned)');
+      break;
+    case 'pgsql':
+      $ret[] = update_sql('CREATE INDEX {project_issues}_nid_assigned_idx ON {project_issues}(nid, assigned)');
+      break;
+  }
+  return $ret;
+}

@@ -1,0 +1,302 @@
+<?php
+
+
+/**
+ * @file
+ * Defines a field type for referencing a taxonomy term.
+ **/
+
+/**
+ * Implementation of hook_help().
+ **/
+function content_taxonomy_help($section) {
+  switch ($section) {
+    case 'admin/modules#description':
+      return t('Defines a field type for referencing a taxonomy term. <em>Note: Requires content.module.</em>');
+  }
+}
+
+/**
+ * Implementation of hook_field_info().
+ */
+function content_taxonomy_field_info() {
+  return array(
+    'content_taxonomy' => array('label' => 'Taxonomy Field'),
+  );
+}
+
+/**
+ * Implementation of hook_field_settings().
+ */
+function content_taxonomy_field_settings($op, $field) {
+  switch ($op) {
+    case 'form':
+      $form = array();
+      $form['save'] = array(
+        '#type' => 'radios', 
+        '#title' => t('Save options'),
+        '#options' => array( 
+          'tag' => t('Save as tag'), 
+          'cck_table' => t('Save in cck table'), 
+          'both' => t('Both')),
+        '#default_value' => isset($field['save']) ? $field['save'] : 'tag',
+      );
+      
+      $form['vocabulary'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Specify terms to show'),
+        '#collapsible' => TRUE,
+      );
+      
+      $options_term = array();
+      $options_voc = array();
+      $options_term[0] = '---';
+      foreach (taxonomy_get_vocabularies() as $voc) {
+        $options_voc[$voc->vid] = $voc->name;
+        foreach (taxonomy_get_tree($voc->vid) as $term) {
+          $options_term[$voc->name][$term->tid] = str_repeat('- ', $term->depth) . $term->name;
+        }
+      }
+      
+      $form['vocabulary']['vid'] = array(
+        '#title' => t('Vocabulary'),
+        '#type' => 'select',
+        '#default_value' => isset($field['vid']) ? $field['vid'] : 0,
+        '#options' => $options_voc,
+      );
+      
+      $form['vocabulary']['tid'] = array(
+        '#title' => t('Terms'),
+        '#type' => 'select',
+        '#default_value' => isset($field['tid']) ? $field['tid'] : 0,
+        '#options' => $options_term,
+      );
+
+      $form['vocabulary']['depth'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Depth of taxonomy tree'),
+        '#default_value' => isset($field['depth']) ? $field['depth'] : 1,
+        '#description' => t('leave blank for unlimited depth'),
+      );
+      
+      return $form;   
+      
+    case 'save':
+      return array('save', 'vid', 'tid', 'depth');
+    
+    case 'database columns':
+      if (isset($field['save']) && $field['save'] != 'tag') {
+        return array(
+          'value' => array('type' => 'int', 'not null' => TRUE, 'default' => 0, 'sortable' => TRUE),
+        );
+      }
+  }
+}
+
+/**
+ * Implementation of hook_field().
+ */
+function content_taxonomy_field($op, &$node, $field, &$node_field, $teaser, $page) {
+  switch ($op) {
+    case 'load':   
+      if (isset($field['save']) && $field['save'] != 'tag') {
+        $data = $node_field;
+        unset($node_field);
+        foreach ($data as $delta => $value) {
+          $term = taxonomy_get_term($value['value']);
+          $additions[$field['field_name']][$field['tid']][$term->tid] = $term;
+        }
+      }
+      else {
+        $additions[$field['field_name']][$field['tid']] = content_taxonomy_terms_by_field($node, $field['vid'], $field['tid'], $field['depth']);
+      }
+      
+      $widget_type = $field['widget']['type'];
+      $function = $widget_type ."_field_load";
+      if (function_exists($function)) {
+        $function($op, $node, $field, $node_field, $additions, $teaser, $page);
+      }
+      return $additions;
+      break;
+      
+    case 'submit': 
+      global $content_taxonomy_array_cleared;
+      if (!is_array($content_taxonomy_array_cleared) || !$content_taxonomy_array_cleared[$node->nid]) {
+        unset($node->taxonomy);
+        $content_taxonomy_array_cleared[$node->nid] = true;
+      }
+  
+      if (isset($field['save']) && $field['save'] != 'cck_table') {
+        if (is_array($node_field['tids'])) {
+          foreach ($node_field['tids'] as $tid) {
+            if ($tid) {
+              $node->taxonomy[$field['vid']][$tid] = $tid;
+            }
+          }
+        }
+        elseif (is_array($node_field) && $field['save'] == 'both') {
+          foreach ($node_field as $tid => $value) {
+            if ($tid) {
+              $node->taxonomy[$field['vid']][$tid] = $tid;
+            }
+          }
+        }        
+      }
+      break;
+      
+    case 'delete':
+      taxonomy_node_delete($node->nid);
+      break;
+  }
+}
+
+
+/**
+ * Implementation of hook_field_formatter_info().
+ */
+function content_taxonomy_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => 'As Text',
+      'field types' => array('content_taxonomy'),
+    ),
+    'link' => array(
+      'label' => 'As Link',
+      'field types' => array('content_taxonomy'),
+    ),
+  );
+}
+
+/**
+ * Implemenation of hook_field_formatter
+ */
+function content_taxonomy_field_formatter($field, $item, $formatter, $node) {
+  $terms = array();
+  if ($node->in_preview) {
+    if (is_array($item)) {
+      foreach ($item as $key => $tid) {
+        $item[$key] = taxonomy_get_term($tid);
+      }
+    }  
+  }
+
+  if (!is_array($item)) {
+    return '';
+  }
+  
+  if ($formatter == 'link') {
+    foreach ($item as $key => $term) {
+      if (!is_object($term) && $key == 'value' && is_numeric($term) && $term != 0) {
+        $term = taxonomy_get_term($term);
+      }
+      if (!empty($term->name)) {
+        $terms[] = l($term->name, taxonomy_term_path($term), array('rel' => 'tag', 'title' => $term->description));
+      }
+    }
+  }
+  else {
+    foreach ($item as $key => $term) {
+      if (!is_object($term) && $key == 'value' && is_numeric($term) && $term != 0) {
+        $term = taxonomy_get_term($term);
+      }
+      if (!empty($term->name)) {
+        $terms []= check_plain($term->name);
+      }
+    }
+  }
+  return implode('<br />', $terms);
+}
+
+/**
+ *  Returns all term - node relation, optionally for a given parent
+ * 
+ *  @param Object Node
+ *  @param Integer Voc ID
+ *  @param Integer TID of a Parent
+ *  @param Integer depth of hierarchy to load
+ */
+function content_taxonomy_terms_by_field($node, $vid, $parent = NULL, $depth) {
+  if (is_numeric($parent) && $depth == 1) {
+    $result = db_query("SELECT n.tid FROM {term_hierarchy} h, {term_node} n WHERE
+      n.nid = %d AND n.tid = h.tid AND h.parent = %d", $node->nid, $parent);
+    
+    while ($data = db_fetch_array($result)) {
+      $term = taxonomy_get_term($data["tid"]);
+      $additions[$term->tid] = $term;
+    }
+    return $additions;
+  }
+  else { 
+    return taxonomy_node_get_terms_by_vocabulary($node->nid, $vid);
+  }
+}
+
+/**
+ * Implementation of hook_form_alter
+ *
+ * hides the taxonomy form if there exists content taxonomy fields
+ */
+function content_taxonomy_form_alter($form_id, &$form) {
+  if (isset($form['type']) && $form['type']['#value'] .'_node_form' == $form_id) {   
+    $info = _content_type_info();
+    $content_type = $info['content types'][$form['type']['#value']];
+    foreach ($content_type['fields'] as $field_name => $field) {
+      if ($field['type'] == 'content_taxonomy') {
+        unset($form['taxonomy']);
+        break;
+      }
+    }
+  }
+}
+
+
+/**
+ * Implementation of hook_token_list().
+ */
+function content_taxonomy_token_list($type = 'all') {
+  if ($type == 'field' || $type == 'all') {
+    $tokens = array();
+
+    $tokens['content_taxonomy']['term']  = t('Name of top taxonomy term');
+    $tokens['content_taxonomy']['tid']   = t('ID of top taxonomy term');
+    $tokens['content_taxonomy']['vocab'] = t('Name of top terms vocabulary');
+    $tokens['content_taxonomy']['vid']   = t('ID of top terms vocabulary');
+
+    return $tokens;
+  }
+}
+
+/**
+ * Implementation of hook_token_values().
+ */
+function content_taxonomy_token_values($type, $object = NULL) {
+  if ($type == 'field') {
+    // This ugly check is necessary because of some weird things going on
+    // inside the content_taxonomy module: it doesn't always pass the same
+    // object to CCK, and therefor Token doesn't always get a "content
+    // taxonomy field object" with the same structure.
+    if (isset($object['tids'])) {
+      // This one is necessary for submitting content.
+      $tid = reset($object['tids']);
+    }
+    elseif (is_array($object[0]) && is_object(reset($object[0]))) {
+      // This one is necessary for viewing content.
+      $term = reset($object[0]);
+      $tid = $term->tid;
+    }
+    else {
+      // This one is also sometimes necessary for viewing content...
+       $tid = reset(array_keys($object));
+    }
+
+    $term = taxonomy_get_term($tid);
+    $vocabulary = taxonomy_get_vocabulary($term->vid);
+
+    $tokens['term']  = $term->name;
+    $tokens['tid']   = $tid;
+    $tokens['vocab'] = $vocabulary->name;
+    $tokens['vid']   = $term->vid;
+
+    return $tokens;
+  }
+}

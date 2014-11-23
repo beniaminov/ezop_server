@@ -1,0 +1,270 @@
+# $Id: statistics-module.ru.po,v 1.2 2007/03/17 20:47:06 vadbarsdrupalorg Exp $
+# Russian translation of Drupal 5.x.
+# Copyright 2007 vadbars <vadbars@mail.ru>
+# Generated from file: statistics.module,v 1.249 2007/01/10 15:17:51 dries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal 5.0\n"
+"POT-Creation-Date: 2007-01-16 17:30+0500\n"
+"PO-Revision-Date: 2007-01-23 19:41+0500\n"
+"Last-Translator: vadbars <vadbars@mail.ru>\n"
+"Language-Team: Russian Drupal Translation Team (RDTT) <translators@drupal.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: modules/statistics/statistics.module:15
+msgid "The statistics module keeps track of numerous statistics of site usage. It counts how many times, and from where each of your posts is viewed. The statistics module can be used to learn many useful things about how users are interacting with each other and with your site."
+msgstr "Модуль статистики следит за статистикой использования сайта. Он считает, сколько раз и откуда был просмотрен каждый материал. Модуль статистики можно использовать для того, чтобы узнать много полезных вещей о том, как пользователи взаимодействуют друг с другом и с вашим сайтом."
+
+#: modules/statistics/statistics.module:16
+msgid ""
+"<p>Statistics module features</p>\n"
+"<ul>\n"
+"<li>Logs show statistics for how many times your site and specific content on your site has been accessed.</li>\n"
+"<li>Referrers tells you from where visitors came from (referrer URL).</li>\n"
+"<li>Top pages shows you what's hot, what is the most popular content on your site.</li>\n"
+"<li>Top users shows you the most active users for your site.</li>\n"
+"<li>Recent hits displays information about the latest activity on your site.</li>\n"
+"<li>Node count displays the number of times a node has been accessed in the node's link section next to <em># comments</em>.</li>\n"
+"<li>Popular content block creates a block that can display the day's top viewed content, the all time top viewed content, and the last content viewed.</li>\n"
+"</ul>\n"
+msgstr ""
+"<p>Возможности модуля статистики</p>\n"
+"<ul>\n"
+"<li>Журналы показывают статистику, сколько раз посещали ваш сайт и какую информацию на нем смотрели.</li>\n"
+"<li>Источники отсылок позволяют вам узнать, откуда приходили ваши посетители (обратные ссылки).</li>\n"
+"<li>Списки лучших страниц показывают, что интересует посетителей, самое популярное содержание на вашем сайте.</li>\n"
+"<li>Списки лучших пользователей показывают самых активных пользователей на вашем сайте.</li>\n"
+"<li>Последние просмотры дают информацию об активности на вашем сайте за послежнее время.</li>\n"
+"<li>Счетчики посещений для материалов сайта показывают сколько раз страница просматривалась, в разделе ссылок на страницы сразу после <em>числа комментариев</em>.</li>\n"
+"<li>лок популяного содержания создает блок, в котором перечислены самые популярные материалы за день, за все время, а также последний просмотренный материал.</li>\n"
+"</ul>\n"
+
+#: modules/statistics/statistics.module:27
+msgid ""
+"<p>Configuring the statistics module</p>\n"
+"<ul>\n"
+"<li>Enable access log allows you to turn the access log on and off. This log is used to store data about every page accessed, such as the remote host's IP address, where they came from (referrer), what node they've viewed, and their user name. Enabling the log adds one database call per page displayed by Drupal.</li>\n"
+"<li>Discard access logs older than allows you to configure how long an access log entry is saved, after which time it is deleted from the database table. To use this you need to run <em>cron.php</em></li>\n"
+"<li>Enable node view counter allows you to turn on and off the node-counting functionality of this module. If it is turned on, an extra database query is added for each node displayed, which increments a counter.</li>\n"
+"</ul>\n"
+msgstr ""
+"<p>Настройка модуля статистики</p>\n"
+"<ul>\n"
+"<li>Включение системного журнала позволит вам включать или выключать доступ. Системный журнал используется для сохранения данных о доступе к каждой странице сайта, например, удаленный IP адрес хоста, откуда кто пришел (источник отсылки), какой пользователь какой материал смотрел. Включение журнала добавляет одно обращение к базе данных на каждую страницу, показанную Drupal.</li>\n"
+"<li>Отбрасывание старых записей позволяет вам настраивать, как долго хранить записи, после какого времени из удалять из таблиц базы данных. Для того, чтобы это использовать, нужен скрипт <em>cron.php</em></li>\n"
+"<li>Включение счетчика просмотров страниц позволяет вам использовать функцию учета просмотров в этом модуле. Если она включена, добавляется по одному запросу к базе данных при каждом просмотре страницы, с увеличением значения счетчика.</li>\n"
+"</ul>\n"
+
+#: modules/statistics/statistics.module:34
+msgid "For more information please read the configuration and customization handbook <a href=\"@statistics\">Statistics page</a>."
+msgstr "Подробная информация находится в руководстве по настройке, на странице <a href=\"@statistics\">статистики</a>."
+
+#: modules/statistics/statistics.module:37
+msgid "Settings for the statistical information that Drupal will keep about the site. See <a href=\"@statistics\">site statistics</a> for the actual information."
+msgstr "Настройки статистической информации о сайте. См. <a href=\"@statistics\">статистика сайта</a> для получения актуальной информации."
+
+#: modules/statistics/statistics.module:39
+msgid "This page shows you the most recent hits."
+msgstr "Эта страница показывает последние просмотры страниц."
+
+#: modules/statistics/statistics.module:41
+msgid "This page shows you all external referrers. These are links pointing to your web site from outside your web site."
+msgstr "Эта страница показывает вам источники внешних ссылок на ваш сайт."
+
+#: modules/statistics/statistics.module:43
+msgid "When you ban a visitor, you prevent the visitor's IP address from accessing your site. Unlike blocking a user, banning a visitor works even for anonymous users. The most common use for this is to block bots/web crawlers that are consuming too many resources."
+msgstr "Когда вы запрещаете (баните) посетителя, вы запрещаете доступ к вам с того IP-адреса, с которого этот посетитель приходит на ваш сайт. В отличие от блокирования пользователя, запрет (бан) относится только к анонимным посетителям. Одно из обычных использований этого - блокирование поисковых роботов, которые используют слишком много ресурсов."
+
+#: modules/statistics/statistics.module:109
+msgid "Recent hits"
+msgstr "Последние посещения"
+
+#: modules/statistics/statistics.module:110
+msgid "View pages that have recently been visited."
+msgstr "Список недавно посещенных страниц."
+
+#: modules/statistics/statistics.module:115
+msgid "Top pages"
+msgstr "Популярные страницы"
+
+#: modules/statistics/statistics.module:116
+msgid "View pages that have been hit frequently."
+msgstr "Список часто посещаемых страниц."
+
+#: modules/statistics/statistics.module:122
+msgid "Top visitors"
+msgstr "Активные посетители"
+
+#: modules/statistics/statistics.module:123
+msgid "View visitors that hit many pages."
+msgstr "Просмотр посетителей, посетивших много страниц сайта."
+
+#: modules/statistics/statistics.module:129
+msgid "Top referrers"
+msgstr "Лучшие источники посещений"
+
+#: modules/statistics/statistics.module:130
+msgid "View top referrers."
+msgstr "Просмотр списка лучших источников посещений."
+
+#: modules/statistics/statistics.module:136
+msgid "View access log."
+msgstr "Просмотреть системный журнал посещений."
+
+#: modules/statistics/statistics.module:142;367
+msgid "Access log settings"
+msgstr "Настройки журнала доступа"
+
+#: modules/statistics/statistics.module:143
+msgid "Control details about what and how your site logs."
+msgstr "Определение, что и как заносить в системный журнал сайта."
+
+#: modules/statistics/statistics.module:154
+msgid "Track page visits"
+msgstr "Проследить посещения страницы"
+
+#: modules/statistics/statistics.module:216;242;274
+msgid "details"
+msgstr "подробности"
+
+#: modules/statistics/statistics.module:233;260
+msgid "Timestamp"
+msgstr "Дата/время"
+
+#: modules/statistics/statistics.module:290;314;345
+msgid "Hits"
+msgstr "Хиты"
+
+#: modules/statistics/statistics.module:292
+msgid "Average page generation time"
+msgstr "Среднее время генерации страницы"
+
+#: modules/statistics/statistics.module:293;316
+msgid "Total page generation time"
+msgstr "Общее время генерации страницы"
+
+#: modules/statistics/statistics.module:299
+msgid "%time ms"
+msgstr "%time мс"
+
+#: modules/statistics/statistics.module:302
+msgid "Top pages in the past %interval"
+msgstr "Лучшие страницы за %interval"
+
+#: modules/statistics/statistics.module:326
+msgid "unban"
+msgstr "снять запрет"
+
+#: modules/statistics/statistics.module:326
+msgid "ban"
+msgstr "запретить"
+
+#: modules/statistics/statistics.module:330
+msgid "Top visitors in the past %interval"
+msgstr "Лучшие посетители за последние %interval"
+
+#: modules/statistics/statistics.module:342
+msgid "Top referrers in the past %interval"
+msgstr "Лучшие источники за %interval"
+
+#: modules/statistics/statistics.module:346
+msgid "Url"
+msgstr "Адрес ссылки"
+
+#: modules/statistics/statistics.module:347
+msgid "Last visit"
+msgstr "Последнее посещение"
+
+#: modules/statistics/statistics.module:370
+msgid "Enable access log"
+msgstr "Включить журнал доступа"
+
+#: modules/statistics/statistics.module:373
+msgid "Log each page access. Required for referrer statistics."
+msgstr "Записывать каждый запрос страницы. Необходимо для статистики источников посетителей."
+
+#: modules/statistics/statistics.module:377
+msgid "Discard access logs older than"
+msgstr "Отбрасывать записи журнала доступа старше "
+
+#: modules/statistics/statistics.module:380
+msgid "Older access log entries (including referrer statistics) will be automatically discarded. Requires crontab."
+msgstr "Более старые записи журнала доступа (включая статистику источников посетителей) будут удаляться автоматически. Требуется корректная настройка регулярных процедур (crontab)."
+
+#: modules/statistics/statistics.module:385
+msgid "Content viewing counter settings"
+msgstr "Настройки счетчика просмотров"
+
+#: modules/statistics/statistics.module:388
+msgid "Count content views"
+msgstr "Счётчик просмотра содержимого "
+
+#: modules/statistics/statistics.module:391
+msgid "Increment a counter each time content is viewed."
+msgstr "Увеличивать значение счетчика каждый раз, когда материал просматривается."
+
+#: modules/statistics/statistics.module:463;502
+msgid "Popular content"
+msgstr "Наиболее читаемое"
+
+#: modules/statistics/statistics.module:470
+msgid "Number of day's top views to display"
+msgstr "Число наиболее популярных просмотров за день"
+
+#: modules/statistics/statistics.module:470
+msgid "How many content items to display in \"day\" list."
+msgstr "Сколько элементов показывать в списке \"за день\"."
+
+#: modules/statistics/statistics.module:471
+msgid "Number of all time views to display"
+msgstr "Показать количество просмотров за всё время"
+
+#: modules/statistics/statistics.module:471
+msgid "How many content items to display in \"all time\" list."
+msgstr "Сколько элементов показывать в списке \"за всё время\"."
+
+#: modules/statistics/statistics.module:472
+msgid "Number of most recent views to display"
+msgstr "Число наиболее новых просмотров для отображения"
+
+#: modules/statistics/statistics.module:472
+msgid "How many content items to display in \"recently viewed\" list."
+msgstr "Сколько элементов показывать в списке \"недавних просмотров\"."
+
+#: modules/statistics/statistics.module:487
+msgid "Today's:"
+msgstr "За сегодня:"
+
+#: modules/statistics/statistics.module:492
+msgid "All time:"
+msgstr "За всё время:"
+
+#: modules/statistics/statistics.module:497
+msgid "Last viewed:"
+msgstr "За последнее время:"
+
+#: modules/statistics/statistics.module:92
+msgid "1 read"
+msgid_plural "@count reads"
+msgstr[0] "@count просмотр"
+msgstr[1] "@count просмотра"
+msgstr[2] "@count просмотров"
+
+#: modules/statistics/statistics.module:79
+msgid "access statistics"
+msgstr "иметь доступ к статистике"
+
+#: modules/statistics/statistics.module:79
+msgid "view post access counter"
+msgstr "видеть счетчик сообщений"
+
+#: modules/statistics/statistics.module:0
+msgid "statistics"
+msgstr "статистика"
+

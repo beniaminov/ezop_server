@@ -1,0 +1,181 @@
+<html>
+<head><title>EZOP Ontology Editor</title><meta http-equiv="Content-Type" content="text/html;charset=windows-1251" />
+
+<!--%%%%%%%%%%%% Menu Styles %%%%%%%%%%%-->
+<link rel="Stylesheet" type="text/css" href="menu.css" />
+<link rel="Stylesheet" type="text/css" href="curconcept.css" />
+
+<!-- Add-On Core Code (Remove when not using any add-on's) -->
+<style type="text/css">.qmfv{visibility:visible !important;}.qmfh{visibility:hidden !important;}</style>
+<script type="text/javascript">qmad=new Object();qmad.bvis="";qmad.bhide="";</script>
+
+	<!-- Add-On Settings -->
+	<script type="text/JavaScript" src="AddOnSettings.js"></script>
+
+<!-- Core Menu Code -->
+<script type="text/javascript" src="CoreMenu.js"></script>
+
+<!-- Add-On Code: Slide Animation -->
+<script type="text/javascript" src="AddOnSlideAnimation.js"></script>
+
+<!-- Add-On Code: Item Bullets (CSS - Imageless) -->
+<script type="text/javascript" src="AddOnItemBullets.js"></script>
+
+
+
+</head>
+
+<body style="margin:40px;background-color:#ffffff;"><noscript><span style="font-size:13px;font-family:arial;"><span style="color:#dd3300">Warning!</span>&nbsp&nbsp; QuickMenu may have been blocked by IE-SP2's active content option. This browser feature blocks JavaScript from running locally on your computer.<br><br>This warning will not display once the menu is on-line.  To enable the menu locally, click the yellow bar above, and select <span style="color:#0033dd;">"Allow Blocked Content"</span>.<br><br>To permanently enable active content locally...<div style="padding:0px 0px 30px 10px;color:#0033dd;"><br>1: Select 'Tools' --> 'Internet Options' from the IE menu.<br>2: Click the 'Advanced' tab.<br>3: Check the 2nd option under 'Security' in the tree (Allow active content to run in files on my computer.)</div></span></noscript>
+
+<!--Open Visual Interface Button
+<a style="font-size:13px;color:#444444;font-family:arial;text-decoration:none;display:block;margin-bottom:25px;" id="qmv_open_visual_interface" href="javascript:if (qm_s3){window.name='qm_open';window.location = window.location.href;}else{var qmnw = window.open(window.location.href,'qm_open','scrollbars=no,location=no,status=yes,menu=no,toolbar=no,resizable=yes');if (window.focus) {qmnw.focus()}}"><span style="color:#dd3300;">[+]</span> Open Visual Interface</a>-->
+
+
+<!-- QuickMenu Structure [Menu 0] -->
+
+<ul id="qm0" class="qmmc">
+
+	<li><a class="qmparent" href="javascript:void(0)">Текущая онтология</a>
+
+		<ul>
+		<li><a href="javascript:void(0)">Показать</a></li>
+		<li><a href="javascript:void(0)">Редактировать</a></li>
+		<li><a href="javascript:void(0)">Построить всё</a></li>
+		<li><a href="javascript:void(0)">Достроить</a></li>
+		<li><a href="javascript:void(0)">Сохранить новую версию онтологии</a></li>
+		<li><a href="javascript:void(0);">Новая в текущей среде</a></li>
+		<li><a href="javascript:void(0);">Новая в среде ядра</a></li>
+		</ul></li>
+
+	<li><a class="qmparent" href="javascript:void(0)">Команда</a>
+
+		<ul>
+		<li><a href="javascript:void(0)">Выполнить</a></li>
+		</ul></li>
+
+	<li><a class="qmparent" href="javascript:void(0)">Словари</a>
+
+		<ul>
+		<li><a href="javascript:void(0)">Все внешние шаблоны</a></li>
+		<li><a href="javascript:void(0)">Все шаблоны текущей онтологии</a></li>
+		<li><a href="javascript:void(0)">Все шаблоны текущей онтологии и среды</a></li>
+		<li><a href="javascript:void(0)">Продукции</a></li>
+		</ul></li>
+
+	<li><a class="qmparent" href="javascript:void(0)">Сообщения</a>
+
+		<ul>
+		<li><a href="javascript:void(0)">Показать</a></li>
+		<li><a href="javascript:void(0)">Установить</a></li>
+		</ul></li>
+
+	<li><a class="qmparent" href="javascript:void(0);">Помощь</a>
+
+		<ul>
+		<li><a href="javascript:void(0);">Назначение системы ЭЗОП</a></li>
+		<li><a href="javascript:void(0);">Язык системы ЭЗОП</a></li>
+		<li><a href="javascript:void(0);">История создания системы</a></li>
+		<li><a href="javascript:void(0);">Технология работы с системой</a></li>
+		</ul></li>
+
+<li class="qmclear">&nbsp;</li></ul>
+
+
+
+<!-- Create Menu Settings: (Menu ID, Is Vertical, Show Timer, Hide Timer, On Click ('all', 'main' or 'lev2'), Right to Left, Horizontal Subs, Flush Left, Flush Top) -->
+<script type="text/javascript">qm_create(0,false,0,500,false,false,false,false,false);</script>
+
+<!--********************************************************************************************************************************************-->
+
+<!--startPage(ShortName, KBName, Location):-!,
+subPath(Location,"kbmenu.htm","Main menu/", MainMenuPath),
+environment (EnvFile),
+name_file (NameEnv, EnvFile,_,_),!,
+write("Content-type: text/html\n\n"),
+writef(" <title>Системы представления понятий ЭЗОП - % </title> ", ShortName), 
+write(" <meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\"> "),-->
+
+
+<div>
+ <form action="editor.exe" target="_self" method="POST" id = "main_form">
+ <p><input type="hidden" id="dlg_ask" name = "dlg_ask" value = "">
+ <p><input type="hidden" id="msg_to_display" name = "msg_to_display" value = "">
+ <p><input type="hidden" id="menu_item" name = "menu_item" value = "">
+ <!--writef(" <p><input type=\"hidden\" id=\"kb_name\" name = \"kb_name\" value = \"%\">", KBName), -->
+ <p><input type="hidden" id="kb_name" name = "kb_name" value = "%">
+ <p><input type="hidden" id="location" name = "location" value = ""> 
+ <p><input type="hidden" id="curcnpt_name" name = "curcnpt_name" value = ""> 
+ <p><input type="hidden" id="curcnpt_text" name = "curcnpt_text" value = ""> 
+ <!--writef(" <p><input type=\"hidden\" id=\"env\" name = \"env\" value = \"%\">", NameEnv), -->
+ <p><input type="hidden" id="env" name = "env" value = "">
+ <p><input type="hidden" id="cmd" name = "cmd" value = ""> 
+ <p><input type="hidden" id="rest" name = "rest" value = "">
+ <p><input type="hidden" id="readonly" name = "readonly" value = "">
+ <p><input type="hidden" id="toolbar_button" name = "toolbar_button" value = "">
+ <p><input type="hidden" id="explorer_selected_left" name = "explorer_selected_left" value = "">
+ <p><input type="hidden" id="explorer_selected_right" name = "explorer_selected_right" value = "">
+ <p><input type="hidden" id="new_folder_name" name = "new_folder_name" value = "">
+ <p><input type="hidden" id="new_cnpt_name" name = "new_cnpt_name" value = "">
+ <p><input type="hidden" id="button" onclick = "submit();">
+ </form>
+
+ <p><input type="hidden" id="inset" name = "inset" value = "">
+ 
+</div>
+
+ <!--**************************************************************************************************************************************************************-->
+  
+  <!--curCnptPage(Text, Text2) :-!,
+ write("Content-type: text/html\n\n"), 
+ 
+ get_current_concept_name( Name ),
+ test_inconsistence (ClassID),
+ ifReadonly (Name, Readonly), -->
+ 
+ <form name="readonlyform" id="readonlyform" method="post" action"editor.exe">
+ <input type="hidden" name="readonly" id="hidden" value="">
+ </form>
+ 
+ <div>
+  
+ <!--ifIncons (ClassID), -->
+ <SPAN class="header"> Текущее понятие: </SPAN>
+ <!--writef("<SPAN id = \"name_cnpt\" class=\"%\"> ", ClassID),-->
+ <SPAN id = "SPAN" class=""> <!--write( Name ),--> </SPAN>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <SPAN class="header"> Режим: </SPAN>
+ <SPAN class="header" id="mode_cnpt"><!-- choose_mode (Name, Mode), write( Mode ),--> </SPAN>
+ <table height = "80%" width = "100%" cellspacing="0" border="1" bordercolor= "#1a39fb"> 
+ <tr> 
+ <td width = "60%">
+ <textarea id = "concept_text" name = "concept_text" SIZE="59" style = "WIDTH: 100%; HEIGHT: 100%; background-color:Transparent; WRAP=SOFT, Readonly="Readonly"> <!--write( Text ),--> </textarea>
+ </td>
+ <td width = "40%"> 
+ <table height = "100%" width = "100%" cellspacing="0" border="0" bordercolor= "#1a39fb">
+ <tr height = "60%">
+ <td>
+ <SPAN class="header"> Новая команда или вопрос: </SPAN>
+ <textarea id = "concept_cmd" name = "concept_cmd" style = "WIDTH: 100%; HEIGHT: 90%" WRAP=hard> </textarea>
+ <!--
+ write(" <INPUT TYPE = text id= "Text1" name = \"concept_cmd\" VALUE = \"\" SIZE=59 style = \"WIDTH: 100%; HEIGHT: 100%\" wrap=hard > "),
+ -->
+ </td>
+ </tr>
+ <tr height = "40%" >
+ <td>
+ <SPAN class="header"> Необработанная часть текста: </SPAN>
+ <textarea id = "concept_rest" name = "concept_rest" style = "WIDTH: 100%; HEIGHT: 85%" WRAP=hard> <!--write(Text2),--> </textarea>
+ <!--
+ writef("<INPUT TYPE = text  id = "Text2" name = \"concept_rest\" VALUE = \"%\"" , Text2),
+ write(" SIZE=59 style = \"WIDTH: 100%; HEIGHT: 100%\" wrap=hard > "),
+ -->
+ </td></tr></table>
+ </td></tr></table>
+ </div>
+ 
+</body>
+</html>
+ 
+ 
+ 
+ 
